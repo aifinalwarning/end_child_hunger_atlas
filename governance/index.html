@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Zero Harm Policy and governance framework for Feed Children ASAP Atlas. Anti-coercion principles, beneficiary protection, data privacy, and ethical implementation guidelines.">
+    <title>Zero Harm Policy & Governance | Feed Children ASAP Atlas</title>
+    
+    <style>
+        /* ============================================
+           RESET & BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --earth-dark: #2d3e2f;
+            --earth-medium: #5a7c5e;
+            --earth-light: #8ba888;
+            --healing-green: #a8c5a0;
+            --warm-sand: #e8dcc4;
+            --soft-blue: #7a9eb8;
+            --warning-red: #d97757;
+            --neutral-gray: #6b7280;
+            --background-light: #f9f9f7;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --card-background: #ffffff;
+            --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --border-radius: 8px;
+            --transition-smooth: all 0.3s ease;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--background-light);
+            overflow-x: hidden;
+        }
+        
+        /* ============================================
+           TYPOGRAPHY
+           ============================================ */
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+        }
+        
+        h1 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            color: var(--earth-dark);
+        }
+        
+        h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--earth-medium);
+            margin-top: 3rem;
+        }
+        
+        h3 {
+            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+            color: var(--earth-medium);
+            margin-top: 2rem;
+        }
+        
+        h4 {
+            font-size: clamp(1.125rem, 2vw, 1.25rem);
+            color: var(--earth-dark);
+            margin-top: 1.5rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        ul, ol {
+            margin-bottom: 1rem;
+            margin-left: 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        strong {
+            color: var(--earth-dark);
+        }
+        
+        /* ============================================
+           LAYOUT
+           ============================================ */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        .top-nav {
+            background: var(--earth-dark);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .nav-home {
+            color: var(--warm-sand);
+            font-weight: 600;
+            font-size: 1.125rem;
+            text-decoration: none;
+        }
+        
+        .nav-home:hover {
+            color: var(--healing-green);
+        }
+        
+        .breadcrumb {
+            color: var(--warm-sand);
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+        
+        /* ============================================
+           HEADER
+           ============================================ */
+        header {
+            background: linear-gradient(135deg, var(--earth-medium) 0%, var(--healing-green) 100%);
+            padding: 3rem 0 2rem;
+            color: white;
+        }
+        
+        .page-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.25);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 400;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* ============================================
+           CONTENT SECTIONS
+           ============================================ */
+        .content-section {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        /* ============================================
+           CORE PRINCIPLES BOX
+           ============================================ */
+        .principles-box {
+            background: linear-gradient(135deg, rgba(168, 197, 160, 0.2) 0%, rgba(232, 220, 196, 0.2) 100%);
+            border: 3px solid var(--healing-green);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .principles-box h3 {
+            color: var(--earth-dark);
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+        
+        .principle-item {
+            background: white;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--healing-green);
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .principle-number {
+            display: inline-block;
+            background: var(--healing-green);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 32px;
+            font-weight: 700;
+            margin-right: 0.75rem;
+        }
+        
+        .principle-title {
+            font-weight: 600;
+            color: var(--earth-dark);
+            font-size: 1.125rem;
+            display: inline;
+        }
+        
+        .principle-description {
+            margin-top: 0.75rem;
+            color: var(--text-secondary);
+        }
+        
+        /* ============================================
+           RED LINE BOX
+           ============================================ */
+        .red-line-box {
+            background: rgba(217, 119, 87, 0.1);
+            border: 3px solid var(--warning-red);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .red-line-box h3 {
+            color: var(--warning-red);
+            margin-top: 0;
+        }
+        
+        .violation-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .violation-list li {
+            padding: 1rem 0 1rem 2.5rem;
+            position: relative;
+            border-bottom: 1px solid rgba(217, 119, 87, 0.2);
+        }
+        
+        .violation-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .violation-list li::before {
+            content: '🚫';
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+        }
+        
+        /* ============================================
+           DECISION FRAMEWORK
+           ============================================ */
+        .decision-framework {
+            background: var(--background-light);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .decision-step {
+            background: white;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: var(--soft-blue);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 32px;
+            font-weight: 700;
+            margin-right: 0.75rem;
+        }
+        
+        .step-question {
+            font-weight: 600;
+            color: var(--earth-dark);
+            font-size: 1.05rem;
+            display: inline;
+        }
+        
+        .step-guidance {
+            margin-top: 0.75rem;
+            color: var(--text-secondary);
+            padding-left: 2.5rem;
+        }
+        
+        /* ============================================
+           SAFEGUARDS CHECKLIST
+           ============================================ */
+        .safeguards-checklist {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .checklist-section {
+            margin-bottom: 2rem;
+        }
+        
+        .checklist-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .checklist-section h4 {
+            color: var(--earth-medium);
+            margin-top: 0;
+        }
+        
+        .checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .checklist li {
+            padding: 0.75rem 0 0.75rem 2.5rem;
+            position: relative;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .checklist li:last-child {
+            border-bottom: none;
+        }
+        
+        .checklist li::before {
+            content: '☐';
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+            color: var(--earth-medium);
+        }
+        
+        /* ============================================
+           CALLOUT BOXES
+           ============================================ */
+        .callout {
+            border-left: 4px solid;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        .callout.info {
+            background: rgba(122, 158, 184, 0.1);
+            border-left-color: var(--soft-blue);
+        }
+        
+        .callout.success {
+            background: rgba(168, 197, 160, 0.1);
+            border-left-color: var(--healing-green);
+        }
+        
+        .callout.warning {
+            background: rgba(217, 119, 87, 0.1);
+            border-left-color: var(--warning-red);
+        }
+        
+        .callout h4 {
+            margin-top: 0;
+        }
+        
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 1.5rem;
+            }
+            
+            .principles-box,
+            .red-line-box,
+            .decision-framework,
+            .safeguards-checklist {
+                padding: 1.5rem;
+            }
+        }
+        
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: var(--earth-dark);
+            color: var(--warm-sand);
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            text-align: center;
+            font-size: 0.875rem;
+            opacity: 0.9;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .footer-content a {
+            color: var(--healing-green);
+            text-decoration: none;
+        }
+        
+        .footer-content a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="top-nav">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-home">← Feed Children ASAP Atlas</a>
+            <span class="breadcrumb">Governance</span>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <span class="page-badge">🛡️ Core Framework</span>
+            <h1>Zero Harm Policy & Governance</h1>
+            <p class="subtitle">
+                The non-negotiable ethical framework for all Atlas guidance. Beneficiary dignity, safety, 
+                and autonomy take precedence over program efficiency or institutional convenience.
+            </p>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <div class="container">
+            
+            <!-- INTRODUCTION -->
+            <div class="content-section">
+                <h2>Our Commitment</h2>
+                <p>
+                    <strong>The Feed Children ASAP Atlas exists to help children, not harm them.</strong> Every 
+                    recommendation, tool, and framework in this resource has been designed with beneficiary 
+                    protection as the primary consideration.
+                </p>
+                
+                <p>
+                    This Zero Harm Policy establishes the ethical boundaries that govern all Atlas content. 
+                    <strong>These principles are non-negotiable.</strong> They apply regardless of context, 
+                    urgency, funding pressure, or programmatic convenience.
+                </p>
+                
+                <p>
+                    If you find content in this Atlas that violates these principles, or if you encounter 
+                    situations where these principles conflict with other guidance, the Zero Harm principles 
+                    always take precedence. No exceptions.
+                </p>
+            </div>
+
+            <!-- CORE PRINCIPLES -->
+            <div class="principles-box">
+                <h3>🎯 Core Zero Harm Principles</h3>
+                <p>
+                    <strong>Every action must pass through these filters:</strong>
+                </p>
+                
+                <div class="principle-item">
+                    <span class="principle-number">1</span>
+                    <span class="principle-title">Dignity Before Efficiency</span>
+                    <div class="principle-description">
+                        Beneficiary dignity is more important than program efficiency. We will not humiliate, 
+                        shame, or degrade people to achieve nutrition outcomes. Programs that require people to 
+                        sacrifice dignity are unacceptable, even if they "work."
+                    </div>
+                </div>
+                
+                <div class="principle-item">
+                    <span class="principle-number">2</span>
+                    <span class="principle-title">Autonomy Over Compliance</span>
+                    <div class="principle-description">
+                        People have the right to make their own choices, even choices we disagree with. We provide 
+                        information and support; we do not coerce, manipulate, or withhold services to force 
+                        behavior change. Conditionality must be truly voluntary.
+                    </div>
+                </div>
+                
+                <div class="principle-item">
+                    <span class="principle-number">3</span>
+                    <span class="principle-title">Privacy as Default</span>
+                    <div class="principle-description">
+                        Collect minimum data necessary. Protect what we collect rigorously. Default to anonymity 
+                        where possible. People's personal information—including their nutrition status—is sensitive 
+                        and must be treated as such.
+                    </div>
+                </div>
+                
+                <div class="principle-item">
+                    <span class="principle-number">4</span>
+                    <span class="principle-title">Informed Consent Always</span>
+                    <div class="principle-description">
+                        People must understand what they're agreeing to: what data is collected, how it's used, 
+                        who sees it, and what happens if they decline. Consent obtained through confusion, pressure, 
+                        or desperation is not valid consent.
+                    </div>
+                </div>
+                
+                <div class="principle-item">
+                    <span class="principle-number">5</span>
+                    <span class="principle-title">Do No Harm Through Exclusion</span>
+                    <div class="principle-description">
+                        Targeting criteria must not create stigma, family conflict, or community tension. Programs 
+                        that help some while harming others through exclusion are not acceptable. Design inclusion 
+                        criteria carefully.
+                    </div>
+                </div>
+                
+                <div class="principle-item">
+                    <span class="principle-number">6</span>
+                    <span class="principle-title">Accountability to Beneficiaries</span>
+                    <div class="principle-description">
+                        Beneficiaries must have safe, accessible ways to provide feedback, report problems, and 
+                        hold programs accountable. Accountability to donors is important; accountability to 
+                        beneficiaries is essential.
+                    </div>
+                </div>
+            </div>
+
+            <!-- RED LINES -->
+            <div class="red-line-box">
+                <h3>🚫 Absolute Prohibitions</h3>
+                <p>
+                    <strong>These practices are never acceptable under any circumstances:</strong>
+                </p>
+                
+                <ul class="violation-list">
+                    <li>
+                        <strong>Withholding treatment as punishment:</strong> Never withhold nutrition treatment 
+                        (RUTF, food, services) because someone "doesn't comply" with other program requirements. 
+                        Treatment is a right, not a reward for good behavior.
+                    </li>
+                    
+                    <li>
+                        <strong>Coercing behavior change through conditionality:</strong> Conditional programs 
+                        must be truly optional. If people lose essential services for non-participation, it's coercion, 
+                        not choice. "Attend counseling or no food" is coercion.
+                    </li>
+                    
+                    <li>
+                        <strong>Public identification of malnourished children:</strong> Never publicly announce 
+                        which children are malnourished, display their photos without consent, or create registries 
+                        that stigmatize. Nutrition status is private health information.
+                    </li>
+                    
+                    <li>
+                        <strong>Selling, sharing, or monetizing beneficiary data:</strong> Beneficiary data cannot 
+                        be sold, shared with third parties for marketing, or used for purposes beyond program delivery 
+                        without explicit consent for each new use.
+                    </li>
+                    
+                    <li>
+                        <strong>Deception about program benefits or risks:</strong> Never misrepresent what a 
+                        program offers, exaggerate benefits, or hide risks to increase enrollment. Honesty is 
+                        not optional.
+                    </li>
+                    
+                    <li>
+                        <strong>Targeting based on characteristics that create stigma:</strong> Never target based 
+                        on ethnicity, religion, political affiliation, or other characteristics that could endanger 
+                        beneficiaries or create community conflict.
+                    </li>
+                    
+                    <li>
+                        <strong>Harassment or abuse by staff:</strong> Zero tolerance for sexual harassment, verbal 
+                        abuse, physical violence, or exploitation by program staff. This includes "gifts" or "favors" 
+                        demanded in exchange for services.
+                    </li>
+                    
+                    <li>
+                        <strong>Failing to protect children in programs:</strong> Programs serving children must 
+                        have child safeguarding policies, staff background checks, and reporting mechanisms. Child 
+                        safety is paramount.
+                    </li>
+                </ul>
+            </div>
+
+            <!-- ETHICAL DECISION FRAMEWORK -->
+            <div class="content-section">
+                <h2>Ethical Decision-Making Framework</h2>
+                <p>
+                    When facing difficult decisions where trade-offs are necessary, use this framework:
+                </p>
+                
+                <div class="decision-framework">
+                    <div class="decision-step">
+                        <span class="step-number">1</span>
+                        <span class="step-question">Does this protect beneficiary safety and dignity?</span>
+                        <div class="step-guidance">
+                            If the answer is no, stop. Find another approach. Safety and dignity are not negotiable 
+                            for program efficiency, coverage, or cost savings.
+                        </div>
+                    </div>
+                    
+                    <div class="decision-step">
+                        <span class="step-number">2</span>
+                        <span class="step-question">Would beneficiaries themselves approve if they knew all details?</span>
+                        <div class="step-guidance">
+                            If you're hiding information because you know beneficiaries would object, that's a red 
+                            flag. Transparency test: Would you be comfortable explaining this decision directly to 
+                            beneficiaries in their own language?
+                        </div>
+                    </div>
+                    
+                    <div class="decision-step">
+                        <span class="step-number">3</span>
+                        <span class="step-question">Are we minimizing burden on beneficiaries?</span>
+                        <div class="step-guidance">
+                            Every data point collected, every meeting required, every condition imposed is a burden. 
+                            Can you justify each requirement? Is there a less burdensome way to achieve the goal?
+                        </div>
+                    </div>
+                    
+                    <div class="decision-step">
+                        <span class="step-number">4</span>
+                        <span class="step-question">Does this approach respect local culture and context?</span>
+                        <div class="step-guidance">
+                            What works in one culture may be offensive or harmful in another. Have you consulted 
+                            with local communities? Are you imposing external values inappropriately?
+                        </div>
+                    </div>
+                    
+                    <div class="decision-step">
+                        <span class="step-number">5</span>
+                        <span class="step-question">Are the most vulnerable protected, not excluded?</span>
+                        <div class="step-guidance">
+                            Program requirements often inadvertently exclude the most vulnerable: those without ID, 
+                            without literacy, without mobility, without male household members. Are your systems 
+                            accessible to everyone who needs help?
+                        </div>
+                    </div>
+                    
+                    <div class="decision-step">
+                        <span class="step-number">6</span>
+                        <span class="step-question">Can beneficiaries provide feedback and hold us accountable?</span>
+                        <div class="step-guidance">
+                            Is there a safe, accessible mechanism for complaints? Will you actually act on feedback? 
+                            Or is accountability theater—a suggestion box no one checks?
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- IMPLEMENTATION SAFEGUARDS -->
+            <div class="content-section">
+                <h2>Implementation Safeguards</h2>
+                <p>
+                    These safeguards should be embedded in every nutrition program:
+                </p>
+                
+                <div class="safeguards-checklist">
+                    <div class="checklist-section">
+                        <h4>Before Program Launch</h4>
+                        <ul class="checklist">
+                            <li>Community consultation completed with diverse stakeholder groups</li>
+                            <li>Child safeguarding policy in place with reporting mechanism</li>
+                            <li>Staff code of conduct signed by all personnel</li>
+                            <li>Data protection plan documented and approved</li>
+                            <li>Feedback mechanism established and tested</li>
+                            <li>Informed consent materials prepared in local languages</li>
+                            <li>Targeting criteria reviewed for potential to cause harm through exclusion</li>
+                            <li>Alternative options identified for those who don't meet criteria</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="checklist-section">
+                        <h4>During Implementation</h4>
+                        <ul class="checklist">
+                            <li>Regular beneficiary feedback collected and acted upon</li>
+                            <li>Staff supervision includes observation of beneficiary interactions</li>
+                            <li>Complaints logged, investigated, and resolved with documentation</li>
+                            <li>Data access restricted to authorized personnel only</li>
+                            <li>Privacy protections audited regularly</li>
+                            <li>Beneficiary dignity monitored (not just program outputs)</li>
+                            <li>Unintended harms assessed and addressed promptly</li>
+                            <li>Exclusion errors investigated and corrected</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="checklist-section">
+                        <h4>Continuous Accountability</h4>
+                        <ul class="checklist">
+                            <li>Beneficiary representatives involved in program review</li>
+                            <li>Quarterly ethics review of program practices</li>
+                            <li>Staff training refreshers on dignity and safeguarding</li>
+                            <li>Zero tolerance enforcement for abuse or exploitation</li>
+                            <li>Data protection compliance verified by independent party</li>
+                            <li>Community perception of program monitored</li>
+                            <li>Harm reduction measures adjusted based on learning</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DATA PROTECTION SPECIFICS -->
+            <div class="content-section">
+                <h2>Data Protection Requirements</h2>
+                <p>
+                    Nutrition programs collect sensitive health information. Specific data protection requirements:
+                </p>
+                
+                <h3>Data Minimization</h3>
+                <ul>
+                    <li>Collect only data essential for service delivery or required reporting</li>
+                    <li>Use aggregate data when individual-level data is not necessary</li>
+                    <li>Use anonymous identifiers instead of names when possible</li>
+                    <li>Avoid collecting sensitive attributes (ethnicity, religion, HIV status) unless absolutely necessary for targeting</li>
+                </ul>
+                
+                <h3>Secure Storage</h3>
+                <ul>
+                    <li>Physical records stored in locked cabinets in secure rooms</li>
+                    <li>Digital data encrypted and password-protected</li>
+                    <li>Access limited to staff with legitimate need</li>
+                    <li>Backup data protected with same security as primary data</li>
+                    <li>No data stored on personal devices or shared via insecure channels</li>
+                </ul>
+                
+                <h3>Limited Sharing</h3>
+                <ul>
+                    <li>Share individual-level data only with explicit consent for each recipient</li>
+                    <li>Data sharing agreements document purpose, security, and retention</li>
+                    <li>No sharing with parties that could misuse data (political groups, marketers, etc.)</li>
+                    <li>Anonymize data before sharing for research or reporting when possible</li>
+                </ul>
+                
+                <h3>Retention & Deletion</h3>
+                <ul>
+                    <li>Define retention period before collecting data (e.g., "program duration + 1 year")</li>
+                    <li>Delete data securely when retention period expires</li>
+                    <li>Destroy paper records by shredding; digitally wipe electronic files</li>
+                    <li>Honor beneficiary requests for data deletion unless legally required to retain</li>
+                </ul>
+            </div>
+
+            <!-- WHEN THINGS GO WRONG -->
+            <div class="content-section">
+                <h2>When Things Go Wrong</h2>
+                <p>
+                    Even well-designed programs can cause harm. When problems occur:
+                </p>
+                
+                <div class="callout warning">
+                    <h4>⚠️ Responding to Harm</h4>
+                    <ol style="margin-bottom: 0;">
+                        <li><strong>Stop the harmful practice immediately.</strong> Don't wait for approvals or consensus. If something is causing harm, stop it now.</li>
+                        <li><strong>Acknowledge harm to those affected.</strong> Apologize sincerely. Don't make excuses or blame beneficiaries.</li>
+                        <li><strong>Investigate what went wrong.</strong> Why did this happen? What systems failed? Be honest, not defensive.</li>
+                        <li><strong>Make it right.</strong> What can you do to address the harm? Compensation? Changed policies? Public commitment?</li>
+                        <li><strong>Prevent recurrence.</strong> Change systems, not just individual behavior. Build safeguards so it can't happen again.</li>
+                        <li><strong>Report honestly to stakeholders.</strong> Donors, partners, and communities deserve transparency about failures.</li>
+                    </ol>
+                </div>
+                
+                <h3>Common Failure Modes to Watch For</h3>
+                <ul>
+                    <li><strong>Drift toward coercion:</strong> What started as optional gradually becomes required through social pressure or staff attitude</li>
+                    <li><strong>Data creep:</strong> Collecting "just one more data point" that seems harmless but increases privacy risk</li>
+                    <li><strong>Ignoring feedback:</strong> Complaints dismissed as "unreasonable" rather than signals of problems</li>
+                    <li><strong>Targeting rigidity:</strong> Rules applied inflexibly, excluding deserving cases or including inappropriate ones</li>
+                    <li><strong>Staff burnout leading to mistreatment:</strong> Overworked staff becoming impatient or harsh with beneficiaries</li>
+                    <li><strong>Normalization of shortcuts:</strong> Skipping consent, rushing assessments, fabricating data becoming "how we do things"</li>
+                </ul>
+            </div>
+
+            <!-- COMMITMENT -->
+            <div class="content-section">
+                <h2>Our Ongoing Commitment</h2>
+                <p>
+                    <strong>This is not a static document.</strong> As we learn about new harms, unintended 
+                    consequences, and better practices, we will update this policy.
+                </p>
+                
+                <p>
+                    If you identify content in the Feed Children ASAP Atlas that violates these principles, or 
+                    if you see gaps in our safeguards, we want to know. The Atlas should model the accountability 
+                    we ask of programs.
+                </p>
+                
+                <div class="callout success">
+                    <h4>✅ We Commit To:</h4>
+                    <ul style="margin-bottom: 0;">
+                        <li>Reviewing this policy annually and updating based on learning</li>
+                        <li>Removing or revising any Atlas content found to violate Zero Harm principles</li>
+                        <li>Being transparent about limitations and uncertainties in our guidance</li>
+                        <li>Prioritizing beneficiary welfare over institutional interests</li>
+                        <li>Learning from failures and near-misses to improve safeguards</li>
+                        <li>Centering the voices and experiences of those affected by nutrition programs</li>
+                    </ul>
+                </div>
+                
+                <p>
+                    <strong>Child nutrition work is sacred trust.</strong> Families experiencing malnutrition are 
+                    often in their most vulnerable moments. We have enormous power to help or harm. This Zero Harm 
+                    Policy exists to ensure we use that power responsibly.
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <p>
+                <strong>Zero Harm Policy</strong> | Feed Children ASAP Atlas<br>
+                <a href="../about.html">About This Project</a> • 
+                <a href="../index.html">Return to Atlas</a>
+            </p>
+            <p style="margin-top: 1rem; font-size: 0.8rem;">
+                This policy applies to all Atlas content. Beneficiary protection is non-negotiable.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Accessibility: Reduced motion support
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('*').forEach(el => {
+                el.style.animation = 'none';
+                el.style.transition = 'none';
+            });
+        }
+    </script>
+</body>
+</html>
