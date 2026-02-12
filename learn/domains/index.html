@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Understanding the key domains and sectors that affect child nutrition: health, agriculture, social protection, WASH, education, and their interconnections.">
+    <title>Key Domains | Feed Children ASAP Atlas</title>
+    
+    <style>
+        /* ============================================
+           RESET & BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --earth-dark: #2d3e2f;
+            --earth-medium: #5a7c5e;
+            --earth-light: #8ba888;
+            --healing-green: #a8c5a0;
+            --warm-sand: #e8dcc4;
+            --soft-blue: #7a9eb8;
+            --health-red: #d97757;
+            --agriculture-yellow: #e8bc7c;
+            --wash-blue: #5a9e9e;
+            --education-purple: #7a6b9e;
+            --protection-orange: #e8a87c;
+            --neutral-gray: #6b7280;
+            --background-light: #f9f9f7;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --card-background: #ffffff;
+            --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --border-radius: 8px;
+            --transition-smooth: all 0.3s ease;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--background-light);
+            overflow-x: hidden;
+        }
+        
+        /* ============================================
+           TYPOGRAPHY
+           ============================================ */
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+        }
+        
+        h1 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            color: var(--earth-dark);
+        }
+        
+        h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--earth-medium);
+            margin-top: 3rem;
+        }
+        
+        h3 {
+            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+            color: var(--earth-medium);
+            margin-top: 2rem;
+        }
+        
+        h4 {
+            font-size: clamp(1.125rem, 2vw, 1.25rem);
+            color: var(--earth-dark);
+            margin-top: 1.5rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        ul, ol {
+            margin-bottom: 1rem;
+            margin-left: 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        strong {
+            color: var(--earth-dark);
+        }
+        
+        /* ============================================
+           LAYOUT
+           ============================================ */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        .top-nav {
+            background: var(--earth-dark);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .nav-home {
+            color: var(--warm-sand);
+            font-weight: 600;
+            font-size: 1.125rem;
+            text-decoration: none;
+        }
+        
+        .nav-home:hover {
+            color: var(--healing-green);
+        }
+        
+        .breadcrumb {
+            color: var(--warm-sand);
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+        
+        /* ============================================
+           HEADER
+           ============================================ */
+        header {
+            background: linear-gradient(135deg, var(--earth-medium) 0%, var(--soft-blue) 100%);
+            padding: 3rem 0 2rem;
+            color: white;
+        }
+        
+        .page-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.25);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 400;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* ============================================
+           CONTENT SECTIONS
+           ============================================ */
+        .content-section {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        /* ============================================
+           INTRO BOX
+           ============================================ */
+        .intro-box {
+            background: linear-gradient(135deg, rgba(168, 197, 160, 0.15) 0%, rgba(232, 220, 196, 0.15) 100%);
+            border: 2px solid var(--healing-green);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .intro-box h3 {
+            margin-top: 0;
+            color: var(--earth-dark);
+        }
+        
+        /* ============================================
+           DOMAIN CARDS
+           ============================================ */
+        .domains-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .domain-card {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-subtle);
+            border-left: 6px solid;
+            transition: var(--transition-smooth);
+        }
+        
+        .domain-card:hover {
+            box-shadow: var(--shadow-medium);
+            transform: translateY(-2px);
+        }
+        
+        .domain-card.health { border-left-color: var(--health-red); }
+        .domain-card.agriculture { border-left-color: var(--agriculture-yellow); }
+        .domain-card.wash { border-left-color: var(--wash-blue); }
+        .domain-card.education { border-left-color: var(--education-purple); }
+        .domain-card.protection { border-left-color: var(--protection-orange); }
+        .domain-card.governance { border-left-color: var(--earth-medium); }
+        
+        .domain-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .domain-icon {
+            font-size: 2.5rem;
+        }
+        
+        .domain-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--earth-dark);
+        }
+        
+        .domain-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .domain-why {
+            background: var(--background-light);
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+        
+        .domain-why-title {
+            font-weight: 600;
+            color: var(--earth-medium);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .domain-examples {
+            margin-top: 1rem;
+        }
+        
+        .domain-examples-title {
+            font-weight: 600;
+            color: var(--earth-dark);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .domain-examples ul {
+            margin-left: 1.25rem;
+            margin-bottom: 0;
+        }
+        
+        .domain-examples li {
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        /* ============================================
+           INTERCONNECTIONS SECTION
+           ============================================ */
+        .interconnections {
+            background: var(--background-light);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .connection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .connection-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .connection-title {
+            font-weight: 600;
+            color: var(--earth-dark);
+            margin-bottom: 0.75rem;
+            font-size: 1.05rem;
+        }
+        
+        .connection-domains {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+        }
+        
+        .domain-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: white;
+        }
+        
+        .badge-health { background: var(--health-red); }
+        .badge-agriculture { background: var(--agriculture-yellow); color: var(--earth-dark); }
+        .badge-wash { background: var(--wash-blue); }
+        .badge-education { background: var(--education-purple); }
+        .badge-protection { background: var(--protection-orange); color: var(--earth-dark); }
+        
+        .connection-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        /* ============================================
+           COORDINATION CHALLENGES
+           ============================================ */
+        .challenges-box {
+            background: rgba(217, 119, 87, 0.1);
+            border: 2px solid var(--health-red);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .challenges-box h3 {
+            color: var(--health-red);
+            margin-top: 0;
+        }
+        
+        /* ============================================
+           PRACTICAL GUIDANCE
+           ============================================ */
+        .guidance-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .guidance-card {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-subtle);
+            border-top: 4px solid var(--soft-blue);
+        }
+        
+        .guidance-card h4 {
+            margin-top: 0;
+            color: var(--earth-dark);
+        }
+        
+        /* ============================================
+           CALLOUT BOXES
+           ============================================ */
+        .callout {
+            border-left: 4px solid;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        .callout.info {
+            background: rgba(122, 158, 184, 0.1);
+            border-left-color: var(--soft-blue);
+        }
+        
+        .callout.success {
+            background: rgba(168, 197, 160, 0.1);
+            border-left-color: var(--healing-green);
+        }
+        
+        .callout h4 {
+            margin-top: 0;
+        }
+        
+        /* ============================================
+           NEXT STEPS
+           ============================================ */
+        .next-steps {
+            background: linear-gradient(135deg, var(--earth-medium) 0%, var(--soft-blue) 100%);
+            color: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .next-steps h3 {
+            color: white;
+            margin-top: 0;
+        }
+        
+        .next-steps-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .next-step-link {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1.25rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            transition: var(--transition-smooth);
+            text-decoration: none;
+            color: white;
+        }
+        
+        .next-step-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .next-step-icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .next-step-label {
+            font-weight: 600;
+        }
+        
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 1.5rem;
+            }
+            
+            .domains-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .connection-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .guidance-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: var(--earth-dark);
+            color: var(--warm-sand);
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            text-align: center;
+            font-size: 0.875rem;
+            opacity: 0.9;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .footer-content a {
+            color: var(--healing-green);
+            text-decoration: none;
+        }
+        
+        .footer-content a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="top-nav">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-home">← Feed Children ASAP Atlas</a>
+            <span class="breadcrumb">Learn → Key Domains</span>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <span class="page-badge">📚 Learning Resource</span>
+            <h1>Key Domains in Child Nutrition</h1>
+            <p class="subtitle">
+                Understanding the interconnected sectors that affect child nutrition and how to work 
+                across traditional boundaries for better outcomes.
+            </p>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <div class="container">
+            
+            <!-- INTRODUCTION -->
+            <div class="intro-box">
+                <h3>🌐 Why Multiple Domains Matter</h3>
+                <p>
+                    <strong>Child nutrition is not just a health problem.</strong> It's simultaneously a health issue, 
+                    an agricultural issue, an economic issue, an education issue, a water and sanitation issue, and a 
+                    governance issue.
+                </p>
+                <p>
+                    No single sector can "solve" malnutrition alone. But understanding how different domains contribute—and 
+                    where they intersect—helps you identify leverage points and partnership opportunities.
+                </p>
+                <p style="margin-bottom: 0;">
+                    <strong>This guide</strong> explains the key domains, why they matter for nutrition, and how they 
+                    interact. Use it to understand where your work fits and who you need to collaborate with.
+                </p>
+            </div>
+
+            <!-- DOMAINS -->
+            <div class="content-section">
+                <h2>The Six Core Domains</h2>
+                
+                <div class="domains-grid">
+                    <!-- HEALTH -->
+                    <div class="domain-card health">
+                        <div class="domain-header">
+                            <span class="domain-icon">🏥</span>
+                            <div class="domain-title">Health Systems</div>
+                        </div>
+                        <div class="domain-description">
+                            Clinical nutrition services, screening, treatment, prevention, and health service delivery.
+                        </div>
+                        <div class="domain-why">
+                            <div class="domain-why-title">Why It Matters for Nutrition</div>
+                            <p style="margin: 0; color: var(--text-secondary); font-size: 0.95rem;">
+                                Health systems identify malnourished children, provide treatment (SAM/MAM programs), 
+                                deliver micronutrient supplements, promote infant feeding practices, and monitor growth.
+                            </p>
+                        </div>
+                        <div class="domain-examples">
+                            <div class="domain-examples-title">Key Interventions:</div>
+                            <ul>
+                                <li>Community-based management of acute malnutrition (CMAM)</li>
+                                <li>Growth monitoring and promotion</li>
+                                <li>Vitamin A supplementation campaigns</li>
+                                <li>Infant and young child feeding (IYCF) counseling</li>
+                                <li>Deworming and immunization integration</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- AGRICULTURE -->
+                    <div class="domain-card agriculture">
+                        <div class="domain-header">
+                            <span class="domain-icon">🌾</span>
+                            <div class="domain-title">Agriculture & Food Systems</div>
+                        </div>
+                        <div class="domain-description">
+                            Food production, markets, availability, diversity, and household food security.
+                        </div>
+                        <div class="domain-why">
+                            <div class="domain-why-title">Why It Matters for Nutrition</div>
+                            <p style="margin: 0; color: var(--text-secondary); font-size: 0.95rem;">
+                                Agriculture determines what foods are available, affordable, and accessible. Diverse 
+                                production systems enable diverse diets. Markets connect food to consumers.
+                            </p>
+                        </div>
+                        <div class="domain-examples">
+                            <div class="domain-examples-title">Key Interventions:</div>
+                            <ul>
+                                <li>Homestead food production (gardens, small livestock)</li>
+                                <li>Biofortification (nutrient-enhanced crops)</li>
+                                <li>Value chain development for nutritious foods</li>
+                                <li>Agricultural extension for dietary diversity</li>
+                                <li>Farmer field schools with nutrition messaging</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- SOCIAL PROTECTION -->
+                    <div class="domain-card protection">
+                        <div class="domain-header">
+                            <span class="domain-icon">🤝</span>
+                            <div class="domain-title">Social Protection</div>
+                        </div>
+                        <div class="domain-description">
+                            Safety nets, cash transfers, food assistance, and economic support for vulnerable households.
+                        </div>
+                        <div class="domain-why">
+                            <div class="domain-why-title">Why It Matters for Nutrition</div>
+                            <p style="margin: 0; color: var(--text-secondary); font-size: 0.95rem;">
+                                Poverty directly drives malnutrition. Social protection provides resources for food 
+                                purchase, reduces economic stress, and enables households to invest in child care.
+                            </p>
+                        </div>
+                        <div class="domain-examples">
+                            <div class="domain-examples-title">Key Interventions:</div>
+                            <ul>
+                                <li>Cash transfer programs (conditional or unconditional)</li>
+                                <li>Food vouchers and e-transfers</li>
+                                <li>School feeding programs</li>
+                                <li>Public works with nutrition focus</li>
+                                <li>Nutrition-sensitive safety nets</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- WASH -->
+                    <div class="domain-card wash">
+                        <div class="domain-header">
+                            <span class="domain-icon">💧</span>
+                            <div class="domain-title">WASH</div>
+                        </div>
+                        <div class="domain-description">
+                            Water, sanitation, hygiene infrastructure and behavior—critical for nutrient absorption.
+                        </div>
+                        <div class="domain-why">
+                            <div class="domain-why-title">Why It Matters for Nutrition</div>
+                            <p style="margin: 0; color: var(--text-secondary); font-size: 0.95rem;">
+                                Poor WASH causes diarrhea and environmental enteric dysfunction, preventing nutrient 
+                                absorption even when food is available. Clean water and sanitation are prerequisites 
+                                for nutrition.
+                            </p>
+                        </div>
+                        <div class="domain-examples">
+                            <div class="domain-examples-title">Key Interventions:</div>
+                            <ul>
+                                <li>Handwashing promotion (at critical times)</li>
+                                <li>Improved sanitation (toilets, waste management)</li>
+                                <li>Safe water supply</li>
+                                <li>Food hygiene practices</li>
+                                <li>Community-led total sanitation (CLTS)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- EDUCATION -->
+                    <div class="domain-card education">
+                        <div class="domain-header">
+                            <span class="domain-icon">📚</span>
+                            <div class="domain-title">Education</div>
+                        </div>
+                        <div class="domain-description">
+                            Schools as platforms for nutrition delivery, education, and long-term empowerment.
+                        </div>
+                        <div class="domain-why">
+                            <div class="domain-why-title">Why It Matters for Nutrition</div>
+                            <p style="margin: 0; color: var(--text-secondary); font-size: 0.95rem;">
+                                Schools reach children at scale. Maternal education strongly predicts child nutrition. 
+                                Schools can deliver feeding, health services, and nutrition knowledge simultaneously.
+                            </p>
+                        </div>
+                        <div class="domain-examples">
+                            <div class="domain-examples-title">Key Interventions:</div>
+                            <ul>
+                                <li>School feeding and snack programs</li>
+                                <li>Nutrition education in curriculum</li>
+                                <li>School gardens and cooking classes</li>
+                                <li>Health screenings at schools</li>
+                                <li>Girls' education (long-term nutrition impact)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- GOVERNANCE -->
+                    <div class="domain-card governance">
+                        <div class="domain-header">
+                            <span class="domain-icon">⚖️</span>
+                            <div class="domain-title">Governance & Coordination</div>
+                        </div>
+                        <div class="domain-description">
+                            Policy, regulation, coordination across sectors, and institutional frameworks.
+                        </div>
+                        <div class="domain-why">
+                            <div class="domain-why-title">Why It Matters for Nutrition</div>
+                            <p style="margin: 0; color: var(--text-secondary); font-size: 0.95rem;">
+                                Multi-sectoral nutrition responses require coordination. Policies shape incentives. 
+                                Governance determines whether sectors actually work together or operate in silos.
+                            </p>
+                        </div>
+                        <div class="domain-examples">
+                            <div class="domain-examples-title">Key Mechanisms:</div>
+                            <ul>
+                                <li>National nutrition strategies and plans</li>
+                                <li>Multi-sectoral coordination platforms</li>
+                                <li>Food fortification regulations</li>
+                                <li>Maternity protection policies</li>
+                                <li>Budget allocation and tracking</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INTERCONNECTIONS -->
+            <div class="content-section">
+                <h2>How Domains Interconnect</h2>
+                <p>
+                    Real impact happens at the intersections. Here are examples of powerful cross-domain approaches:
+                </p>
+                
+                <div class="interconnections">
+                    <div class="connection-grid">
+                        <div class="connection-card">
+                            <div class="connection-title">Cash + Nutrition Counseling</div>
+                            <div class="connection-domains">
+                                <span class="domain-badge badge-protection">Social Protection</span>
+                                <span class="domain-badge badge-health">Health</span>
+                            </div>
+                            <div class="connection-description">
+                                Cash transfers provide resources to buy food; health workers provide guidance on 
+                                what to buy and how to feed children. Together, they address both access and knowledge.
+                            </div>
+                        </div>
+                        
+                        <div class="connection-card">
+                            <div class="connection-title">Agriculture-Nutrition Extension</div>
+                            <div class="connection-domains">
+                                <span class="domain-badge badge-agriculture">Agriculture</span>
+                                <span class="domain-badge badge-health">Health</span>
+                            </div>
+                            <div class="connection-description">
+                                Agricultural extension workers trained in nutrition promote production of diverse, 
+                                nutritious crops—not just high-yield staples. Farmers grow food their families need.
+                            </div>
+                        </div>
+                        
+                        <div class="connection-card">
+                            <div class="connection-title">WASH + CMAM Integration</div>
+                            <div class="connection-domains">
+                                <span class="domain-badge badge-wash">WASH</span>
+                                <span class="domain-badge badge-health">Health</span>
+                            </div>
+                            <div class="connection-description">
+                                Treating acute malnutrition while improving household water and sanitation prevents 
+                                re-admission. Addresses immediate crisis and underlying causes together.
+                            </div>
+                        </div>
+                        
+                        <div class="connection-card">
+                            <div class="connection-title">School Feeding + Agriculture</div>
+                            <div class="connection-domains">
+                                <span class="domain-badge badge-education">Education</span>
+                                <span class="domain-badge badge-agriculture">Agriculture</span>
+                            </div>
+                            <div class="connection-description">
+                                Schools source food from local smallholder farmers, creating markets for nutritious 
+                                crops while feeding children. Home-grown school feeding strengthens both sectors.
+                            </div>
+                        </div>
+                        
+                        <div class="connection-card">
+                            <div class="connection-title">Social Protection + Education</div>
+                            <div class="connection-domains">
+                                <span class="domain-badge badge-protection">Social Protection</span>
+                                <span class="domain-badge badge-education">Education</span>
+                            </div>
+                            <div class="connection-description">
+                                Cash transfers conditional on school attendance reduce child labor, increase girls' 
+                                education (improving future child nutrition), and may fund school feeding.
+                            </div>
+                        </div>
+                        
+                        <div class="connection-card">
+                            <div class="connection-title">Multi-Sectoral Platforms</div>
+                            <div class="connection-domains">
+                                <span class="domain-badge badge-health">All Domains</span>
+                            </div>
+                            <div class="connection-description">
+                                National nutrition coordination platforms bring health, agriculture, education, WASH, 
+                                and protection sectors together for joint planning, shared targets, and aligned budgets.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COORDINATION CHALLENGES -->
+            <div class="challenges-box">
+                <h3>🚧 Why Cross-Sector Coordination Is Hard</h3>
+                <p><strong>Understanding the barriers helps you navigate them:</strong></p>
+                <ul>
+                    <li><strong>Siloed budgets:</strong> Each ministry/sector has separate funding, no shared accountability</li>
+                    <li><strong>Different mandates:</strong> Health targets disease reduction; agriculture targets yields; neither "owns" nutrition</li>
+                    <li><strong>Competing priorities:</strong> Nutrition is often secondary to core sectoral goals</li>
+                    <li><strong>Technical languages:</strong> Sectors use different terminology, metrics, and frameworks</li>
+                    <li><strong>Turf protection:</strong> Coordination seen as threat to sector autonomy or resources</li>
+                    <li><strong>No shared incentives:</strong> Individuals not rewarded for cross-sector work</li>
+                </ul>
+                <p style="margin-top: 1rem; margin-bottom: 0;">
+                    <strong>Success requires:</strong> Political commitment, shared targets, joint budget authority (not just 
+                    information sharing), and incentives for collaboration.
+                </p>
+            </div>
+
+            <!-- PRACTICAL GUIDANCE -->
+            <div class="content-section">
+                <h2>Practical Guidance by Your Role</h2>
+                
+                <div class="guidance-cards">
+                    <div class="guidance-card">
+                        <h4>If You're in Health</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                            Partner with agriculture on homestead production. Coordinate with WASH on hygiene promotion. 
+                            Link nutrition programs to social protection registries. Train teachers on growth monitoring.
+                        </p>
+                    </div>
+                    
+                    <div class="guidance-card">
+                        <h4>If You're in Agriculture</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                            Train extension workers in nutrition messaging. Promote diverse crops, not just staples. 
+                            Connect farmers to school feeding markets. Integrate nutrition into agricultural policies.
+                        </p>
+                    </div>
+                    
+                    <div class="guidance-card">
+                        <h4>If You're in Social Protection</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                            Add nutrition indicators to cash transfer programs. Partner with health for "cash plus" 
+                            models. Target transfers to critical nutrition windows (pregnancy, early childhood).
+                        </p>
+                    </div>
+                    
+                    <div class="guidance-card">
+                        <h4>If You're in WASH</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                            Prioritize hygiene behaviors that prevent diarrhea. Integrate with nutrition treatment 
+                            programs. Focus on households with young children and pregnant women first.
+                        </p>
+                    </div>
+                    
+                    <div class="guidance-card">
+                        <h4>If You're in Education</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                            Implement school feeding linked to local agriculture. Integrate nutrition education into 
+                            curriculum. Screen children for malnutrition and refer to health services.
+                        </p>
+                    </div>
+                    
+                    <div class="guidance-card">
+                        <h4>If You're Coordinating</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                            Establish shared nutrition targets across sectors. Create joint budget mechanisms. Facilitate 
+                            (don't force) collaboration. Focus on quick wins to build trust.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WHERE TO START -->
+            <div class="content-section">
+                <h2>Where to Start</h2>
+                
+                <div class="callout success">
+                    <h4>✅ Start Small, Build Evidence</h4>
+                    <p>
+                        Don't try to coordinate all sectors at once. Pick <strong>one partnership</strong> that makes 
+                        obvious sense in your context:
+                    </p>
+                    <ul>
+                        <li>Health + WASH if diarrhea rates are high</li>
+                        <li>Agriculture + Health if food is available but diets aren't diverse</li>
+                        <li>Social Protection + Health if poverty is the primary barrier</li>
+                        <li>Education + Health if schools have infrastructure and reach</li>
+                    </ul>
+                    <p style="margin-bottom: 0;">
+                        Demonstrate impact in a pilot, then expand. Coordination is easier when there's proof it works.
+                    </p>
+                </div>
+                
+                <div class="callout info">
+                    <h4>📖 Learn More</h4>
+                    <p style="margin-bottom: 0.5rem;">Explore domain-specific guidance in the For Stakeholders sections:</p>
+                    <ul style="margin-bottom: 0;">
+                        <li><a href="../for/policymakers.html" style="color: var(--soft-blue);">Policymakers</a> - for governance and coordination approaches</li>
+                        <li><a href="../for/implementers.html" style="color: var(--soft-blue);">Implementers</a> - for field-level integration</li>
+                        <li><a href="../for/funders.html" style="color: var(--soft-blue);">Funders</a> - for financing multi-sectoral work</li>
+                        <li><a href="../for/researchers.html" style="color: var(--soft-blue);">Researchers</a> - for evidence on cross-domain approaches</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- NEXT STEPS -->
+            <div class="next-steps">
+                <h3>🚀 Continue Learning</h3>
+                <p>Explore related resources:</p>
+                
+                <div class="next-steps-links">
+                    <a href="how-it-works.html" class="next-step-link">
+                        <span class="next-step-icon">📖</span>
+                        <div class="next-step-label">How It Works</div>
+                    </a>
+                    
+                    <a href="../tools/map-constraints.html" class="next-step-link">
+                        <span class="next-step-icon">🗺️</span>
+                        <div class="next-step-label">Map Constraints</div>
+                    </a>
+                    
+                    <a href="../tools/choose-intervention.html" class="next-step-link">
+                        <span class="next-step-icon">🎯</span>
+                        <div class="next-step-label">Select Interventions</div>
+                    </a>
+                    
+                    <a href="../governance.html" class="next-step-link">
+                        <span class="next-step-icon">🛡️</span>
+                        <div class="next-step-label">Governance</div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <p>
+                <strong>Key Domains</strong> | Part of Feed Children ASAP Atlas<br>
+                <a href="../governance.html">Zero Harm Policy</a> • 
+                <a href="../about.html">About This Project</a> • 
+                <a href="../index.html">Return to Atlas</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Accessibility: Reduced motion support
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('*').forEach(el => {
+                el.style.animation = 'none';
+                el.style.transition = 'none';
+            });
+        }
+    </script>
+</body>
+</html>
