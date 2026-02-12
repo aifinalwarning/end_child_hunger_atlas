@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About the Feed Children ASAP Atlas: purpose, approach, structure, and how to use this decision-safe framework for child nutrition interventions.">
+    <title>About | Feed Children ASAP Atlas</title>
+    
+    <style>
+        /* ============================================
+           RESET & BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --earth-dark: #2d3e2f;
+            --earth-medium: #5a7c5e;
+            --earth-light: #8ba888;
+            --healing-green: #a8c5a0;
+            --warm-sand: #e8dcc4;
+            --soft-blue: #7a9eb8;
+            --neutral-gray: #6b7280;
+            --background-light: #f9f9f7;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --card-background: #ffffff;
+            --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --border-radius: 8px;
+            --transition-smooth: all 0.3s ease;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--background-light);
+            overflow-x: hidden;
+        }
+        
+        /* ============================================
+           TYPOGRAPHY
+           ============================================ */
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+        }
+        
+        h1 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            color: var(--earth-dark);
+        }
+        
+        h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--earth-medium);
+            margin-top: 3rem;
+        }
+        
+        h3 {
+            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+            color: var(--earth-medium);
+            margin-top: 2rem;
+        }
+        
+        h4 {
+            font-size: clamp(1.125rem, 2vw, 1.25rem);
+            color: var(--earth-dark);
+            margin-top: 1.5rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        ul, ol {
+            margin-bottom: 1rem;
+            margin-left: 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        strong {
+            color: var(--earth-dark);
+        }
+        
+        /* ============================================
+           LAYOUT
+           ============================================ */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        .top-nav {
+            background: var(--earth-dark);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .nav-home {
+            color: var(--warm-sand);
+            font-weight: 600;
+            font-size: 1.125rem;
+            text-decoration: none;
+        }
+        
+        .nav-home:hover {
+            color: var(--healing-green);
+        }
+        
+        .breadcrumb {
+            color: var(--warm-sand);
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+        
+        /* ============================================
+           HEADER
+           ============================================ */
+        header {
+            background: linear-gradient(135deg, var(--earth-medium) 0%, var(--soft-blue) 100%);
+            padding: 3rem 0 2rem;
+            color: white;
+        }
+        
+        .page-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.25);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 400;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* ============================================
+           CONTENT SECTIONS
+           ============================================ */
+        .content-section {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        /* ============================================
+           MISSION BOX
+           ============================================ */
+        .mission-box {
+            background: linear-gradient(135deg, rgba(90, 124, 94, 0.15) 0%, rgba(168, 197, 160, 0.15) 100%);
+            border: 3px solid var(--healing-green);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .mission-statement {
+            font-size: clamp(1.25rem, 3vw, 1.5rem);
+            font-weight: 600;
+            color: var(--earth-dark);
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        
+        .mission-description {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+        }
+        
+        /* ============================================
+           VALUES GRID
+           ============================================ */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .value-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.75rem;
+            box-shadow: var(--shadow-subtle);
+            border-left: 4px solid var(--healing-green);
+        }
+        
+        .value-icon {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 0.75rem;
+        }
+        
+        .value-title {
+            font-weight: 600;
+            color: var(--earth-dark);
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .value-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        /* ============================================
+           PROBLEM/SOLUTION BOX
+           ============================================ */
+        .problem-solution {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .problem-box, .solution-box {
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .problem-box {
+            background: rgba(217, 119, 87, 0.1);
+            border: 2px solid #d97757;
+        }
+        
+        .solution-box {
+            background: rgba(168, 197, 160, 0.1);
+            border: 2px solid var(--healing-green);
+        }
+        
+        .problem-box h3 {
+            color: #d97757;
+            margin-top: 0;
+        }
+        
+        .solution-box h3 {
+            color: var(--healing-green);
+            margin-top: 0;
+        }
+        
+        /* ============================================
+           PRINCIPLES LIST
+           ============================================ */
+        .principles-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .principles-list li {
+            padding: 1rem 0 1rem 3rem;
+            position: relative;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .principles-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .principles-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+            color: var(--healing-green);
+            font-weight: 700;
+        }
+        
+        /* ============================================
+           CALLOUT BOXES
+           ============================================ */
+        .callout {
+            border-left: 4px solid;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        .callout.info {
+            background: rgba(122, 158, 184, 0.1);
+            border-left-color: var(--soft-blue);
+        }
+        
+        .callout.success {
+            background: rgba(168, 197, 160, 0.1);
+            border-left-color: var(--healing-green);
+        }
+        
+        .callout h4 {
+            margin-top: 0;
+        }
+        
+        /* ============================================
+           CONTACT SECTION
+           ============================================ */
+        .contact-section {
+            background: var(--background-light);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .contact-section h3 {
+            color: var(--earth-dark);
+            margin-top: 0;
+        }
+        
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 1.5rem;
+            }
+            
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .problem-solution {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: var(--earth-dark);
+            color: var(--warm-sand);
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            text-align: center;
+            font-size: 0.875rem;
+            opacity: 0.9;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .footer-content a {
+            color: var(--healing-green);
+            text-decoration: none;
+        }
+        
+        .footer-content a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="top-nav">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-home">← Feed Children ASAP Atlas</a>
+            <span class="breadcrumb">About</span>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <span class="page-badge">ℹ️ About the Project</span>
+            <h1>About Feed Children ASAP Atlas</h1>
+            <p class="subtitle">
+                A decision-safe framework for child nutrition interventions. Created to help institutional 
+                actors navigate the path from knowledge to action without career risk or blame.
+            </p>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <div class="container">
+            
+            <!-- MISSION -->
+            <div class="mission-box">
+                <div class="mission-statement">
+                    Our Mission: Create safer pathways for institutional decision-makers to address child 
+                    malnutrition without sacrificing their careers or reputations
+                </div>
+                <p class="mission-description">
+                    The world doesn't lack knowledge about how to improve child nutrition. We lack institutional 
+                    courage to act on what we know. This Atlas exists to bridge that gap.
+                </p>
+            </div>
+
+            <!-- THE PROBLEM WE'RE SOLVING -->
+            <div class="content-section">
+                <h2>The Problem We're Solving</h2>
+                
+                <div class="problem-solution">
+                    <div class="problem-box">
+                        <h3>🚧 Barriers to Action</h3>
+                        <p><strong>People know what needs to be done, but institutional barriers prevent action:</strong></p>
+                        <ul style="margin: 0;">
+                            <li><strong>Career Risk:</strong> "If this program fails, my career is over"</li>
+                            <li><strong>Institutional Inertia:</strong> "This isn't how we've done things before"</li>
+                            <li><strong>Attribution Anxiety:</strong> "What if we can't prove impact?"</li>
+                            <li><strong>Coordination Paralysis:</strong> "Too many stakeholders, no clear lead"</li>
+                            <li><strong>Analysis Paralysis:</strong> "We need more data before deciding"</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="solution-box">
+                        <h3>✅ Our Approach</h3>
+                        <p><strong>Decision-safe pathways that reduce institutional risk:</strong></p>
+                        <ul style="margin: 0;">
+                            <li><strong>Professional Cover:</strong> Evidence-based recommendations reduce personal blame</li>
+                            <li><strong>Face-Saving Language:</strong> Framing that protects reputations and relationships</li>
+                            <li><strong>Actionable Focus:</strong> 5 implementable options beat 50 theoretical ones</li>
+                            <li><strong>Anti-Harm Design:</strong> Safety guardrails built in from the start</li>
+                            <li><strong>Deployment Ready:</strong> Works offline, no dependencies, immediate use</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CORE VALUES -->
+            <div class="content-section">
+                <h2>Core Values</h2>
+                <p>
+                    These principles guide everything in the Atlas:
+                </p>
+                
+                <div class="values-grid">
+                    <div class="value-card">
+                        <span class="value-icon">🛡️</span>
+                        <div class="value-title">Zero-Harm First</div>
+                        <div class="value-description">
+                            Beneficiary safety, dignity, and autonomy are non-negotiable. Program efficiency 
+                            never justifies compromising human dignity.
+                        </div>
+                    </div>
+                    
+                    <div class="value-card">
+                        <span class="value-icon">🚪</span>
+                        <div class="value-title">Decision-Safe Design</div>
+                        <div class="value-description">
+                            Provide professional cover for institutional actors. Recommendations backed by 
+                            evidence reduce personal risk and blame.
+                        </div>
+                    </div>
+                    
+                    <div class="value-card">
+                        <span class="value-icon">⚡</span>
+                        <div class="value-title">Actionable Over Comprehensive</div>
+                        <div class="value-description">
+                            Better to have 5 options you can actually implement than 50 theoretical interventions. 
+                            Prioritize feasibility and clarity.
+                        </div>
+                    </div>
+                    
+                    <div class="value-card">
+                        <span class="value-icon">🤝</span>
+                        <div class="value-title">Multi-Stakeholder Accessibility</div>
+                        <div class="value-description">
+                            Different actors need different entry points. Policymakers, implementers, funders, 
+                            researchers, and communities all have distinct needs.
+                        </div>
+                    </div>
+                    
+                    <div class="value-card">
+                        <span class="value-icon">🌍</span>
+                        <div class="value-title">Deployment-Ready</div>
+                        <div class="value-description">
+                            Works offline, standalone HTML, zero external dependencies. Accessible in bandwidth-limited 
+                            environments and restrictive institutional settings.
+                        </div>
+                    </div>
+                    
+                    <div class="value-card">
+                        <span class="value-icon">🔄</span>
+                        <div class="value-title">Regenerative Structure</div>
+                        <div class="value-description">
+                            Flat, navigable architecture. No complex hierarchies. Clear pathways from any starting 
+                            point to relevant tools and information.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WHAT MAKES IT DIFFERENT -->
+            <div class="content-section">
+                <h2>What Makes This Different</h2>
+                
+                <h3>Not Another Technical Manual</h3>
+                <p>
+                    There are excellent technical guidelines from WHO, UNICEF, and others. This isn't trying 
+                    to replace them. The Atlas focuses on the <strong>institutional and political barriers</strong> 
+                    that prevent technical guidance from being implemented.
+                </p>
+                
+                <h3>Decision-Safe Framing</h3>
+                <p>
+                    Every recommendation includes the evidence base and acknowledges limitations. This gives 
+                    decision-makers professional cover: "I followed evidence-based guidance from recognized sources." 
+                    Reduces personal blame when programs face inevitable challenges.
+                </p>
+                
+                <h3>Anti-Harm by Design, Not Tacked On</h3>
+                <p>
+                    Most resources add "do no harm" as an afterthought. The Atlas starts with Zero Harm principles 
+                    and builds everything else around them. <a href="../governance/index.html" style="color: var(--soft-blue);">Read our Zero Harm Policy</a>.
+                </p>
+                
+                <h3>Actually Offline-First</h3>
+                <p>
+                    Many resources claim to be "accessible" but require constant internet connectivity. The Atlas 
+                    is truly standalone: single HTML files, no external dependencies, works in restrictive networks.
+                </p>
+                
+                <h3>Honest About Limitations</h3>
+                <p>
+                    We acknowledge what we don't know, what evidence is weak, and where context matters more than 
+                    global guidance. Uncertainty is stated clearly, not hidden.
+                </p>
+            </div>
+
+            <!-- HOW TO USE -->
+            <div class="content-section">
+                <h2>How to Use the Atlas</h2>
+                
+                <div class="callout info">
+                    <h4>🧭 Different Starting Points for Different Needs</h4>
+                    <p style="margin-bottom: 0;">
+                        <strong>There's no single "right" way to use the Atlas.</strong> Choose your entry point 
+                        based on where you are and what you need:
+                    </p>
+                </div>
+                
+                <h3>If You're New to Nutrition Programming</h3>
+                <ol>
+                    <li>Start with <a href="../learn/how-it-works.html" style="color: var(--soft-blue);">How It Works</a> to understand the framework</li>
+                    <li>Review <a href="../learn/domains.html" style="color: var(--soft-blue);">Key Domains</a> to see the big picture</li>
+                    <li>Choose your role-based portal (policymaker, implementer, etc.) for tailored guidance</li>
+                    <li>Explore the interactive tools to work through specific decisions</li>
+                </ol>
+                
+                <h3>If You're Planning a Specific Program</h3>
+                <ol>
+                    <li>Use the <a href="../tools/map-constraints.html" style="color: var(--soft-blue);">Constraints Mapper</a> to identify your barriers</li>
+                    <li>Use the <a href="../tools/choose-intervention.html" style="color: var(--soft-blue);">Intervention Selector</a> to filter appropriate interventions</li>
+                    <li>Reference <a href="../act/start-fast.html" style="color: var(--soft-blue);">Rapid Start Guide</a> for implementation steps</li>
+                    <li>Adapt <a href="../act/templates.html" style="color: var(--soft-blue);">Country Templates</a> for your context</li>
+                </ol>
+                
+                <h3>If You Need Quick Answers</h3>
+                <ol>
+                    <li>Try the <a href="../tools/ask.html" style="color: var(--soft-blue);">Question Engine</a> for specific questions</li>
+                    <li>Check the <a href="../learn/glossary.html" style="color: var(--soft-blue);">Glossary</a> for term definitions</li>
+                    <li>Search the <a href="../learn/research.html" style="color: var(--soft-blue);">Research Hub</a> for evidence on specific interventions</li>
+                </ol>
+                
+                <h3>If You're Facing Institutional Barriers</h3>
+                <p>
+                    This is the Atlas's core purpose. The framework provides:
+                </p>
+                <ul>
+                    <li><strong>Evidence-based justifications</strong> for recommendations (professional cover)</li>
+                    <li><strong>Decision-safe language</strong> for proposals and reports</li>
+                    <li><strong>Risk mitigation strategies</strong> embedded in all guidance</li>
+                    <li><strong>Multi-stakeholder framing</strong> to build coalitions and share responsibility</li>
+                </ul>
+            </div>
+
+            <!-- STRUCTURE -->
+            <div class="content-section">
+                <h2>Atlas Structure</h2>
+                
+                <h3>🚪 For (Role-Based Portals)</h3>
+                <p>
+                    Tailored entry points for different institutional actors: policymakers, implementers, funders, 
+                    researchers, communities. Each portal surfaces the most relevant tools and information for that role.
+                </p>
+                
+                <h3>🔧 Tools (Interactive Decision Support)</h3>
+                <p>
+                    Practical tools for working through specific decisions: mapping constraints, choosing interventions, 
+                    collecting data, measuring outcomes. All work offline with no external dependencies.
+                </p>
+                
+                <h3>📚 Learn (Knowledge Resources)</h3>
+                <p>
+                    Deeper dives into key topics: how the framework works, nutrition domains, research evidence, 
+                    technical terminology. Educational rather than operational.
+                </p>
+                
+                <h3>⚡ Act (Rapid Deployment Resources)</h3>
+                <p>
+                    Get-started guides, templates, training materials. For when you need to move from planning 
+                    to implementation quickly.
+                </p>
+            </div>
+
+            <!-- WHO IS THIS FOR -->
+            <div class="content-section">
+                <h2>Who Is This For</h2>
+                
+                <h3>Primary Audience: Institutional Decision-Makers</h3>
+                <ul>
+                    <li><strong>Government officials</strong> in health, agriculture, social protection ministries</li>
+                    <li><strong>UN staff</strong> (UNICEF, WFP, WHO) navigating bureaucratic systems</li>
+                    <li><strong>Foundation program officers</strong> making funding decisions</li>
+                    <li><strong>NGO leadership</strong> designing programs in complex environments</li>
+                    <li><strong>Donor representatives</strong> needing to understand implementation realities</li>
+                </ul>
+                
+                <h3>Secondary Audience</h3>
+                <ul>
+                    <li><strong>Field implementers</strong> needing practical tools and templates</li>
+                    <li><strong>Researchers and academics</strong> seeking to make work more actionable</li>
+                    <li><strong>Students and early-career professionals</strong> learning nutrition programming</li>
+                    <li><strong>Community representatives</strong> engaging with formal programs</li>
+                </ul>
+            </div>
+
+            <!-- LIMITATIONS -->
+            <div class="content-section">
+                <h2>What This Is NOT</h2>
+                <p>
+                    <strong>Honest limitations matter. The Atlas is not:</strong>
+                </p>
+                
+                <ul class="principles-list" style="list-style: none; padding-left: 0;">
+                    <li style="padding-left: 2rem; border-bottom: 1px solid rgba(0, 0, 0, 0.05);">
+                        <strong>A substitute for local expertise:</strong> Global guidance cannot replace contextual 
+                        knowledge. The Atlas provides frameworks; you provide context.
+                    </li>
+                    <li style="padding-left: 2rem; border-bottom: 1px solid rgba(0, 0, 0, 0.05);">
+                        <strong>Comprehensive:</strong> We prioritize actionable over comprehensive. Some interventions 
+                        and approaches are deliberately excluded if evidence is weak or implementation is complex.
+                    </li>
+                    <li style="padding-left: 2rem; border-bottom: 1px solid rgba(0, 0, 0, 0.05);">
+                        <strong>Updated real-time:</strong> This is a static resource. Check publication dates. 
+                        Supplement with recent evidence and current situational data.
+                    </li>
+                    <li style="padding-left: 2rem; border-bottom: 1px solid rgba(0, 0, 0, 0.05);">
+                        <strong>Magic:</strong> It still requires courage to act. The Atlas reduces institutional 
+                        barriers but cannot eliminate them entirely.
+                    </li>
+                    <li style="padding-left: 2rem;">
+                        <strong>Politically neutral:</strong> We have values. Zero harm, beneficiary dignity, and 
+                        evidence-based practice are non-negotiable. This shapes what we include and exclude.
+                    </li>
+                </ul>
+            </div>
+
+            <!-- DEVELOPMENT & CONTRIBUTORS -->
+            <div class="content-section">
+                <h2>Development & Contributors</h2>
+                
+                <h3>Created By Foster + Navi</h3>
+                <p>
+                    The Feed Children ASAP Atlas is developed and maintained by <strong>Foster + Navi</strong>, 
+                    a policy design initiative focused on creating decision-safe pathways for complex humanitarian 
+                    and development challenges.
+                </p>
+                
+                <p>
+                    Our approach combines deep technical expertise in child nutrition with an understanding of 
+                    institutional dynamics, political economy, and the barriers that prevent knowledge from 
+                    translating into action.
+                </p>
+                
+                <h3>Acknowledgments</h3>
+                <p>
+                    This work builds on decades of research, program experience, and technical guidance from:
+                </p>
+                <ul>
+                    <li>WHO, UNICEF, WFP, and other UN agencies for technical standards and evidence synthesis</li>
+                    <li>Academic researchers whose rigorous evaluations inform our recommendations</li>
+                    <li>Field practitioners who shared lessons learned from implementation</li>
+                    <li>Government officials and local partners who provided contextual insights</li>
+                    <li>Beneficiary communities whose feedback shaped the Zero Harm framework</li>
+                </ul>
+            </div>
+
+            <!-- FEEDBACK & CONTACT -->
+            <div class="contact-section">
+                <h3>📬 Feedback & Contact</h3>
+                <p>
+                    <strong>This is a living resource.</strong> We want to hear from you:
+                </p>
+                <ul style="text-align: left; max-width: 600px; margin: 1.5rem auto;">
+                    <li>Found content that violates Zero Harm principles?</li>
+                    <li>Identified gaps in coverage or guidance?</li>
+                    <li>Have field experience that contradicts our recommendations?</li>
+                    <li>Discovered technical errors or broken functionality?</li>
+                    <li>Want to contribute content or case studies?</li>
+                </ul>
+                <p>
+                    <strong>We're committed to continuous improvement based on user feedback.</strong>
+                </p>
+            </div>
+
+            <!-- LICENSE & USE -->
+            <div class="content-section">
+                <h2>License & Use</h2>
+                
+                <div class="callout success">
+                    <h4>✅ You Are Free To:</h4>
+                    <ul style="margin-bottom: 0;">
+                        <li><strong>Use:</strong> Apply this framework in your programs and organizations</li>
+                        <li><strong>Adapt:</strong> Modify content for your context and needs</li>
+                        <li><strong>Share:</strong> Distribute the Atlas within your organization or networks</li>
+                        <li><strong>Build Upon:</strong> Create derivative works and context-specific versions</li>
+                    </ul>
+                </div>
+                
+                <p>
+                    <strong>We Ask That You:</strong>
+                </p>
+                <ul>
+                    <li>Maintain the Zero Harm Policy in any adaptations</li>
+                    <li>Credit the Feed Children ASAP Atlas and Foster + Navi</li>
+                    <li>Share improvements and feedback with the broader community</li>
+                    <li>Do not use for commercial purposes without permission</li>
+                </ul>
+            </div>
+
+            <!-- VERSION & UPDATES -->
+            <div class="content-section">
+                <h2>Version & Updates</h2>
+                <p>
+                    <strong>Current Version:</strong> 1.0 (February 2026)
+                </p>
+                <p>
+                    This is the initial public release. We plan to update the Atlas based on:
+                </p>
+                <ul>
+                    <li>User feedback and field experience</li>
+                    <li>New research evidence and best practices</li>
+                    <li>Identified gaps or errors in current content</li>
+                    <li>Changes in global nutrition policy and standards</li>
+                </ul>
+                <p>
+                    <strong>Check back periodically for updated versions.</strong> Major updates will be clearly 
+                    noted with version numbers and change logs.
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <p>
+                <strong>About Feed Children ASAP Atlas</strong><br>
+                <a href="../governance/index.html">Zero Harm Policy</a> • 
+                <a href="../index.html">Return to Atlas Home</a>
+            </p>
+            <p style="margin-top: 1rem; font-size: 0.8rem;">
+                Developed by Foster + Navi | Version 1.0 | February 2026
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Accessibility: Reduced motion support
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('*').forEach(el => {
+                el.style.animation = 'none';
+                el.style.transition = 'none';
+            });
+        }
+    </script>
+</body>
+</html>
