@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A face-saving guide for policymakers, ministers, cabinet members, and institutional leaders. Exit ramps from systemic harm to healing without professional risk or destabilization.">
-    <title>For Policymakers & Leaders | Feed Children ASAP Atlas</title>
+    <meta name="description" content="A systems-level framework for rapid, ethical action to feed children globally. No coercion. No blame. Clear pathways for decision-makers, implementers, funders, researchers, and communities.">
+    <title>Feed Children ASAP Atlas | A Regenerative Policy Framework</title>
     
     <style>
         /* ============================================
@@ -50,7 +50,7 @@
         /* ============================================
            TYPOGRAPHY
            ============================================ */
-        h1, h2, h3, h4 {
+        h1, h2, h3 {
             font-weight: 600;
             line-height: 1.3;
             margin-bottom: 0.75rem;
@@ -64,19 +64,11 @@
         h2 {
             font-size: clamp(1.5rem, 3vw, 2rem);
             color: var(--earth-medium);
-            margin-top: 3rem;
         }
         
         h3 {
-            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+            font-size: clamp(1.125rem, 2vw, 1.375rem);
             color: var(--earth-medium);
-            margin-top: 2rem;
-        }
-        
-        h4 {
-            font-size: clamp(1.125rem, 2vw, 1.25rem);
-            color: var(--earth-dark);
-            margin-top: 1.5rem;
         }
         
         p {
@@ -94,77 +86,940 @@
             color: var(--earth-medium);
         }
         
-        strong {
-            color: var(--earth-dark);
-            font-weight: 600;
-        }
-        
-        em {
-            color: var(--earth-medium);
-        }
-        
         /* ============================================
-           LAYOUT
+           LAYOUT STRUCTURE
            ============================================ */
         .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-        
-        .wide-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 1.5rem;
         }
         
         section {
-            padding: 3rem 0;
+            padding: 4rem 0;
         }
         
         /* ============================================
-           NAVIGATION
+           HEADER
            ============================================ */
-        .top-nav {
-            background: var(--earth-dark);
-            padding: 1rem 0;
-            position: sticky;
+        header {
+            background: linear-gradient(135deg, var(--earth-dark) 0%, var(--earth-medium) 100%);
+            color: var(--warm-sand);
+            padding: 3rem 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
             top: 0;
-            z-index: 100;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path fill="rgba(255,255,255,0.05)" d="M0,0 Q300,40 600,20 T1200,0 L1200,120 L0,120 Z"/></svg>') no-repeat bottom;
+            background-size: cover;
+            opacity: 0.3;
+        }
+        
+        header .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+        }
+        
+        .mission-statement {
+            max-width: 800px;
+            font-size: clamp(1rem, 2vw, 1.125rem);
+            line-height: 1.8;
+            margin-top: 1.5rem;
+            opacity: 0.9;
+        }
+        
+        /* ============================================
+           PARTICLE GLOBE SECTION
+           ============================================ */
+        .globe-section {
+            background: var(--card-background);
+            padding: 4rem 0;
+            position: relative;
+        }
+        
+        .globe-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        #healing-globe {
+            width: 100%;
+            max-width: 500px;
+            height: 400px;
+            border-radius: var(--border-radius);
             box-shadow: var(--shadow-medium);
         }
         
-        .nav-content {
+        .globe-caption {
+            max-width: 600px;
+            text-align: center;
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        /* ============================================
+           ROLE-BASED PORTALS
+           ============================================ */
+        .portals-section {
+            background: linear-gradient(180deg, var(--background-light) 0%, var(--warm-sand) 100%);
+        }
+        
+        .portals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .portal {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-subtle);
+            transition: var(--transition-smooth);
+            border: 2px solid transparent;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
+            flex-direction: column;
             gap: 1rem;
         }
         
-        .nav-home {
-            color: var(--warm-sand);
-            font-weight: 600;
+        .portal:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--healing-green);
+        }
+        
+        .portal.returning-user {
+            border-color: var(--earth-medium);
+            background: linear-gradient(135deg, var(--card-background) 0%, rgba(168, 197, 160, 0.1) 100%);
+        }
+        
+        .portal-icon {
+            font-size: 2.5rem;
+            line-height: 1;
+        }
+        
+        .portal-title {
+            font-size: 1.25rem;
+            color: var(--earth-dark);
+            margin: 0;
+        }
+        
+        .portal-description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+        
+        .portal-cta {
+            display: inline-block;
+            color: var(--soft-blue);
+            font-weight: 500;
+            margin-top: auto;
+        }
+        
+        .portal:hover .portal-cta {
+            transform: translateX(4px);
+        }
+        
+        /* ============================================
+           TOOLS PREVIEW
+           ============================================ */
+        .tools-section {
+            background: var(--card-background);
+        }
+        
+        .tools-intro {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            text-align: center;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .tool-card {
+            background: var(--background-light);
+            border-radius: var(--border-radius);
+            padding: 1.75rem;
+            border-left: 4px solid var(--healing-green);
+        }
+        
+        .tool-name {
             font-size: 1.125rem;
+            color: var(--earth-dark);
+            margin-bottom: 0.5rem;
         }
         
-        .nav-home:hover {
-            color: var(--healing-green);
+        .tool-purpose {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
         }
         
-        .nav-links {
+        .tool-audience {
+            font-size: 0.875rem;
+            color: var(--neutral-gray);
+            font-style: italic;
+        }
+        
+        /* ============================================
+           HOW IT WORKS
+           ============================================ */
+        .how-it-works-section {
+            background: linear-gradient(180deg, var(--background-light) 0%, var(--card-background) 100%);
+        }
+        
+        .system-explanation {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .process-flow {
             display: flex;
+            flex-direction: column;
             gap: 1.5rem;
-            list-style: none;
-            flex-wrap: wrap;
+            margin-top: 2rem;
         }
         
-        .nav-links a {
+        .process-step {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-subtle);
+            border-left: 4px solid var(--earth-medium);
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            background: var(--healing-green);
+            color: var(--earth-dark);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 32px;
+            font-weight: 600;
+            margin-right: 0.75rem;
+        }
+        
+        .step-title {
+            font-size: 1.125rem;
+            color: var(--earth-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .step-description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+        
+        /* ============================================
+           ZERO HARM BADGE (PERSISTENT)
+           ============================================ */
+        .zero-harm-badge {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--earth-dark);
+            color: var(--warm-sand);
+            padding: 0.75rem 1.25rem;
+            border-radius: 50px;
+            box-shadow: var(--shadow-medium);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: var(--transition-smooth);
+        }
+        
+        .zero-harm-badge:hover {
+            background: var(--earth-medium);
+            transform: scale(1.05);
+        }
+        
+        .zero-harm-badge::before {
+            content: '🛡️';
+            margin-right: 0.5rem;
+        }
+        
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: var(--earth-dark);
+            color: var(--warm-sand);
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--healing-green);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .footer-links a {
             color: var(--warm-sand);
             font-size: 0.95rem;
             opacity: 0.9;
         }
         
-        .nav-links a:hover {
+        .footer-links a:hover {
             opacity: 1;
-            colo
+            color: var(--healing-green);
+        }
+        
+        .zero-harm-statement {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-left: 4px solid var(--healing-green);
+        }
+        
+        .zero-harm-statement h3 {
+            color: var(--healing-green);
+            margin-bottom: 0.75rem;
+        }
+        
+        .zero-harm-statement p {
+            color: var(--warm-sand);
+            font-size: 0.95rem;
+            margin: 0.5rem 0;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 1.5rem;
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+        
+        /* ============================================
+           RESPONSIVE DESIGN
+           ============================================ */
+        @media (max-width: 768px) {
+            section {
+                padding: 3rem 0;
+            }
+            
+            .portals-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .zero-harm-badge {
+                top: 10px;
+                right: 10px;
+                font-size: 0.75rem;
+                padding: 0.5rem 1rem;
+            }
+            
+            #healing-globe {
+                height: 300px;
+            }
+        }
+        
+        /* ============================================
+           PRINT STYLES
+           ============================================ */
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .zero-harm-badge,
+            #healing-globe {
+                display: none;
+            }
+            
+            .portal,
+            .tool-card,
+            .process-step {
+                page-break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+            
+            a {
+                text-decoration: underline;
+            }
+            
+            a[href^="http"]::after {
+                content: " (" attr(href) ")";
+                font-size: 0.8em;
+            }
+        }
+        
+        /* ============================================
+           NO-JS FALLBACK
+           ============================================ */
+        .no-js .globe-container {
+            display: none;
+        }
+        
+        .no-js .js-only {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- ZERO HARM BADGE (PERSISTENT) -->
+    <aside class="zero-harm-badge">
+        <a href="governance.html">Zero Harm Policy</a>
+    </aside>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <h1>Feed Children ASAP Atlas</h1>
+            <p class="subtitle">A Regenerative Policy Framework for Rapid, Ethical Action</p>
+            <p class="mission-statement">
+                Global food systems have evolved to prioritize efficiency and markets over the immediate nutritional needs of children. 
+                This separation was not designed by malice, but it produces measurable harm. This atlas provides decision-makers, 
+                implementers, funders, researchers, and communities with clear, lawful pathways to realign these systems—without 
+                destabilization, coercion, or institutional blame. The goal is simple: children and food, together, now.
+            </p>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <!-- PARTICLE GLOBE SECTION -->
+        <section class="globe-section">
+            <div class="container">
+                <div class="globe-container">
+                    <canvas id="healing-globe" aria-label="Animated representation of interconnected global food systems">
+                        <p>Your browser does not support the canvas element. This visualization represents interconnected global food systems as a living network.</p>
+                    </canvas>
+                    <p class="globe-caption">
+                        This represents the planetary food system as an interconnected network. Each point of light represents a 
+                        potential intervention, connection, or pathway. The system is not broken—it is misaligned. Realignment 
+                        requires coordinated action across multiple scales, from policy chambers to village centers.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ROLE-BASED PORTALS -->
+        <section class="portals-section">
+            <div class="container">
+                <h2>Choose Your Entry Point</h2>
+                <p style="max-width: 800px; margin-bottom: 2rem;">
+                    This atlas is organized by role and decision context. Select the path that matches your position, authority, 
+                    and constraints. Each portal provides tailored strategies, language frameworks, and exit ramps designed to 
+                    enable action without professional or institutional risk.
+                </p>
+                
+                <div class="portals-grid">
+                    <a href="for-policymakers.html" class="portal" data-role="policymakers">
+                        <span class="portal-icon">🏛️</span>
+                        <h3 class="portal-title">For Policymakers & Leaders</h3>
+                        <p class="portal-description">
+                            Exit ramps from harm to healing. Sentence structures, structural buffers, and face-saving pathways 
+                            for ministers, cabinet members, executives, and institutional decision-makers.
+                        </p>
+                        <span class="portal-cta">Enter →</span>
+                    </a>
+                    
+                    <a href="for-implementers.html" class="portal" data-role="implementers">
+                        <span class="portal-icon">🌾</span>
+                        <h3 class="portal-title">For Implementers</h3>
+                        <p class="portal-description">
+                            Ground-level action playbooks. Rapid-start kits, logistics templates, and field-tested protocols for 
+                            NGOs, humanitarian operators, and on-the-ground coordinators.
+                        </p>
+                        <span class="portal-cta">Enter →</span>
+                    </a>
+                    
+                    <a href="for-funders.html" class="portal" data-role="funders">
+                        <span class="portal-icon">💼</span>
+                        <h3 class="portal-title">For Funders & Philanthropies</h3>
+                        <p class="portal-description">
+                            Strategic deployment frameworks. How to allocate capital for maximum systemic leverage without 
+                            reputational risk, legal exposure, or mission drift.
+                        </p>
+                        <span class="portal-cta">Enter →</span>
+                    </a>
+                    
+                    <a href="for-researchers.html" class="portal" data-role="researchers">
+                        <span class="portal-icon">🔬</span>
+                        <h3 class="portal-title">For Researchers</h3>
+                        <p class="portal-description">
+                            Evidence synthesis and validation protocols. Access literature hubs, replication packs, and 
+                            cross-domain bridges connecting nutrition science, economics, and governance.
+                        </p>
+                        <span class="portal-cta">Enter →</span>
+                    </a>
+                    
+                    <a href="for-communities.html" class="portal" data-role="communities">
+                        <span class="portal-icon">🤝</span>
+                        <h3 class="portal-title">For Communities</h3>
+                        <p class="portal-description">
+                            Accessible, locally adaptable resources. Plain-language guides, participation frameworks, and 
+                            accountability tools designed for direct use by affected populations.
+                        </p>
+                        <span class="portal-cta">Enter →</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- TOOLS PREVIEW -->
+        <section class="tools-section">
+            <div class="container">
+                <div class="tools-intro">
+                    <h2>Integrated Decision Tools</h2>
+                    <p>
+                        The atlas includes five standalone tools designed to accelerate decision-making without requiring 
+                        institutional buy-in, procurement delays, or technical expertise. Each tool addresses a specific 
+                        decision problem and operates independently.
+                    </p>
+                </div>
+                
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <h3 class="tool-name">Question Engine</h3>
+                        <p class="tool-purpose">
+                            Maps critical questions to evidence, hypotheses, and experimental designs. Prevents action paralysis 
+                            by clarifying what is known, unknown, and testable.
+                        </p>
+                        <p class="tool-audience">For: Researchers, policymakers, strategic planners</p>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3 class="tool-name">Constraints Mapper</h3>
+                        <p class="tool-purpose">
+                            Visualizes legal, logistical, funding, supply chain, conflict, and cultural barriers to action in 
+                            specific geographies. Identifies high-leverage intervention points.
+                        </p>
+                        <p class="tool-audience">For: Implementers, funders, logistics coordinators</p>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3 class="tool-name">Intervention Selector</h3>
+                        <p class="tool-purpose">
+                            Filters evidence-based interventions by context, capacity, and constraints. Returns ranked options 
+                            with cost-effectiveness estimates and deployment timelines.
+                        </p>
+                        <p class="tool-audience">For: Policymakers, NGOs, foundation program officers</p>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3 class="tool-name">Data Collector</h3>
+                        <p class="tool-purpose">
+                            Structured field reporting forms with offline-first functionality, privacy safeguards, and audit trails. 
+                            Enables real-time verification without centralized surveillance.
+                        </p>
+                        <p class="tool-audience">For: Field teams, monitoring staff, local coordinators</p>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <h3 class="tool-name">Metrics Dashboard</h3>
+                        <p class="tool-purpose">
+                            Tracks key performance indicators, outcomes, equity metrics, and cost-effectiveness. Designed for 
+                            accountability without performance theater.
+                        </p>
+                        <p class="tool-audience">For: Executives, donors, oversight bodies, public auditors</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW IT WORKS -->
+        <section class="how-it-works-section">
+            <div class="container">
+                <div class="system-explanation">
+                    <h2>How This System Works</h2>
+                    <p>
+                        The atlas operates on a simple principle: speed and safety are not opposites. They require coordination. 
+                        This system bridges the gap between those who can act quickly (communities, field teams) and those who 
+                        control resources and legitimacy (governments, foundations, multilateral institutions).
+                    </p>
+                    
+                    <div class="process-flow">
+                        <div class="process-step">
+                            <span class="step-number">1</span>
+                            <h3 class="step-title">Questions Drive Action</h3>
+                            <p class="step-description">
+                                Every intervention begins with a clearly stated question: "What prevents children in [location] 
+                                from accessing adequate nutrition?" The Question Engine structures inquiry and links it to evidence.
+                            </p>
+                        </div>
+                        
+                        <div class="process-step">
+                            <span class="step-number">2</span>
+                            <h3 class="step-title">Constraints Determine Strategy</h3>
+                            <p class="step-description">
+                                Context matters. The Constraints Mapper reveals which barriers are legal, logistical, cultural, or 
+                                financial—and which can be addressed immediately versus which require systemic change.
+                            </p>
+                        </div>
+                        
+                        <div class="process-step">
+                            <span class="step-number">3</span>
+                            <h3 class="step-title">Evidence Guides Selection</h3>
+                            <p class="step-description">
+                                Not all interventions work everywhere. The Intervention Selector uses evidence grading, cost data, 
+                                and deployment timelines to recommend context-appropriate solutions.
+                            </p>
+                        </div>
+                        
+                        <div class="process-step">
+                            <span class="step-number">4</span>
+                            <h3 class="step-title">Data Enables Accountability</h3>
+                            <p class="step-description">
+                                Real-time, privacy-preserving field data prevents both opacity and surveillance. The Data Collector 
+                                ensures transparency without exploitation.
+                            </p>
+                        </div>
+                        
+                        <div class="process-step">
+                            <span class="step-number">5</span>
+                            <h3 class="step-title">Measurement Sustains Trust</h3>
+                            <p class="step-description">
+                                Public dashboards showing outcomes, equity, and cost-effectiveness create institutional incentives 
+                                for continued action. The Metrics Dashboard prevents performance decay.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <p style="margin-top: 2rem; padding: 1.5rem; background: var(--card-background); border-radius: var(--border-radius); border-left: 4px solid var(--healing-green);">
+                        <strong>Why Modular Tools Matter:</strong> Centralized platforms create dependencies, delays, and points 
+                        of failure. Standalone tools can be deployed independently, adapted locally, and sustained without 
+                        permanent institutional infrastructure. They reduce barriers to action.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Navigate</h3>
+                    <ul class="footer-links">
+                        <li><a href="for-policymakers.html">For Policymakers</a></li>
+                        <li><a href="for-implementers.html">For Implementers</a></li>
+                        <li><a href="for-funders.html">For Funders</a></li>
+                        <li><a href="for-researchers.html">For Researchers</a></li>
+                        <li><a href="for-communities.html">For Communities</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="learn-how-it-works.html">How It Works</a></li>
+                        <li><a href="learn-domains.html">Knowledge Domains</a></li>
+                        <li><a href="learn-research-hub.html">Research Hub</a></li>
+                        <li><a href="learn-glossary.html">Glossary</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Take Action</h3>
+                    <ul class="footer-links">
+                        <li><a href="act-rapid-start.html">Rapid Start Kits</a></li>
+                        <li><a href="act-country-templates.html">Country Templates</a></li>
+                        <li><a href="act-procurement.html">Procurement Tools</a></li>
+                        <li><a href="act-training.html">Training Modules</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <ul class="footer-links">
+                        <li><a href="governance.html">Zero Harm Policy</a></li>
+                        <li><a href="datasets.html">Datasets & Sources</a></li>
+                        <li><a href="about.html">Mission & Architecture</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="zero-harm-statement">
+                <h3>Zero Harm & Anti-Coercion Commitment</h3>
+                <p>
+                    This atlas operates under absolute non-harm principles. No surveillance. No coercion. No shaming. 
+                    No targeting of individuals or institutions. No advocacy for illegal activity. No manipulation.
+                </p>
+                <p>
+                    All tools prioritize consent, privacy, and local agency. Data collection is transparent, opt-in, 
+                    and anonymized. This framework exists to enable action, not to enforce compliance.
+                </p>
+                <p>
+                    If you encounter content that violates these principles, report it immediately via the governance page.
+                </p>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>
+                    Feed Children ASAP Atlas | Offline-First | No Tracking | Open Patterns | 
+                    Licensed for Regenerative Use
+                </p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem;">
+                    This page functions offline after first load. All data remains local. No analytics. No beacons.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT (PROGRESSIVE ENHANCEMENT) -->
+    <script>
+        // ============================================
+        // PARTICLE GLOBE VISUALIZATION
+        // ============================================
+        (function() {
+            const canvas = document.getElementById('healing-globe');
+            if (!canvas || !canvas.getContext) return;
+            
+            const ctx = canvas.getContext('2d');
+            let animationId;
+            let particles = [];
+            let connections = [];
+            
+            // Set canvas size
+            function resizeCanvas() {
+                const rect = canvas.getBoundingClientRect();
+                canvas.width = rect.width * window.devicePixelRatio;
+                canvas.height = rect.height * window.devicePixelRatio;
+                ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+            }
+            
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            
+            // Particle class
+            class Particle {
+                constructor() {
+                    this.reset();
+                }
+                
+                reset() {
+                    const centerX = canvas.width / (2 * window.devicePixelRatio);
+                    const centerY = canvas.height / (2 * window.devicePixelRatio);
+                    const radius = Math.min(centerX, centerY) * 0.7;
+                    
+                    const angle = Math.random() * Math.PI * 2;
+                    const r = radius * (0.5 + Math.random() * 0.5);
+                    
+                    this.x = centerX + Math.cos(angle) * r;
+                    this.y = centerY + Math.sin(angle) * r;
+                    this.z = Math.random() * 100 - 50;
+                    
+                    this.vx = (Math.random() - 0.5) * 0.2;
+                    this.vy = (Math.random() - 0.5) * 0.2;
+                    this.vz = (Math.random() - 0.5) * 0.2;
+                    
+                    this.size = 1 + Math.random() * 2;
+                    this.opacity = 0.3 + Math.random() * 0.5;
+                }
+                
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    this.z += this.vz;
+                    
+                    const centerX = canvas.width / (2 * window.devicePixelRatio);
+                    const centerY = canvas.height / (2 * window.devicePixelRatio);
+                    const maxDist = Math.min(centerX, centerY);
+                    
+                    const dx = this.x - centerX;
+                    const dy = this.y - centerY;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (dist > maxDist || Math.abs(this.z) > 50) {
+                        this.reset();
+                    }
+                }
+                
+                draw() {
+                    const scale = (100 + this.z) / 100;
+                    const alpha = this.opacity * scale;
+                    
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size * scale, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(168, 197, 160, ${alpha})`;
+                    ctx.fill();
+                }
+            }
+            
+            // Initialize particles
+            for (let i = 0; i < 100; i++) {
+                particles.push(new Particle());
+            }
+            
+            // Animation loop
+            function animate() {
+                const w = canvas.width / window.devicePixelRatio;
+                const h = canvas.height / window.devicePixelRatio;
+                
+                // Clear with fade effect
+                ctx.fillStyle = 'rgba(249, 249, 247, 0.1)';
+                ctx.fillRect(0, 0, w, h);
+                
+                // Draw subtle grid
+                ctx.strokeStyle = 'rgba(90, 124, 94, 0.05)';
+                ctx.lineWidth = 0.5;
+                
+                const centerX = w / 2;
+                const centerY = h / 2;
+                const maxRadius = Math.min(centerX, centerY) * 0.7;
+                
+                for (let r = maxRadius * 0.3; r <= maxRadius; r += maxRadius * 0.2) {
+                    ctx.beginPath();
+                    ctx.arc(centerX, centerY, r, 0, Math.PI * 2);
+                    ctx.stroke();
+                }
+                
+                // Update and draw particles
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+                
+                // Draw connections between nearby particles
+                ctx.strokeStyle = 'rgba(168, 197, 160, 0.1)';
+                ctx.lineWidth = 0.5;
+                
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (dist < 80) {
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+                
+                animationId = requestAnimationFrame(animate);
+            }
+            
+            animate();
+            
+            // Pause animation when not visible (performance)
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden) {
+                    cancelAnimationFrame(animationId);
+                } else {
+                    animate();
+                }
+            });
+        })();
+        
+        // ============================================
+        // RETURNING USER DETECTION
+        // ============================================
+        (function() {
+            const lastRole = localStorage.getItem('feedChildrenAtlas_lastRole');
+            
+            if (lastRole) {
+                const portal = document.querySelector(`[data-role="${lastRole}"]`);
+                if (portal) {
+                    portal.classList.add('returning-user');
+                }
+            }
+            
+            // Track portal clicks
+            document.querySelectorAll('.portal[data-role]').forEach(portal => {
+                portal.addEventListener('click', function() {
+                    const role = this.getAttribute('data-role');
+                    localStorage.setItem('feedChildrenAtlas_lastRole', role);
+                });
+            });
+        })();
+        
+        // ============================================
+        // SMOOTH SCROLL POLYFILL (MINIMAL)
+        // ============================================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // ============================================
+        // ACCESSIBILITY: REDUCED MOTION
+        // ============================================
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('*').forEach(el => {
+                el.style.animation = 'none';
+                el.style.transition = 'none';
+            });
+        }
+    </script>
+    
+    <!--
+    ZERO HARM COMPLIANCE NOTICE:
+    
+    This page contains:
+    - No tracking or analytics
+    - No external API calls
+    - No data collection
+    - No hidden telemetry
+    - No surveillance mechanisms
+    
+    All functionality operates locally via localStorage for user preferences only.
+    No personally identifiable information is transmitted, stored, or processed.
+    
+    All linked content adheres to the same zero-harm, anti-coercion principles.
+    
+    This system exists to enable coordinated action to feed children without 
+    coercion, manipulation, or institutional destabilization.
+    -->
+</body>
+</html>
