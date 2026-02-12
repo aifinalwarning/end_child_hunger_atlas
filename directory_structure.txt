@@ -1,0 +1,43 @@
+feed_children_asap_atlas/
+├── index.html                              # Animated landing page
+│
+├── for/                                    # Stakeholder entry points
+│   ├── policymakers.html                   # ⭐ Your main guide
+│   ├── implementers.html
+│   ├── funders.html
+│   ├── researchers.html
+│   └── communities.html
+│
+├── tools/                                  # Interactive applications
+│   ├── ask.html                            # Question engine
+│   ├── map-constraints.html                # Barriers visualizer
+│   ├── choose-intervention.html            # Action selector
+│   ├── collect-data.html                   # Field reporting
+│   └── measure.html                        # Metrics dashboard
+│
+├── learn/                                  # Knowledge resources
+│   ├── how-it-works.html                   # System overview
+│   ├── domains.html                        # 12 domains as cards
+│   ├── research.html                       # Evidence hub
+│   └── glossary.html                       # Definitions
+│
+├── act/                                    # Execution resources
+│   ├── start-fast.html                     # Rapid start kits
+│   ├── templates.html                      # Country/city templates
+│   └── training.html                       # Modules + workshops
+│
+├── governance.html                         # Zero-harm policy (prominent!)
+├── data.html                               # Datasets + sources
+├── about.html                              # Mission, team, architecture
+│
+└── assets/
+    ├── data/
+    │   ├── constraints.json
+    │   ├── interventions.json
+    │   └── metrics.json
+    ├── particles/
+    │   ├── globe-config.json
+    │   └── healing-waves.json
+    └── images/
+        ├── icons/
+        └── backgrounds/
