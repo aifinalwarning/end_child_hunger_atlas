@@ -1,0 +1,1618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Privacy-first data collection protocol builder. Design ethical, minimal, consent-based data systems for nutrition programs. Generate forms, consent templates, and security protocols.">
+    <title>Data Collection Protocol Builder | Feed Children ASAP Atlas</title>
+    
+    <style>
+        /* ============================================
+           RESET & BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --earth-dark: #2d3e2f;
+            --earth-medium: #5a7c5e;
+            --earth-light: #8ba888;
+            --healing-green: #a8c5a0;
+            --warm-sand: #e8dcc4;
+            --soft-blue: #7a9eb8;
+            --data-purple: #7a6b9e;
+            --privacy-teal: #5a9e9e;
+            --warning-red: #d97757;
+            --neutral-gray: #6b7280;
+            --background-light: #f9f9f7;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --card-background: #ffffff;
+            --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --border-radius: 8px;
+            --transition-smooth: all 0.3s ease;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--background-light);
+            overflow-x: hidden;
+        }
+        
+        /* ============================================
+           TYPOGRAPHY
+           ============================================ */
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+        }
+        
+        h1 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            color: var(--earth-dark);
+        }
+        
+        h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--earth-medium);
+            margin-top: 2rem;
+        }
+        
+        h3 {
+            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+            color: var(--earth-medium);
+            margin-top: 1.5rem;
+        }
+        
+        h4 {
+            font-size: clamp(1.125rem, 2vw, 1.25rem);
+            color: var(--earth-dark);
+            margin-top: 1rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        label {
+            display: block;
+            font-weight: 500;
+            color: var(--earth-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* ============================================
+           LAYOUT
+           ============================================ */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .narrow-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        .top-nav {
+            background: var(--earth-dark);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .nav-home {
+            color: var(--warm-sand);
+            font-weight: 600;
+            font-size: 1.125rem;
+            text-decoration: none;
+        }
+        
+        .nav-home:hover {
+            color: var(--healing-green);
+        }
+        
+        .tool-name {
+            color: var(--warm-sand);
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        /* ============================================
+           HEADER
+           ============================================ */
+        header {
+            background: linear-gradient(135deg, var(--data-purple) 0%, var(--privacy-teal) 100%);
+            padding: 3rem 0 2rem;
+            color: white;
+        }
+        
+        .tool-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.25);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 400;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* ============================================
+           INTERFACE SECTIONS
+           ============================================ */
+        .interface-section {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        /* ============================================
+           PRIVACY WARNING
+           ============================================ */
+        .privacy-warning {
+            background: linear-gradient(135deg, rgba(217, 119, 87, 0.1) 0%, rgba(232, 168, 124, 0.1) 100%);
+            border: 2px solid var(--warning-red);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .privacy-warning h3 {
+            color: var(--warning-red);
+            margin-top: 0;
+        }
+        
+        .privacy-warning ul {
+            margin-left: 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        .privacy-warning li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* ============================================
+           TABS
+           ============================================ */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 2px solid var(--earth-light);
+            margin-bottom: 2rem;
+        }
+        
+        .tab {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--neutral-gray);
+            border-bottom: 3px solid transparent;
+            transition: var(--transition-smooth);
+        }
+        
+        .tab.active {
+            color: var(--data-purple);
+            border-bottom-color: var(--data-purple);
+        }
+        
+        .tab:hover {
+            color: var(--earth-medium);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* ============================================
+           FORM ELEMENTS
+           ============================================ */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--earth-light);
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: var(--transition-smooth);
+        }
+        
+        input[type="text"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--data-purple);
+            box-shadow: 0 0 0 3px rgba(122, 107, 158, 0.1);
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        /* ============================================
+           DATA CATEGORIES
+           ============================================ */
+        .data-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .category-card {
+            background: var(--background-light);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            border-left: 4px solid var(--data-purple);
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        
+        .category-icon {
+            font-size: 1.75rem;
+        }
+        
+        .category-name {
+            font-weight: 600;
+            color: var(--earth-dark);
+            font-size: 1.125rem;
+        }
+        
+        .category-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .data-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+        
+        .data-item:hover {
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .data-item.selected {
+            background: var(--privacy-teal);
+            color: white;
+        }
+        
+        .data-item.warning {
+            border-left: 3px solid var(--warning-red);
+        }
+        
+        .data-item-label {
+            flex: 1;
+            font-size: 0.95rem;
+        }
+        
+        .data-item-warning {
+            color: var(--warning-red);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        /* ============================================
+           SELECTED DATA
+           ============================================ */
+        .selected-data-list {
+            background: var(--warm-sand);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .selected-data-list h3 {
+            margin-top: 0;
+            color: var(--earth-dark);
+        }
+        
+        .selected-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        
+        .selected-data-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 1rem;
+            background: white;
+            border-radius: 6px;
+            gap: 1rem;
+        }
+        
+        .selected-data-info {
+            flex: 1;
+        }
+        
+        .selected-data-name {
+            font-weight: 600;
+            color: var(--earth-dark);
+            margin-bottom: 0.25rem;
+        }
+        
+        .selected-data-justification {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+        
+        .remove-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.25rem;
+            opacity: 0.6;
+            transition: var(--transition-smooth);
+            padding: 0.25rem;
+        }
+        
+        .remove-btn:hover {
+            opacity: 1;
+            color: var(--warning-red);
+        }
+        
+        /* ============================================
+           BUTTONS
+           ============================================ */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            font-family: inherit;
+        }
+        
+        .btn-primary {
+            background: var(--data-purple);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--privacy-teal);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .btn-primary:disabled {
+            background: var(--neutral-gray);
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-secondary {
+            background: var(--earth-light);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--earth-medium);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--earth-light);
+            color: var(--earth-medium);
+        }
+        
+        .btn-outline:hover {
+            background: var(--background-light);
+        }
+        
+        .btn-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        /* ============================================
+           PROTOCOL PREVIEW
+           ============================================ */
+        .protocol-preview {
+            background: var(--background-light);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 2px solid var(--earth-light);
+        }
+        
+        .protocol-section {
+            margin-bottom: 2rem;
+        }
+        
+        .protocol-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .protocol-section h4 {
+            color: var(--data-purple);
+            margin-top: 0;
+        }
+        
+        .protocol-content {
+            background: white;
+            padding: 1.25rem;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        
+        /* ============================================
+           CHECKLIST
+           ============================================ */
+        .checklist {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 2px solid var(--privacy-teal);
+        }
+        
+        .checklist h3 {
+            margin-top: 0;
+            color: var(--privacy-teal);
+        }
+        
+        .checklist-items {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .checklist-items li {
+            padding: 1rem 0 1rem 3rem;
+            position: relative;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .checklist-items li:last-child {
+            border-bottom: none;
+        }
+        
+        .checklist-items li::before {
+            content: '☐';
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+            color: var(--privacy-teal);
+        }
+        
+        /* ============================================
+           EMPTY STATE
+           ============================================ */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--neutral-gray);
+        }
+        
+        .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        /* ============================================
+           MODAL
+           ============================================ */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .modal-content h3 {
+            margin-top: 0;
+            color: var(--data-purple);
+        }
+        
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .interface-section {
+                padding: 1.5rem;
+            }
+            
+            .data-categories {
+                grid-template-columns: 1fr;
+            }
+            
+            .tabs {
+                flex-wrap: wrap;
+            }
+            
+            .tab {
+                flex: 1;
+                min-width: 120px;
+            }
+            
+            .btn-actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+        
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: var(--earth-dark);
+            color: var(--warm-sand);
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            text-align: center;
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+        
+        .footer-content a {
+            color: var(--healing-green);
+            text-decoration: none;
+        }
+        
+        .footer-content a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="top-nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="../index.html" class="nav-home">← Feed Children ASAP Atlas</a>
+                <span class="tool-name">Data Collection Protocol Builder</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header>
+        <div class="narrow-container">
+            <span class="tool-badge">🔒 Interactive Tool</span>
+            <h1>Data Collection Protocol Builder</h1>
+            <p class="subtitle">
+                Design ethical, privacy-first data collection systems. Apply data minimization, ensure informed consent, 
+                and protect beneficiary privacy. Generate collection protocols and consent templates.
+            </p>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <div class="container">
+            
+            <!-- PRIVACY WARNING -->
+            <div class="privacy-warning">
+                <h3>⚠️ Privacy-First Data Collection</h3>
+                <p><strong>Before collecting any data, ask:</strong></p>
+                <ul>
+                    <li><strong>Do we actually need this?</strong> Only collect data essential for program delivery or required reporting.</li>
+                    <li><strong>Do we have consent?</strong> People must understand what data is collected and how it's used.</li>
+                    <li><strong>Can we protect it?</strong> Have security measures in place before collecting sensitive information.</li>
+                    <li><strong>Can we minimize it?</strong> Use aggregate data, anonymization, or ID numbers instead of names when possible.</li>
+                    <li><strong>Will we delete it?</strong> Plan for data retention limits and secure deletion.</li>
+                </ul>
+                <p style="margin-top: 1rem;"><strong>Default to collecting less data, not more.</strong> Excessive data collection creates privacy risks and maintenance burden.</p>
+            </div>
+
+            <!-- TABS -->
+            <div class="tabs">
+                <button class="tab active" data-tab="define">Define Data Needs</button>
+                <button class="tab" data-tab="consent">Consent Process</button>
+                <button class="tab" data-tab="security">Security Measures</button>
+                <button class="tab" data-tab="protocol">Generate Protocol</button>
+            </div>
+
+            <!-- TAB: DEFINE DATA NEEDS -->
+            <div class="tab-content active" id="define-tab">
+                <div class="interface-section">
+                    <h2>Step 1: Define What Data You Actually Need</h2>
+                    <p>Select only the data points essential for your program. Every piece of data creates privacy risk and maintenance burden.</p>
+                    
+                    <div class="form-group">
+                        <label for="program-name">Program Name</label>
+                        <input type="text" id="program-name" placeholder="e.g., Community Nutrition Support Program">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="collection-purpose">Primary Purpose of Data Collection</label>
+                        <select id="collection-purpose">
+                            <option value="">Select purpose</option>
+                            <option value="enrollment">Beneficiary Enrollment & Eligibility</option>
+                            <option value="monitoring">Program Monitoring & Tracking</option>
+                            <option value="evaluation">Impact Evaluation & Research</option>
+                            <option value="reporting">Donor/Government Reporting</option>
+                        </select>
+                    </div>
+                    
+                    <h3>Select Data Categories</h3>
+                    <p>Click items to add to your collection protocol. Items marked with ⚠️ require extra privacy protections.</p>
+                    
+                    <div class="data-categories">
+                        <!-- Identification -->
+                        <div class="category-card">
+                            <div class="category-header">
+                                <span class="category-icon">👤</span>
+                                <span class="category-name">Identification</span>
+                            </div>
+                            <div class="category-items">
+                                <div class="data-item" data-category="identification" data-field="id-number" data-sensitive="false">
+                                    <input type="checkbox">
+                                    <span class="data-item-label">ID Number (anonymous)</span>
+                                </div>
+                                <div class="data-item warning" data-category="identification" data-field="full-name" data-sensitive="true">
+                                    <input type="checkbox">
+                                    <span class="data-item-label">Full Name <span class="data-item-warning">⚠️</span></span>
+                                </div>
+                                <div class="data-item" data-category="identification" data-field="age" data-sensitive="false">
+                                    <input type="checkbox">
+                                    <span class="data-item-label">Age</span>
+                                </div>
+                                <div class="data-item" data-category="identification" data-field="gender" data-sensitive="false">
+                                    <input type="checkbox">
+                                    <span class="data-item-label">Gender</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Location -->
+                        <div class="category-card">
+                            <div class="category-header">
+                                <span class="category-icon">📍</span>
+                                <span class="category-name">Location</span>
+                            </div>
+                            <div class="category-items">
+                                <div class="data-item" data-category="location" data-field="district" data-sensitive="false">
+                                    <input type="checkbox">
+                                    <span class="data-item-label">District/Region</span>
+                                </div>
+                                <div class="data-item" data-category="location" data-field="village" data-sensitive="false">
+                                    <input type="checkbox">
+                                    <span class="data-item-label">Village/Community</span>
+                                </div>
+                                <div class="data-item warning" data-category="location" data-field="address" data-sensitive="true">
+                                    <input type="checkbox">
+                                    <span class="data-item-label">Specific Address <span class="data-item-warning">⚠️</span></span>
+                                </div>
+                                <div class="data-item warning" data-category="location" data-field="gps" data-sensitive="true">
+                                    <input type="checkbox">
+                                    <span class="data-item-label">GPS Coordinates <span class="data-item-warning">⚠️</span></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Contact -->
+                        <div class="category-card">
+                            <div class="category-header">
+                                <span class="category-icon">📱</span>
+                                <span class="category-name">Contact</span>
+                            </div>
+                            <div class="category-items">
+                                <div class="data-item warning" data-category="contact" data-field="phone" data-sensitive="true">
+                                    <input type="checkbox">
+                                    <span class="data-item-label">Phone Number <span class="data-item-warning">⚠️</span></span>
+                                </div>
+                                <div class="data-item warning" data-category="contact" data-field="email" data-sensitive="true">
+                                    <input type="checkbox">
+                                    <span class="data-item-label">Email Address <span class="data-item-warning">⚠️</span></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Anthropometrics -->
+                        <div class="category-card">
+                            <div class="category-header">
+                                <span class="category-icon">📏</span>
+                                <span class="category-name">Anthropometrics</span>
+                            </div>
+                            <div class="category-items">
+                                <div class="data-item" data-category="anthropometrics" data-field="height" data-sensitive="false">
+                                    <input type="checkbox">
+                                    <span class="data-item-label">Height/Length</span>
+                                </div>
+                                <div class="data-item" data-category="anthropometrics" data-field="weight" data-sensitive="false">
+                                    <input type="checkbox">
+                                    <span class="data-item-label">Weight</span>
+                                </div>
+                                <div class="data-item" data-category="anthropometrics" data-field="muac" data-sensitive="false">
+                                    <input type="checkbox">
+                                    <span class="data-item-label">MUAC</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Health -->
+                        <div class="category-card">
+                            <div class="category-header">
+                                <span class="category-icon">🏥</span>
+                                <span class="category-name">Health</span>
+                            </div>
+                            <div class="category-items">
+                                <div class="data-item warning" data-category="health" data-field="medical-history" data-sensitive="true">
+                                    <input type="checkbox">
+                                    <span class="data-item-label">Medical History <span class="data-item-warning">⚠️</span></span>
+                                </div>
+                                <div class="data-item warning" data-category="health" data-field="disability" data-sensitive="true">
+                                    <input type="checkbox">
+                                    <span class="data-item-label">Disability Status <span class="data-item-warning">⚠️</span></span>
+                                </div>
+                                <div class="data-item warning" data-category="health" data-field="hiv-status" data-sensitive="true">
+                                    <input type="checkbox">
+                                    <span class="data-item-label">HIV Status <span class="data-item-warning">⚠️</span></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Household -->
+                        <div class="category-card">
+                            <div class="category-header">
+                                <span class="category-icon">🏠</span>
+                                <span class="category-name">Household</span>
+                            </div>
+                            <div class="category-items">
+                                <div class="data-item" data-category="household" data-field="household-size" data-sensitive="false">
+                                    <input type="checkbox">
+                                    <span class="data-item-label">Household Size</span>
+                                </div>
+                                <div class="data-item" data-category="household" data-field="children-count" data-sensitive="false">
+                                    <input type="checkbox">
+                                    <span class="data-item-label">Number of Children</span>
+                                </div>
+                                <div class="data-item warning" data-category="household" data-field="income" data-sensitive="true">
+                                    <input type="checkbox">
+                                    <span class="data-item-label">Household Income <span class="data-item-warning">⚠️</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="selected-data-list" id="selected-data-container">
+                        <h3>Selected Data Points (<span id="selected-count">0</span>)</h3>
+                        <div class="selected-items" id="selected-items"></div>
+                    </div>
+                    
+                    <div class="btn-actions">
+                        <button class="btn btn-primary" onclick="switchTab('consent')" id="next-to-consent" disabled>Next: Consent Process →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: CONSENT PROCESS -->
+            <div class="tab-content" id="consent-tab">
+                <div class="interface-section">
+                    <h2>Step 2: Design Informed Consent Process</h2>
+                    <p>Ensure people understand what data you're collecting and how it will be used.</p>
+                    
+                    <div class="form-group">
+                        <label for="consent-language">Consent Language(s)</label>
+                        <input type="text" id="consent-language" placeholder="e.g., Swahili, English">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="consent-method">Consent Method</label>
+                        <select id="consent-method">
+                            <option value="">Select method</option>
+                            <option value="written">Written signature</option>
+                            <option value="verbal">Verbal consent (documented)</option>
+                            <option value="thumbprint">Thumbprint (for non-literate participants)</option>
+                            <option value="witness">Witnessed consent</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="data-use">How Will Data Be Used? (Explain in plain language)</label>
+                        <textarea id="data-use" placeholder="Example: We will use this information to ensure eligible families receive nutrition support and to track program effectiveness. Your information will be kept confidential and only shared with program staff who need it to serve you."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="data-retention">Data Retention Period</label>
+                        <select id="data-retention">
+                            <option value="">Select retention period</option>
+                            <option value="program-duration">Duration of program only</option>
+                            <option value="1year">Program + 1 year</option>
+                            <option value="3years">Program + 3 years</option>
+                            <option value="5years">Program + 5 years</option>
+                        </select>
+                    </div>
+                    
+                    <div class="checklist">
+                        <h3>Consent Checklist</h3>
+                        <p>Your consent process must include all of these elements:</p>
+                        <ul class="checklist-items">
+                            <li>Explain what data is being collected in plain language</li>
+                            <li>Explain why you need this data and how it will be used</li>
+                            <li>Explain who will have access to the data</li>
+                            <li>Explain how long data will be kept</li>
+                            <li>Explain security measures to protect data</li>
+                            <li>Confirm participation is voluntary and can be withdrawn</li>
+                            <li>Explain what happens if they withdraw (data deleted)</li>
+                            <li>Provide contact information for questions or complaints</li>
+                            <li>Offer translation into local language(s)</li>
+                            <li>Allow time for questions before signing</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="btn-actions">
+                        <button class="btn btn-outline" onclick="switchTab('define')">← Back</button>
+                        <button class="btn btn-primary" onclick="switchTab('security')" id="next-to-security" disabled>Next: Security Measures →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: SECURITY MEASURES -->
+            <div class="tab-content" id="security-tab">
+                <div class="interface-section">
+                    <h2>Step 3: Define Security & Privacy Measures</h2>
+                    <p>How will you protect the data you collect?</p>
+                    
+                    <div class="form-group">
+                        <label for="storage-method">Data Storage Method</label>
+                        <select id="storage-method">
+                            <option value="">Select storage method</option>
+                            <option value="paper">Paper forms in locked filing cabinet</option>
+                            <option value="local">Local computer with encryption</option>
+                            <option value="cloud">Cloud storage (encrypted, access-controlled)</option>
+                            <option value="offline-db">Offline database with backups</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="access-control">Who Has Access to Identifiable Data?</label>
+                        <textarea id="access-control" placeholder="List specific roles, not individual names. Example: Program Manager, Data Entry Clerk, M&E Officer"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="anonymization">Anonymization Strategy</label>
+                        <select id="anonymization">
+                            <option value="">Select strategy</option>
+                            <option value="id-only">Use ID numbers for all analysis; names stored separately</option>
+                            <option value="aggregate">Only store aggregate data; no individual records</option>
+                            <option value="pseudonymize">Pseudonymize data (replace names with codes)</option>
+                            <option value="full-id">Full identification required (justify in notes)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="deletion-plan">Data Deletion Plan</label>
+                        <textarea id="deletion-plan" placeholder="Describe how and when data will be securely deleted. Example: All paper forms will be shredded after 2 years. Digital records will be permanently deleted using secure deletion software."></textarea>
+                    </div>
+                    
+                    <div class="checklist">
+                        <h3>Security Checklist</h3>
+                        <p>Your data protection plan must include:</p>
+                        <ul class="checklist-items">
+                            <li>Secure physical storage for paper forms (locked cabinets/rooms)</li>
+                            <li>Password protection for all digital files</li>
+                            <li>Encryption for sensitive data</li>
+                            <li>Access controls (only authorized staff)</li>
+                            <li>Regular backups (with same security as primary data)</li>
+                            <li>Secure deletion procedures</li>
+                            <li>Data breach response plan</li>
+                            <li>Staff training on data protection</li>
+                            <li>No data stored on personal devices</li>
+                            <li>No sharing via insecure channels (email, WhatsApp)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="btn-actions">
+                        <button class="btn btn-outline" onclick="switchTab('consent')">← Back</button>
+                        <button class="btn btn-primary" onclick="generateProtocol()" id="generate-protocol" disabled>Generate Protocol →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: GENERATE PROTOCOL -->
+            <div class="tab-content" id="protocol-tab">
+                <div class="interface-section">
+                    <h2>Step 4: Your Data Collection Protocol</h2>
+                    <p>Review your protocol and export templates for use in the field.</p>
+                    
+                    <div class="protocol-preview" id="protocol-preview"></div>
+                    
+                    <div class="btn-actions">
+                        <button class="btn btn-outline" onclick="switchTab('security')">← Back</button>
+                        <button class="btn btn-secondary" onclick="exportConsentForm()">📄 Export Consent Form</button>
+                        <button class="btn btn-secondary" onclick="exportDataForm()">📋 Export Data Collection Form</button>
+                        <button class="btn btn-primary" onclick="exportFullProtocol()">📤 Export Full Protocol</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- JUSTIFICATION MODAL -->
+    <div class="modal" id="justification-modal">
+        <div class="modal-content">
+            <h3>Why Do You Need This Data?</h3>
+            <p>Explain the specific program purpose that requires <strong id="modal-field-name"></strong>.</p>
+            <div class="form-group">
+                <textarea id="justification-text" placeholder="Example: We need phone numbers to send SMS reminders about distribution dates and to follow up with families who miss pickups."></textarea>
+            </div>
+            <div class="btn-actions">
+                <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveJustification()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>
+                    <strong>Data Collection Protocol Builder</strong> | Part of Feed Children ASAP Atlas<br>
+                    <a href="../governance.html">Zero Harm Policy</a> • 
+                    <a href="../index.html">Return to Atlas</a>
+                </p>
+                <p style="margin-top: 1rem; font-size: 0.8rem;">
+                    All data stored locally in your browser. No tracking. No external servers.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // ============================================
+        // STATE MANAGEMENT
+        // ============================================
+        let protocolData = {
+            programName: '',
+            purpose: '',
+            selectedData: [],
+            consentLanguage: '',
+            consentMethod: '',
+            dataUse: '',
+            dataRetention: '',
+            storageMethod: '',
+            accessControl: '',
+            anonymization: '',
+            deletionPlan: ''
+        };
+
+        let currentModalField = null;
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+        document.addEventListener('DOMContentLoaded', () => {
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            // Tab switching
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    if (!tab.classList.contains('active')) {
+                        switchTab(tab.dataset.tab);
+                    }
+                });
+            });
+
+            // Data item selection
+            document.querySelectorAll('.data-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const checkbox = item.querySelector('input[type="checkbox"]');
+                    checkbox.checked = !checkbox.checked;
+                    handleDataSelection(item);
+                });
+            });
+
+            // Form inputs
+            document.getElementById('program-name').addEventListener('input', updateProtocolData);
+            document.getElementById('collection-purpose').addEventListener('change', updateProtocolData);
+            document.getElementById('consent-language').addEventListener('input', updateProtocolData);
+            document.getElementById('consent-method').addEventListener('change', updateProtocolData);
+            document.getElementById('data-use').addEventListener('input', updateProtocolData);
+            document.getElementById('data-retention').addEventListener('change', updateProtocolData);
+            document.getElementById('storage-method').addEventListener('change', updateProtocolData);
+            document.getElementById('access-control').addEventListener('input', updateProtocolData);
+            document.getElementById('anonymization').addEventListener('change', updateProtocolData);
+            document.getElementById('deletion-plan').addEventListener('input', updateProtocolData);
+        }
+
+        // ============================================
+        // TAB MANAGEMENT
+        // ============================================
+        function switchTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+            
+            // Update tab content
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ============================================
+        // DATA SELECTION
+        // ============================================
+        function handleDataSelection(item) {
+            const checkbox = item.querySelector('input[type="checkbox"]');
+            const field = item.dataset.field;
+            const category = item.dataset.category;
+            const sensitive = item.dataset.sensitive === 'true';
+            const label = item.querySelector('.data-item-label').textContent.trim();
+            
+            if (checkbox.checked) {
+                // Show justification modal for sensitive data
+                if (sensitive) {
+                    currentModalField = { field, category, label, sensitive };
+                    showJustificationModal(label);
+                } else {
+                    addDataField(field, category, label, sensitive, '');
+                }
+            } else {
+                removeDataField(field);
+            }
+        }
+
+        function showJustificationModal(fieldName) {
+            document.getElementById('modal-field-name').textContent = fieldName;
+            document.getElementById('justification-text').value = '';
+            document.getElementById('justification-modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('justification-modal').classList.remove('active');
+            
+            // Uncheck the item if modal was canceled
+            if (currentModalField) {
+                const item = document.querySelector(`[data-field="${currentModalField.field}"]`);
+                const checkbox = item.querySelector('input[type="checkbox"]');
+                checkbox.checked = false;
+            }
+            
+            currentModalField = null;
+        }
+
+        function saveJustification() {
+            const justification = document.getElementById('justification-text').value.trim();
+            
+            if (!justification) {
+                alert('Please provide a justification for collecting this sensitive data.');
+                return;
+            }
+            
+            addDataField(
+                currentModalField.field,
+                currentModalField.category,
+                currentModalField.label,
+                currentModalField.sensitive,
+                justification
+            );
+            
+            closeModal();
+        }
+
+        function addDataField(field, category, label, sensitive, justification) {
+            // Check if already added
+            if (protocolData.selectedData.find(d => d.field === field)) {
+                return;
+            }
+            
+            protocolData.selectedData.push({
+                field,
+                category,
+                label,
+                sensitive,
+                justification
+            });
+            
+            updateSelectedDataDisplay();
+            updateNavigationButtons();
+        }
+
+        function removeDataField(field) {
+            protocolData.selectedData = protocolData.selectedData.filter(d => d.field !== field);
+            updateSelectedDataDisplay();
+            updateNavigationButtons();
+        }
+
+        function updateSelectedDataDisplay() {
+            const container = document.getElementById('selected-items');
+            const count = document.getElementById('selected-count');
+            
+            count.textContent = protocolData.selectedData.length;
+            
+            if (protocolData.selectedData.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--neutral-gray); padding: 1rem;">No data points selected yet.</p>';
+                return;
+            }
+            
+            container.innerHTML = '';
+            
+            protocolData.selectedData.forEach(data => {
+                const item = document.createElement('div');
+                item.className = 'selected-data-item';
+                item.innerHTML = `
+                    <div class="selected-data-info">
+                        <div class="selected-data-name">
+                            ${data.label}
+                            ${data.sensitive ? '<span style="color: var(--warning-red); margin-left: 0.5rem;">⚠️ Sensitive</span>' : ''}
+                        </div>
+                        <div style="font-size: 0.875rem; color: var(--neutral-gray);">Category: ${data.category}</div>
+                        ${data.justification ? `<div class="selected-data-justification">Justification: ${data.justification}</div>` : ''}
+                    </div>
+                    <button class="remove-btn" onclick="removeDataFieldByField('${data.field}')" title="Remove">✕</button>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function removeDataFieldByField(field) {
+            // Uncheck the checkbox
+            const item = document.querySelector(`[data-field="${field}"]`);
+            if (item) {
+                const checkbox = item.querySelector('input[type="checkbox"]');
+                checkbox.checked = false;
+            }
+            
+            removeDataField(field);
+        }
+
+        // ============================================
+        // PROTOCOL DATA UPDATES
+        // ============================================
+        function updateProtocolData() {
+            protocolData.programName = document.getElementById('program-name').value;
+            protocolData.purpose = document.getElementById('collection-purpose').value;
+            protocolData.consentLanguage = document.getElementById('consent-language').value;
+            protocolData.consentMethod = document.getElementById('consent-method').value;
+            protocolData.dataUse = document.getElementById('data-use').value;
+            protocolData.dataRetention = document.getElementById('data-retention').value;
+            protocolData.storageMethod = document.getElementById('storage-method').value;
+            protocolData.accessControl = document.getElementById('access-control').value;
+            protocolData.anonymization = document.getElementById('anonymization').value;
+            protocolData.deletionPlan = document.getElementById('deletion-plan').value;
+            
+            updateNavigationButtons();
+        }
+
+        function updateNavigationButtons() {
+            // Step 1 -> 2
+            const nextToConsent = document.getElementById('next-to-consent');
+            nextToConsent.disabled = !(protocolData.programName && protocolData.purpose && protocolData.selectedData.length > 0);
+            
+            // Step 2 -> 3
+            const nextToSecurity = document.getElementById('next-to-security');
+            nextToSecurity.disabled = !(protocolData.consentLanguage && protocolData.consentMethod && protocolData.dataUse && protocolData.dataRetention);
+            
+            // Step 3 -> 4
+            const generateBtn = document.getElementById('generate-protocol');
+            generateBtn.disabled = !(protocolData.storageMethod && protocolData.accessControl && protocolData.anonymization && protocolData.deletionPlan);
+        }
+
+        // ============================================
+        // PROTOCOL GENERATION
+        // ============================================
+        function generateProtocol() {
+            const preview = document.getElementById('protocol-preview');
+            
+            const sensitiveData = protocolData.selectedData.filter(d => d.sensitive);
+            const nonSensitiveData = protocolData.selectedData.filter(d => !d.sensitive);
+            
+            preview.innerHTML = `
+                <div class="protocol-section">
+                    <h4>Program Overview</h4>
+                    <div class="protocol-content">
+                        <strong>Program Name:</strong> ${protocolData.programName}<br>
+                        <strong>Data Collection Purpose:</strong> ${protocolData.purpose}
+                    </div>
+                </div>
+                
+                <div class="protocol-section">
+                    <h4>Data Points to be Collected</h4>
+                    <div class="protocol-content">
+                        <strong>Total data points:</strong> ${protocolData.selectedData.length}<br>
+                        <strong>Sensitive data points:</strong> ${sensitiveData.length} (require extra protection)<br><br>
+                        
+                        <strong>Non-Sensitive Data:</strong><br>
+                        ${nonSensitiveData.map(d => `• ${d.label}`).join('<br>')}<br><br>
+                        
+                        ${sensitiveData.length > 0 ? `
+                            <strong style="color: var(--warning-red);">Sensitive Data (requires justification):</strong><br>
+                            ${sensitiveData.map(d => `• ${d.label}: ${d.justification}`).join('<br>')}
+                        ` : ''}
+                    </div>
+                </div>
+                
+                <div class="protocol-section">
+                    <h4>Informed Consent Process</h4>
+                    <div class="protocol-content">
+                        <strong>Language(s):</strong> ${protocolData.consentLanguage}<br>
+                        <strong>Consent Method:</strong> ${protocolData.consentMethod}<br>
+                        <strong>Data Use Explanation:</strong><br>
+                        ${protocolData.dataUse}<br><br>
+                        <strong>Data Retention:</strong> ${protocolData.dataRetention}
+                    </div>
+                </div>
+                
+                <div class="protocol-section">
+                    <h4>Data Security & Privacy</h4>
+                    <div class="protocol-content">
+                        <strong>Storage Method:</strong> ${protocolData.storageMethod}<br><br>
+                        <strong>Access Control:</strong><br>
+                        ${protocolData.accessControl}<br><br>
+                        <strong>Anonymization Strategy:</strong> ${protocolData.anonymization}<br><br>
+                        <strong>Deletion Plan:</strong><br>
+                        ${protocolData.deletionPlan}
+                    </div>
+                </div>
+                
+                <div class="protocol-section">
+                    <h4>Compliance Summary</h4>
+                    <div class="protocol-content">
+                        ✓ Data minimization applied (only essential data collected)<br>
+                        ✓ Informed consent process designed<br>
+                        ✓ Security measures defined<br>
+                        ✓ Data retention and deletion plan established<br>
+                        ${sensitiveData.length > 0 ? '✓ Extra protections for sensitive data documented<br>' : ''}
+                        ✓ Privacy-first approach maintained
+                    </div>
+                </div>
+            `;
+            
+            switchTab('protocol');
+        }
+
+        // ============================================
+        // EXPORT FUNCTIONS
+        // ============================================
+        function exportConsentForm() {
+            const form = `
+INFORMED CONSENT FORM
+${protocolData.programName}
+
+════════════════════════════════════════════════════════════
+
+INTRODUCTION:
+You are being invited to participate in ${protocolData.programName}. Before you decide whether to participate, please read this form carefully and ask any questions you may have.
+
+WHAT DATA WILL BE COLLECTED:
+We will collect the following information from you:
+${protocolData.selectedData.map(d => `• ${d.label}`).join('\n')}
+
+WHY WE NEED THIS DATA:
+${protocolData.dataUse}
+
+WHO WILL HAVE ACCESS TO YOUR DATA:
+${protocolData.accessControl}
+
+HOW LONG WE WILL KEEP YOUR DATA:
+${protocolData.dataRetention}
+
+HOW WE WILL PROTECT YOUR DATA:
+${protocolData.storageMethod}
+${protocolData.anonymization}
+
+YOUR RIGHTS:
+- Participation is completely voluntary
+- You can refuse to answer any questions
+- You can withdraw from the program at any time
+- If you withdraw, your data will be deleted
+- You can request a copy of your data
+- You can request corrections to your data
+
+QUESTIONS OR CONCERNS:
+If you have questions about this program or your data, please contact:
+[INSERT CONTACT NAME AND PHONE NUMBER]
+
+CONSENT:
+I have read this form (or it has been read to me in ${protocolData.consentLanguage}).
+I understand what data will be collected and how it will be used.
+I have had the opportunity to ask questions.
+I voluntarily agree to participate.
+
+Name: _______________________________
+Signature/Thumbprint: _______________________________
+Date: _______________________________
+
+Witnessed by (staff name): _______________________________
+Staff signature: _______________________________
+
+════════════════════════════════════════════════════════════
+            `.trim();
+            
+            downloadFile(form, `consent-form-${Date.now()}.txt`);
+        }
+
+        function exportDataForm() {
+            const form = `
+DATA COLLECTION FORM
+${protocolData.programName}
+
+════════════════════════════════════════════════════════════
+
+Date: _______________  Enumerator: _______________
+
+PARTICIPANT INFORMATION:
+${protocolData.selectedData.map(d => `
+${d.label}: _______________________________
+${d.sensitive ? '⚠️ SENSITIVE - Handle with care' : ''}
+`).join('\n')}
+
+CONSENT CONFIRMATION:
+☐ Consent form read and explained in ${protocolData.consentLanguage}
+☐ Participant had opportunity to ask questions
+☐ Participant signed/thumbprinted consent form
+☐ Participant received copy of consent form
+
+NOTES:
+_________________________________________________________________
+_________________________________________________________________
+_________________________________________________________________
+
+════════════════════════════════════════════════════════════
+
+DATA PROTECTION REMINDER:
+- Never leave forms unattended
+- Store in locked cabinet immediately after collection
+- Do not share participant information
+- Do not take photos of forms
+- Report any data breach immediately
+
+════════════════════════════════════════════════════════════
+            `.trim();
+            
+            downloadFile(form, `data-form-${Date.now()}.txt`);
+        }
+
+        function exportFullProtocol() {
+            const sensitiveData = protocolData.selectedData.filter(d => d.sensitive);
+            
+            const protocol = `
+DATA COLLECTION PROTOCOL
+${protocolData.programName}
+Generated: ${new Date().toLocaleString()}
+
+════════════════════════════════════════════════════════════
+
+1. PROGRAM OVERVIEW
+   Name: ${protocolData.programName}
+   Purpose: ${protocolData.purpose}
+
+2. DATA TO BE COLLECTED
+   Total Data Points: ${protocolData.selectedData.length}
+   Sensitive Data Points: ${sensitiveData.length}
+   
+   Data List:
+${protocolData.selectedData.map(d => `   • ${d.label} (${d.category})${d.sensitive ? ' ⚠️ SENSITIVE' : ''}${d.justification ? `\n     Justification: ${d.justification}` : ''}`).join('\n')}
+
+3. INFORMED CONSENT PROCESS
+   Language(s): ${protocolData.consentLanguage}
+   Method: ${protocolData.consentMethod}
+   
+   Data Use Explanation:
+   ${protocolData.dataUse}
+   
+   Retention Period: ${protocolData.dataRetention}
+   
+   Required Consent Elements:
+   ✓ Explain what data is collected
+   ✓ Explain why data is needed
+   ✓ Explain who has access
+   ✓ Explain how long data is kept
+   ✓ Explain security measures
+   ✓ Confirm participation is voluntary
+   ✓ Explain withdrawal rights
+   ✓ Provide contact for questions
+
+4. DATA SECURITY & PRIVACY
+   Storage Method: ${protocolData.storageMethod}
+   
+   Access Control:
+   ${protocolData.accessControl}
+   
+   Anonymization: ${protocolData.anonymization}
+   
+   Deletion Plan:
+   ${protocolData.deletionPlan}
+
+5. DATA PROTECTION PROCEDURES
+   Physical Security:
+   • All paper forms stored in locked filing cabinets
+   • Access limited to authorized personnel only
+   • Forms never left unattended in field
+   • No forms taken home by staff
+   
+   Digital Security:
+   • All digital files password protected
+   • Sensitive data encrypted
+   • No data stored on personal devices
+   • No sharing via email or messaging apps
+   • Regular secure backups
+   
+   Breach Response:
+   • Immediately report any suspected breach to Program Manager
+   • Document what data was potentially compromised
+   • Notify affected individuals if identifiable data exposed
+   • Review and strengthen security measures
+
+6. STAFF TRAINING REQUIREMENTS
+   All staff collecting or handling data must be trained on:
+   • Informed consent procedures
+   • Data protection requirements
+   • Secure storage and handling
+   • Privacy and confidentiality
+   • Breach reporting procedures
+   • Ethical data collection practices
+
+7. COMPLIANCE CHECKLIST
+   ${sensitiveData.length > 0 ? '✓' : '☐'} Extra protections for sensitive data
+   ✓ Data minimization applied
+   ✓ Informed consent process designed
+   ✓ Security measures defined
+   ✓ Retention and deletion plan established
+   ✓ Access controls documented
+   ✓ Staff training plan included
+   ✓ Privacy-first approach maintained
+
+════════════════════════════════════════════════════════════
+
+This protocol was generated by the Feed Children ASAP Atlas
+Data Collection Protocol Builder.
+
+Zero Harm Policy: All data collection must prioritize participant
+privacy, informed consent, and data security. Only collect data
+that is essential for program delivery or required reporting.
+
+════════════════════════════════════════════════════════════
+            `.trim();
+            
+            downloadFile(protocol, `data-protocol-${Date.now()}.txt`);
+        }
+
+        function downloadFile(content, filename) {
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Accessibility: Reduced motion support
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('*').forEach(el => {
+                el.style.animation = 'none';
+                el.style.transition = 'none';
+            });
+        }
+    </script>
+    
+    <!--
+    ZERO HARM COMPLIANCE NOTICE:
+    
+    This tool contains:
+    - No tracking or analytics
+    - No external API calls
+    - No data transmission to servers
+    - No data storage (protocol data not persisted)
+    - No surveillance mechanisms
+    
+    All protocol building is performed client-side.
+    All data remains on the user's device during session only.
+    
+    This tool provides guidance only. Actual data collection must comply
+    with applicable laws, regulations, and ethical standards including:
+    - Local data protection laws
+    - IRB/ethics committee requirements
+    - Donor/funder data policies
+    - Sector-specific regulations
+    
+    Always prioritize participant privacy, informed consent, and data
+    minimization. When in doubt, collect less data, not more.
+    -->
+</body>
+</html>
