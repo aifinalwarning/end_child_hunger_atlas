@@ -1,0 +1,1640 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="dark light" />
+  <title>end_child_hunger_atlas — Food Logistics Research Primer (Offline-First)</title>
+  <meta name="description" content="Offline-first, prompt-primer dashboard summarizing recent cross-domain food logistics research and translating it into policy-ready metrics + Claude expansion prompts." />
+
+  <!--
+    Zero-Harm & Anti-Inversion Note (Visible + Comment):
+    This file is designed to inform and empower without coercion. It stores data locally only, uses gentle rate limits,
+    and avoids tactics that could be repurposed for harm, surveillance, or manipulation. No hidden telemetry.
+  -->
+
+  <style>
+    /* =========================================================
+      end_child_hunger_atlas — Single-file index.html (offline-first)
+      Tooltip: This CSS block defines all styling with no external dependencies.
+      How to extend: Add new CSS variables in :root, then use them in components.
+      Expected outcome: Consistent theme, accessible UI, print-friendly rendering.
+    ========================================================= */
+    :root{
+      --bg0:#070A12; --bg1:#0A1020; --card:#0E1830; --card2:#101F3A;
+      --text:#EAF0FF; --muted:#A8B4D8; --faint:#7683AA;
+      --line:rgba(255,255,255,.12);
+      --good:#78F0B1; --warn:#FFD36A; --bad:#FF7A9A; --accent:#7AA7FF;
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 16px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Arial, "Noto Sans", sans-serif;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:var(--sans); color:var(--text);
+      background: radial-gradient(1200px 700px at 70% -10%, rgba(122,167,255,.25), transparent 55%),
+                  radial-gradient(900px 600px at 20% 10%, rgba(120,240,177,.18), transparent 55%),
+                  linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:1100px; margin:0 auto; padding:24px 16px 64px}
+    .glass{
+      background: linear-gradient(180deg, rgba(16,31,58,.86), rgba(14,24,48,.86));
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      border-bottom:1px solid var(--line);
+      background: rgba(7,10,18,.72);
+      backdrop-filter: blur(10px);
+    }
+    .topbar-inner{max-width:1100px; margin:0 auto; padding:10px 16px; display:flex; gap:10px; align-items:center; justify-content:space-between}
+    .brand{display:flex; align-items:center; gap:10px; min-width:240px}
+    .logo{
+      width:34px; height:34px; border-radius:10px;
+      background: radial-gradient(circle at 30% 30%, rgba(120,240,177,.9), rgba(122,167,255,.55) 45%, rgba(255,255,255,.08) 70%);
+      border:1px solid var(--line);
+      box-shadow: 0 10px 40px rgba(122,167,255,.12);
+    }
+    .brand h1{font-size:14px; margin:0; line-height:1.15}
+    .brand .sub{font-size:12px; color:var(--muted)}
+    .controls{display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
+    .search{
+      width:min(360px, 55vw);
+      display:flex; align-items:center; gap:8px;
+      padding:8px 10px; border-radius:12px;
+      border:1px solid var(--line);
+      background: rgba(16,31,58,.55);
+    }
+    .search input{
+      width:100%; border:0; outline:0; color:var(--text);
+      background:transparent; font-size:13px;
+    }
+    .btn{
+      border:1px solid var(--line);
+      background: rgba(16,31,58,.55);
+      color: var(--text);
+      border-radius: 12px;
+      padding:8px 10px;
+      font-size:12px;
+      cursor:pointer;
+      transition: transform .06s ease, background .15s ease;
+      user-select:none;
+    }
+    .btn:hover{background: rgba(16,31,58,.8)}
+    .btn:active{transform: translateY(1px)}
+    .btn.good{border-color: rgba(120,240,177,.35)}
+    .btn.warn{border-color: rgba(255,211,106,.35)}
+    .btn.bad{border-color: rgba(255,122,154,.35)}
+    .pill{
+      font-size:12px; padding:6px 10px; border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(16,31,58,.45);
+      color:var(--muted);
+      display:inline-flex; gap:8px; align-items:center;
+      white-space:nowrap;
+    }
+    .pill b{color:var(--text); font-weight:600}
+    .grid{
+      display:grid; gap:14px;
+      grid-template-columns: 1.35fr .65fr;
+      align-items:start;
+    }
+    @media (max-width: 980px){
+      .grid{grid-template-columns:1fr}
+      .brand{min-width:auto}
+    }
+
+    /* Splash */
+    .splash{
+      position:fixed; inset:0; z-index:999;
+      display:grid; place-items:center;
+      background: radial-gradient(1000px 700px at 50% 35%, rgba(122,167,255,.28), transparent 60%),
+                  radial-gradient(900px 650px at 30% 70%, rgba(120,240,177,.18), transparent 60%),
+                  linear-gradient(180deg, #050710, #070A12);
+      transition: opacity .5s ease, visibility .5s ease;
+    }
+    .splash.hide{opacity:0; visibility:hidden}
+    .splash-card{
+      width:min(820px, 92vw);
+      padding:22px;
+      border-radius: 22px;
+      border:1px solid var(--line);
+      background: rgba(14,24,48,.65);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      position:relative;
+      overflow:hidden;
+    }
+    .splash-card h2{margin:0 0 6px; font-size:20px}
+    .splash-card p{margin:0 0 14px; color:var(--muted); line-height:1.4}
+    .bar{
+      height:10px; border-radius:999px; border:1px solid var(--line);
+      background: rgba(16,31,58,.45);
+      overflow:hidden;
+    }
+    .bar > i{
+      display:block; height:100%; width:0%;
+      background: linear-gradient(90deg, rgba(120,240,177,.9), rgba(122,167,255,.9));
+      border-radius:999px;
+      transition: width .8s ease;
+    }
+    .splash-row{display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between}
+    .mini{font-family:var(--mono); font-size:12px; color:var(--faint)}
+    .kbd{
+      font-family:var(--mono);
+      font-size:12px;
+      padding:3px 8px;
+      border-radius:10px;
+      border:1px solid var(--line);
+      background: rgba(16,31,58,.55);
+      color:var(--text);
+    }
+
+    /* Hero */
+    .hero{padding:18px; margin-top:16px; position:relative; overflow:hidden}
+    .hero h2{margin:0 0 8px; font-size:22px}
+    .hero p{margin:0; color:var(--muted); line-height:1.5}
+    .hero .row{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+
+    /* Parallax layers */
+    .parallax{
+      position:absolute; inset:-40px; z-index:-1;
+      pointer-events:none;
+      opacity:.85;
+    }
+    .nebula{
+      position:absolute; inset:0;
+      background:
+        radial-gradient(600px 400px at 20% 30%, rgba(122,167,255,.22), transparent 60%),
+        radial-gradient(700px 460px at 80% 20%, rgba(120,240,177,.14), transparent 60%),
+        radial-gradient(520px 360px at 70% 80%, rgba(255,211,106,.10), transparent 60%);
+      filter: blur(0px);
+      transform: translate3d(0,0,0);
+      will-change: transform;
+    }
+    canvas.starfield{
+      position:absolute; inset:0; width:100%; height:100%;
+      opacity:.6;
+    }
+
+    /* Sidebar */
+    .side{padding:14px}
+    .side h3{margin:0 0 10px; font-size:14px}
+    .toc a{
+      display:block; padding:8px 10px; border-radius:12px;
+      border:1px solid transparent;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.2;
+    }
+    .toc a:hover{border-color:var(--line); background: rgba(16,31,58,.45); color:var(--text); text-decoration:none}
+    .side .sep{height:1px; background: var(--line); margin:12px 0}
+    .small{font-size:12px; color:var(--muted); line-height:1.45}
+
+    /* Sections */
+    section.card{padding:14px; margin-top:14px}
+    section.card h3{margin:0 0 8px; font-size:16px}
+    .kicker{font-size:12px; color:var(--faint); margin-bottom:8px}
+    .cols{display:grid; gap:12px; grid-template-columns:1fr 1fr}
+    @media (max-width: 880px){ .cols{grid-template-columns:1fr} }
+
+    details{
+      border:1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(16,31,58,.35);
+      overflow:hidden;
+    }
+    summary{
+      cursor:pointer;
+      padding:12px 12px;
+      font-weight:650;
+      list-style:none;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+    }
+    summary::-webkit-details-marker{display:none}
+    details .content{padding: 0 12px 12px}
+    .tagrow{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px}
+    .tag{
+      font-family:var(--mono); font-size:11px;
+      padding:4px 8px; border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(14,24,48,.55);
+      color:var(--muted);
+    }
+    .callout{
+      border:1px solid rgba(120,240,177,.25);
+      background: rgba(120,240,177,.06);
+      padding:12px;
+      border-radius: 14px;
+      color: var(--text);
+    }
+    .callout b{color:var(--good)}
+    .warnbox{
+      border:1px solid rgba(255,211,106,.25);
+      background: rgba(255,211,106,.06);
+      padding:12px;
+      border-radius: 14px;
+      color: var(--text);
+    }
+    .badbox{
+      border:1px solid rgba(255,122,154,.22);
+      background: rgba(255,122,154,.06);
+      padding:12px;
+      border-radius: 14px;
+      color: var(--text);
+    }
+
+    .table{
+      width:100%;
+      border-collapse: separate;
+      border-spacing:0;
+      overflow:hidden;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background: rgba(16,31,58,.25);
+    }
+    .table th,.table td{
+      padding:10px 10px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      vertical-align:top;
+      font-size:13px;
+      line-height:1.35;
+    }
+    .table th{color:var(--muted); font-weight:650; text-align:left; background: rgba(16,31,58,.35)}
+    .table tr:last-child td{border-bottom:0}
+    code, pre{font-family:var(--mono)}
+    pre{
+      margin:10px 0 0;
+      padding:12px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background: rgba(7,10,18,.55);
+      overflow:auto;
+      white-space:pre-wrap;
+      word-break:break-word;
+      font-size:12px;
+      line-height:1.45;
+    }
+
+    /* HUD */
+    .hud{
+      position:fixed; right:14px; bottom:14px; z-index:60;
+      width:min(340px, 92vw);
+    }
+    .hud .panel{padding:12px}
+    .hud h4{margin:0 0 8px; font-size:13px}
+    .meter{height:10px; border-radius:999px; border:1px solid var(--line); background: rgba(16,31,58,.45); overflow:hidden}
+    .meter i{display:block; height:100%; width:0%; background: linear-gradient(90deg, rgba(120,240,177,.95), rgba(122,167,255,.85)); border-radius:999px; transition: width .25s ease}
+    .hud .row{display:flex; gap:10px; align-items:center; justify-content:space-between; flex-wrap:wrap}
+    .hud .row .pill{padding:5px 9px}
+    .hud small{color:var(--muted)}
+    .hud .btn{padding:7px 9px}
+
+    /* Constellation visualizer */
+    .viz{
+      margin-top:10px;
+      border:1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(16,31,58,.25);
+      overflow:hidden;
+    }
+    canvas#constellation{display:block; width:100%; height:180px}
+
+    /* Footer */
+    footer{
+      margin-top:18px;
+      padding:14px;
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(16,31,58,.35);
+      color: var(--muted);
+      line-height:1.45;
+      font-size:12px;
+    }
+    footer b{color:var(--text)}
+    .footgrid{display:grid; gap:10px; grid-template-columns: 1.2fr .8fr}
+    @media (max-width: 880px){ .footgrid{grid-template-columns:1fr} }
+
+    /* Print */
+    @media print{
+      .topbar, .hud, .splash{display:none !important}
+      body{background:#fff !important; color:#000 !important}
+      a{color:#000; text-decoration:underline}
+      .glass, details, .table, footer{box-shadow:none !important; background:#fff !important}
+      .parallax, canvas.starfield{display:none !important}
+      .tag{border-color:#bbb; color:#000}
+    }
+
+    /* Hidden */
+    .hidden{display:none !important}
+  </style>
+</head>
+
+<body>
+  <!-- Splash Screen -->
+  <div class="splash" id="splash" aria-hidden="true">
+    <div class="splash-card">
+      <h2>Food Logistics Research Primer 🛰️📦</h2>
+      <p>
+        Offline-first dashboard + prompt-primer for expanding <b>end_child_hunger_atlas</b> using Claude.
+        Local-only storage, no auto-send, no hidden analytics.
+      </p>
+      <div class="bar" aria-label="Loading"><i id="splashBar"></i></div>
+      <div class="splash-row" style="margin-top:10px">
+        <div class="mini">Tip: Press <span class="kbd">/</span> to focus search, <span class="kbd">P</span> to print.</div>
+        <button class="btn good" id="enterBtn" title="Tooltip: Enters the dashboard. Expected outcome: splash hides, content is interactive.">Enter</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top bar -->
+  <div class="topbar" role="banner">
+    <div class="topbar-inner">
+      <div class="brand" title="Tooltip: Branding + document identity. How to extend: change title/subtitle; keep short for small screens. Outcome: clear project context.">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>end_child_hunger_atlas</h1>
+          <div class="sub">Food Logistics Research Primer • Offline-first • Policy-ready</div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <div class="search" title="Tooltip: Client-side search across sections. How to extend: add data-search attributes to new blocks. Outcome: rapid navigation without internet.">
+          <span aria-hidden="true">🔎</span>
+          <input id="q" type="search" placeholder="Search: cold chain, waste, routing, resilience, drones…" autocomplete="off" />
+        </div>
+
+        <span class="pill" id="statusPill" title="Tooltip: Offline/online indicator. Outcome: user understands reliability + whether live links may open.">
+          <span aria-hidden="true">🧭</span><b id="netState">…</b><span id="netHint">checking</span>
+        </span>
+
+        <button class="btn" id="toggleNotesBtn" title="Tooltip: Show/hide personal notes panel. Outcome: local notes remain private and persistent.">🗒️ Notes</button>
+        <button class="btn warn" id="toggleAnalyticsBtn" title="Tooltip: Optional local-only analytics. Outcome: transparency: nothing is sent; you can reset anytime.">📊 Local Analytics</button>
+        <button class="btn" id="printBtn" title="Tooltip: Print-friendly output. Outcome: clean PDF or paper copy.">🖨️ Print</button>
+        <button class="btn bad" id="resetBtn" title="Tooltip: Reset local data (IndexedDB + caches). Outcome: full privacy wipe.">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero glass" id="top">
+      <div class="parallax" aria-hidden="true">
+        <div class="nebula" id="nebula"></div>
+        <canvas class="starfield" id="stars"></canvas>
+      </div>
+
+      <h2>From “research soup” → policy actions kids can eat 🍎</h2>
+      <p>
+        This page summarizes recent, high-signal research and practice on food logistics (cold chain, loss/waste,
+        network optimization, resilience, humanitarian delivery). It also includes <b>Claude-ready prompt primers</b>
+        for expanding each module into a full HTML dashboard in your collection.
+      </p>
+
+      <div class="row">
+        <span class="pill" title="Tooltip: XP is earned by marking items reviewed. Outcome: lightweight progress tracking, stored locally.">✨ XP <b id="xp">0</b> • Level <b id="lvl">1</b></span>
+        <span class="pill" title="Tooltip: Shows last saved timestamp (local only). Outcome: user trust + persistence verification.">💾 Last save <b id="lastSave">—</b></span>
+        <span class="pill" title="Tooltip: Source refresh logic. Outcome: indicates that this primer is citation-backed, not vibes-based.">📚 Sources <b id="srcCount">0</b></span>
+      </div>
+    </div>
+
+    <div class="grid" style="margin-top:14px">
+      <!-- Main content -->
+      <main>
+        <!-- Orientation -->
+        <section class="card glass" id="orientation" data-search="orientation how to use claude prompt primer atlas html collection">
+          <div class="kicker">00 • Orientation Gateway</div>
+          <h3>How to use this as a Claude expansion primer 🧠</h3>
+
+          <div class="cols">
+            <div class="callout">
+              <b>Workflow (fast):</b>
+              <div style="margin-top:8px; color:var(--muted)">
+                1) Pick a module below → open its “Claude Expansion Prompt”.<br/>
+                2) Paste into Claude with your repo context (folder structure + target audience).<br/>
+                3) Claude expands into a dedicated <span style="font-family:var(--mono)">index.html</span> file with metrics, UI, and policy actions.<br/>
+                4) You keep the citations + add local datasets later.
+              </div>
+            </div>
+
+            <div class="warnbox">
+              <b>Guardrails (important):</b>
+              <div style="margin-top:8px; color:var(--muted)">
+                This system avoids coercive framing and hidden tracking. It focuses on verifiable evidence,
+                measurable outcomes, and transparent decision pathways. Keep it boringly ethical — boring is stable. 🧱
+              </div>
+            </div>
+          </div>
+
+          <details style="margin-top:12px">
+            <summary>
+              Claude Expansion Prompt — Orientation Module
+              <span class="tag">PROMPT</span>
+            </summary>
+            <div class="content">
+              <pre id="prompt_orientation"></pre>
+            </div>
+          </details>
+        </section>
+
+        <!-- Evidence map -->
+        <section class="card glass" id="evidence-map" data-search="evidence map citations sources bibliography research 2024 2025 2026">
+          <div class="kicker">01 • Evidence Map</div>
+          <h3>What the latest signal converges on (cross-domain)</h3>
+          <p class="small">
+            These are the main “gravity wells” in current food logistics: cold chain modernization, loss/waste reduction,
+            route/network optimization, resilience economics, and governance guardrails for new tech.
+          </p>
+
+          <table class="table" style="margin-top:10px" aria-label="Evidence map table">
+            <thead>
+              <tr>
+                <th>Theme</th>
+                <th>Core claim</th>
+                <th>Why policymakers should care</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>Cold chain as systems optimization</b></td>
+                <td>
+                  Cold chain sustainability is increasingly treated as an optimization + monitoring problem (not just more refrigeration),
+                  with “intelligent optimization” to handle tradeoffs.
+                  <span class="tagrow">
+                    <span class="tag">Cold chain</span><span class="tag">Optimization</span><span class="tag">Sustainability</span>
+                  </span>
+                </td>
+                <td>Reduces spoilage, stabilizes prices, improves nutrition delivery reliability, and can reduce emissions.</td>
+              </tr>
+              <tr>
+                <td><b>Loss + waste is a “parallel supply”</b></td>
+                <td>
+                  Significant food is lost post-harvest and wasted at retail/household levels; interventions differ by stage.
+                </td>
+                <td>Cheaper and faster than expanding production, plus climate and fiscal benefits.</td>
+              </tr>
+              <tr>
+                <td><b>Routing & network design is becoming operational</b></td>
+                <td>
+                  Humanitarian and public supply chains are adopting optimization tools for network and route planning.
+                </td>
+                <td>More meals delivered per dollar; better coverage; better readiness for shocks.</td>
+              </tr>
+              <tr>
+                <td><b>Resilience has a price tag — and a payoff</b></td>
+                <td>
+                  Modern supply-chain strategy emphasizes balancing resilience and cost; treat resilience as avoided catastrophe cost.
+                </td>
+                <td>Budget clarity: preparedness reduces emergency spending and political volatility.</td>
+              </tr>
+              <tr>
+                <td><b>Governance & safety for emerging delivery tech</b></td>
+                <td>
+                  Drones/traceability tools help under disruption but require safety/privacy/legal frameworks.
+                </td>
+                <td>Prevents harm, reduces backlash, protects trust in public programs.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <details style="margin-top:12px">
+            <summary>
+              Claude Expansion Prompt — “Evidence Map Dashboard”
+              <span class="tag">PROMPT</span>
+            </summary>
+            <div class="content">
+              <pre id="prompt_evidence"></pre>
+            </div>
+          </details>
+        </section>
+
+        <!-- Cold chain -->
+        <section class="card glass" id="cold-chain" data-search="cold chain refrigeration emissions monitoring sensors intelligent optimization review 2026">
+          <div class="kicker">02 • Cold Chain</div>
+          <h3>Cold chain: from “fridges” → coordinated infrastructure ⚡🧊</h3>
+
+          <div class="cols">
+            <div class="callout">
+              <b>Recent research signal:</b>
+              <div style="margin-top:8px; color:var(--muted)">
+                A 2026 review frames sustainable food cold chain logistics as an intelligent optimization problem
+                (tradeoffs + constraints + monitoring). <a href="https://www.sciencedirect.com/science/article/abs/pii/S0924224426000658" target="_blank" rel="noopener">ScienceDirect (2026)</a>.
+                :contentReference[oaicite:0]{index=0}
+              </div>
+            </div>
+            <div class="warnbox">
+              <b>Policy anchor:</b>
+              <div style="margin-top:8px; color:var(--muted)">
+                FAO notes the food cold chain is responsible for ~4% of global GHG emissions (including tech + loss/waste due to inadequate cold chain),
+                making it a food security + climate lever. <a href="https://openknowledge.fao.org/server/api/core/bitstreams/cf42e3c6-157e-4ea9-8873-8b3cc9242b96/content" target="_blank" rel="noopener">FAO report PDF</a>.
+                :contentReference[oaicite:1]{index=1}
+              </div>
+            </div>
+          </div>
+
+          <details style="margin-top:12px">
+            <summary>
+              Metrics to track (dashboard-ready)
+              <span class="tag">METRICS</span>
+            </summary>
+            <div class="content">
+              <ul class="small">
+                <li><b>Cold chain uptime:</b> % time facilities maintain target ranges; downtime causes loss.</li>
+                <li><b>Energy reliability:</b> grid stability + backup availability (solar, batteries, generators).</li>
+                <li><b>Spoilage rate by node:</b> farm, aggregation, transport, storage, retail/school kitchens.</li>
+                <li><b>Cost per protected calorie:</b> $ spent per kcal delivered without spoilage.</li>
+                <li><b>Emissions per protected kg:</b> tie to energy mix and refrigeration tech choices. :contentReference[oaicite:2]{index=2}</li>
+              </ul>
+            </div>
+          </details>
+
+          <details style="margin-top:12px">
+            <summary>
+              Claude Expansion Prompt — “Cold Chain Policy Console”
+              <span class="tag">PROMPT</span>
+            </summary>
+            <div class="content">
+              <pre id="prompt_coldchain"></pre>
+            </div>
+          </details>
+        </section>
+
+        <!-- Loss and waste -->
+        <section class="card glass" id="loss-waste" data-search="food loss waste 13.2 19 percent UNEP 2024 FAO policy series emissions">
+          <div class="kicker">03 • Food Loss & Waste</div>
+          <h3>Loss/waste: the fastest “new supply” you can unlock ♻️🥕</h3>
+
+          <div class="cols">
+            <div class="callout">
+              <b>Key quant:</b>
+              <div style="margin-top:8px; color:var(--muted)">
+                FAO cites ~13.2% of food lost after harvest and before retail, and ~19% wasted at retail/food service/households (UNEP 2024 stats).
+                <a href="https://www.fao.org/policy-support/policy-themes/food-loss-and-food-waste/fao-policy-series--food-loss---food-waste" target="_blank" rel="noopener">FAO Policy Series page</a>.
+                :contentReference[oaicite:3]{index=3}
+              </div>
+            </div>
+            <div class="warnbox">
+              <b>Climate linkage:</b>
+              <div style="margin-top:8px; color:var(--muted)">
+                UNFCCC notes food loss and waste contribute roughly 8–10% of annual global greenhouse gas emissions (contextual policy lever).
+                <a href="https://unfccc.int/news/food-loss-and-waste-account-for-8-10-of-annual-global-greenhouse-gas-emissions-cost-usd-1-trillion" target="_blank" rel="noopener">UNFCCC (2024)</a>.
+                :contentReference[oaicite:4]{index=4}
+              </div>
+            </div>
+          </div>
+
+          <details style="margin-top:12px">
+            <summary>
+              Intervention stack (by stage)
+              <span class="tag">ACTIONS</span>
+            </summary>
+            <div class="content small">
+              <b>Pre-retail loss:</b> drying, storage, aggregation, transport reliability, cold chain, handling training.<br/>
+              <b>Retail & institutional waste:</b> forecasting, portion sizing, donation routing, dynamic menus (school meals), packaging improvements.<br/>
+              <b>Household waste:</b> date label clarity, education, smaller package sizes, local composting — but logistics wins tend to be upstream first.
+            </div>
+          </details>
+
+          <details style="margin-top:12px">
+            <summary>
+              Claude Expansion Prompt — “Loss/Waste Reduction Dashboard”
+              <span class="tag">PROMPT</span>
+            </summary>
+            <div class="content">
+              <pre id="prompt_losswaste"></pre>
+            </div>
+          </details>
+        </section>
+
+        <!-- Routing -->
+        <section class="card glass" id="routing" data-search="routing optimization delivery networks route the meals WFP data-driven routes">
+          <div class="kicker">04 • Routing & Network Optimization</div>
+          <h3>Routing: “make the map do the work” 🗺️🚚</h3>
+
+          <div class="callout">
+            <b>Applied proof:</b>
+            <div style="margin-top:8px; color:var(--muted)">
+              WFP’s “Route The Meals” is an optimization tool to build data-driven delivery networks and routes for more efficient operations.
+              <a href="https://innovation.wfp.org/project/route-meals" target="_blank" rel="noopener">WFP Innovation page (2025)</a>.
+              :contentReference[oaicite:5]{index=5}
+            </div>
+          </div>
+
+          <details style="margin-top:12px">
+            <summary>
+              Metrics that matter (public + humanitarian + school meals)
+              <span class="tag">METRICS</span>
+            </summary>
+            <div class="content">
+              <table class="table" aria-label="Routing metrics table">
+                <thead><tr><th>Metric</th><th>Definition</th><th>What it buys you</th></tr></thead>
+                <tbody>
+                  <tr><td><b>Cost per meal delivered</b></td><td>Total logistics cost / meals delivered</td><td>Budget leverage: more meals per dollar</td></tr>
+                  <tr><td><b>On-time rate</b></td><td>% deliveries within required window</td><td>School meal reliability; reduced spoilage</td></tr>
+                  <tr><td><b>Coverage gap</b></td><td>Households/schools beyond threshold travel time</td><td>Equity targeting</td></tr>
+                  <tr><td><b>Disruption recovery time</b></td><td>Hours/days to restore service after shock</td><td>Resilience readiness</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </details>
+
+          <details style="margin-top:12px">
+            <summary>
+              Claude Expansion Prompt — “Routing Console + Scenario Simulator”
+              <span class="tag">PROMPT</span>
+            </summary>
+            <div class="content">
+              <pre id="prompt_routing"></pre>
+            </div>
+          </details>
+        </section>
+
+        <!-- Resilience economics -->
+        <section class="card glass" id="resilience" data-search="resilience supply chain cost of resilience agrifood supply chains BCG 2025">
+          <div class="kicker">05 • Resilience Economics</div>
+          <h3>Resilience: a budget line item, not a motivational poster 🧱📉</h3>
+
+          <div class="warnbox">
+            <b>Signal:</b>
+            <div style="margin-top:8px; color:var(--muted)">
+              Strategy work emphasizes the “cost of resilience” as the new supply-chain challenge — balancing robustness and competitiveness.
+              <a href="https://www.bcg.com/publications/2025/cost-resilience-new-supply-chain-challenge" target="_blank" rel="noopener">BCG (2025)</a>.
+              :contentReference[oaicite:6]{index=6}
+            </div>
+          </div>
+
+          <details style="margin-top:12px">
+            <summary>
+              Policy-friendly framing
+              <span class="tag">FRAMING</span>
+            </summary>
+            <div class="content small">
+              The trick is to convert “resilience” into <b>avoided cost</b>:
+              emergency procurement, hospitalizations from nutrition gaps, school absenteeism, civil unrest risk,
+              and inflationary spikes. Tie each resilience intervention to a measurable avoided-loss estimate.
+            </div>
+          </details>
+
+          <details style="margin-top:12px">
+            <summary>
+              Claude Expansion Prompt — “Resilience ROI Calculator”
+              <span class="tag">PROMPT</span>
+            </summary>
+            <div class="content">
+              <pre id="prompt_resilience"></pre>
+            </div>
+          </details>
+        </section>
+
+        <!-- Outlook / scenario analysis -->
+        <section class="card glass" id="outlook" data-search="OECD FAO outlook 2025 2034 undernourishment eliminated scenario analysis 7% emissions">
+          <div class="kicker">06 • Macro Outlook & Scenarios</div>
+          <h3>Big picture: scenarios policymakers can’t ignore 🌍📊</h3>
+
+          <div class="callout">
+            <b>Scenario hook:</b>
+            <div style="margin-top:8px; color:var(--muted)">
+              OECD-FAO Agricultural Outlook 2025–2034 includes scenario analysis suggesting undernourishment could be eliminated by 2034 under specific productivity/production conditions,
+              alongside reductions in direct agricultural emissions.
+              <a href="https://www.oecd.org/en/publications/2025/07/oecd-fao-agricultural-outlook-2025-2034_3eb15914.html" target="_blank" rel="noopener">OECD summary (2025)</a>.
+              :contentReference[oaicite:7]{index=7}
+            </div>
+          </div>
+
+          <details style="margin-top:12px">
+            <summary>
+              Claude Expansion Prompt — “Scenario Tracker + Policy Levers”
+              <span class="tag">PROMPT</span>
+            </summary>
+            <div class="content">
+              <pre id="prompt_outlook"></pre>
+            </div>
+          </details>
+        </section>
+
+        <!-- Notes / local-only -->
+        <section class="card glass hidden" id="notes" data-search="notes personal plan draft local storage">
+          <div class="kicker">Local • Notes</div>
+          <h3>Private notes (stored locally only) 🗒️</h3>
+          <p class="small">
+            Tooltip: Notes are stored in IndexedDB on this device only. How to extend: add “note categories” or per-module notes.
+            Outcome: safe drafting without leaking sensitive plans.
+          </p>
+          <textarea id="notesText" style="width:100%; min-height:160px; resize:vertical; padding:10px; border-radius:14px; border:1px solid var(--line); background: rgba(7,10,18,.35); color:var(--text);" placeholder="Write your notes here…"></textarea>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px">
+            <button class="btn good" id="saveNotesBtn">Save notes</button>
+            <button class="btn" id="exportNotesBtn">Export notes (JSON)</button>
+          </div>
+        </section>
+
+        <!-- Analytics (local-only, optional) -->
+        <section class="card glass hidden" id="analytics" data-search="analytics local only transparent optional resettable">
+          <div class="kicker">Local • Analytics (Optional)</div>
+          <h3>Transparent local-only analytics 📊 (no sending)</h3>
+          <div class="badbox">
+            <b>Promise:</b>
+            <div style="margin-top:8px; color:var(--muted)">
+              This never transmits data anywhere. It only counts interactions on this device so you can see what you’ve reviewed.
+              You can turn it off or reset anytime.
+            </div>
+          </div>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px">
+            <label class="pill" title="Tooltip: Toggle analytics. Outcome: user controls tracking; stays local.">
+              <input id="analyticsToggle" type="checkbox" style="transform: translateY(1px)" />
+              <span>Enable local analytics</span>
+            </label>
+            <button class="btn bad" id="resetAnalyticsBtn">Reset analytics counters</button>
+          </div>
+
+          <details style="margin-top:12px">
+            <summary>
+              View counters
+              <span class="tag">LOCAL</span>
+            </summary>
+            <div class="content">
+              <pre id="analyticsDump"></pre>
+            </div>
+          </details>
+        </section>
+
+        <!-- Sources -->
+        <section class="card glass" id="sources" data-search="sources citations links bibliography fao oecd wfp unfccc cold chain review 2026">
+          <div class="kicker">References</div>
+          <h3>Sources used in this primer 📚</h3>
+          <p class="small">
+            Tooltip: These are the sources referenced directly in the content above. How to extend: add new items with title, org, year, and a one-line relevance note.
+            Outcome: auditability + policy-grade legitimacy.
+          </p>
+
+          <table class="table" aria-label="Sources table">
+            <thead><tr><th>Source</th><th>Why it matters</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>
+                  Chen et al. (2026) — “Ubiquitous intelligent optimization promotes sustainable food cold chain logistics…” (Trends in Food Science & Technology).
+                  <br/><a href="https://www.sciencedirect.com/science/article/abs/pii/S0924224426000658" target="_blank" rel="noopener">Open</a> :contentReference[oaicite:8]{index=8}
+                </td>
+                <td>Summarizes optimization + sustainability tradeoffs in food cold chain logistics.</td>
+              </tr>
+              <tr>
+                <td>
+                  FAO — “Sustainable Food Cold Chains” report (PDF).
+                  <br/><a href="https://openknowledge.fao.org/server/api/core/bitstreams/cf42e3c6-157e-4ea9-8873-8b3cc9242b96/content" target="_blank" rel="noopener">Open</a> :contentReference[oaicite:9]{index=9}
+                </td>
+                <td>Policy-grade overview; includes cold chain emissions framing and system implications.</td>
+              </tr>
+              <tr>
+                <td>
+                  FAO Policy Series — Food Loss & Food Waste (and UNEP 2024 stats).
+                  <br/><a href="https://www.fao.org/policy-support/policy-themes/food-loss-and-food-waste/fao-policy-series--food-loss---food-waste" target="_blank" rel="noopener">Open</a> :contentReference[oaicite:10]{index=10}
+                </td>
+                <td>Stage-specific quantification for loss vs waste; useful for dashboards and targets.</td>
+              </tr>
+              <tr>
+                <td>
+                  UNFCCC (2024) — Food loss/waste emissions context.
+                  <br/><a href="https://unfccc.int/news/food-loss-and-waste-account-for-8-10-of-annual-global-greenhouse-gas-emissions-cost-usd-1-trillion" target="_blank" rel="noopener">Open</a> :contentReference[oaicite:11]{index=11}
+                </td>
+                <td>Connects FLW to climate; helps justify logistics reforms in climate plans.</td>
+              </tr>
+              <tr>
+                <td>
+                  WFP Innovation — “Route The Meals” (2025).
+                  <br/><a href="https://innovation.wfp.org/project/route-meals" target="_blank" rel="noopener">Open</a> :contentReference[oaicite:12]{index=12}
+                </td>
+                <td>Concrete applied example of network/route optimization in real food assistance operations.</td>
+              </tr>
+              <tr>
+                <td>
+                  OECD-FAO Agricultural Outlook 2025–2034 (2025).
+                  <br/><a href="https://www.oecd.org/en/publications/2025/07/oecd-fao-agricultural-outlook-2025-2034_3eb15914.html" target="_blank" rel="noopener">Open</a> :contentReference[oaicite:13]{index=13}
+                </td>
+                <td>Scenario framing for ending undernourishment; macro levers + policy narrative basis.</td>
+              </tr>
+              <tr>
+                <td>
+                  BCG (2025) — Cost of resilience framing for supply chains.
+                  <br/><a href="https://www.bcg.com/publications/2025/cost-resilience-new-supply-chain-challenge" target="_blank" rel="noopener">Open</a> :contentReference[oaicite:14]{index=14}
+                </td>
+                <td>Decision-maker language: resilience tradeoffs and cost justification patterns.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Attributions & Licensing -->
+        <section class="card glass" id="attributions" data-search="attributions licensing github patterns open source">
+          <div class="kicker">Meta</div>
+          <h3>Attributions & Licensing</h3>
+          <div class="small">
+            <b>Design patterns:</b> This single-file dashboard uses common open UI patterns (sticky nav, collapsible sections, offline-first storage, local-only analytics) implemented from scratch.
+            No proprietary code copied.<br/><br/>
+            <b>Suggested repo license:</b> CC BY-SA 4.0 or AGPL-3.0 (choose based on whether you want network-use copyleft for code).<br/>
+            <b>Citation content:</b> Sources remain under their original copyrights; this page summarizes and links rather than reproducing large excerpts.
+          </div>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="side glass" aria-label="Sidebar Table of Contents">
+        <h3>TOC 🧭</h3>
+        <nav class="toc" id="toc">
+          <a href="#orientation">00 • Orientation</a>
+          <a href="#evidence-map">01 • Evidence Map</a>
+          <a href="#cold-chain">02 • Cold Chain</a>
+          <a href="#loss-waste">03 • Loss & Waste</a>
+          <a href="#routing">04 • Routing</a>
+          <a href="#resilience">05 • Resilience</a>
+          <a href="#outlook">06 • Macro Outlook</a>
+          <a href="#sources">References</a>
+          <a href="#attributions">Attributions</a>
+        </nav>
+
+        <div class="sep"></div>
+
+        <div class="small">
+          <b>Checklist (earn XP):</b>
+          <div style="margin-top:8px; display:grid; gap:8px">
+            <label class="pill"><input type="checkbox" class="chk" data-xp="15" data-node="coldchain" /> Reviewed Cold Chain</label>
+            <label class="pill"><input type="checkbox" class="chk" data-xp="15" data-node="losswaste" /> Reviewed Loss/Waste</label>
+            <label class="pill"><input type="checkbox" class="chk" data-xp="15" data-node="routing" /> Reviewed Routing</label>
+            <label class="pill"><input type="checkbox" class="chk" data-xp="15" data-node="resilience" /> Reviewed Resilience</label>
+            <label class="pill"><input type="checkbox" class="chk" data-xp="15" data-node="outlook" /> Reviewed Outlook</label>
+          </div>
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="small">
+          <b>Constellation (state visualizer) ✨</b>
+          <div class="viz" title="Tooltip: Constellation shows which domains you’ve ‘lit up’ by completing checkboxes. How to extend: add nodes for more modules. Outcome: quick, playful status overview.">
+            <canvas id="constellation" width="600" height="180" aria-label="Constellation visualizer"></canvas>
+          </div>
+          <div style="margin-top:8px" class="small">
+            Nodes light up as you progress. Stored locally.
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <footer role="contentinfo">
+      <div class="footgrid">
+        <div>
+          <b>Zero-Harm & Anti-Inversion Note:</b> This tool is built for benevolent policy outcomes (child hunger elimination) via transparent evidence and measurable actions.
+          It avoids coercion, avoids hidden tracking, and stores data locally only. No auto-sending. Reset anytime. 🛡️
+        </div>
+        <div>
+          <b>Offline-first:</b> Works without internet; links open only when online. A lightweight service worker caches this page locally for reliability.
+          <div style="margin-top:8px">
+            <span class="pill">🔒 Local-only storage</span>
+            <span class="pill">🧾 Audit-friendly citations</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <noscript>
+      <div class="glass" style="padding:14px; margin-top:14px; border:1px solid rgba(255,122,154,.35); background: rgba(255,122,154,.06);">
+        <b>JavaScript is disabled.</b> This page still contains the research summary and Claude prompts, but offline storage, search, and HUD features require JS.
+      </div>
+    </noscript>
+  </div>
+
+  <!-- HUD -->
+  <div class="hud" aria-label="Gamification HUD">
+    <div class="panel glass">
+      <div class="row">
+        <h4 style="margin:0">HUD: Progress ✨</h4>
+        <button class="btn" id="hudToggle" title="Tooltip: Collapse HUD. Outcome: less screen clutter.">Hide</button>
+      </div>
+      <div class="row" style="margin-top:8px">
+        <span class="pill">XP <b id="hudXp">0</b></span>
+        <span class="pill">Level <b id="hudLvl">1</b></span>
+        <span class="pill">Nodes <b id="hudNodes">0</b>/5</span>
+      </div>
+      <div style="margin-top:10px">
+        <div class="meter" aria-label="XP meter"><i id="xpBar"></i></div>
+        <small id="xpHint">Complete checkboxes to light the constellation.</small>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* =========================================================
+      JS: Safety + Offline + IndexedDB + UI
+      Tooltip: This script handles all interactivity (search, HUD, storage, constellation, offline cache).
+      How to extend: Add new modules by adding checkbox nodes + prompt blocks, then update CONST_NODES.
+      Expected outcome: Offline reliability, local-only persistence, no console errors.
+    ========================================================= */
+
+    // ---------- Gentle rate limit for text inputs (anti-abuse, anti-freeze) ----------
+    const Rate = (() => {
+      let last = 0;
+      return (minMs=60) => {
+        const now = Date.now();
+        if (now - last < minMs) return false;
+        last = now; return true;
+      };
+    })();
+
+    // ---------- Minimal sanitizer for displayed/exported text ----------
+    const sanitize = (s) => (s ?? "").toString().replace(/[<>]/g, (m)=> m === "<" ? "&lt;" : "&gt;").slice(0, 200000);
+
+    // ---------- IndexedDB wrapper (no deps) ----------
+    const DB = (() => {
+      const NAME = "end_child_hunger_atlas_db";
+      const VERSION = 1;
+      const STORES = { kv:"kv" };
+
+      function open(){
+        return new Promise((resolve,reject)=>{
+          const req = indexedDB.open(NAME, VERSION);
+          req.onupgradeneeded = () => {
+            const db = req.result;
+            if (!db.objectStoreNames.contains(STORES.kv)) db.createObjectStore(STORES.kv);
+          };
+          req.onsuccess = () => resolve(req.result);
+          req.onerror = () => reject(req.error);
+        });
+      }
+      async function get(key){
+        const db = await open();
+        return new Promise((resolve,reject)=>{
+          const tx = db.transaction(STORES.kv, "readonly");
+          const store = tx.objectStore(STORES.kv);
+          const req = store.get(key);
+          req.onsuccess = () => resolve(req.result);
+          req.onerror = () => reject(req.error);
+        });
+      }
+      async function set(key, val){
+        const db = await open();
+        return new Promise((resolve,reject)=>{
+          const tx = db.transaction(STORES.kv, "readwrite");
+          const store = tx.objectStore(STORES.kv);
+          const req = store.put(val, key);
+          req.onsuccess = () => resolve(true);
+          req.onerror = () => reject(req.error);
+        });
+      }
+      async function del(key){
+        const db = await open();
+        return new Promise((resolve,reject)=>{
+          const tx = db.transaction(STORES.kv, "readwrite");
+          const store = tx.objectStore(STORES.kv);
+          const req = store.delete(key);
+          req.onsuccess = () => resolve(true);
+          req.onerror = () => reject(req.error);
+        });
+      }
+      async function clear(){
+        const db = await open();
+        return new Promise((resolve,reject)=>{
+          const tx = db.transaction(STORES.kv, "readwrite");
+          const store = tx.objectStore(STORES.kv);
+          const req = store.clear();
+          req.onsuccess = () => resolve(true);
+          req.onerror = () => reject(req.error);
+        });
+      }
+      return {get,set,del,clear};
+    })();
+
+    // ---------- State ----------
+    const CONST_NODES = [
+      {id:"coldchain", label:"Cold Chain"},
+      {id:"losswaste", label:"Loss/Waste"},
+      {id:"routing", label:"Routing"},
+      {id:"resilience", label:"Resilience"},
+      {id:"outlook", label:"Outlook"},
+    ];
+
+    const state = {
+      xp: 0,
+      checks: {},
+      notes: "",
+      analyticsEnabled: false,
+      analytics: { searches:0, toggles:0, prints:0, opens:0 },
+      lastSave: null
+    };
+
+    // ---------- UI refs ----------
+    const $ = (q)=> document.querySelector(q);
+    const splash = $("#splash");
+    const splashBar = $("#splashBar");
+    const enterBtn = $("#enterBtn");
+    const q = $("#q");
+    const sections = Array.from(document.querySelectorAll("section.card"));
+    const xpEl = $("#xp"), lvlEl = $("#lvl"), lastSaveEl = $("#lastSave"), srcCountEl = $("#srcCount");
+    const netStateEl = $("#netState"), netHintEl = $("#netHint");
+    const notesSec = $("#notes"), analyticsSec = $("#analytics");
+    const notesText = $("#notesText");
+    const analyticsToggle = $("#analyticsToggle");
+    const analyticsDump = $("#analyticsDump");
+    const statusPill = $("#statusPill");
+
+    // HUD
+    const hud = document.querySelector(".hud");
+    const hudToggle = $("#hudToggle");
+    const hudXp = $("#hudXp"), hudLvl = $("#hudLvl"), hudNodes = $("#hudNodes");
+    const xpBar = $("#xpBar"), xpHint = $("#xpHint");
+
+    // Buttons
+    const printBtn = $("#printBtn");
+    const toggleNotesBtn = $("#toggleNotesBtn");
+    const toggleAnalyticsBtn = $("#toggleAnalyticsBtn");
+    const saveNotesBtn = $("#saveNotesBtn");
+    const exportNotesBtn = $("#exportNotesBtn");
+    const resetBtn = $("#resetBtn");
+    const resetAnalyticsBtn = $("#resetAnalyticsBtn");
+
+    // ---------- Helpers ----------
+    function levelFromXp(xp){
+      // Simple leveling curve: every 60 XP = +1 level, capped at 50.
+      return Math.max(1, Math.min(50, 1 + Math.floor(xp / 60)));
+    }
+    function clamp(n,min,max){ return Math.max(min, Math.min(max, n)); }
+
+    function setLastSave(ts){
+      state.lastSave = ts;
+      const d = ts ? new Date(ts) : null;
+      lastSaveEl.textContent = d ? d.toLocaleString() : "—";
+    }
+
+    function updateHud(){
+      const lvl = levelFromXp(state.xp);
+      xpEl.textContent = state.xp;
+      lvlEl.textContent = lvl;
+
+      hudXp.textContent = state.xp;
+      hudLvl.textContent = lvl;
+
+      const nodesOn = CONST_NODES.filter(n => !!state.checks[n.id]).length;
+      hudNodes.textContent = nodesOn;
+
+      // bar: 0..60 toward next level
+      const into = state.xp % 60;
+      const pct = clamp((into / 60) * 100, 0, 100);
+      xpBar.style.width = pct + "%";
+      xpHint.textContent = nodesOn === CONST_NODES.length
+        ? "Constellation fully lit. Now: turn this into policy action."
+        : "Complete checkboxes to light the constellation.";
+    }
+
+    function applySearch(term){
+      const t = term.trim().toLowerCase();
+      if (!t){
+        sections.forEach(s => s.classList.remove("hidden"));
+        return;
+      }
+      sections.forEach(s => {
+        const hay = (s.getAttribute("data-search") || "") + " " + (s.innerText || "");
+        const ok = hay.toLowerCase().includes(t);
+        s.classList.toggle("hidden", !ok);
+      });
+    }
+
+    function setNetUI(){
+      const online = navigator.onLine;
+      netStateEl.textContent = online ? "Online" : "Offline";
+      netHintEl.textContent = online ? "links available" : "offline mode";
+      statusPill.style.borderColor = online ? "rgba(120,240,177,.35)" : "rgba(255,211,106,.35)";
+    }
+
+    // ---------- Constellation visualizer ----------
+    const cv = $("#constellation");
+    const ctx = cv.getContext("2d");
+
+    function resizeCanvasToCSS(canvas){
+      const rect = canvas.getBoundingClientRect();
+      const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+      canvas.width = Math.floor(rect.width * dpr);
+      canvas.height = Math.floor(rect.height * dpr);
+      return dpr;
+    }
+
+    function drawConstellation(){
+      const dpr = resizeCanvasToCSS(cv);
+      const w = cv.width, h = cv.height;
+      ctx.clearRect(0,0,w,h);
+
+      // background
+      ctx.fillStyle = "rgba(7,10,18,.0)";
+      ctx.fillRect(0,0,w,h);
+
+      // node layout
+      const pad = 28 * dpr;
+      const pts = CONST_NODES.map((n,i) => {
+        const x = pad + (i/(CONST_NODES.length-1)) * (w - pad*2);
+        const y = (h*0.52) + Math.sin(i*1.1) * (h*0.12);
+        return {id:n.id, label:n.label, x, y};
+      });
+
+      // links
+      ctx.lineWidth = 1.25 * dpr;
+      pts.forEach((p,i)=>{
+        if (i === 0) return;
+        const prev = pts[i-1];
+        const onA = !!state.checks[prev.id];
+        const onB = !!state.checks[p.id];
+        ctx.strokeStyle = (onA && onB) ? "rgba(120,240,177,.55)" : "rgba(255,255,255,.12)";
+        ctx.beginPath();
+        ctx.moveTo(prev.x, prev.y);
+        ctx.lineTo(p.x, p.y);
+        ctx.stroke();
+      });
+
+      // nodes
+      pts.forEach(p=>{
+        const on = !!state.checks[p.id];
+        const r = (on ? 8 : 6) * dpr;
+
+        // glow
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, r*2.2, 0, Math.PI*2);
+        ctx.fillStyle = on ? "rgba(120,240,177,.10)" : "rgba(122,167,255,.06)";
+        ctx.fill();
+
+        // core
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, r, 0, Math.PI*2);
+        ctx.fillStyle = on ? "rgba(120,240,177,.85)" : "rgba(255,255,255,.22)";
+        ctx.fill();
+
+        // label
+        ctx.font = `${12*dpr}px ${getComputedStyle(document.body).fontFamily}`;
+        ctx.fillStyle = on ? "rgba(234,240,255,.85)" : "rgba(168,180,216,.75)";
+        ctx.fillText(p.label, p.x - (22*dpr), p.y + (22*dpr));
+      });
+    }
+
+    // ---------- Starfield ----------
+    const stars = $("#stars");
+    const sctx = stars.getContext("2d");
+    let starPts = [];
+    function initStars(){
+      const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+      const rect = stars.getBoundingClientRect();
+      stars.width = Math.floor(rect.width * dpr);
+      stars.height = Math.floor(rect.height * dpr);
+      const count = Math.floor((rect.width * rect.height) / 9000);
+      starPts = new Array(count).fill(0).map(()=>({
+        x: Math.random() * stars.width,
+        y: Math.random() * stars.height,
+        r: (Math.random()*1.6 + 0.4) * dpr,
+        a: Math.random()*0.6 + 0.2
+      }));
+    }
+    function drawStars(dx=0, dy=0){
+      const w = stars.width, h = stars.height;
+      sctx.clearRect(0,0,w,h);
+      sctx.fillStyle = "rgba(255,255,255,.0)";
+      sctx.fillRect(0,0,w,h);
+      for (const p of starPts){
+        const x = (p.x + dx) % w;
+        const y = (p.y + dy) % h;
+        sctx.beginPath();
+        sctx.arc(x, y, p.r, 0, Math.PI*2);
+        sctx.fillStyle = `rgba(234,240,255,${p.a})`;
+        sctx.fill();
+      }
+    }
+
+    // ---------- Prompts ----------
+    function buildPrompts(){
+      const baseContext =
+`ROLE: You are Claude, acting as a policy-grade systems designer + front-end engineer.
+GOAL: Expand the selected module into a complete, single-file, offline-first index.html dashboard for a collection titled "end_child_hunger_atlas".
+AUDIENCE: Policymakers, public institutions, NGOs, and civic leaders.
+STYLE: Evidence-based, non-coercive, clear metrics, actionable levers, transparent assumptions.
+SAFETY: No hidden telemetry. Local-only storage. Include a visible Zero-Harm + Anti-Inversion note. Sanitize inputs. Gentle rate limiting.
+
+DELIVERABLE REQUIREMENTS:
+- Fully standalone index.html (no external dependencies)
+- Online-first with offline fallback (service worker caching this file + local IndexedDB)
+- Sticky nav/TOC, collapsible sections, client-side search, print stylesheet, noscript fallback
+- Local-only optional analytics (disabled by default) + reset button
+- Gamification HUD (lightweight) + constellation-style state visualizer
+- Clear citations section with links (summarize, do not reproduce long excerpts)
+- Tooltips in code comments explaining extension points
+
+KNOWN SOURCES TO INCORPORATE (use these citations and expand with additional reputable sources):
+- 2026 review on intelligent optimization in sustainable food cold chain logistics (ScienceDirect): https://www.sciencedirect.com/science/article/abs/pii/S0924224426000658
+- FAO "Sustainable Food Cold Chains" PDF: https://openknowledge.fao.org/server/api/core/bitstreams/cf42e3c6-157e-4ea9-8873-8b3cc9242b96/content
+- FAO Policy Series: Food Loss & Food Waste (includes UNEP 2024 stats): https://www.fao.org/policy-support/policy-themes/food-loss-and-food-waste/fao-policy-series--food-loss---food-waste
+- UNFCCC note on food loss/waste emissions: https://unfccc.int/news/food-loss-and-waste-account-for-8-10-of-annual-global-greenhouse-gas-emissions-cost-usd-1-trillion
+- WFP "Route The Meals" optimization tool: https://innovation.wfp.org/project/route-meals
+- OECD-FAO Agricultural Outlook 2025–2034: https://www.oecd.org/en/publications/2025/07/oecd-fao-agricultural-outlook-2025-2034_3eb15914.html
+- BCG: "Cost of Resilience" supply chain challenge (2025): https://www.bcg.com/publications/2025/cost-resilience-new-supply-chain-challenge
+
+IMPORTANT: Add "and more" by scouring additional cross-domain sources:
+- peer-reviewed ops research (vehicle routing, network design)
+- humanitarian logistics and school meal logistics
+- cold chain energy + maintenance + reliability research
+- food loss/waste measurement standards and databases
+- climate disruption impacts on food systems and logistics resilience
+Use short, policy-friendly summaries and link them.`;
+
+      $("#prompt_orientation").textContent = sanitize(
+        `${baseContext}
+
+MODULE: 00_Orientation_Gateway
+TASK:
+1) Write an orientation dashboard that explains the atlas concept, what files exist, how to use them, and how to interpret metrics.
+2) Include a "Policy-Ready Brief" section: how to present this to a ministry or council.
+3) Include a "Data Later" section: explain how to plug in CSV/JSON later without breaking offline-first.
+4) Include a "Zero-Harm" section emphasizing transparency and non-coercion.
+OUTPUT: A complete index.html for the orientation module.`
+      );
+
+      $("#prompt_evidence").textContent = sanitize(
+        `${baseContext}
+
+MODULE: 01_Evidence_Map_Dashboard
+TASK:
+Build a dashboard that maps each theme to:
+- strongest evidence points
+- key metrics
+- policy levers
+- implementation barriers
+- minimum viable pilot design
+Include a "Causal Path" diagram section (simple SVG or canvas) showing how logistics improvements reduce child hunger.
+OUTPUT: A complete index.html for the evidence map.`
+      );
+
+      $("#prompt_coldchain").textContent = sanitize(
+        `${baseContext}
+
+MODULE: 02_Cold_Chain_Policy_Console
+TASK:
+Create a cold chain dashboard that:
+- explains cold chain as a systems optimization problem (monitoring + routing + energy + maintenance)
+- lists key failure modes (temperature deviation, equipment failure, transport delays, energy inefficiency)
+- provides a policy procurement checklist and maintenance capacity plan
+- includes a calculator for "cost per protected calorie" and "emissions per protected kg"
+- includes a pilot blueprint for 90 days (site selection, KPIs, data collection)
+Add citations to FAO cold chains PDF and the 2026 review. Expand with additional reputable sources.
+OUTPUT: A complete index.html for the cold chain module.`
+      );
+
+      $("#prompt_losswaste").textContent = sanitize(
+        `${baseContext}
+
+MODULE: 03_Loss_Waste_Reduction_Dashboard
+TASK:
+Create a dashboard that separates:
+(A) pre-retail food loss and (B) retail/household waste.
+Include:
+- stage-by-stage interventions and "fast ROI" options
+- measurement section (what to track, how to estimate without perfect data)
+- policy levers (standards, labeling clarity, donation routing, cold chain upgrades)
+- climate co-benefits narrative (UNFCCC framing) without overclaiming
+Expand with additional reputable sources on FLW measurement and interventions.
+OUTPUT: A complete index.html for the loss/waste module.`
+      );
+
+      $("#prompt_routing").textContent = sanitize(
+        `${baseContext}
+
+MODULE: 04_Routing_Network_Optimization_Console
+TASK:
+Build a routing + network design console that:
+- explains routing optimization in plain language
+- includes scenario toggles: fuel price spike, road closure, extreme weather day, demand surge
+- provides "coverage gap" mapping logic (offline demo with mock data; show how real data would plug in)
+- references WFP Route The Meals as an applied example, plus ops research sources (VRP, facility location)
+Add a section: "School Meals Logistics as Critical Infrastructure".
+OUTPUT: A complete index.html for the routing module.`
+      );
+
+      $("#prompt_resilience").textContent = sanitize(
+        `${baseContext}
+
+MODULE: 05_Resilience_ROI_Calculator
+TASK:
+Build a dashboard that turns resilience into budget language:
+- avoided cost model (emergency procurement, health impacts, absenteeism, unrest risk)
+- supplier diversity index, buffer stock policy, contingency routing score
+- a simple ROI calculator with assumptions clearly shown and editable
+Use BCG framing for decision language, but expand with academic/public sector resilience sources.
+OUTPUT: A complete index.html for the resilience module.`
+      );
+
+      $("#prompt_outlook").textContent = sanitize(
+        `${baseContext}
+
+MODULE: 06_Macro_Outlook_Scenario_Tracker
+TASK:
+Build a dashboard that:
+- summarizes OECD-FAO outlook scenario framing (nutrition/hunger outcomes + productivity conditions)
+- translates macro scenarios into local actionable levers (school meals, procurement, storage, transport)
+- includes a "policy timeline" planner (quarterly milestones)
+Expand with reputable sources on climate-driven disruption and food security projections.
+OUTPUT: A complete index.html for the macro outlook module.`
+      );
+    }
+
+    // ---------- Storage load/save ----------
+    async function loadState(){
+      try{
+        const saved = await DB.get("state_v1");
+        if (saved && typeof saved === "object"){
+          Object.assign(state, saved);
+        }
+      }catch(e){}
+      // Apply loaded
+      setLastSave(state.lastSave);
+      notesText.value = state.notes || "";
+      analyticsToggle.checked = !!state.analyticsEnabled;
+
+      // Restore checkboxes
+      document.querySelectorAll(".chk").forEach(chk=>{
+        const node = chk.getAttribute("data-node");
+        chk.checked = !!state.checks[node];
+      });
+      recalcXpFromChecks();
+      updateHud();
+      drawConstellation();
+      updateAnalyticsDump();
+    }
+
+    function recalcXpFromChecks(){
+      let xp = 0;
+      document.querySelectorAll(".chk").forEach(chk=>{
+        if (chk.checked) xp += Number(chk.getAttribute("data-xp") || 0);
+      });
+      state.xp = xp;
+    }
+
+    async function saveState(){
+      try{
+        const ts = Date.now();
+        setLastSave(ts);
+        state.lastSave = ts;
+        await DB.set("state_v1", state);
+      }catch(e){}
+    }
+
+    function updateAnalyticsDump(){
+      analyticsDump.textContent = sanitize(JSON.stringify({
+        enabled: !!state.analyticsEnabled,
+        counters: state.analytics,
+        lastSave: state.lastSave ? new Date(state.lastSave).toISOString() : null
+      }, null, 2));
+    }
+
+    // ---------- Optional local analytics ----------
+    function bumpAnalytic(key){
+      if (!state.analyticsEnabled) return;
+      if (!state.analytics[key]) state.analytics[key] = 0;
+      state.analytics[key] += 1;
+      updateAnalyticsDump();
+      saveState();
+    }
+
+    // ---------- Reset (privacy wipe) ----------
+    async function wipeAll(){
+      // Clear IndexedDB
+      await DB.clear();
+
+      // Clear caches (service worker)
+      if (window.caches){
+        const keys = await caches.keys();
+        await Promise.all(keys.map(k => caches.delete(k)));
+      }
+
+      // Best-effort unregister SW
+      if ("serviceWorker" in navigator){
+        const regs = await navigator.serviceWorker.getRegistrations();
+        await Promise.all(regs.map(r => r.unregister()));
+      }
+
+      // Reload
+      location.reload();
+    }
+
+    // ---------- Service Worker (inline via Blob) ----------
+    async function setupSW(){
+      if (!("serviceWorker" in navigator) || !window.Blob) return;
+
+      const swCode = `
+        const CACHE = "end_child_hunger_atlas_cache_v1";
+        self.addEventListener("install", (e) => {
+          e.waitUntil((async()=>{
+            const cache = await caches.open(CACHE);
+            // Cache the current HTML shell.
+            try{
+              const res = await fetch(self.location.href, {cache: "no-store"});
+              await cache.put(self.location.href, res.clone());
+            }catch(err){}
+            self.skipWaiting();
+          })());
+        });
+        self.addEventListener("activate", (e) => {
+          e.waitUntil((async()=>{
+            const keys = await caches.keys();
+            await Promise.all(keys.map(k => k === CACHE ? null : caches.delete(k)));
+            self.clients.claim();
+          })());
+        });
+        self.addEventListener("fetch", (e) => {
+          const req = e.request;
+          // Only handle GET
+          if (req.method !== "GET") return;
+          e.respondWith((async()=>{
+            const cache = await caches.open(CACHE);
+            const cached = await cache.match(req.url);
+            try{
+              const fresh = await fetch(req);
+              cache.put(req.url, fresh.clone());
+              return fresh;
+            }catch(err){
+              return cached || new Response("Offline and not cached.", {status: 503, headers: {"Content-Type":"text/plain"}});
+            }
+          })());
+        });
+      `.trim();
+
+      try{
+        const blob = new Blob([swCode], {type:"text/javascript"});
+        const url = URL.createObjectURL(blob);
+        await navigator.serviceWorker.register(url);
+      }catch(e){}
+    }
+
+    // ---------- Events ----------
+    function hookEvents(){
+      // Splash
+      let progress = 0;
+      const tick = () => {
+        progress = Math.min(100, progress + (Math.random()*18 + 8));
+        splashBar.style.width = progress + "%";
+        if (progress >= 100) return;
+        setTimeout(tick, 220);
+      };
+      tick();
+
+      enterBtn.addEventListener("click", ()=>{
+        splash.classList.add("hide");
+        bumpAnalytic("opens");
+      });
+
+      // Keyboard shortcuts
+      window.addEventListener("keydown", (e)=>{
+        if (e.key === "/" && document.activeElement !== q){
+          e.preventDefault();
+          q.focus();
+        }
+        if ((e.key === "p" || e.key === "P") && (e.ctrlKey || e.metaKey)){
+          // Let browser handle
+          return;
+        }
+        if (e.key === "P" && !e.ctrlKey && !e.metaKey){
+          // Print shortcut without ctrl (friendly)
+          window.print();
+        }
+      });
+
+      // Search
+      q.addEventListener("input", ()=>{
+        if (!Rate(35)) return;
+        applySearch(q.value);
+        bumpAnalytic("searches");
+      });
+
+      // Net state
+      window.addEventListener("online", setNetUI);
+      window.addEventListener("offline", setNetUI);
+
+      // Checkboxes
+      document.querySelectorAll(".chk").forEach(chk=>{
+        chk.addEventListener("change", async ()=>{
+          const node = chk.getAttribute("data-node");
+          state.checks[node] = chk.checked;
+          recalcXpFromChecks();
+          updateHud();
+          drawConstellation();
+          bumpAnalytic("toggles");
+          await saveState();
+        });
+      });
+
+      // Notes
+      toggleNotesBtn.addEventListener("click", ()=>{
+        notesSec.classList.toggle("hidden");
+        bumpAnalytic("toggles");
+      });
+      saveNotesBtn.addEventListener("click", async ()=>{
+        state.notes = sanitize(notesText.value);
+        await saveState();
+      });
+      exportNotesBtn.addEventListener("click", ()=>{
+        const payload = {
+          exportedAt: new Date().toISOString(),
+          notes: sanitize(notesText.value),
+          checks: state.checks,
+          xp: state.xp
+        };
+        const blob = new Blob([JSON.stringify(payload, null, 2)], {type:"application/json"});
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "end_child_hunger_atlas_notes.json";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      });
+
+      // Analytics
+      toggleAnalyticsBtn.addEventListener("click", ()=>{
+        analyticsSec.classList.toggle("hidden");
+        bumpAnalytic("toggles");
+      });
+      analyticsToggle.addEventListener("change", async ()=>{
+        state.analyticsEnabled = analyticsToggle.checked;
+        updateAnalyticsDump();
+        await saveState();
+      });
+      resetAnalyticsBtn.addEventListener("click", async ()=>{
+        state.analytics = { searches:0, toggles:0, prints:0, opens:0 };
+        updateAnalyticsDump();
+        await saveState();
+      });
+
+      // Print
+      printBtn.addEventListener("click", ()=>{
+        bumpAnalytic("prints");
+        window.print();
+      });
+
+      // HUD collapse
+      hudToggle.addEventListener("click", ()=>{
+        const hidden = hud.getAttribute("data-hidden") === "1";
+        if (hidden){
+          hud.setAttribute("data-hidden","0");
+          hud.style.opacity = "1";
+          hud.style.pointerEvents = "auto";
+          hudToggle.textContent = "Hide";
+        }else{
+          hud.setAttribute("data-hidden","1");
+          hud.style.opacity = ".28";
+          hud.style.pointerEvents = "auto";
+          hudToggle.textContent = "Show";
+        }
+      });
+
+      // Reset
+      resetBtn.addEventListener("click", ()=>{
+        const ok = confirm("Reset local data (IndexedDB + cache) on this device? This cannot be undone.");
+        if (ok) wipeAll();
+      });
+
+      // Parallax
+      const nebula = $("#nebula");
+      window.addEventListener("mousemove", (e)=>{
+        if (!Rate(16)) return;
+        const x = (e.clientX / window.innerWidth) - 0.5;
+        const y = (e.clientY / window.innerHeight) - 0.5;
+        nebula.style.transform = `translate3d(${x*14}px, ${y*10}px, 0)`;
+        drawStars(x*18, y*12);
+      });
+
+      window.addEventListener("resize", ()=>{
+        initStars();
+        drawStars(0,0);
+        drawConstellation();
+      });
+    }
+
+    // ---------- Init ----------
+    (async function init(){
+      // Count sources in table
+      srcCountEl.textContent = String(document.querySelectorAll("#sources tbody tr").length);
+
+      buildPrompts();
+      setNetUI();
+      initStars();
+      drawStars(0,0);
+      drawConstellation();
+
+      await loadState();
+      await setupSW();
+      hookEvents();
+
+      // Hide splash automatically after a moment (but keep button)
+      setTimeout(()=>{ splashBar.style.width = "100%"; }, 900);
+      setTimeout(()=>{ splash.classList.add("hide"); }, 1450);
+
+      // Save periodically (gentle)
+      setInterval(()=>{ saveState(); }, 12000);
+    })();
+  </script>
+</body>
+</html>
