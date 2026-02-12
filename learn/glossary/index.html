@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Glossary of key terms in child nutrition: definitions for technical concepts, programs, measurements, and research methods in accessible language.">
+    <title>Glossary | Feed Children ASAP Atlas</title>
+    
+    <style>
+        /* ============================================
+           RESET & BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --earth-dark: #2d3e2f;
+            --earth-medium: #5a7c5e;
+            --earth-light: #8ba888;
+            --healing-green: #a8c5a0;
+            --warm-sand: #e8dcc4;
+            --soft-blue: #7a9eb8;
+            --neutral-gray: #6b7280;
+            --background-light: #f9f9f7;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --card-background: #ffffff;
+            --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --border-radius: 8px;
+            --transition-smooth: all 0.3s ease;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--background-light);
+            overflow-x: hidden;
+        }
+        
+        /* ============================================
+           TYPOGRAPHY
+           ============================================ */
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+        }
+        
+        h1 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            color: var(--earth-dark);
+        }
+        
+        h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--earth-medium);
+            margin-top: 3rem;
+        }
+        
+        h3 {
+            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+            color: var(--earth-medium);
+            margin-top: 2rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        strong {
+            color: var(--earth-dark);
+        }
+        
+        /* ============================================
+           LAYOUT
+           ============================================ */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        .top-nav {
+            background: var(--earth-dark);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .nav-home {
+            color: var(--warm-sand);
+            font-weight: 600;
+            font-size: 1.125rem;
+            text-decoration: none;
+        }
+        
+        .nav-home:hover {
+            color: var(--healing-green);
+        }
+        
+        .breadcrumb {
+            color: var(--warm-sand);
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+        
+        /* ============================================
+           HEADER
+           ============================================ */
+        header {
+            background: linear-gradient(135deg, var(--earth-medium) 0%, var(--soft-blue) 100%);
+            padding: 3rem 0 2rem;
+            color: white;
+        }
+        
+        .page-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.25);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 400;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* ============================================
+           SEARCH & FILTER
+           ============================================ */
+        .search-section {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .search-box {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            font-size: 1.05rem;
+            border: 2px solid var(--earth-light);
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            transition: var(--transition-smooth);
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--earth-medium);
+            box-shadow: 0 0 0 3px rgba(90, 124, 94, 0.1);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.25rem;
+            color: var(--neutral-gray);
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--earth-light);
+            background: white;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            color: var(--earth-medium);
+        }
+        
+        .filter-btn:hover {
+            border-color: var(--earth-medium);
+        }
+        
+        .filter-btn.active {
+            background: var(--earth-medium);
+            border-color: var(--earth-medium);
+            color: white;
+        }
+        
+        .results-count {
+            margin-top: 1rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        /* ============================================
+           ALPHABET NAV
+           ============================================ */
+        .alphabet-nav {
+            background: var(--background-light);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .alphabet-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .alphabet-link {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            line-height: 32px;
+            text-align: center;
+            border-radius: 50%;
+            text-decoration: none;
+            color: var(--earth-medium);
+            font-weight: 600;
+            transition: var(--transition-smooth);
+        }
+        
+        .alphabet-link:hover {
+            background: var(--earth-light);
+            color: white;
+        }
+        
+        .alphabet-link.disabled {
+            color: var(--neutral-gray);
+            opacity: 0.3;
+            cursor: default;
+        }
+        
+        .alphabet-link.disabled:hover {
+            background: none;
+        }
+        
+        /* ============================================
+           GLOSSARY ENTRIES
+           ============================================ */
+        .glossary-section {
+            margin: 3rem 0;
+        }
+        
+        .letter-header {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--earth-dark);
+            border-bottom: 3px solid var(--earth-medium);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .glossary-entries {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .glossary-entry {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-subtle);
+            transition: var(--transition-smooth);
+        }
+        
+        .glossary-entry.hidden {
+            display: none;
+        }
+        
+        .glossary-entry:hover {
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .entry-term {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--earth-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .entry-category {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+        }
+        
+        .category-measurement { background: var(--soft-blue); color: white; }
+        .category-condition { background: var(--healing-green); color: white; }
+        .category-intervention { background: var(--earth-medium); color: white; }
+        .category-research { background: #7a6b9e; color: white; }
+        .category-program { background: #e8a87c; color: var(--earth-dark); }
+        
+        .entry-definition {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 0.75rem;
+        }
+        
+        .entry-also-known {
+            color: var(--neutral-gray);
+            font-size: 0.9rem;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+        
+        .entry-example {
+            background: var(--background-light);
+            padding: 0.75rem;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-top: 0.75rem;
+        }
+        
+        .entry-example strong {
+            color: var(--earth-medium);
+        }
+        
+        /* ============================================
+           NO RESULTS
+           ============================================ */
+        .no-results {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--neutral-gray);
+        }
+        
+        .no-results-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .search-section {
+                padding: 1.5rem;
+            }
+            
+            .filter-buttons {
+                flex-direction: column;
+            }
+            
+            .filter-btn {
+                width: 100%;
+            }
+            
+            .alphabet-links {
+                gap: 0.25rem;
+            }
+            
+            .alphabet-link {
+                width: 28px;
+                height: 28px;
+                line-height: 28px;
+                font-size: 0.875rem;
+            }
+        }
+        
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: var(--earth-dark);
+            color: var(--warm-sand);
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            text-align: center;
+            font-size: 0.875rem;
+            opacity: 0.9;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .footer-content a {
+            color: var(--healing-green);
+            text-decoration: none;
+        }
+        
+        .footer-content a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="top-nav">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-home">← Feed Children ASAP Atlas</a>
+            <span class="breadcrumb">Learn → Glossary</span>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <span class="page-badge">📚 Reference</span>
+            <h1>Glossary</h1>
+            <p class="subtitle">
+                Key terms and concepts in child nutrition, explained in accessible language. 
+                Technical precision without unnecessary jargon.
+            </p>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <div class="container">
+            
+            <!-- SEARCH & FILTER -->
+            <div class="search-section">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input 
+                        type="text" 
+                        class="search-input" 
+                        id="search-input" 
+                        placeholder="Search terms... (e.g., 'stunting', 'CMAM', 'z-score')"
+                    >
+                </div>
+                
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-category="all">All Terms</button>
+                    <button class="filter-btn" data-category="measurement">Measurements</button>
+                    <button class="filter-btn" data-category="condition">Conditions</button>
+                    <button class="filter-btn" data-category="intervention">Interventions</button>
+                    <button class="filter-btn" data-category="research">Research Methods</button>
+                    <button class="filter-btn" data-category="program">Programs</button>
+                </div>
+                
+                <div class="results-count" id="results-count"></div>
+            </div>
+
+            <!-- ALPHABET NAVIGATION -->
+            <div class="alphabet-nav">
+                <div class="alphabet-links" id="alphabet-nav"></div>
+            </div>
+
+            <!-- GLOSSARY ENTRIES -->
+            <div id="glossary-content"></div>
+            
+            <!-- NO RESULTS -->
+            <div class="no-results" id="no-results" style="display: none;">
+                <div class="no-results-icon">🔍</div>
+                <p><strong>No terms found</strong></p>
+                <p>Try a different search term or category filter.</p>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <p>
+                <strong>Glossary</strong> | Part of Feed Children ASAP Atlas<br>
+                <a href="../governance.html">Zero Harm Policy</a> • 
+                <a href="../about.html">About This Project</a> • 
+                <a href="../index.html">Return to Atlas</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // ============================================
+        // GLOSSARY DATA
+        // ============================================
+        const glossaryTerms = [
+            // A
+            {
+                term: 'Acute Malnutrition',
+                category: 'condition',
+                definition: 'Recent and rapid weight loss or failure to gain weight, measured by low weight-for-height or low mid-upper arm circumference (MUAC). Indicates current nutritional stress, often from illness or food shortage.',
+                alsoKnown: 'Also called: wasting',
+                example: 'A child with acute malnutrition has become thin recently—you can see their ribs. This is different from stunting, which develops over months or years.'
+            },
+            {
+                term: 'Anthropometry',
+                category: 'measurement',
+                definition: 'The measurement of the human body, especially height, weight, and body circumference. Primary method for assessing nutritional status in children.',
+                example: 'Anthropometric measurements include weighing a child on a scale, measuring their height with a stadiometer, and measuring arm circumference with a MUAC tape.'
+            },
+            
+            // B
+            {
+                term: 'Biofortification',
+                category: 'intervention',
+                definition: 'Breeding crops to have higher levels of vitamins and minerals through conventional breeding or genetic modification. Increases nutrient content of staple foods.',
+                example: 'Orange sweet potato has been biofortified to contain more vitamin A. Farmers grow it just like regular sweet potato, but it provides more nutrition.'
+            },
+            {
+                term: 'Breastfeeding, Exclusive',
+                category: 'intervention',
+                definition: 'Feeding an infant only breastmilk (no water, no other foods or liquids) for the first 6 months of life. Recommended by WHO as optimal infant feeding.',
+                example: 'Exclusive breastfeeding means the baby gets only breastmilk—not even water—until 6 months old. After 6 months, continue breastfeeding while adding other foods.'
+            },
+            
+            // C
+            {
+                term: 'CMAM',
+                category: 'program',
+                definition: 'Community-Based Management of Acute Malnutrition. Treatment program for severely malnourished children that takes place in communities and health centers rather than hospitals, using ready-to-use therapeutic food.',
+                alsoKnown: 'Also called: community-based therapeutic care (CTC)',
+                example: 'CMAM programs allow most children with severe malnutrition to be treated at home with weekly check-ins, rather than being hospitalized for weeks.'
+            },
+            {
+                term: 'Complementary Feeding',
+                category: 'intervention',
+                definition: 'The process of introducing foods and liquids in addition to breastmilk, starting around 6 months of age. Critical period for preventing malnutrition.',
+                example: 'Complementary feeding begins at 6 months with soft foods like porridge, while continuing to breastfeed. By 12 months, children eat family foods.'
+            },
+            
+            // D
+            {
+                term: 'Dietary Diversity',
+                category: 'measurement',
+                definition: 'The number of different food groups consumed over a given period (usually 24 hours). Indicator of diet quality and micronutrient adequacy.',
+                example: 'A child with good dietary diversity ate foods from 5+ groups yesterday: grains, legumes, vegetables, animal foods, and fruit. A child eating only maize porridge has low dietary diversity.'
+            },
+            
+            // E
+            {
+                term: 'Efficacy',
+                category: 'research',
+                definition: 'Whether an intervention works under ideal conditions (controlled research settings). Contrast with effectiveness, which is performance in real-world conditions.',
+                example: 'A nutrition supplement may have high efficacy in a clinical trial with perfect compliance, but lower effectiveness when distributed through rural health posts.'
+            },
+            {
+                term: 'Effectiveness',
+                category: 'research',
+                definition: 'How well an intervention works in real-world conditions with typical implementation constraints. More relevant than efficacy for program planning.',
+                example: 'Cash transfers are effective at improving food security when markets function and households can buy nutritious foods, but less effective in remote areas with limited food availability.'
+            },
+            
+            // F
+            {
+                term: 'Food Fortification',
+                category: 'intervention',
+                definition: 'Adding vitamins and minerals to commonly consumed foods during processing (e.g., adding iron to flour, iodine to salt, vitamin A to cooking oil).',
+                example: 'Most table salt is fortified with iodine to prevent iodine deficiency and goiter. Consumers get the benefit without changing their diet.'
+            },
+            
+            // G
+            {
+                term: 'Growth Monitoring',
+                category: 'program',
+                definition: 'Regular measurement and recording of a child\'s weight (and sometimes height) to track growth over time. Used to identify children who are not growing well.',
+                example: 'At monthly clinic visits, a child is weighed and the weight is plotted on a growth chart. If the line goes flat or down, it signals a problem.'
+            },
+            
+            // H
+            {
+                term: 'HAZ',
+                category: 'measurement',
+                definition: 'Height-for-Age Z-score. Statistical measure of how far a child\'s height deviates from the median height for their age. Primary measure of stunting.',
+                alsoKnown: 'Also called: length-for-age z-score (LAZ) for children under 2',
+                example: 'A HAZ of -2.5 means a child is 2.5 standard deviations below the median height for their age—they are stunted.'
+            },
+            
+            // I
+            {
+                term: 'IYCF',
+                category: 'program',
+                definition: 'Infant and Young Child Feeding. Practices for feeding children from birth to 2 years, including breastfeeding, complementary feeding, and responsive feeding.',
+                example: 'IYCF counseling teaches caregivers when to start foods, what foods to offer, how often to feed, and how to encourage eating.'
+            },
+            
+            // L
+            {
+                term: 'Lipid-Based Nutrient Supplements (LNS)',
+                category: 'intervention',
+                definition: 'Fortified food products containing fats, proteins, carbohydrates, vitamins and minerals. Used for prevention or treatment of malnutrition. Includes RUTF.',
+                example: 'Small-quantity LNS (like Nutributter) are given daily to prevent malnutrition. Large-quantity LNS (like Plumpy\'Nut) treat severe malnutrition.'
+            },
+            
+            // M
+            {
+                term: 'MAM',
+                category: 'condition',
+                definition: 'Moderate Acute Malnutrition. Weight-for-height between -2 and -3 z-scores, or MUAC between 115mm and 125mm. Less severe than SAM but requires treatment.',
+                example: 'A child with MAM is noticeably thin but not as severely wasted as a child with SAM. They need supplementary feeding to prevent progression to SAM.'
+            },
+            {
+                term: 'Micronutrients',
+                category: 'measurement',
+                definition: 'Vitamins and minerals needed in small amounts for normal growth and development. Common deficiencies include vitamin A, iron, zinc, and iodine.',
+                alsoKnown: 'Also called: vitamins and minerals',
+                example: 'Micronutrient deficiencies are often called "hidden hunger" because a child may get enough calories but lack specific vitamins or minerals.'
+            },
+            {
+                term: 'MUAC',
+                category: 'measurement',
+                definition: 'Mid-Upper Arm Circumference. Measurement of the circumference of the left upper arm, used to identify acute malnutrition. Easy, cheap screening tool.',
+                example: 'MUAC tape color codes make screening simple: green (healthy), yellow (MAM), red (SAM). A measurement under 115mm indicates severe malnutrition.'
+            },
+            
+            // N
+            {
+                term: 'Nutrition-Sensitive',
+                category: 'program',
+                definition: 'Programs in other sectors (agriculture, WASH, social protection) that include nutrition considerations and are expected to improve nutrition outcomes, though that\'s not their primary goal.',
+                example: 'A nutrition-sensitive agriculture project promotes growing diverse vegetables, not just staple grains. This supports nutrition even though it\'s primarily an agriculture project.'
+            },
+            {
+                term: 'Nutrition-Specific',
+                category: 'program',
+                definition: 'Interventions that directly address immediate causes of malnutrition (inadequate dietary intake or disease). Includes treatment, supplementation, feeding programs.',
+                example: 'Nutrition-specific interventions include treating SAM with RUTF, vitamin A supplementation, and nutrition counseling—all directly targeting nutrition.'
+            },
+            
+            // O
+            {
+                term: 'Oedema',
+                category: 'condition',
+                definition: 'Swelling caused by fluid accumulation, especially in feet and legs. Sign of severe malnutrition (kwashiorkor) regardless of weight. Medical emergency.',
+                alsoKnown: 'Spelling: edema (American English)',
+                example: 'A child with bilateral pitting oedema is severely malnourished even if they don\'t look thin. Press on their foot—if it leaves an indent, that\'s pitting oedema.'
+            },
+            
+            // P
+            {
+                term: 'Prevalence',
+                category: 'measurement',
+                definition: 'The proportion of a population that has a condition at a specific time. Usually expressed as a percentage.',
+                example: 'If 100 children are measured and 30 are stunted, the prevalence of stunting is 30%. This is different from incidence, which is new cases over time.'
+            },
+            
+            // R
+            {
+                term: 'RCT',
+                category: 'research',
+                definition: 'Randomized Controlled Trial. Research design where participants are randomly assigned to treatment or control groups. Gold standard for establishing causation.',
+                example: 'An RCT of school feeding would randomly assign some schools to receive feeding and others not, then compare outcomes. Random assignment helps ensure groups are comparable.'
+            },
+            {
+                term: 'RUTF',
+                category: 'intervention',
+                definition: 'Ready-to-Use Therapeutic Food. High-energy, fortified food paste for treating severe acute malnutrition. Most famous brand is Plumpy\'Nut. Can be eaten without preparation or water.',
+                example: 'RUTF packets contain 500 calories of peanut paste fortified with vitamins and minerals. A severely malnourished child eats 2-3 packets daily for 6-8 weeks.'
+            },
+            
+            // S
+            {
+                term: 'SAM',
+                category: 'condition',
+                definition: 'Severe Acute Malnutrition. Weight-for-height below -3 z-scores, MUAC below 115mm, or presence of bilateral pitting oedema. Life-threatening condition requiring immediate treatment.',
+                example: 'A child with SAM is extremely thin with visible ribs and wasted muscles. Without treatment, they have high risk of death from infection or organ failure.'
+            },
+            {
+                term: 'Stunting',
+                category: 'condition',
+                definition: 'Chronic malnutrition indicated by low height-for-age (below -2 z-scores). Results from prolonged inadequate nutrition and repeated illness. Largely irreversible after age 2.',
+                example: 'A stunted 3-year-old is significantly shorter than healthy children the same age. This reflects malnutrition and illness during pregnancy and the first 2 years of life.'
+            },
+            {
+                term: 'Supplementary Feeding',
+                category: 'program',
+                definition: 'Provision of extra food (in addition to normal diet) to prevent or treat moderate malnutrition. Less intensive than therapeutic feeding for SAM.',
+                example: 'Supplementary feeding might provide fortified blended flour or biscuits to children with moderate malnutrition to help them gain weight.'
+            },
+            
+            // T
+            {
+                term: 'Therapeutic Feeding',
+                category: 'program',
+                definition: 'Specialized feeding for severely malnourished children using specific nutrient-dense foods (RUTF or F-75/F-100 formula). Different from supplementary feeding, which is for moderate malnutrition.',
+                example: 'Therapeutic feeding uses RUTF for most children with SAM. Very sick children may need F-75 milk formula in hospital before transitioning to RUTF.'
+            },
+            
+            // U
+            {
+                term: 'Undernutrition',
+                category: 'condition',
+                definition: 'Umbrella term for insufficient intake of energy and/or nutrients. Includes stunting, wasting, underweight, and micronutrient deficiencies.',
+                example: 'Undernutrition can manifest as stunting (too short), wasting (too thin), underweight (low weight-for-age), or vitamin deficiencies—often multiple forms coexist.'
+            },
+            {
+                term: 'Underweight',
+                category: 'condition',
+                definition: 'Low weight-for-age (below -2 z-scores). Composite indicator reflecting both wasting and stunting. Less specific than height or weight-for-height measures.',
+                example: 'An underweight child weighs less than expected for their age, but this could be because they\'re stunted, wasted, or both. More specific measures help diagnose the problem.'
+            },
+            
+            // W
+            {
+                term: 'WASH',
+                category: 'program',
+                definition: 'Water, Sanitation, and Hygiene. Sector addressing access to clean water, safe disposal of waste, and hygiene behaviors. Critical for preventing diarrhea and improving nutrition.',
+                example: 'WASH interventions include building latrines, protecting water sources, and promoting handwashing with soap at critical times (after toilet, before eating).'
+            },
+            {
+                term: 'Wasting',
+                category: 'condition',
+                definition: 'Low weight-for-height indicating acute malnutrition. Child is too thin for their height. Can develop rapidly during illness or food shortage.',
+                alsoKnown: 'Also called: acute malnutrition',
+                example: 'Wasting is visible thinness—loose skin, visible ribs, wasted muscles. Unlike stunting, wasting can improve quickly with treatment.'
+            },
+            {
+                term: 'WHZ',
+                category: 'measurement',
+                definition: 'Weight-for-Height Z-score. Measure of how far a child\'s weight deviates from expected weight for their height. Primary measure of acute malnutrition/wasting.',
+                alsoKnown: 'Also called: weight-for-length z-score (WLZ) for children under 2',
+                example: 'A WHZ of -3 indicates severe wasting. The child weighs much less than expected for their height, even if their height is normal.'
+            },
+            
+            // Z
+            {
+                term: 'Z-score',
+                category: 'measurement',
+                definition: 'Statistical measure of how far a measurement deviates from the median of a reference population, expressed in standard deviations. Used to classify malnutrition.',
+                example: 'A z-score of -2 means the child is 2 standard deviations below the median. Below -2 is moderate malnutrition; below -3 is severe malnutrition.'
+            }
+        ];
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+        let currentFilter = 'all';
+        let currentSearch = '';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeGlossary();
+            setupEventListeners();
+        });
+
+        // ============================================
+        // SETUP
+        // ============================================
+        function initializeGlossary() {
+            renderAlphabetNav();
+            renderGlossary();
+            updateResultsCount();
+        }
+
+        function setupEventListeners() {
+            // Search input
+            document.getElementById('search-input').addEventListener('input', (e) => {
+                currentSearch = e.target.value.toLowerCase();
+                filterAndRender();
+            });
+
+            // Filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentFilter = btn.dataset.category;
+                    filterAndRender();
+                });
+            });
+        }
+
+        // ============================================
+        // ALPHABET NAVIGATION
+        // ============================================
+        function renderAlphabetNav() {
+            const container = document.getElementById('alphabet-nav');
+            const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+            
+            // Get letters that have terms
+            const lettersWithTerms = new Set(
+                glossaryTerms.map(term => term.term.charAt(0).toUpperCase())
+            );
+            
+            alphabet.forEach(letter => {
+                const link = document.createElement('a');
+                link.className = 'alphabet-link';
+                link.textContent = letter;
+                
+                if (lettersWithTerms.has(letter)) {
+                    link.href = `#letter-${letter}`;
+                } else {
+                    link.classList.add('disabled');
+                }
+                
+                container.appendChild(link);
+            });
+        }
+
+        // ============================================
+        // RENDERING
+        // ============================================
+        function filterAndRender() {
+            const filtered = glossaryTerms.filter(term => {
+                const matchesCategory = currentFilter === 'all' || term.category === currentFilter;
+                const matchesSearch = !currentSearch || 
+                    term.term.toLowerCase().includes(currentSearch) ||
+                    term.definition.toLowerCase().includes(currentSearch) ||
+                    (term.alsoKnown && term.alsoKnown.toLowerCase().includes(currentSearch));
+                
+                return matchesCategory && matchesSearch;
+            });
+            
+            renderGlossary(filtered);
+            updateResultsCount(filtered.length);
+        }
+
+        function renderGlossary(terms = glossaryTerms) {
+            const container = document.getElementById('glossary-content');
+            const noResults = document.getElementById('no-results');
+            
+            if (terms.length === 0) {
+                container.innerHTML = '';
+                noResults.style.display = 'block';
+                return;
+            }
+            
+            noResults.style.display = 'none';
+            
+            // Group by first letter
+            const grouped = {};
+            terms.forEach(term => {
+                const letter = term.term.charAt(0).toUpperCase();
+                if (!grouped[letter]) grouped[letter] = [];
+                grouped[letter].push(term);
+            });
+            
+            // Sort letters
+            const letters = Object.keys(grouped).sort();
+            
+            let html = '';
+            letters.forEach(letter => {
+                html += `
+                    <div class="glossary-section" id="letter-${letter}">
+                        <div class="letter-header">${letter}</div>
+                        <div class="glossary-entries">
+                            ${grouped[letter].map(term => renderEntry(term)).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function renderEntry(term) {
+            const categoryLabels = {
+                measurement: 'Measurement',
+                condition: 'Condition',
+                intervention: 'Intervention',
+                research: 'Research Method',
+                program: 'Program/Service'
+            };
+            
+            return `
+                <div class="glossary-entry" data-term="${term.term.toLowerCase()}" data-category="${term.category}">
+                    <div class="entry-term">${term.term}</div>
+                    <span class="entry-category category-${term.category}">${categoryLabels[term.category]}</span>
+                    ${term.alsoKnown ? `<div class="entry-also-known">${term.alsoKnown}</div>` : ''}
+                    <div class="entry-definition">${term.definition}</div>
+                    ${term.example ? `
+                        <div class="entry-example">
+                            <strong>Example:</strong> ${term.example}
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        function updateResultsCount(count = glossaryTerms.length) {
+            const container = document.getElementById('results-count');
+            const total = glossaryTerms.length;
+            
+            if (currentSearch || currentFilter !== 'all') {
+                container.textContent = `Showing ${count} of ${total} terms`;
+            } else {
+                container.textContent = `${total} terms total`;
+            }
+        }
+
+        // Accessibility: Reduced motion support
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('*').forEach(el => {
+                el.style.animation = 'none';
+                el.style.transition = 'none';
+            });
+        }
+    </script>
+</body>
+</html>
