@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Data sources and datasets for child nutrition programming. Global nutrition data, country-level statistics, survey data, GIS resources, and data quality guidance.">
+    <title>Data & Datasets | Feed Children ASAP Atlas</title>
+    
+    <style>
+        /* ============================================
+           RESET & BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --earth-dark: #2d3e2f;
+            --earth-medium: #5a7c5e;
+            --earth-light: #8ba888;
+            --healing-green: #a8c5a0;
+            --warm-sand: #e8dcc4;
+            --soft-blue: #7a9eb8;
+            --data-purple: #7a6b9e;
+            --data-teal: #5a9e9e;
+            --neutral-gray: #6b7280;
+            --background-light: #f9f9f7;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --card-background: #ffffff;
+            --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --border-radius: 8px;
+            --transition-smooth: all 0.3s ease;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--background-light);
+            overflow-x: hidden;
+        }
+        
+        /* ============================================
+           TYPOGRAPHY
+           ============================================ */
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+        }
+        
+        h1 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            color: var(--earth-dark);
+        }
+        
+        h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--earth-medium);
+            margin-top: 3rem;
+        }
+        
+        h3 {
+            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+            color: var(--earth-medium);
+            margin-top: 2rem;
+        }
+        
+        h4 {
+            font-size: clamp(1.125rem, 2vw, 1.25rem);
+            color: var(--earth-dark);
+            margin-top: 1.5rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        ul, ol {
+            margin-bottom: 1rem;
+            margin-left: 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        strong {
+            color: var(--earth-dark);
+        }
+        
+        /* ============================================
+           LAYOUT
+           ============================================ */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        .top-nav {
+            background: var(--earth-dark);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .nav-home {
+            color: var(--warm-sand);
+            font-weight: 600;
+            font-size: 1.125rem;
+            text-decoration: none;
+        }
+        
+        .nav-home:hover {
+            color: var(--healing-green);
+        }
+        
+        .breadcrumb {
+            color: var(--warm-sand);
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+        
+        /* ============================================
+           HEADER
+           ============================================ */
+        header {
+            background: linear-gradient(135deg, var(--data-purple) 0%, var(--data-teal) 100%);
+            padding: 3rem 0 2rem;
+            color: white;
+        }
+        
+        .page-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.25);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 400;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* ============================================
+           CONTENT SECTIONS
+           ============================================ */
+        .content-section {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        /* ============================================
+           DATA CATEGORY CARDS
+           ============================================ */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .category-card {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 1.75rem;
+            box-shadow: var(--shadow-subtle);
+            transition: var(--transition-smooth);
+            border-top: 4px solid;
+            cursor: pointer;
+        }
+        
+        .category-card.nutrition { border-top-color: var(--data-purple); }
+        .category-card.demographic { border-top-color: var(--soft-blue); }
+        .category-card.geographic { border-top-color: var(--healing-green); }
+        .category-card.research { border-top-color: var(--data-teal); }
+        
+        .category-card:hover {
+            box-shadow: var(--shadow-medium);
+            transform: translateY(-2px);
+        }
+        
+        .category-icon {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 0.75rem;
+        }
+        
+        .category-title {
+            font-weight: 600;
+            color: var(--earth-dark);
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .category-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+        
+        .category-examples {
+            background: var(--background-light);
+            padding: 0.75rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        /* ============================================
+           DATA SOURCE CARDS
+           ============================================ */
+        .datasource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .datasource-card {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-subtle);
+            transition: var(--transition-smooth);
+            border-left: 6px solid;
+        }
+        
+        .datasource-card.global { border-left-color: var(--data-purple); }
+        .datasource-card.country { border-left-color: var(--soft-blue); }
+        .datasource-card.subnational { border-left-color: var(--healing-green); }
+        
+        .datasource-card:hover {
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .datasource-header {
+            margin-bottom: 1rem;
+        }
+        
+        .datasource-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--earth-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .datasource-subtitle {
+            color: var(--neutral-gray);
+            font-size: 0.9rem;
+        }
+        
+        .datasource-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+        }
+        
+        .datasource-info {
+            background: var(--background-light);
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+        
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .info-row:last-child {
+            border-bottom: none;
+        }
+        
+        .info-label {
+            color: var(--neutral-gray);
+        }
+        
+        .info-value {
+            color: var(--earth-dark);
+            font-weight: 500;
+        }
+        
+        .datasource-link {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--data-purple);
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition-smooth);
+        }
+        
+        .datasource-link:hover {
+            background: var(--data-teal);
+        }
+        
+        /* ============================================
+           DATA QUALITY BOX
+           ============================================ */
+        .quality-box {
+            background: linear-gradient(135deg, rgba(122, 107, 158, 0.1) 0%, rgba(90, 158, 158, 0.1) 100%);
+            border: 2px solid var(--data-purple);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .quality-box h3 {
+            color: var(--data-purple);
+            margin-top: 0;
+        }
+        
+        .quality-checklist {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .quality-item {
+            background: white;
+            padding: 1.25rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .quality-icon {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .quality-title {
+            font-weight: 600;
+            color: var(--earth-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .quality-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        /* ============================================
+           CALLOUT BOXES
+           ============================================ */
+        .callout {
+            border-left: 4px solid;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        .callout.info {
+            background: rgba(122, 158, 184, 0.1);
+            border-left-color: var(--soft-blue);
+        }
+        
+        .callout.warning {
+            background: rgba(232, 188, 124, 0.1);
+            border-left-color: #e8bc7c;
+        }
+        
+        .callout.success {
+            background: rgba(168, 197, 160, 0.1);
+            border-left-color: var(--healing-green);
+        }
+        
+        .callout h4 {
+            margin-top: 0;
+        }
+        
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 1.5rem;
+            }
+            
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .datasource-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .quality-checklist {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: var(--earth-dark);
+            color: var(--warm-sand);
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            text-align: center;
+            font-size: 0.875rem;
+            opacity: 0.9;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .footer-content a {
+            color: var(--healing-green);
+            text-decoration: none;
+        }
+        
+        .footer-content a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="top-nav">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-home">← Feed Children ASAP Atlas</a>
+            <span class="breadcrumb">Data & Datasets</span>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <span class="page-badge">📊 Data Resources</span>
+            <h1>Data & Datasets</h1>
+            <p class="subtitle">
+                Key data sources for nutrition program planning, targeting, and evaluation. Global databases, 
+                country surveys, demographic data, and geographic resources.
+            </p>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <div class="container">
+            
+            <!-- INTRODUCTION -->
+            <div class="content-section">
+                <h2>Why Data Matters</h2>
+                <p>
+                    <strong>Good programs start with good data.</strong> Before designing interventions, you need 
+                    to understand: Where is malnutrition concentrated? What are the underlying causes? Who is most 
+                    vulnerable? What resources exist?
+                </p>
+                
+                <p>
+                    This page catalogs the most useful data sources for nutrition programming. Some are global 
+                    databases you can access online. Others are country-level surveys you'll need to request. 
+                    All are more reliable than guessing.
+                </p>
+                
+                <div class="callout warning">
+                    <h4>⚠️ Data Limitations</h4>
+                    <p><strong>No dataset is perfect.</strong> Survey data may be 2-5 years old. Coverage is 
+                    often incomplete. Methods vary across countries. Use data as a starting point, not gospel. 
+                    Validate with local knowledge and recent rapid assessments.</p>
+                </div>
+            </div>
+
+            <!-- DATA CATEGORIES -->
+            <div class="content-section">
+                <h2>What Kind of Data Do You Need?</h2>
+                
+                <div class="category-grid">
+                    <div class="category-card nutrition">
+                        <span class="category-icon">📈</span>
+                        <div class="category-title">Nutrition Data</div>
+                        <div class="category-description">
+                            Malnutrition prevalence, trends, and coverage of nutrition interventions. Core data 
+                            for program planning and targeting.
+                        </div>
+                        <div class="category-examples">
+                            <strong>Examples:</strong> Stunting rates, wasting prevalence, micronutrient 
+                            deficiencies, IYCF practices, treatment coverage
+                        </div>
+                    </div>
+                    
+                    <div class="category-card demographic">
+                        <span class="category-icon">👥</span>
+                        <div class="category-title">Demographic Data</div>
+                        <div class="category-description">
+                            Population characteristics, household composition, poverty levels. Essential for 
+                            calculating program size and targeting vulnerable groups.
+                        </div>
+                        <div class="category-examples">
+                            <strong>Examples:</strong> Population size, age structure, poverty rates, household 
+                            characteristics, maternal education
+                        </div>
+                    </div>
+                    
+                    <div class="category-card geographic">
+                        <span class="category-icon">🗺️</span>
+                        <div class="category-title">Geographic Data</div>
+                        <div class="category-description">
+                            Maps, administrative boundaries, facility locations, accessibility. Needed for 
+                            logistics, site selection, and coverage planning.
+                        </div>
+                        <div class="category-examples">
+                            <strong>Examples:</strong> Health facility maps, road networks, district boundaries, 
+                            population density, travel times
+                        </div>
+                    </div>
+                    
+                    <div class="category-card research">
+                        <span class="category-icon">🔬</span>
+                        <div class="category-title">Research & Evidence</div>
+                        <div class="category-description">
+                            Published studies, evaluations, and evidence on intervention effectiveness. 
+                            Informs choice of interventions and implementation approaches.
+                        </div>
+                        <div class="category-examples">
+                            <strong>Examples:</strong> Systematic reviews, impact evaluations, cost-effectiveness 
+                            studies, implementation research
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MAJOR DATA SOURCES -->
+            <div class="content-section">
+                <h2>📚 Major Nutrition Data Sources</h2>
+                <p>These are the most important databases for nutrition program planning:</p>
+                
+                <div class="datasource-grid">
+                    <!-- DHS -->
+                    <div class="datasource-card global">
+                        <div class="datasource-header">
+                            <div class="datasource-title">Demographic & Health Surveys (DHS)</div>
+                            <div class="datasource-subtitle">USAID | Global Coverage</div>
+                        </div>
+                        <div class="datasource-description">
+                            Nationally representative household surveys conducted in 90+ countries since 1984. 
+                            Gold standard for nutrition, health, and demographic data. Includes anthropometry, 
+                            IYCF practices, micronutrient indicators.
+                        </div>
+                        <div class="datasource-info">
+                            <div class="info-row">
+                                <span class="info-label">Coverage:</span>
+                                <span class="info-value">90+ countries</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Frequency:</span>
+                                <span class="info-value">Every 3-5 years</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Access:</span>
+                                <span class="info-value">Free with registration</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Geographic Detail:</span>
+                                <span class="info-value">Regional/provincial</span>
+                            </div>
+                        </div>
+                        <a href="#" class="datasource-link" onclick="alert('dhsprogram.com'); return false;">Visit DHS Program →</a>
+                    </div>
+
+                    <!-- MICS -->
+                    <div class="datasource-card global">
+                        <div class="datasource-header">
+                            <div class="datasource-title">Multiple Indicator Cluster Surveys (MICS)</div>
+                            <div class="datasource-subtitle">UNICEF | Global Coverage</div>
+                        </div>
+                        <div class="datasource-description">
+                            UNICEF-supported household surveys in 100+ countries. Similar to DHS but often in 
+                            countries without DHS. Strong on child survival, nutrition, and WASH indicators.
+                        </div>
+                        <div class="datasource-info">
+                            <div class="info-row">
+                                <span class="info-label">Coverage:</span>
+                                <span class="info-value">100+ countries</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Frequency:</span>
+                                <span class="info-value">Every 3-5 years</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Access:</span>
+                                <span class="info-value">Free, public data</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Geographic Detail:</span>
+                                <span class="info-value">Regional/district</span>
+                            </div>
+                        </div>
+                        <a href="#" class="datasource-link" onclick="alert('mics.unicef.org'); return false;">Visit MICS →</a>
+                    </div>
+
+                    <!-- Global Nutrition Report -->
+                    <div class="datasource-card global">
+                        <div class="datasource-header">
+                            <div class="datasource-title">Global Nutrition Report Data</div>
+                            <div class="datasource-subtitle">Independent | Global</div>
+                        </div>
+                        <div class="datasource-description">
+                            Annual compilation of nutrition data from 193 countries. Country nutrition profiles 
+                            with trends, targets, and progress tracking. Best for quick country overviews.
+                        </div>
+                        <div class="datasource-info">
+                            <div class="info-row">
+                                <span class="info-label">Coverage:</span>
+                                <span class="info-value">193 countries</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Frequency:</span>
+                                <span class="info-value">Annual updates</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Access:</span>
+                                <span class="info-value">Free, downloadable</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Geographic Detail:</span>
+                                <span class="info-value">National only</span>
+                            </div>
+                        </div>
+                        <a href="#" class="datasource-link" onclick="alert('globalnutritionreport.org'); return false;">Visit GNR →</a>
+                    </div>
+
+                    <!-- WHO NutDash -->
+                    <div class="datasource-card global">
+                        <div class="datasource-header">
+                            <div class="datasource-title">WHO Nutrition Landscape</div>
+                            <div class="datasource-subtitle">WHO | Global</div>
+                        </div>
+                        <div class="datasource-description">
+                            WHO's comprehensive database of country nutrition data. Includes malnutrition, 
+                            micronutrients, policy indicators, and intervention coverage from multiple sources.
+                        </div>
+                        <div class="datasource-info">
+                            <div class="info-row">
+                                <span class="info-label">Coverage:</span>
+                                <span class="info-value">All WHO countries</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Frequency:</span>
+                                <span class="info-value">Continuous updates</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Access:</span>
+                                <span class="info-value">Free, online portal</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Geographic Detail:</span>
+                                <span class="info-value">National, some subnational</span>
+                            </div>
+                        </div>
+                        <a href="#" class="datasource-link" onclick="alert('who.int/data/nutrition'); return false;">Visit WHO Nutrition →</a>
+                    </div>
+
+                    <!-- SMART Surveys -->
+                    <div class="datasource-card country">
+                        <div class="datasource-header">
+                            <div class="datasource-title">SMART Surveys</div>
+                            <div class="datasource-subtitle">Various | Subnational</div>
+                        </div>
+                        <div class="datasource-description">
+                            Standardized Monitoring and Assessment of Relief and Transitions surveys. Rapid 
+                            assessments of malnutrition and mortality in emergency and development contexts.
+                        </div>
+                        <div class="datasource-info">
+                            <div class="info-row">
+                                <span class="info-label">Coverage:</span>
+                                <span class="info-value">Emergency-affected areas</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Frequency:</span>
+                                <span class="info-value">6-12 months (crises)</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Access:</span>
+                                <span class="info-value">Request from agencies</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Geographic Detail:</span>
+                                <span class="info-value">District/livelihood zones</span>
+                            </div>
+                        </div>
+                        <a href="#" class="datasource-link" onclick="alert('smartmethodology.org'); return false;">SMART Methodology →</a>
+                    </div>
+
+                    <!-- HDX -->
+                    <div class="datasource-card country">
+                        <div class="datasource-header">
+                            <div class="datasource-title">Humanitarian Data Exchange</div>
+                            <div class="datasource-subtitle">OCHA | Crisis Countries</div>
+                        </div>
+                        <div class="datasource-description">
+                            Open platform for sharing humanitarian data. Includes nutrition surveys, population 
+                            data, facility locations, and administrative boundaries for crisis-affected countries.
+                        </div>
+                        <div class="datasource-info">
+                            <div class="info-row">
+                                <span class="info-label">Coverage:</span>
+                                <span class="info-value">Crisis-affected countries</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Frequency:</span>
+                                <span class="info-value">Varies by dataset</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Access:</span>
+                                <span class="info-value">Free, open data</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Geographic Detail:</span>
+                                <span class="info-value">Subnational, facility-level</span>
+                            </div>
+                        </div>
+                        <a href="#" class="datasource-link" onclick="alert('data.humdata.org'); return false;">Visit HDX →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DEMOGRAPHIC & GEOGRAPHIC DATA -->
+            <div class="content-section">
+                <h2>👥 Demographic & Geographic Data</h2>
+                
+                <h3>Population & Demographic Data</h3>
+                <ul>
+                    <li><strong>WorldPop:</strong> High-resolution population density maps and demographic estimates. Essential for estimating target populations in specific areas.</li>
+                    <li><strong>UN Population Division:</strong> Country population projections and demographic indicators. Useful for medium-term planning.</li>
+                    <li><strong>National Census Data:</strong> Most detailed demographic data available. Contact national statistics offices. Often 10+ years old.</li>
+                    <li><strong>World Bank DataBank:</strong> Development indicators including poverty, education, health infrastructure. Good for contextual analysis.</li>
+                </ul>
+                
+                <h3>Geographic & GIS Data</h3>
+                <ul>
+                    <li><strong>OpenStreetMap:</strong> Free, editable maps with roads, facilities, and administrative boundaries. Variable quality but improving.</li>
+                    <li><strong>GADM:</strong> Database of global administrative boundaries. Download shapefiles for any country free.</li>
+                    <li><strong>HealthSites.io:</strong> Crowdsourced database of health facility locations. Incomplete but useful where official data unavailable.</li>
+                    <li><strong>NASA FIRMS:</strong> Active fire data for tracking agricultural burning, conflict, or displacement. Real-time updates.</li>
+                </ul>
+            </div>
+
+            <!-- DATA QUALITY -->
+            <div class="quality-box">
+                <h3>🎯 Assessing Data Quality</h3>
+                <p>
+                    <strong>Not all data is created equal.</strong> Before using a dataset for program decisions, 
+                    assess its quality:
+                </p>
+                
+                <div class="quality-checklist">
+                    <div class="quality-item">
+                        <span class="quality-icon">📅</span>
+                        <div class="quality-title">Recency</div>
+                        <div class="quality-description">
+                            How old is the data? Nutrition situations change. Data >5 years old may not reflect 
+                            current reality, especially post-crisis.
+                        </div>
+                    </div>
+                    
+                    <div class="quality-item">
+                        <span class="quality-icon">🎯</span>
+                        <div class="quality-title">Representativeness</div>
+                        <div class="quality-description">
+                            Does the sample represent your target area? National data may mask subnational 
+                            variation. Urban data doesn't tell you about rural areas.
+                        </div>
+                    </div>
+                    
+                    <div class="quality-item">
+                        <span class="quality-icon">📏</span>
+                        <div class="quality-title">Sample Size</div>
+                        <div class="quality-description">
+                            Large enough for reliable estimates? Small samples have wide confidence intervals. 
+                            Check if subnational estimates are statistically valid.
+                        </div>
+                    </div>
+                    
+                    <div class="quality-item">
+                        <span class="quality-icon">🔬</span>
+                        <div class="quality-title">Methodology</div>
+                        <div class="quality-description">
+                            Were standardized methods used? WHO training? Equipment calibrated? Poorly conducted 
+                            surveys produce misleading data.
+                        </div>
+                    </div>
+                    
+                    <div class="quality-item">
+                        <span class="quality-icon">🎭</span>
+                        <div class="quality-title">Political Bias</div>
+                        <div class="quality-description">
+                            Who collected the data and why? Government surveys may underreport problems. NGO 
+                            assessments may overstate needs. Consider motivations.
+                        </div>
+                    </div>
+                    
+                    <div class="quality-item">
+                        <span class="quality-icon">📊</span>
+                        <div class="quality-title">Consistency</div>
+                        <div class="quality-description">
+                            Do different sources agree? If DHS, MICS, and SMART surveys show vastly different 
+                            prevalence, investigate why before using data.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- USING DATA RESPONSIBLY -->
+            <div class="content-section">
+                <h2>🛡️ Using Data Responsibly</h2>
+                
+                <div class="callout warning">
+                    <h4>⚠️ Data Can Cause Harm</h4>
+                    <p>
+                        <strong>Data about vulnerable populations is sensitive.</strong> Malnutrition data can 
+                        stigmatize communities. Detailed location data can enable targeting by armed groups. 
+                        Ethnic/religious breakdowns can fuel discrimination.
+                    </p>
+                </div>
+                
+                <h3>Principles for Responsible Data Use</h3>
+                
+                <h4>1. Privacy Protection</h4>
+                <ul>
+                    <li>Never share individual-level data without consent</li>
+                    <li>Aggregate data to at least district level before sharing publicly</li>
+                    <li>Remove geographic precision (GPS coordinates) before publication</li>
+                    <li>Consider whether ethnic/religious breakdowns are necessary or could cause harm</li>
+                </ul>
+                
+                <h4>2. Context & Interpretation</h4>
+                <ul>
+                    <li>Always provide context: "20% wasting" needs comparison to emergency thresholds</li>
+                    <li>Explain limitations: sample size, geographic coverage, data age</li>
+                    <li>Avoid ranking or shaming: "District X has highest malnutrition" can stigmatize</li>
+                    <li>Present trends, not just snapshots: improving or worsening?</li>
+                </ul>
+                
+                <h4>3. Avoid Misuse</h4>
+                <ul>
+                    <li>Don't use data to justify predetermined conclusions</li>
+                    <li>Don't cherry-pick indicators that support your narrative</li>
+                    <li>Don't compare incomparable data (different methods, seasons, populations)</li>
+                    <li>Don't claim precision you don't have (confidence intervals matter)</li>
+                </ul>
+                
+                <h4>4. Community Ownership</h4>
+                <ul>
+                    <li>Share findings with communities surveyed, not just donors</li>
+                    <li>Use accessible language and formats, not just technical reports</li>
+                    <li>Allow communities to respond to or contest findings</li>
+                    <li>Credit local data collectors and knowledge holders</li>
+                </ul>
+            </div>
+
+            <!-- FILLING DATA GAPS -->
+            <div class="content-section">
+                <h2>🔍 When Data Doesn't Exist</h2>
+                <p>
+                    <strong>Perfect data rarely exists for the exact question you need answered.</strong> 
+                    What to do when there's a gap:
+                </p>
+                
+                <div class="callout info">
+                    <h4>📋 Options for Filling Data Gaps</h4>
+                    <ol>
+                        <li><strong>Use proxy indicators:</strong> If you don't have wasting data, poverty and food insecurity can indicate high-risk areas</li>
+                        <li><strong>Extrapolate from nearby areas:</strong> If neighboring districts are similar, their data may roughly apply</li>
+                        <li><strong>Rapid assessments:</strong> Small surveys (100-200 households) can give rough estimates quickly</li>
+                        <li><strong>Key informant interviews:</strong> Local health workers and leaders know which areas are worst affected</li>
+                        <li><strong>Program monitoring data:</strong> Screening data from existing programs reveals trends even if not representative</li>
+                        <li><strong>Satellite/remote sensing data:</strong> Crop conditions, rainfall, vegetation indices correlate with malnutrition</li>
+                    </ol>
+                </div>
+                
+                <div class="callout success">
+                    <h4>✅ Best Practice: Triangulate</h4>
+                    <p style="margin-bottom: 0;">
+                        <strong>Don't rely on one data source.</strong> Use multiple sources and methods. If survey 
+                        data, key informant interviews, and health facility records all point to the same districts 
+                        as high-need, you can be more confident. Contradictory data signals the need for better 
+                        information before committing resources.
+                    </p>
+                </div>
+            </div>
+
+            <!-- NEXT STEPS -->
+            <div class="content-section">
+                <h2>🚀 Next Steps</h2>
+                
+                <h3>If you need data for program planning:</h3>
+                <ol>
+                    <li>Start with DHS or MICS for your country—check recency</li>
+                    <li>Look for SMART surveys or nutrition cluster data if in humanitarian context</li>
+                    <li>Download administrative boundaries and facility locations from HDX or OpenStreetMap</li>
+                    <li>Supplement with local knowledge and recent rapid assessments</li>
+                    <li>Document data sources, limitations, and assumptions for stakeholders</li>
+                </ol>
+                
+                <h3>If you're collecting new data:</h3>
+                <ul>
+                    <li>Use standardized methods (SMART, WHO) for comparability</li>
+                    <li>Get ethical approval if required (university, ministry of health)</li>
+                    <li>Train enumerators properly—bad data worse than no data</li>
+                    <li>Build in data quality checks during collection</li>
+                    <li>Share findings responsibly, protecting privacy</li>
+                    <li>Use our <a href="../tools/collect-data.html" style="color: var(--data-purple);">Data Collection Protocol Builder</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <p>
+                <strong>Data & Datasets</strong> | Part of Feed Children ASAP Atlas<br>
+                <a href="../governance/index.html">Zero Harm Policy</a> • 
+                <a href="../about.html">About This Project</a> • 
+                <a href="../index.html">Return to Atlas</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Accessibility: Reduced motion support
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('*').forEach(el => {
+                el.style.animation = 'none';
+                el.style.transition = 'none';
+            });
+        }
+    </script>
+</body>
+</html>
