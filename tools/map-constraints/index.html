@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive constraints mapping tool. Visualize legal, logistical, funding, supply chain, conflict, and cultural barriers to child nutrition interventions. Identify high-leverage intervention points.">
+    <title>Constraints Mapper | Feed Children ASAP Atlas</title>
+    
+    <style>
+        /* ============================================
+           RESET & BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --earth-dark: #2d3e2f;
+            --earth-medium: #5a7c5e;
+            --earth-light: #8ba888;
+            --healing-green: #a8c5a0;
+            --warm-sand: #e8dcc4;
+            --soft-blue: #7a9eb8;
+            --constraint-red: #d97757;
+            --constraint-orange: #e8a87c;
+            --constraint-yellow: #e8bc7c;
+            --neutral-gray: #6b7280;
+            --background-light: #f9f9f7;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --card-background: #ffffff;
+            --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --border-radius: 8px;
+            --transition-smooth: all 0.3s ease;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--background-light);
+            overflow-x: hidden;
+        }
+        
+        /* ============================================
+           TYPOGRAPHY
+           ============================================ */
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+        }
+        
+        h1 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            color: var(--earth-dark);
+        }
+        
+        h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--earth-medium);
+            margin-top: 2rem;
+        }
+        
+        h3 {
+            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+            color: var(--earth-medium);
+            margin-top: 1.5rem;
+        }
+        
+        h4 {
+            font-size: clamp(1.125rem, 2vw, 1.25rem);
+            color: var(--earth-dark);
+            margin-top: 1rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        label {
+            display: block;
+            font-weight: 500;
+            color: var(--earth-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* ============================================
+           LAYOUT
+           ============================================ */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .narrow-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        .top-nav {
+            background: var(--earth-dark);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .nav-home {
+            color: var(--warm-sand);
+            font-weight: 600;
+            font-size: 1.125rem;
+            text-decoration: none;
+        }
+        
+        .nav-home:hover {
+            color: var(--healing-green);
+        }
+        
+        .tool-name {
+            color: var(--warm-sand);
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        /* ============================================
+           HEADER
+           ============================================ */
+        header {
+            background: linear-gradient(135deg, var(--constraint-red) 0%, var(--constraint-orange) 100%);
+            padding: 3rem 0 2rem;
+            color: white;
+        }
+        
+        .tool-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.25);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 400;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* ============================================
+           INTERFACE SECTIONS
+           ============================================ */
+        .interface-section {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        /* ============================================
+           FORM ELEMENTS
+           ============================================ */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        input[type="text"],
+        select,
+        textarea {
+            padding: 0.75rem;
+            border: 2px solid var(--earth-light);
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: var(--transition-smooth);
+        }
+        
+        input[type="text"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--constraint-orange);
+            box-shadow: 0 0 0 3px rgba(232, 168, 124, 0.1);
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        /* ============================================
+           CONSTRAINT CATEGORIES
+           ============================================ */
+        .category-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .category-card {
+            background: var(--background-light);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            border: 3px solid transparent;
+        }
+        
+        .category-card:hover {
+            box-shadow: var(--shadow-medium);
+            transform: translateY(-2px);
+        }
+        
+        .category-card.selected {
+            border-color: var(--constraint-orange);
+            background: white;
+        }
+        
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .category-name {
+            font-weight: 600;
+            color: var(--earth-dark);
+            font-size: 1rem;
+        }
+        
+        /* ============================================
+           SEVERITY SELECTOR
+           ============================================ */
+        .severity-selector {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .severity-option {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid var(--earth-light);
+            border-radius: 6px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+        
+        .severity-option:hover {
+            border-color: var(--earth-medium);
+        }
+        
+        .severity-option.selected {
+            border-width: 3px;
+        }
+        
+        .severity-option.low.selected {
+            border-color: var(--constraint-yellow);
+            background: rgba(232, 188, 124, 0.1);
+        }
+        
+        .severity-option.medium.selected {
+            border-color: var(--constraint-orange);
+            background: rgba(232, 168, 124, 0.1);
+        }
+        
+        .severity-option.high.selected {
+            border-color: var(--constraint-red);
+            background: rgba(217, 119, 87, 0.1);
+        }
+        
+        .severity-icon {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .severity-label {
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        /* ============================================
+           BUTTONS
+           ============================================ */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            font-family: inherit;
+        }
+        
+        .btn-primary {
+            background: var(--constraint-orange);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--constraint-red);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .btn-secondary {
+            background: var(--earth-light);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--earth-medium);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--earth-light);
+            color: var(--earth-medium);
+        }
+        
+        .btn-outline:hover {
+            background: var(--background-light);
+        }
+        
+        .btn-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        /* ============================================
+           CONSTRAINTS LIST
+           ============================================ */
+        .constraints-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .constraint-item {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-subtle);
+            border-left: 6px solid;
+            transition: var(--transition-smooth);
+        }
+        
+        .constraint-item:hover {
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .constraint-item.low {
+            border-left-color: var(--constraint-yellow);
+        }
+        
+        .constraint-item.medium {
+            border-left-color: var(--constraint-orange);
+        }
+        
+        .constraint-item.high {
+            border-left-color: var(--constraint-red);
+        }
+        
+        .constraint-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            gap: 1rem;
+        }
+        
+        .constraint-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--earth-dark);
+        }
+        
+        .constraint-meta {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .meta-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .severity-badge {
+            color: white;
+        }
+        
+        .severity-badge.low {
+            background: var(--constraint-yellow);
+        }
+        
+        .severity-badge.medium {
+            background: var(--constraint-orange);
+        }
+        
+        .severity-badge.high {
+            background: var(--constraint-red);
+        }
+        
+        .category-badge {
+            background: var(--soft-blue);
+            color: white;
+        }
+        
+        .constraint-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .constraint-mitigation {
+            background: var(--background-light);
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+        }
+        
+        .mitigation-title {
+            font-weight: 600;
+            color: var(--earth-medium);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+        
+        .mitigation-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        .constraint-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.25rem;
+            padding: 0.25rem;
+            opacity: 0.6;
+            transition: var(--transition-smooth);
+        }
+        
+        .icon-btn:hover {
+            opacity: 1;
+        }
+        
+        /* ============================================
+           VISUALIZATION CANVAS
+           ============================================ */
+        .viz-container {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        #constraints-canvas {
+            width: 100%;
+            height: 500px;
+            border-radius: var(--border-radius);
+            background: var(--background-light);
+        }
+        
+        .viz-legend {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        
+        .legend-label {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+        
+        /* ============================================
+           SUMMARY STATS
+           ============================================ */
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            background: var(--background-light);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--earth-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+        
+        /* ============================================
+           EMPTY STATE
+           ============================================ */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--neutral-gray);
+        }
+        
+        .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        /* ============================================
+           TABS
+           ============================================ */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 2px solid var(--earth-light);
+            margin-bottom: 2rem;
+        }
+        
+        .tab {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--neutral-gray);
+            border-bottom: 3px solid transparent;
+            transition: var(--transition-smooth);
+        }
+        
+        .tab.active {
+            color: var(--constraint-orange);
+            border-bottom-color: var(--constraint-orange);
+        }
+        
+        .tab:hover {
+            color: var(--earth-medium);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .interface-section {
+                padding: 1.5rem;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .category-selector {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .severity-selector {
+                flex-direction: column;
+            }
+            
+            .summary-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            #constraints-canvas {
+                height: 300px;
+            }
+            
+            .tabs {
+                flex-wrap: wrap;
+            }
+            
+            .tab {
+                flex: 1;
+                min-width: 120px;
+            }
+            
+            .btn-actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+        
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: var(--earth-dark);
+            color: var(--warm-sand);
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            text-align: center;
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+        
+        .footer-content a {
+            color: var(--healing-green);
+            text-decoration: none;
+        }
+        
+        .footer-content a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="top-nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="../index.html" class="nav-home">← Feed Children ASAP Atlas</a>
+                <span class="tool-name">Constraints Mapper</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header>
+        <div class="narrow-container">
+            <span class="tool-badge">🗺️ Interactive Tool</span>
+            <h1>Constraints Mapper</h1>
+            <p class="subtitle">
+                Identify and visualize barriers to child nutrition interventions. Map legal, logistical, funding, 
+                supply chain, conflict, and cultural constraints. Discover high-leverage intervention points.
+            </p>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <div class="container">
+            
+            <!-- TABS -->
+            <div class="tabs">
+                <button class="tab active" data-tab="map">Map Constraints</button>
+                <button class="tab" data-tab="view">View All</button>
+                <button class="tab" data-tab="analyze">Analysis</button>
+            </div>
+
+            <!-- TAB: MAP CONSTRAINTS -->
+            <div class="tab-content active" id="map-tab">
+                <div class="interface-section">
+                    <h2>Add a Constraint</h2>
+                    <p>Identify a specific barrier to nutrition interventions in your context.</p>
+                    
+                    <form id="constraint-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="location">Location/Context</label>
+                                <input type="text" id="location" placeholder="e.g., Northern Kenya, Urban Karachi" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="timeframe">Timeframe</label>
+                                <select id="timeframe" required>
+                                    <option value="">Select timeframe</option>
+                                    <option value="immediate">Immediate (0-3 months)</option>
+                                    <option value="short">Short-term (3-12 months)</option>
+                                    <option value="medium">Medium-term (1-3 years)</option>
+                                    <option value="long">Long-term (3+ years)</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Constraint Category</label>
+                            <div class="category-selector">
+                                <div class="category-card" data-category="legal">
+                                    <span class="category-icon">📜</span>
+                                    <div class="category-name">Legal/Policy</div>
+                                </div>
+                                
+                                <div class="category-card" data-category="logistics">
+                                    <span class="category-icon">🚚</span>
+                                    <div class="category-name">Logistics</div>
+                                </div>
+                                
+                                <div class="category-card" data-category="funding">
+                                    <span class="category-icon">💰</span>
+                                    <div class="category-name">Funding</div>
+                                </div>
+                                
+                                <div class="category-card" data-category="supply">
+                                    <span class="category-icon">📦</span>
+                                    <div class="category-name">Supply Chain</div>
+                                </div>
+                                
+                                <div class="category-card" data-category="conflict">
+                                    <span class="category-icon">⚠️</span>
+                                    <div class="category-name">Conflict/Security</div>
+                                </div>
+                                
+                                <div class="category-card" data-category="cultural">
+                                    <span class="category-icon">🌍</span>
+                                    <div class="category-name">Cultural</div>
+                                </div>
+                            </div>
+                            <input type="hidden" id="category" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="description">Constraint Description</label>
+                            <textarea id="description" placeholder="Describe the specific barrier and its impact on nutrition programs..." required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Severity Level</label>
+                            <div class="severity-selector">
+                                <div class="severity-option low" data-severity="low">
+                                    <span class="severity-icon">🟡</span>
+                                    <div class="severity-label">Low</div>
+                                </div>
+                                <div class="severity-option medium" data-severity="medium">
+                                    <span class="severity-icon">🟠</span>
+                                    <div class="severity-label">Medium</div>
+                                </div>
+                                <div class="severity-option high" data-severity="high">
+                                    <span class="severity-icon">🔴</span>
+                                    <div class="severity-label">High</div>
+                                </div>
+                            </div>
+                            <input type="hidden" id="severity" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mitigation">Potential Mitigation Strategies (Optional)</label>
+                            <textarea id="mitigation" placeholder="What approaches could reduce or work around this constraint?"></textarea>
+                        </div>
+                        
+                        <div class="btn-actions">
+                            <button type="submit" class="btn btn-primary">📍 Add Constraint</button>
+                            <button type="button" class="btn btn-outline" onclick="resetForm()">Clear Form</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- TAB: VIEW ALL -->
+            <div class="tab-content" id="view-tab">
+                <div class="interface-section">
+                    <h2>Mapped Constraints</h2>
+                    <p>All constraints currently mapped in your assessment.</p>
+                    
+                    <div class="summary-stats" id="summary-stats">
+                        <div class="stat-card">
+                            <div class="stat-value" id="total-count">0</div>
+                            <div class="stat-label">Total Constraints</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="high-count">0</div>
+                            <div class="stat-label">High Severity</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="medium-count">0</div>
+                            <div class="stat-label">Medium Severity</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="low-count">0</div>
+                            <div class="stat-label">Low Severity</div>
+                        </div>
+                    </div>
+                    
+                    <div class="btn-actions">
+                        <button class="btn btn-secondary" onclick="exportConstraints()">📤 Export All</button>
+                        <button class="btn btn-outline" onclick="clearAllConstraints()">🗑️ Clear All</button>
+                    </div>
+                    
+                    <div class="constraints-list" id="constraints-list"></div>
+                </div>
+            </div>
+
+            <!-- TAB: ANALYSIS -->
+            <div class="tab-content" id="analyze-tab">
+                <div class="interface-section">
+                    <h2>Constraint Analysis</h2>
+                    <p>Visual analysis of barriers by category and severity.</p>
+                    
+                    <div class="viz-container">
+                        <canvas id="constraints-canvas"></canvas>
+                        <div class="viz-legend">
+                            <div class="legend-item">
+                                <div class="legend-color" style="background: #e8bc7c;"></div>
+                                <span class="legend-label">Low Severity</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background: #e8a87c;"></div>
+                                <span class="legend-label">Medium Severity</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background: #d97757;"></div>
+                                <span class="legend-label">High Severity</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="insights-section"></div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>
+                    <strong>Constraints Mapper</strong> | Part of Feed Children ASAP Atlas<br>
+                    <a href="../governance.html">Zero Harm Policy</a> • 
+                    <a href="../index.html">Return to Atlas</a>
+                </p>
+                <p style="margin-top: 1rem; font-size: 0.8rem;">
+                    All data stored locally in your browser. No tracking. No external servers.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // ============================================
+        // STATE MANAGEMENT
+        // ============================================
+        let constraints = [];
+        let selectedCategory = null;
+        let selectedSeverity = null;
+
+        // Category metadata
+        const categoryInfo = {
+            legal: { icon: '📜', name: 'Legal/Policy', color: '#7a9eb8' },
+            logistics: { icon: '🚚', name: 'Logistics', color: '#8ba888' },
+            funding: { icon: '💰', name: 'Funding', color: '#c9a961' },
+            supply: { icon: '📦', name: 'Supply Chain', color: '#5a9e9e' },
+            conflict: { icon: '⚠️', name: 'Conflict/Security', color: '#d97757' },
+            cultural: { icon: '🌍', name: 'Cultural', color: '#7a6b9e' }
+        };
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+        document.addEventListener('DOMContentLoaded', () => {
+            loadConstraints();
+            setupEventListeners();
+            updateUI();
+        });
+
+        function setupEventListeners() {
+            // Tab switching
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    switchTab(tab.dataset.tab);
+                });
+            });
+
+            // Category selection
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    selectCategory(card.dataset.category);
+                });
+            });
+
+            // Severity selection
+            document.querySelectorAll('.severity-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    selectSeverity(option.dataset.severity);
+                });
+            });
+
+            // Form submission
+            document.getElementById('constraint-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                addConstraint();
+            });
+        }
+
+        // ============================================
+        // TAB MANAGEMENT
+        // ============================================
+        function switchTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+            
+            // Update tab content
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+            
+            // Update specific tab content
+            if (tabName === 'view') {
+                updateConstraintsList();
+            } else if (tabName === 'analyze') {
+                updateVisualization();
+                updateInsights();
+            }
+        }
+
+        // ============================================
+        // FORM MANAGEMENT
+        // ============================================
+        function selectCategory(category) {
+            selectedCategory = category;
+            
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            document.querySelector(`[data-category="${category}"]`).classList.add('selected');
+            document.getElementById('category').value = category;
+        }
+
+        function selectSeverity(severity) {
+            selectedSeverity = severity;
+            
+            document.querySelectorAll('.severity-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            document.querySelector(`[data-severity="${severity}"]`).classList.add('selected');
+            document.getElementById('severity').value = severity;
+        }
+
+        function resetForm() {
+            document.getElementById('constraint-form').reset();
+            selectedCategory = null;
+            selectedSeverity = null;
+            
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            document.querySelectorAll('.severity-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+        }
+
+        // ============================================
+        // CONSTRAINT MANAGEMENT
+        // ============================================
+        function addConstraint() {
+            const constraint = {
+                id: Date.now(),
+                location: document.getElementById('location').value,
+                timeframe: document.getElementById('timeframe').value,
+                category: selectedCategory,
+                description: document.getElementById('description').value,
+                severity: selectedSeverity,
+                mitigation: document.getElementById('mitigation').value,
+                timestamp: new Date().toISOString()
+            };
+            
+            constraints.push(constraint);
+            saveConstraints();
+            resetForm();
+            
+            alert('Constraint added successfully!');
+            switchTab('view');
+        }
+
+        function deleteConstraint(id) {
+            if (confirm('Delete this constraint?')) {
+                constraints = constraints.filter(c => c.id !== id);
+                saveConstraints();
+                updateUI();
+            }
+        }
+
+        function editConstraint(id) {
+            const constraint = constraints.find(c => c.id === id);
+            if (!constraint) return;
+            
+            // Switch to map tab
+            switchTab('map');
+            
+            // Populate form
+            document.getElementById('location').value = constraint.location;
+            document.getElementById('timeframe').value = constraint.timeframe;
+            document.getElementById('description').value = constraint.description;
+            document.getElementById('mitigation').value = constraint.mitigation || '';
+            
+            selectCategory(constraint.category);
+            selectSeverity(constraint.severity);
+            
+            // Delete old constraint
+            deleteConstraint(id);
+        }
+
+        function clearAllConstraints() {
+            if (confirm('Delete all constraints? This cannot be undone.')) {
+                constraints = [];
+                saveConstraints();
+                updateUI();
+            }
+        }
+
+        // ============================================
+        // DATA PERSISTENCE
+        // ============================================
+        function saveConstraints() {
+            localStorage.setItem('feedChildrenAtlas_constraints', JSON.stringify(constraints));
+            updateUI();
+        }
+
+        function loadConstraints() {
+            const saved = localStorage.getItem('feedChildrenAtlas_constraints');
+            if (saved) {
+                try {
+                    constraints = JSON.parse(saved);
+                } catch (e) {
+                    constraints = [];
+                }
+            }
+        }
+
+        // ============================================
+        // UI UPDATES
+        // ============================================
+        function updateUI() {
+            updateSummaryStats();
+            updateConstraintsList();
+        }
+
+        function updateSummaryStats() {
+            const total = constraints.length;
+            const high = constraints.filter(c => c.severity === 'high').length;
+            const medium = constraints.filter(c => c.severity === 'medium').length;
+            const low = constraints.filter(c => c.severity === 'low').length;
+            
+            document.getElementById('total-count').textContent = total;
+            document.getElementById('high-count').textContent = high;
+            document.getElementById('medium-count').textContent = medium;
+            document.getElementById('low-count').textContent = low;
+        }
+
+        function updateConstraintsList() {
+            const container = document.getElementById('constraints-list');
+            
+            if (constraints.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">🗺️</div>
+                        <p>No constraints mapped yet.</p>
+                        <p>Switch to the "Map Constraints" tab to add your first constraint.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = '';
+            
+            // Sort by severity (high to low)
+            const sorted = [...constraints].sort((a, b) => {
+                const severityOrder = { high: 3, medium: 2, low: 1 };
+                return severityOrder[b.severity] - severityOrder[a.severity];
+            });
+            
+            sorted.forEach(constraint => {
+                const item = document.createElement('div');
+                item.className = `constraint-item ${constraint.severity}`;
+                
+                const categoryData = categoryInfo[constraint.category];
+                
+                item.innerHTML = `
+                    <div class="constraint-header">
+                        <div>
+                            <div class="constraint-title">${categoryData.icon} ${constraint.location}</div>
+                        </div>
+                        <div class="constraint-meta">
+                            <span class="meta-badge severity-badge ${constraint.severity}">
+                                ${constraint.severity.charAt(0).toUpperCase() + constraint.severity.slice(1)} Severity
+                            </span>
+                            <span class="meta-badge category-badge">
+                                ${categoryData.name}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="constraint-description">${constraint.description}</div>
+                    ${constraint.mitigation ? `
+                        <div class="constraint-mitigation">
+                            <div class="mitigation-title">💡 Mitigation Strategies:</div>
+                            <div class="mitigation-text">${constraint.mitigation}</div>
+                        </div>
+                    ` : ''}
+                    <div class="constraint-actions">
+                        <button class="icon-btn" onclick="editConstraint(${constraint.id})" title="Edit">✏️</button>
+                        <button class="icon-btn" onclick="deleteConstraint(${constraint.id})" title="Delete">🗑️</button>
+                    </div>
+                `;
+                
+                container.appendChild(item);
+            });
+        }
+
+        // ============================================
+        // VISUALIZATION
+        // ============================================
+        function updateVisualization() {
+            const canvas = document.getElementById('constraints-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas size
+            canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+            canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+            
+            const w = canvas.offsetWidth;
+            const h = canvas.offsetHeight;
+            
+            // Clear canvas
+            ctx.fillStyle = '#f9f9f7';
+            ctx.fillRect(0, 0, w, h);
+            
+            if (constraints.length === 0) {
+                ctx.fillStyle = '#6b7280';
+                ctx.font = '16px -apple-system, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('No constraints to visualize', w / 2, h / 2);
+                ctx.font = '14px -apple-system, sans-serif';
+                ctx.fillText('Add constraints in the "Map Constraints" tab', w / 2, h / 2 + 30);
+                return;
+            }
+            
+            // Group by category
+            const byCategory = {};
+            Object.keys(categoryInfo).forEach(cat => {
+                byCategory[cat] = constraints.filter(c => c.category === cat);
+            });
+            
+            // Calculate positions for radial layout
+            const centerX = w / 2;
+            const centerY = h / 2;
+            const radius = Math.min(w, h) * 0.35;
+            
+            const categories = Object.keys(categoryInfo);
+            const angleStep = (Math.PI * 2) / categories.length;
+            
+            // Draw connections to center
+            ctx.strokeStyle = 'rgba(90, 124, 94, 0.2)';
+            ctx.lineWidth = 2;
+            
+            categories.forEach((cat, i) => {
+                const angle = angleStep * i - Math.PI / 2;
+                const x = centerX + Math.cos(angle) * radius;
+                const y = centerY + Math.sin(angle) * radius;
+                
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.lineTo(x, y);
+                ctx.stroke();
+            });
+            
+            // Draw center circle
+            ctx.fillStyle = '#8ba888';
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, 40, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 14px -apple-system, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('Constraints', centerX, centerY);
+            
+            // Draw category nodes
+            categories.forEach((cat, i) => {
+                const angle = angleStep * i - Math.PI / 2;
+                const x = centerX + Math.cos(angle) * radius;
+                const y = centerY + Math.sin(angle) * radius;
+                
+                const categoryConstraints = byCategory[cat];
+                const highCount = categoryConstraints.filter(c => c.severity === 'high').length;
+                const mediumCount = categoryConstraints.filter(c => c.severity === 'medium').length;
+                const lowCount = categoryConstraints.filter(c => c.severity === 'low').length;
+                
+                // Size based on count
+                const nodeRadius = 30 + categoryConstraints.length * 5;
+                
+                // Color based on max severity
+                let nodeColor = '#e8bc7c'; // low
+                if (highCount > 0) nodeColor = '#d97757';
+                else if (mediumCount > 0) nodeColor = '#e8a87c';
+                
+                // Draw node
+                ctx.fillStyle = nodeColor;
+                ctx.beginPath();
+                ctx.arc(x, y, nodeRadius, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Draw count
+                ctx.fillStyle = 'white';
+                ctx.font = 'bold 18px -apple-system, sans-serif';
+                ctx.fillText(categoryConstraints.length.toString(), x, y);
+                
+                // Draw label
+                const labelY = y + nodeRadius + 20;
+                ctx.fillStyle = '#1f2937';
+                ctx.font = '13px -apple-system, sans-serif';
+                ctx.fillText(categoryInfo[cat].name, x, labelY);
+            });
+        }
+
+        // ============================================
+        // INSIGHTS
+        // ============================================
+        function updateInsights() {
+            const container = document.getElementById('insights-section');
+            
+            if (constraints.length === 0) {
+                container.innerHTML = '';
+                return;
+            }
+            
+            // Calculate insights
+            const byCategory = {};
+            Object.keys(categoryInfo).forEach(cat => {
+                byCategory[cat] = constraints.filter(c => c.category === cat);
+            });
+            
+            const mostConstrained = Object.entries(byCategory)
+                .sort((a, b) => b[1].length - a[1].length)[0];
+            
+            const highSeverity = constraints.filter(c => c.severity === 'high');
+            const criticalCategories = Object.entries(byCategory)
+                .filter(([cat, items]) => items.some(c => c.severity === 'high'))
+                .map(([cat]) => categoryInfo[cat].name);
+            
+            container.innerHTML = `
+                <div class="interface-section" style="margin-top: 2rem;">
+                    <h3>Key Insights</h3>
+                    
+                    <div style="background: var(--background-light); padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+                        <h4 style="margin-top: 0; color: var(--earth-medium);">📊 Most Constrained Area</h4>
+                        <p><strong>${categoryInfo[mostConstrained[0]].name}</strong> has the most constraints (${mostConstrained[1].length}), 
+                        suggesting this is a major bottleneck for interventions.</p>
+                    </div>
+                    
+                    ${highSeverity.length > 0 ? `
+                        <div style="background: rgba(217, 119, 87, 0.1); padding: 1.5rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid var(--constraint-red);">
+                            <h4 style="margin-top: 0; color: var(--constraint-red);">⚠️ Critical Barriers</h4>
+                            <p><strong>${highSeverity.length} high-severity constraints</strong> require immediate attention. 
+                            Categories affected: ${criticalCategories.join(', ')}.</p>
+                        </div>
+                    ` : ''}
+                    
+                    <div style="background: var(--background-light); padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+                        <h4 style="margin-top: 0; color: var(--earth-medium);">💡 Recommendations</h4>
+                        <ul style="margin-left: 1.5rem; color: var(--text-secondary);">
+                            <li>Focus mitigation efforts on high-severity constraints first</li>
+                            <li>Consider alternative intervention approaches for heavily constrained categories</li>
+                            <li>Look for constraints that can be addressed in parallel</li>
+                            <li>Engage stakeholders who can influence systemic barriers</li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ============================================
+        // EXPORT
+        // ============================================
+        function exportConstraints() {
+            if (constraints.length === 0) {
+                alert('No constraints to export.');
+                return;
+            }
+            
+            const report = `
+CONSTRAINTS MAPPING REPORT
+Feed Children ASAP Atlas - Constraints Mapper
+Generated: ${new Date().toLocaleString()}
+
+════════════════════════════════════════════════════════════
+
+SUMMARY STATISTICS:
+- Total Constraints: ${constraints.length}
+- High Severity: ${constraints.filter(c => c.severity === 'high').length}
+- Medium Severity: ${constraints.filter(c => c.severity === 'medium').length}
+- Low Severity: ${constraints.filter(c => c.severity === 'low').length}
+
+────────────────────────────────────────────────────────────
+
+CONSTRAINTS BY CATEGORY:
+
+${Object.entries(categoryInfo).map(([cat, info]) => {
+    const catConstraints = constraints.filter(c => c.category === cat);
+    if (catConstraints.length === 0) return '';
+    
+    return `${info.icon} ${info.name.toUpperCase()} (${catConstraints.length} constraints)
+
+${catConstraints.map((c, i) => `
+${i + 1}. ${c.location} [${c.severity.toUpperCase()} SEVERITY]
+   Timeframe: ${c.timeframe}
+   Description: ${c.description}
+   ${c.mitigation ? `Mitigation: ${c.mitigation}` : ''}
+`).join('\n')}`;
+}).filter(Boolean).join('\n\n────────────────────────────────────────────────────────────\n\n')}
+
+════════════════════════════════════════════════════════════
+
+This report was generated by the Feed Children ASAP Atlas Constraints Mapper.
+For more information, visit the Atlas at your deployment location.
+
+Zero Harm Policy: All constraint mapping should respect community privacy
+and avoid exposing sensitive security or operational information.
+            `.trim();
+            
+            // Create download
+            const blob = new Blob([report], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `constraints-report-${Date.now()}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Accessibility: Reduced motion support
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('*').forEach(el => {
+                el.style.animation = 'none';
+                el.style.transition = 'none';
+            });
+        }
+
+        // Redraw visualization on window resize
+        window.addEventListener('resize', () => {
+            if (document.getElementById('analyze-tab').classList.contains('active')) {
+                updateVisualization();
+            }
+        });
+    </script>
+    
+    <!--
+    ZERO HARM COMPLIANCE NOTICE:
+    
+    This tool contains:
+    - No tracking or analytics
+    - No external API calls
+    - No data transmission to servers
+    - localStorage used only for user's constraint data (local to their browser)
+    - No surveillance mechanisms
+    
+    All constraint mapping is performed client-side.
+    All data remains on the user's device.
+    
+    Users should be cautious about including sensitive operational or security
+    information in constraint descriptions, especially in insecure contexts.
+    -->
+</body>
+</html>
