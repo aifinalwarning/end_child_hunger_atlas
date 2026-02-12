@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Evidence synthesis and validation protocols for researchers, academics, and knowledge producers. Access literature hubs, replication packs, and cross-domain bridges connecting nutrition science, economics, and governance.">
+    <title>For Researchers | Feed Children ASAP Atlas</title>
+    
+    <style>
+        /* ============================================
+           RESET & BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --earth-dark: #2d3e2f;
+            --earth-medium: #5a7c5e;
+            --earth-light: #8ba888;
+            --healing-green: #a8c5a0;
+            --warm-sand: #e8dcc4;
+            --soft-blue: #7a9eb8;
+            --research-purple: #7a6b9e;
+            --evidence-teal: #5a9e9e;
+            --neutral-gray: #6b7280;
+            --background-light: #f9f9f7;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --card-background: #ffffff;
+            --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --border-radius: 8px;
+            --transition-smooth: all 0.3s ease;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--background-light);
+            overflow-x: hidden;
+        }
+        
+        /* ============================================
+           TYPOGRAPHY
+           ============================================ */
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+        }
+        
+        h1 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            color: var(--earth-dark);
+        }
+        
+        h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--earth-medium);
+            margin-top: 3rem;
+        }
+        
+        h3 {
+            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+            color: var(--earth-medium);
+            margin-top: 2rem;
+        }
+        
+        h4 {
+            font-size: clamp(1.125rem, 2vw, 1.25rem);
+            color: var(--earth-dark);
+            margin-top: 1.5rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        a {
+            color: var(--soft-blue);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+        
+        a:hover {
+            color: var(--earth-medium);
+        }
+        
+        strong {
+            color: var(--earth-dark);
+            font-weight: 600;
+        }
+        
+        em {
+            color: var(--earth-medium);
+        }
+        
+        /* ============================================
+           LAYOUT
+           ============================================ */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .wide-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        section {
+            padding: 3rem 0;
+        }
+        
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        .top-nav {
+            background: var(--earth-dark);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .nav-home {
+            color: var(--warm-sand);
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+        
+        .nav-home:hover {
+            color: var(--healing-green);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links a {
+            color: var(--warm-sand);
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        
+        .nav-links a:hover {
+            opacity: 1;
+            color: var(--healing-green);
+        }
+        
+        /* ============================================
+           HEADER
+           ============================================ */
+        header {
+            background: linear-gradient(135deg, var(--research-purple) 0%, var(--evidence-teal) 100%);
+            color: white;
+            padding: 3rem 0 2rem;
+            position: relative;
+        }
+        
+        .audience-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.25);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+        }
+        
+        /* ============================================
+           CONTENT SECTIONS
+           ============================================ */
+        .content-section {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .evidence-section {
+            border-left: 6px solid var(--evidence-teal);
+        }
+        
+        .methodology-section {
+            border-left: 6px solid var(--research-purple);
+        }
+        
+        /* ============================================
+           EVIDENCE HIERARCHY
+           ============================================ */
+        .evidence-pyramid {
+            background: linear-gradient(180deg, var(--background-light) 0%, var(--card-background) 100%);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .evidence-level {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-subtle);
+            border-left: 6px solid;
+            transition: var(--transition-smooth);
+        }
+        
+        .evidence-level:hover {
+            box-shadow: var(--shadow-medium);
+            transform: translateX(4px);
+        }
+        
+        .evidence-level.level-1 {
+            border-left-color: #2d6b2d;
+        }
+        
+        .evidence-level.level-2 {
+            border-left-color: var(--healing-green);
+        }
+        
+        .evidence-level.level-3 {
+            border-left-color: var(--evidence-teal);
+        }
+        
+        .evidence-level.level-4 {
+            border-left-color: var(--soft-blue);
+        }
+        
+        .evidence-level.level-5 {
+            border-left-color: var(--neutral-gray);
+        }
+        
+        .evidence-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .evidence-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--earth-dark);
+            margin: 0;
+        }
+        
+        .evidence-grade {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            background: var(--earth-light);
+            color: white;
+        }
+        
+        .evidence-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        /* ============================================
+           RESEARCH PRIORITY GRID
+           ============================================ */
+        .priority-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .priority-card {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 1.75rem;
+            box-shadow: var(--shadow-subtle);
+            border-top: 4px solid var(--research-purple);
+            transition: var(--transition-smooth);
+        }
+        
+        .priority-card:hover {
+            box-shadow: var(--shadow-medium);
+            transform: translateY(-2px);
+        }
+        
+        .priority-card h3 {
+            margin-top: 0;
+            font-size: 1.25rem;
+            color: var(--research-purple);
+        }
+        
+        .priority-urgency {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+        
+        .priority-urgency.high {
+            background: #d97757;
+            color: white;
+        }
+        
+        .priority-urgency.medium {
+            background: var(--evidence-teal);
+            color: white;
+        }
+        
+        .priority-urgency.ongoing {
+            background: var(--healing-green);
+            color: var(--earth-dark);
+        }
+        
+        /* ============================================
+           METHODOLOGY FRAMEWORK
+           ============================================ */
+        .methodology-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .method-card {
+            background: var(--background-light);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            border-left: 4px solid var(--research-purple);
+        }
+        
+        .method-name {
+            font-weight: 600;
+            color: var(--earth-dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.125rem;
+        }
+        
+        .method-use-case {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+        
+        .method-strength {
+            font-size: 0.875rem;
+            color: var(--earth-medium);
+            font-style: italic;
+        }
+        
+        /* ============================================
+           CROSS-DOMAIN BRIDGES
+           ============================================ */
+        .bridge-matrix {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .bridge-row {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            background: var(--background-light);
+            border-radius: 6px;
+            border-left: 4px solid var(--evidence-teal);
+        }
+        
+        .bridge-domains {
+            font-weight: 600;
+            color: var(--research-purple);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .bridge-opportunity {
+            color: var(--text-secondary);
+        }
+        
+        /* ============================================
+           REPLICATION PROTOCOL
+           ============================================ */
+        .protocol-steps {
+            background: var(--background-light);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .protocol-step {
+            background: var(--card-background);
+            border-left: 4px solid var(--evidence-teal);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 6px;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .protocol-step:last-child {
+            margin-bottom: 0;
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            background: var(--evidence-teal);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 36px;
+            font-weight: 700;
+            margin-right: 0.75rem;
+        }
+        
+        .step-title {
+            display: inline;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--earth-dark);
+        }
+        
+        .step-content {
+            margin-top: 1rem;
+            padding-left: 3rem;
+            color: var(--text-secondary);
+        }
+        
+        /* ============================================
+           DATA SHARING PRINCIPLES
+           ============================================ */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .principle-card {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 1.75rem;
+            box-shadow: var(--shadow-subtle);
+            border-top: 3px solid var(--healing-green);
+        }
+        
+        .principle-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .principle-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--earth-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .principle-description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+        
+        /* ============================================
+           CALLOUT BOXES
+           ============================================ */
+        .callout {
+            background: var(--warm-sand);
+            border-radius: var(--border-radius);
+            padding: 1.75rem;
+            margin: 2rem 0;
+            border-left: 5px solid var(--earth-medium);
+        }
+        
+        .callout-title {
+            font-size: 1.25rem;
+            color: var(--earth-dark);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .callout-content {
+            color: var(--text-secondary);
+        }
+        
+        .warning-box {
+            background: rgba(232, 168, 124, 0.15);
+            border-left-color: #e8a87c;
+        }
+        
+        .success-box {
+            background: rgba(168, 197, 160, 0.2);
+            border-left-color: var(--healing-green);
+        }
+        
+        .info-box {
+            background: rgba(90, 158, 158, 0.1);
+            border-left-color: var(--evidence-teal);
+        }
+        
+        /* ============================================
+           ETHICS CHECKLIST
+           ============================================ */
+        .ethics-checklist {
+            background: var(--card-background);
+            border: 2px solid var(--research-purple);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .ethics-checklist h3 {
+            margin-top: 0;
+            color: var(--research-purple);
+        }
+        
+        .ethics-checklist ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .ethics-checklist li {
+            padding: 0.75rem 0 0.75rem 2rem;
+            position: relative;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .ethics-checklist li:last-child {
+            border-bottom: none;
+        }
+        
+        .ethics-checklist li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            font-size: 1.25rem;
+            color: var(--healing-green);
+            font-weight: bold;
+        }
+        
+        /* ============================================
+           QUOTE BOXES
+           ============================================ */
+        .quote-box {
+            background: var(--background-light);
+            border-left: 4px solid var(--research-purple);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            font-style: italic;
+            font-size: 1.05rem;
+        }
+        
+        .quote-box strong {
+            font-style: normal;
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--earth-medium);
+        }
+        
+        /* ============================================
+           ZERO HARM BADGE
+           ============================================ */
+        .zero-harm-badge {
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--earth-dark);
+            color: var(--warm-sand);
+            padding: 0.75rem 1.25rem;
+            border-radius: 50px;
+            box-shadow: var(--shadow-medium);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: var(--transition-smooth);
+        }
+        
+        .zero-harm-badge:hover {
+            background: var(--earth-medium);
+            transform: scale(1.05);
+        }
+        
+        .zero-harm-badge::before {
+            content: '🛡️';
+            margin-right: 0.5rem;
+        }
+        
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: var(--earth-dark);
+            color: var(--warm-sand);
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .footer-nav a {
+            color: var(--warm-sand);
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        
+        .footer-nav a:hover {
+            opacity: 1;
+            color: var(--healing-green);
+        }
+        
+        .zero-harm-statement {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-left: 4px solid var(--healing-green);
+        }
+        
+        .zero-harm-statement h3 {
+            color: var(--healing-green);
+            margin-top: 0;
+        }
+        
+        .zero-harm-statement p {
+            color: var(--warm-sand);
+            font-size: 0.95rem;
+            margin: 0.5rem 0;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            margin-top: 2rem;
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+        
+        /* ============================================
+           LISTS
+           ============================================ */
+        ul {
+            margin: 1rem 0 1rem 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 1.5rem;
+            }
+            
+            .evidence-pyramid,
+            .bridge-matrix,
+            .protocol-steps {
+                padding: 1.5rem;
+            }
+            
+            .nav-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .nav-links {
+                width: 100%;
+            }
+            
+            .zero-harm-badge {
+                top: auto;
+                bottom: 20px;
+                font-size: 0.75rem;
+                padding: 0.5rem 1rem;
+            }
+            
+            .priority-grid,
+            .methodology-grid,
+            .principles-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .bridge-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .step-content {
+                padding-left: 0;
+                margin-top: 1rem;
+            }
+        }
+        
+        /* ============================================
+           PRINT STYLES
+           ============================================ */
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .top-nav,
+            .zero-harm-badge {
+                display: none;
+            }
+            
+            .content-section,
+            .evidence-pyramid,
+            .ethics-checklist {
+                page-break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+            
+            a[href^="http"]::after {
+                content: " (" attr(href) ")";
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- TOP NAVIGATION -->
+    <nav class="top-nav">
+        <div class="wide-container">
+            <div class="nav-content">
+                <a href="../index.html" class="nav-home">← Feed Children ASAP Atlas</a>
+                <ul class="nav-links">
+                    <li><a href="policymakers.html">For Policymakers</a></li>
+                    <li><a href="implementers.html">For Implementers</a></li>
+                    <li><a href="funders.html">For Funders</a></li>
+                    <li><a href="communities.html">For Communities</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ZERO HARM BADGE -->
+    <aside class="zero-harm-badge">
+        <a href="../governance.html">Zero Harm Policy</a>
+    </aside>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <span class="audience-badge">🔬 For Researchers & Academics</span>
+            <h1>Evidence Synthesis & Knowledge Production Framework</h1>
+            <p class="subtitle">
+                How researchers can generate, validate, and translate knowledge that accelerates action on child 
+                nutrition across disciplines, geographies, and implementation contexts
+            </p>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <div class="container">
+            
+            <!-- CORE THESIS -->
+            <section class="content-section evidence-section">
+                <h2>The Research-Action Gap</h2>
+                <p>
+                    Academic research produces thousands of nutrition studies annually. Most sit in paywalled journals, 
+                    written in technical language, disconnected from implementation contexts. Meanwhile, practitioners 
+                    make urgent decisions with limited evidence, and policymakers cite outdated or cherry-picked studies.
+                </p>
+                <p>
+                    <strong>The result:</strong> A knowledge production system optimized for academic advancement rather 
+                    than real-world impact. Rigorous research that never influences action. Interventions scaled without 
+                    evidence. Resources misallocated due to information asymmetries.
+                </p>
+                
+                <div class="quote-box">
+                    "The question is not 'Is this publishable?' but rather 'Will this knowledge change how resources 
+                    flow to children?'"
+                </div>
+                
+                <p>
+                    This framework repositions research as a <strong>public good for coordination</strong> rather than 
+                    a credential for individual advancement. It provides guidance for researchers who want their work 
+                    to matter beyond citation counts.
+                </p>
+            </section>
+
+            <!-- EVIDENCE HIERARCHY -->
+            <section>
+                <h2>Evidence Quality Framework</h2>
+                <p>
+                    Not all evidence is created equal. This hierarchy guides both evidence generation and evidence 
+                    interpretation. Higher levels provide stronger basis for action, but all levels have value when 
+                    properly contextualized.
+                </p>
+                
+                <div class="evidence-pyramid">
+                    <div class="evidence-level level-1">
+                        <div class="evidence-header">
+                            <h3 class="evidence-title">Level 1: Systematic Reviews & Meta-Analyses</h3>
+                            <span class="evidence-grade">Highest Quality</span>
+                        </div>
+                        <p class="evidence-description">
+                            <strong>What:</strong> Comprehensive synthesis of all available evidence on a specific question, 
+                            with quantitative pooling (meta-analysis) when appropriate.<br>
+                            <strong>Strength:</strong> Reduces bias from single studies, increases statistical power, 
+                            identifies consistency across contexts.<br>
+                            <strong>Limitation:</strong> Quality depends on underlying studies; may mask important 
+                            heterogeneity; retrospective.
+                        </p>
+                    </div>
+                    
+                    <div class="evidence-level level-2">
+                        <div class="evidence-header">
+                            <h3 class="evidence-title">Level 2: Randomized Controlled Trials (RCTs)</h3>
+                            <span class="evidence-grade">High Quality</span>
+                        </div>
+                        <p class="evidence-description">
+                            <strong>What:</strong> Experimental studies with random assignment to intervention and 
+                            control groups, measuring causal effects.<br>
+                            <strong>Strength:</strong> Strongest causal inference; controls for confounding; replicable 
+                            methodology.<br>
+                            <strong>Limitation:</strong> Expensive; may have limited external validity; ethical constraints 
+                            in some contexts; artificial conditions.
+                        </p>
+                    </div>
+                    
+                    <div class="evidence-level level-3">
+                        <div class="evidence-header">
+                            <h3 class="evidence-title">Level 3: Quasi-Experimental Studies</h3>
+                            <span class="evidence-grade">Moderate Quality</span>
+                        </div>
+                        <p class="evidence-description">
+                            <strong>What:</strong> Non-randomized studies using comparison groups, natural experiments, 
+                            regression discontinuity, difference-in-differences, or propensity score matching.<br>
+                            <strong>Strength:</strong> More feasible than RCTs; can leverage existing variation; better 
+                            external validity.<br>
+                            <strong>Limitation:</strong> Weaker causal claims; vulnerable to selection bias; requires 
+                            careful design and analysis.
+                        </p>
+                    </div>
+                    
+                    <div class="evidence-level level-4">
+                        <div class="evidence-header">
+                            <h3 class="evidence-title">Level 4: Observational & Descriptive Studies</h3>
+                            <span class="evidence-grade">Foundational</span>
+                        </div>
+                        <p class="evidence-description">
+                            <strong>What:</strong> Cross-sectional surveys, cohort studies, case-control studies, 
+                            prevalence studies, or descriptive analysis without experimental manipulation.<br>
+                            <strong>Strength:</strong> Can study rare outcomes; real-world conditions; large sample 
+                            sizes; less expensive.<br>
+                            <strong>Limitation:</strong> Cannot establish causation; confounding factors; limited 
+                            ability to inform intervention design.
+                        </p>
+                    </div>
+                    
+                    <div class="evidence-level level-5">
+                        <div class="evidence-header">
+                            <h3 class="evidence-title">Level 5: Expert Opinion & Case Studies</h3>
+                            <span class="evidence-grade">Contextual</span>
+                        </div>
+                        <p class="evidence-description">
+                            <strong>What:</strong> Professional consensus, clinical experience, qualitative research, 
+                            implementation case studies, or theoretical frameworks.<br>
+                            <strong>Strength:</strong> Captures nuance; generates hypotheses; rapid feedback; contextual 
+                            understanding.<br>
+                            <strong>Limitation:</strong> Subjective; not generalizable; vulnerable to bias; should not 
+                            guide major resource allocation alone.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="callout info-box">
+                    <div class="callout-title">
+                        <span>💡</span>
+                        <span>Using the Hierarchy Appropriately</span>
+                    </div>
+                    <div class="callout-content">
+                        <p><strong>Lower-quality evidence still has value when:</strong></p>
+                        <ul>
+                            <li>Higher-quality evidence doesn't exist yet (new interventions, emerging contexts)</li>
+                            <li>Ethical constraints prevent experimental designs</li>
+                            <li>Urgent decisions require immediate action with available information</li>
+                            <li>Qualitative insights reveal mechanisms not captured by quantitative studies</li>
+                        </ul>
+                        <p style="margin-top: 1rem;">
+                            <strong>The key:</strong> Be transparent about evidence quality. Don't overstate certainty. 
+                            Clearly distinguish correlation from causation.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RESEARCH PRIORITIES -->
+            <section>
+                <h2>High-Priority Research Gaps</h2>
+                <p>
+                    These questions represent critical knowledge gaps where new research could significantly influence 
+                    resource allocation, policy design, or implementation effectiveness. Prioritized by potential impact, 
+                    feasibility, and current evidence quality.
+                </p>
+                
+                <div class="priority-grid">
+                    <div class="priority-card">
+                        <h3>Cost-Effectiveness Across Contexts</h3>
+                        <p>
+                            <strong>Question:</strong> How do intervention cost-effectiveness ratios vary across income 
+                            levels, geographies, and implementation partners?<br>
+                            <strong>Why:</strong> Most CE analyses are context-specific. Funders need generalizable 
+                            frameworks for allocation decisions.
+                        </p>
+                        <span class="priority-urgency high">High Urgency</span>
+                    </div>
+                    
+                    <div class="priority-card">
+                        <h3>Supply Chain Optimization</h3>
+                        <p>
+                            <strong>Question:</strong> What distribution models minimize cost and spoilage for therapeutic 
+                            foods in low-infrastructure settings?<br>
+                            <strong>Why:</strong> Logistics often account for 40-60% of program costs. Small improvements 
+                            generate massive savings.
+                        </p>
+                        <span class="priority-urgency high">High Urgency</span>
+                    </div>
+                    
+                    <div class="priority-card">
+                        <h3>Behavior Change Mechanisms</h3>
+                        <p>
+                            <strong>Question:</strong> Which behavioral interventions durably change infant and young child 
+                            feeding practices?<br>
+                            <strong>Why:</strong> Knowledge transfer doesn't guarantee practice change. Understanding 
+                            mechanisms enables better program design.
+                        </p>
+                        <span class="priority-urgency medium">Medium Urgency</span>
+                    </div>
+                    
+                    <div class="priority-card">
+                        <h3>Long-Term Outcomes</h3>
+                        <p>
+                            <strong>Question:</strong> What are the cognitive, economic, and health trajectories of children 
+                            who received early nutrition interventions?<br>
+                            <strong>Why:</strong> Most studies measure short-term anthropometrics. Long-term impacts justify 
+                            investment and inform program design.
+                        </p>
+                        <span class="priority-urgency medium">Medium Urgency</span>
+                    </div>
+                    
+                    <div class="priority-card">
+                        <h3>Multi-Sectoral Synergies</h3>
+                        <p>
+                            <strong>Question:</strong> How do nutrition interventions interact with health, education, and 
+                            WASH programs?<br>
+                            <strong>Why:</strong> Programs operate in silos. Understanding complementarities enables 
+                            better coordination.
+                        </p>
+                        <span class="priority-urgency ongoing">Ongoing</span>
+                    </div>
+                    
+                    <div class="priority-card">
+                        <h3>Emergency Response Effectiveness</h3>
+                        <p>
+                            <strong>Question:</strong> What pre-positioning strategies minimize mortality in acute 
+                            nutrition crises?<br>
+                            <strong>Why:</strong> Crises are increasing. Evidence on rapid response could save thousands 
+                            of lives annually.
+                        </p>
+                        <span class="priority-urgency high">High Urgency</span>
+                    </div>
+                </div>
+                
+                <div class="callout success-box">
+                    <div class="callout-title">
+                        <span>✓</span>
+                        <span>How to Prioritize Your Research</span>
+                    </div>
+                    <div class="callout-content">
+                        <p><strong>High-impact research typically has three characteristics:</strong></p>
+                        <ol>
+                            <li><strong>Decision relevance:</strong> Answers a question that practitioners, funders, or 
+                            policymakers are actively facing</li>
+                            <li><strong>Actionability:</strong> Results can be translated into specific operational changes</li>
+                            <li><strong>Scalability:</strong> Findings apply beyond a single organization or geography</li>
+                        </ol>
+                        <p style="margin-top: 1rem;">
+                            <strong>Test:</strong> If your research succeeds, who will change their behavior and how? 
+                            If you can't answer this, consider refocusing.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CROSS-DOMAIN SYNTHESIS -->
+            <section class="content-section">
+                <h2>Cross-Domain Research Opportunities</h2>
+                <p>
+                    Child nutrition sits at the intersection of multiple disciplines. The highest-leverage research 
+                    often connects insights across traditional academic boundaries. These are areas ripe for synthesis.
+                </p>
+                
+                <div class="bridge-matrix">
+                    <div class="bridge-row">
+                        <div class="bridge-domains">
+                            <span>🧬 Nutrition Science</span>
+                            <span>↔</span>
+                            <span>💰 Economics</span>
+                        </div>
+                        <div class="bridge-opportunity">
+                            <strong>Opportunity:</strong> How do food price volatility, income shocks, and market structures 
+                            affect micronutrient adequacy? Most nutrition studies ignore economic context; most economic 
+                            studies use crude nutrition measures. Synthesis enables better policy design.
+                        </div>
+                    </div>
+                    
+                    <div class="bridge-row">
+                        <div class="bridge-domains">
+                            <span>🏛️ Political Science</span>
+                            <span>↔</span>
+                            <span>🏥 Public Health</span>
+                        </div>
+                        <div class="bridge-opportunity">
+                            <strong>Opportunity:</strong> Why do some governments prioritize child nutrition while others 
+                            don't, despite similar resources? Political economy analysis can explain policy gaps that 
+                            technical analysis misses.
+                        </div>
+                    </div>
+                    
+                    <div class="bridge-row">
+                        <div class="bridge-domains">
+                            <span>🌾 Agricultural Systems</span>
+                            <span>↔</span>
+                            <span>🧠 Behavioral Science</span>
+                        </div>
+                        <div class="bridge-opportunity">
+                            <strong>Opportunity:</strong> What drives farmer adoption of biofortified crops and consumer 
+                            acceptance? Supply-side interventions fail without understanding demand-side psychology.
+                        </div>
+                    </div>
+                    
+                    <div class="bridge-row">
+                        <div class="bridge-domains">
+                            <span>🌍 Climate Science</span>
+                            <span>↔</span>
+                            <span>🍽️ Food Security</span>
+                        </div>
+                        <div class="bridge-opportunity">
+                            <strong>Opportunity:</strong> How do climate shocks cascade through food systems to affect 
+                            child nutrition? Predictive models could enable anticipatory action before crises.
+                        </div>
+                    </div>
+                    
+                    <div class="bridge-row">
+                        <div class="bridge-domains">
+                            <span>📊 Data Science</span>
+                            <span>↔</span>
+                            <span>🚚 Supply Chain</span>
+                        </div>
+                        <div class="bridge-opportunity">
+                            <strong>Opportunity:</strong> Can real-time data and machine learning optimize nutrition supply 
+                            chains? Most humanitarian logistics still rely on static planning models.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- METHODOLOGY GUIDANCE -->
+            <section>
+                <h2>Methodology Selection Framework</h2>
+                <p>
+                    Different research questions require different methods. This framework helps match methods to questions 
+                    for maximum validity and impact.
+                </p>
+                
+                <div class="methodology-grid">
+                    <div class="method-card">
+                        <div class="method-name">Randomized Controlled Trials</div>
+                        <div class="method-use-case">
+                            <strong>Best for:</strong> Testing causal effects of discrete interventions with clear treatment 
+                            and control groups
+                        </div>
+                        <div class="method-strength">
+                            Strength: Internal validity, causal inference<br>
+                            Weakness: External validity, ethical constraints, cost
+                        </div>
+                    </div>
+                    
+                    <div class="method-card">
+                        <div class="method-name">Natural Experiments</div>
+                        <div class="method-use-case">
+                            <strong>Best for:</strong> Leveraging policy changes, geographic boundaries, or timing variation 
+                            to estimate effects
+                        </div>
+                        <div class="method-strength">
+                            Strength: Real-world validity, feasibility<br>
+                            Weakness: Requires right setting, weaker causal claims
+                        </div>
+                    </div>
+                    
+                    <div class="method-card">
+                        <div class="method-name">Implementation Science</div>
+                        <div class="method-use-case">
+                            <strong>Best for:</strong> Understanding how and why interventions succeed or fail in real-world 
+                            settings
+                        </div>
+                        <div class="method-strength">
+                            Strength: Actionable insights, contextual understanding<br>
+                            Weakness: Limited generalizability, requires process data
+                        </div>
+                    </div>
+                    
+                    <div class="method-card">
+                        <div class="method-name">Systems Modeling</div>
+                        <div class="method-use-case">
+                            <strong>Best for:</strong> Exploring complex dynamics, feedback loops, and long-term trajectories 
+                            in nutrition systems
+                        </div>
+                        <div class="method-strength">
+                            Strength: Handles complexity, scenario analysis<br>
+                            Weakness: Model validity depends on assumptions, data quality
+                        </div>
+                    </div>
+                    
+                    <div class="method-card">
+                        <div class="method-name">Mixed Methods</div>
+                        <div class="method-use-case">
+                            <strong>Best for:</strong> Combining quantitative impact measurement with qualitative mechanism 
+                            exploration
+                        </div>
+                        <div class="method-strength">
+                            Strength: Depth and breadth, triangulation<br>
+                            Weakness: Resource intensive, requires multiple skill sets
+                        </div>
+                    </div>
+                    
+                    <div class="method-card">
+                        <div class="method-name">Replication Studies</div>
+                        <div class="method-use-case">
+                            <strong>Best for:</strong> Testing whether findings hold across contexts, populations, or 
+                            implementation partners
+                        </div>
+                        <div class="method-strength">
+                            Strength: Builds confidence, identifies boundary conditions<br>
+                            Weakness: Less novel, harder to publish, requires funding
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- REPLICATION PROTOCOL -->
+            <section class="content-section methodology-section">
+                <h2>Open Science & Replication Protocol</h2>
+                <p>
+                    Science advances through replication, not individual studies. This protocol makes your research 
+                    maximally useful for future researchers, practitioners, and meta-analysts.
+                </p>
+                
+                <div class="protocol-steps">
+                    <div class="protocol-step">
+                        <span class="step-number">1</span>
+                        <h4 class="step-title">Pre-Registration</h4>
+                        <div class="step-content">
+                            <p>
+                                <strong>Register your study design, hypotheses, and analysis plan before data collection.</strong>
+                            </p>
+                            <p>
+                                Platforms: ClinicalTrials.gov (clinical studies), OSF Registries (social science), 
+                                AsPredicted (economics). Include: research question, outcome measures, sample size 
+                                calculation, statistical approach, and any exploratory analyses.
+                            </p>
+                            <p><strong>Why:</strong> Prevents p-hacking, selective reporting, and publication bias.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="protocol-step">
+                        <span class="step-number">2</span>
+                        <h4 class="step-title">Data Collection Transparency</h4>
+                        <div class="step-content">
+                            <p>
+                                <strong>Document data collection procedures, instruments, and challenges in real time.</strong>
+                            </p>
+                            <p>
+                                Include: survey instruments, training materials, quality control procedures, adverse 
+                                events, protocol deviations, and response rates. Store in accessible repository.
+                            </p>
+                            <p><strong>Why:</strong> Enables replication and helps future researchers avoid your mistakes.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="protocol-step">
+                        <span class="step-number">3</span>
+                        <h4 class="step-title">Data Sharing</h4>
+                        <div class="step-content">
+                            <p>
+                                <strong>Make de-identified data publicly available with clear documentation.</strong>
+                            </p>
+                            <p>
+                                Repositories: Harvard Dataverse, Open Science Framework, Dryad, or domain-specific 
+                                archives. Include codebook, data dictionary, and any code used for cleaning or analysis. 
+                                Embargo period acceptable if necessary (typically 12-24 months).
+                            </p>
+                            <p><strong>Why:</strong> Enables meta-analysis, sensitivity testing, and new hypotheses.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="protocol-step">
+                        <span class="step-number">4</span>
+                        <h4 class="step-title">Analysis Code Publication</h4>
+                        <div class="step-content">
+                            <p>
+                                <strong>Share all code used to generate results, figures, and tables.</strong>
+                            </p>
+                            <p>
+                                Platforms: GitHub, GitLab, or OSF. Include: data cleaning scripts, statistical analysis 
+                                code, visualization code, and computational environment specifications (package versions, 
+                                software versions). Use version control.
+                            </p>
+                            <p><strong>Why:</strong> Ensures computational reproducibility and catches errors.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="protocol-step">
+                        <span class="step-number">5</span>
+                        <h4 class="step-title">Plain-Language Summary</h4>
+                        <div class="step-content">
+                            <p>
+                                <strong>Write a 1-2 page summary accessible to non-specialists.</strong>
+                            </p>
+                            <p>
+                                Include: research question in plain language, key findings without jargon, practical 
+                                implications for implementers/policymakers, limitations and caveats, and directions 
+                                for future research. Avoid academic hedging; be direct about what you learned.
+                            </p>
+                            <p><strong>Why:</strong> Bridges research-practice gap; increases real-world impact.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="protocol-step">
+                        <span class="step-number">6</span>
+                        <h4 class="step-title">Null Results Publication</h4>
+                        <div class="step-content">
+                            <p>
+                                <strong>Publish null and negative results; don't file-drawer them.</strong>
+                            </p>
+                            <p>
+                                Options: Traditional journals (increasingly accepting), PLOS ONE (publishes sound methodology 
+                                regardless of results), Cochrane Database of Systematic Reviews, or preprint servers 
+                                (arXiv, medRxiv, SocArXiv).
+                            </p>
+                            <p><strong>Why:</strong> Prevents wasted replication, reduces publication bias, advances knowledge.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="callout warning-box">
+                    <div class="callout-title">
+                        <span>⚠️</span>
+                        <span>Data Sharing Ethics</span>
+                    </div>
+                    <div class="callout-content">
+                        <p><strong>Before sharing data, ensure:</strong></p>
+                        <ul>
+                            <li>Informed consent included permission for data sharing</li>
+                            <li>All personally identifiable information removed</li>
+                            <li>Small-cell suppression applied to prevent re-identification</li>
+                            <li>Sensitive variables (health status, income, location) appropriately protected</li>
+                            <li>Compliance with institutional IRB and local data protection laws</li>
+                        </ul>
+                        <p style="margin-top: 1rem;">
+                            <strong>When in doubt, consult your IRB and prioritize participant privacy over data availability.</strong>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ETHICAL RESEARCH -->
+            <section>
+                <h2>Research Ethics: Non-Negotiable Standards</h2>
+                <p>
+                    Ethical research protects participants, produces valid knowledge, and maintains public trust. 
+                    These principles apply regardless of funding source, publication venue, or career incentives.
+                </p>
+                
+                <div class="ethics-checklist">
+                    <h3>Mandatory Ethical Requirements</h3>
+                    <ul>
+                        <li><strong>Informed consent:</strong> Participants understand purpose, procedures, risks, benefits, 
+                        and voluntary nature of participation. For vulnerable populations (children, illiterate, displaced), 
+                        use appropriate consent procedures.</li>
+                        
+                        <li><strong>Privacy protection:</strong> Minimize data collection to essential variables. Use 
+                        encryption, secure storage, and access controls. De-identify data before analysis. Never share 
+                        identifiable data without explicit consent.</li>
+                        
+                        <li><strong>Equipoise in trials:</strong> RCTs are ethical only when genuine uncertainty exists 
+                        about which intervention is superior. Don't randomize access to proven life-saving interventions.</li>
+                        
+                        <li><strong>Benefit sharing:</strong> Participants and communities should benefit from research, 
+                        not just external researchers and institutions. Share findings, provide results, offer continued 
+                        access to effective interventions.</li>
+                        
+                        <li><strong>Community engagement:</strong> Involve affected communities in research design, 
+                        interpretation, and dissemination. Respect local knowledge and decision-making authority.</li>
+                        
+                        <li><strong>Conflict of interest disclosure:</strong> Declare all financial relationships, 
+                        institutional affiliations, and potential biases. Funding sources should not influence study 
+                        design or reporting.</li>
+                        
+                        <li><strong>Research integrity:</strong> No fabrication, falsification, or plagiarism. Report 
+                        results honestly, including inconvenient findings. Correct errors promptly and publicly.</li>
+                        
+                        <li><strong>Authorship transparency:</strong> Credit all substantive intellectual contributors. 
+                        No ghost authorship (uncredited writers) or gift authorship (undeserved credit).</li>
+                        
+                        <li><strong>Environmental responsibility:</strong> Minimize research footprint. Dispose of materials 
+                        safely. Consider carbon costs of international travel and offsetting options.</li>
+                        
+                        <li><strong>Post-research obligations:</strong> Don't extract knowledge and leave. Capacity building, 
+                        infrastructure sharing, and long-term partnerships demonstrate respect for host communities.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- DATA SHARING PRINCIPLES -->
+            <section>
+                <h2>Open Science Principles</h2>
+                <p>
+                    Science funded by public resources should produce public knowledge. These principles guide ethical 
+                    and effective knowledge sharing.
+                </p>
+                
+                <div class="principles-grid">
+                    <div class="principle-card">
+                        <div class="principle-icon">🔓</div>
+                        <div class="principle-title">Open Access Publishing</div>
+                        <div class="principle-description">
+                            Publish in open-access journals or post preprints to public repositories. Knowledge behind 
+                            paywalls cannot inform action in low-resource settings.
+                        </div>
+                    </div>
+                    
+                    <div class="principle-card">
+                        <div class="principle-icon">📊</div>
+                        <div class="principle-title">Open Data</div>
+                        <div class="principle-description">
+                            Share de-identified data in accessible repositories with clear documentation. Enable 
+                            replication, meta-analysis, and new discoveries.
+                        </div>
+                    </div>
+                    
+                    <div class="principle-card">
+                        <div class="principle-icon">💻</div>
+                        <div class="principle-title">Open Code</div>
+                        <div class="principle-description">
+                            Publish analysis code, computational workflows, and software tools. Transparency enables 
+                            error detection and methodological advancement.
+                        </div>
+                    </div>
+                    
+                    <div class="principle-card">
+                        <div class="principle-icon">📝</div>
+                        <div class="principle-title">Open Protocols</div>
+                        <div class="principle-description">
+                            Share study protocols, instruments, and materials before data collection. Pre-registration 
+                            prevents selective reporting and publication bias.
+                        </div>
+                    </div>
+                    
+                    <div class="principle-card">
+                        <div class="principle-icon">🤝</div>
+                        <div class="principle-title">Open Collaboration</div>
+                        <div class="principle-description">
+                            Invite participation from diverse researchers, especially from low- and middle-income countries. 
+                            Break down institutional and geographic silos.
+                        </div>
+                    </div>
+                    
+                    <div class="principle-card">
+                        <div class="principle-icon">🎓</div>
+                        <div class="principle-title">Open Education</div>
+                        <div class="principle-description">
+                            Share teaching materials, training resources, and capacity-building tools. Enable skill 
+                            transfer and local research capacity development.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- IMPACT PATHWAYS -->
+            <section class="content-section">
+                <h2>Research-to-Action Pathways</h2>
+                <p>
+                    Academic publication is not the endpoint. These are concrete pathways for research to influence 
+                    real-world decisions.
+                </p>
+                
+                <h3>How Research Influences Action</h3>
+                
+                <div class="quote-box">
+                    <strong>Pathway 1: Direct Implementation</strong>
+                    Practitioners read your study and adopt your intervention. Requires: accessible writing, clear 
+                    methods description, implementation guidance, and cost data.
+                </div>
+                
+                <div class="quote-box">
+                    <strong>Pathway 2: Evidence Synthesis</strong>
+                    Your study becomes part of systematic reviews and meta-analyses that inform guidelines. Requires: 
+                    methodological rigor, data sharing, and engagement with review teams.
+                </div>
+                
+                <div class="quote-box">
+                    <strong>Pathway 3: Policy Influence</strong>
+                    Policymakers cite your work when designing programs or regulations. Requires: policy briefs, 
+                    direct engagement with government, media coverage, and patience.
+                </div>
+                
+                <div class="quote-box">
+                    <strong>Pathway 4: Funding Allocation</strong>
+                    Foundations and donors use your cost-effectiveness analysis to prioritize interventions. Requires: 
+                    transparent assumptions, sensitivity analysis, and comparable metrics.
+                </div>
+                
+                <div class="quote-box">
+                    <strong>Pathway 5: Methodological Advancement</strong>
+                    Other researchers adopt your methods or build on your theoretical framework. Requires: detailed 
+                    methodology, replication materials, and engagement with research community.
+                </div>
+                
+                <h3>Practical Steps to Increase Impact</h3>
+                <ul>
+                    <li><strong>Write policy briefs:</strong> 2-page summaries for non-specialists with clear recommendations</li>
+                    <li><strong>Engage stakeholders early:</strong> Involve practitioners and policymakers in research design</li>
+                    <li><strong>Present to diverse audiences:</strong> Not just academic conferences; also practitioner 
+                    convenings, government workshops, foundation meetings</li>
+                    <li><strong>Cultivate media relationships:</strong> Help journalists understand and report your findings accurately</li>
+                    <li><strong>Create implementation resources:</strong> Toolkits, checklists, training materials that 
+                    operationalize your findings</li>
+                    <li><strong>Track downstream use:</strong> Monitor how your work gets cited in program documents, 
+                    policy papers, and funding decisions</li>
+                </ul>
+            </section>
+
+            <!-- COLLABORATION -->
+            <section class="content-section">
+                <h2>Collaborative Research Models</h2>
+                <p>
+                    The most impactful nutrition research often involves partnerships across institutions, disciplines, 
+                    and sectors. These models balance intellectual contribution with operational constraints.
+                </p>
+                
+                <h3>Partnership Structures</h3>
+                
+                <div class="method-card" style="margin: 1.5rem 0;">
+                    <div class="method-name">University-NGO Partnerships</div>
+                    <div class="method-use-case">
+                        <strong>Structure:</strong> Universities provide technical expertise and analysis; NGOs provide 
+                        field access and implementation capacity
+                    </div>
+                    <div class="method-strength">
+                        <strong>Key to success:</strong> Clear MOU on data ownership, authorship, timeline, and resource 
+                        sharing. Respect operational constraints.
+                    </div>
+                </div>
+                
+                <div class="method-card" style="margin: 1.5rem 0;">
+                    <div class="method-name">Multi-Country Consortia</div>
+                    <div class="method-use-case">
+                        <strong>Structure:</strong> Coordinated studies across multiple countries using harmonized protocols 
+                        and pooled analysis
+                    </div>
+                    <div class="method-strength">
+                        <strong>Key to success:</strong> Central coordination team, standardized instruments, regular 
+                        communication, and equitable authorship.
+                    </div>
+                </div>
+                
+                <div class="method-card" style="margin: 1.5rem 0;">
+                    <div class="method-name">Embedded Researchers</div>
+                    <div class="method-use-case">
+                        <strong>Structure:</strong> Researchers work within implementing organizations, conducting studies 
+                        while supporting operations
+                    </div>
+                    <div class="method-strength">
+                        <strong>Key to success:</strong> Dual accountability to research and operations, realistic timelines, 
+                        and building organizational research capacity.
+                    </div>
+                </div>
+                
+                <div class="callout info-box" style="margin-top: 2rem;">
+                    <div class="callout-title">
+                        <span>💡</span>
+                        <span>When Partnerships Fail</span>
+                    </div>
+                    <div class="callout-content">
+                        <p><strong>Common failure modes:</strong></p>
+                        <ul>
+                            <li>Mismatched incentives (publication vs. program delivery)</li>
+                            <li>Unclear data ownership and authorship from the start</li>
+                            <li>Researchers impose unrealistic timelines on operations</li>
+                            <li>Local partners treated as data collectors, not intellectual contributors</li>
+                            <li>Research priorities don't align with organizational strategy</li>
+                        </ul>
+                        <p style="margin-top: 1rem;">
+                            <strong>Prevention:</strong> Negotiate expectations explicitly upfront. Put agreements in writing. 
+                            Build in flexibility. Share resources and credit generously.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FUNDING -->
+            <section class="content-section">
+                <h2>Funding High-Impact Research</h2>
+                <p>
+                    Research funding increasingly requires demonstrated relevance and stakeholder engagement. These 
+                    principles strengthen proposals while maintaining scientific integrity.
+                </p>
+                
+                <h3>Elements of Fundable Research</h3>
+                <ul>
+                    <li><strong>Clear decision relevance:</strong> Articulate exactly what decision-makers will do 
+                    differently based on your findings</li>
+                    <li><strong>Stakeholder buy-in:</strong> Letters of support from implementers, policymakers, or 
+                    communities who will use the results</li>
+                    <li><strong>Feasibility:</strong> Demonstrate access, partnerships, and capacity to execute in 
+                    proposed timeline and budget</li>
+                    <li><strong>Dissemination plan:</strong> Concrete strategy for reaching non-academic audiences, 
+                    not just "we will publish"</li>
+                    <li><strong>Capacity building:</strong> Especially for international work, show how you'll strengthen 
+                    local research capacity</li>
+                    <li><strong>Cost-effectiveness:</strong> Justify budget. More expensive isn't better. Show value 
+                    for money.</li>
+                </ul>
+                
+                <h3>Major Nutrition Research Funders</h3>
+                <ul>
+                    <li><strong>Bill & Melinda Gates Foundation:</strong> Large grants, long timelines, focus on 
+                    scalable solutions</li>
+                    <li><strong>USAID:</strong> Policy-relevant research in priority countries, U.S. institution preference</li>
+                    <li><strong>UNICEF:</strong> Operations research, evaluation, emergency nutrition</li>
+                    <li><strong>World Bank:</strong> Economic analysis, impact evaluation, systems strengthening</li>
+                    <li><strong>Wellcome Trust:</strong> Biomedical and implementation research, global health focus</li>
+                    <li><strong>NIH (Fogarty):</strong> Capacity building, training, U.S.-LMIC partnerships</li>
+                    <li><strong>UK Research Councils:</strong> GCRF, Newton Fund for international development research</li>
+                </ul>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <nav class="footer-nav">
+                <a href="../index.html">Home</a>
+                <a href="policymakers.html">For Policymakers</a>
+                <a href="implementers.html">For Implementers</a>
+                <a href="funders.html">For Funders</a>
+                <a href="communities.html">For Communities</a>
+                <a href="../governance.html">Governance</a>
+                <a href="../about.html">About</a>
+            </nav>
+            
+            <div class="zero-harm-statement">
+                <h3>Zero Harm & Anti-Coercion Commitment</h3>
+                <p>
+                    All research must prioritize participant safety, informed consent, and community benefit. No research 
+                    justifies exploitation, coercion, or privacy violations.
+                </p>
+                <p>
+                    Researchers have ethical obligations to conduct rigorous, honest work and to share findings openly. 
+                    Knowledge funded by public resources should serve the public good, not private advancement.
+                </p>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>Feed Children ASAP Atlas | For Researchers & Academics</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem;">
+                    Offline-First | No Tracking | Zero Surveillance | Licensed for Regenerative Use
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT (MINIMAL PROGRESSIVE ENHANCEMENT) -->
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Track that user visited researchers section
+        try {
+            localStorage.setItem('feedChildrenAtlas_lastRole', 'researchers');
+        } catch (e) {
+            // Silent fail if localStorage unavailable
+        }
+        
+        // Accessibility: Reduced motion support
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('*').forEach(el => {
+                el.style.animation = 'none';
+                el.style.transition = 'none';
+            });
+        }
+        
+        // Print optimization: Expand all sections before print
+        window.addEventListener('beforeprint', function() {
+            document.querySelectorAll('details').forEach(detail => {
+                detail.setAttribute('open', '');
+            });
+        });
+    </script>
+    
+    <!--
+    ZERO HARM COMPLIANCE NOTICE:
+    
+    This page contains:
+    - No tracking or analytics
+    - No external API calls
+    - No data collection beyond localStorage for navigation preferences
+    - No surveillance mechanisms
+    
+    All research frameworks emphasize:
+    - Participant safety and informed consent
+    - Research integrity and transparency
+    - Open science and knowledge sharing
+    - Community benefit and ethical practice
+    - Rigorous methodology and honest reporting
+    
+    Researchers must comply with all applicable IRB regulations, data protection laws, 
+    and ethical guidelines for their institutions and study contexts.
+    -->
+</body>
+</html>
