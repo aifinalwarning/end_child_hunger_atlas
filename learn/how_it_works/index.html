@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="How the Feed Children ASAP Atlas works: decision-safe frameworks, zero-harm principles, and practical pathways for addressing child nutrition without institutional risk.">
+    <title>How It Works | Feed Children ASAP Atlas</title>
+    
+    <style>
+        /* ============================================
+           RESET & BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --earth-dark: #2d3e2f;
+            --earth-medium: #5a7c5e;
+            --earth-light: #8ba888;
+            --healing-green: #a8c5a0;
+            --warm-sand: #e8dcc4;
+            --soft-blue: #7a9eb8;
+            --neutral-gray: #6b7280;
+            --background-light: #f9f9f7;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --card-background: #ffffff;
+            --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --border-radius: 8px;
+            --transition-smooth: all 0.3s ease;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--background-light);
+            overflow-x: hidden;
+        }
+        
+        /* ============================================
+           TYPOGRAPHY
+           ============================================ */
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+        }
+        
+        h1 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            color: var(--earth-dark);
+        }
+        
+        h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--earth-medium);
+            margin-top: 3rem;
+        }
+        
+        h3 {
+            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+            color: var(--earth-medium);
+            margin-top: 2rem;
+        }
+        
+        h4 {
+            font-size: clamp(1.125rem, 2vw, 1.25rem);
+            color: var(--earth-dark);
+            margin-top: 1.5rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        ul, ol {
+            margin-bottom: 1rem;
+            margin-left: 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        strong {
+            color: var(--earth-dark);
+        }
+        
+        /* ============================================
+           LAYOUT
+           ============================================ */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        .top-nav {
+            background: var(--earth-dark);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .nav-home {
+            color: var(--warm-sand);
+            font-weight: 600;
+            font-size: 1.125rem;
+            text-decoration: none;
+        }
+        
+        .nav-home:hover {
+            color: var(--healing-green);
+        }
+        
+        .breadcrumb {
+            color: var(--warm-sand);
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+        
+        /* ============================================
+           HEADER
+           ============================================ */
+        header {
+            background: linear-gradient(135deg, var(--earth-medium) 0%, var(--healing-green) 100%);
+            padding: 3rem 0 2rem;
+            color: white;
+        }
+        
+        .page-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.25);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 400;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* ============================================
+           CONTENT SECTIONS
+           ============================================ */
+        .content-section {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        /* ============================================
+           KEY PRINCIPLES BOX
+           ============================================ */
+        .principles-box {
+            background: linear-gradient(135deg, rgba(168, 197, 160, 0.2) 0%, rgba(232, 220, 196, 0.2) 100%);
+            border: 2px solid var(--healing-green);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .principles-box h3 {
+            color: var(--earth-dark);
+            margin-top: 0;
+        }
+        
+        .principle-item {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+        
+        .principle-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .principle-icon {
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1.5rem;
+        }
+        
+        .principle-title {
+            font-weight: 600;
+            color: var(--earth-dark);
+            margin-bottom: 0.25rem;
+        }
+        
+        .principle-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        /* ============================================
+           VISUAL DIAGRAM
+           ============================================ */
+        .diagram {
+            background: var(--background-light);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .diagram-title {
+            text-align: center;
+            font-weight: 600;
+            color: var(--earth-dark);
+            margin-bottom: 2rem;
+        }
+        
+        .flow-diagram {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .flow-step {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-subtle);
+            position: relative;
+        }
+        
+        .flow-step::after {
+            content: '↓';
+            position: absolute;
+            bottom: -1.75rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            color: var(--earth-light);
+        }
+        
+        .flow-step:last-child::after {
+            display: none;
+        }
+        
+        .flow-number {
+            display: inline-block;
+            background: var(--earth-medium);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: 600;
+            margin-right: 0.75rem;
+        }
+        
+        .flow-content {
+            display: inline;
+        }
+        
+        .flow-title {
+            font-weight: 600;
+            color: var(--earth-dark);
+        }
+        
+        .flow-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+        }
+        
+        /* ============================================
+           STRUCTURE CARDS
+           ============================================ */
+        .structure-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .structure-card {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-subtle);
+            border-top: 4px solid var(--earth-medium);
+            transition: var(--transition-smooth);
+        }
+        
+        .structure-card:hover {
+            box-shadow: var(--shadow-medium);
+            transform: translateY(-2px);
+        }
+        
+        .structure-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+        
+        .structure-title {
+            font-weight: 600;
+            color: var(--earth-dark);
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .structure-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        .structure-link {
+            display: inline-block;
+            margin-top: 0.75rem;
+            color: var(--soft-blue);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .structure-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* ============================================
+           CALLOUT BOXES
+           ============================================ */
+        .callout {
+            border-left: 4px solid;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        .callout.info {
+            background: rgba(122, 158, 184, 0.1);
+            border-left-color: var(--soft-blue);
+        }
+        
+        .callout.success {
+            background: rgba(168, 197, 160, 0.1);
+            border-left-color: var(--healing-green);
+        }
+        
+        .callout h4 {
+            margin-top: 0;
+            color: var(--earth-dark);
+        }
+        
+        /* ============================================
+           FAQ SECTION
+           ============================================ */
+        .faq-item {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .faq-question {
+            font-weight: 600;
+            color: var(--earth-dark);
+            font-size: 1.05rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .faq-answer {
+            color: var(--text-secondary);
+        }
+        
+        /* ============================================
+           NEXT STEPS
+           ============================================ */
+        .next-steps {
+            background: linear-gradient(135deg, var(--soft-blue) 0%, var(--earth-medium) 100%);
+            color: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .next-steps h3 {
+            color: white;
+            margin-top: 0;
+        }
+        
+        .next-steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .next-step-card {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1.25rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            transition: var(--transition-smooth);
+        }
+        
+        .next-step-card:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .next-step-card a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .next-step-icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 1.5rem;
+            }
+            
+            .principles-box {
+                padding: 1.5rem;
+            }
+            
+            .structure-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .next-steps-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .principle-item {
+                padding-left: 1.5rem;
+            }
+        }
+        
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: var(--earth-dark);
+            color: var(--warm-sand);
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            text-align: center;
+            font-size: 0.875rem;
+            opacity: 0.9;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .footer-content a {
+            color: var(--healing-green);
+            text-decoration: none;
+        }
+        
+        .footer-content a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="top-nav">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-home">← Feed Children ASAP Atlas</a>
+            <span class="breadcrumb">Learn → How It Works</span>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <span class="page-badge">📚 Learning Resource</span>
+            <h1>How the Atlas Works</h1>
+            <p class="subtitle">
+                Understanding the philosophy, structure, and approach behind this decision-safe framework 
+                for addressing child nutrition without institutional risk.
+            </p>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <div class="container">
+            
+            <!-- CORE PHILOSOPHY -->
+            <div class="content-section">
+                <h2>The Core Philosophy</h2>
+                <p>
+                    The Feed Children ASAP Atlas is designed around a fundamental insight: <strong>Most people in positions 
+                    to help children don't need more information—they need safer ways to act on what they already know.</strong>
+                </p>
+                
+                <p>
+                    Senior policymakers, foundation directors, UN staff, and institutional decision-makers often understand 
+                    that children are suffering from preventable malnutrition. But they face a complex web of constraints:
+                </p>
+                
+                <ul>
+                    <li><strong>Career risk:</strong> Failed programs damage reputations and derail careers</li>
+                    <li><strong>Institutional inertia:</strong> Organizations have established procedures and risk aversion</li>
+                    <li><strong>Attribution anxiety:</strong> "If I can't prove it worked, I'll be blamed"</li>
+                    <li><strong>Coordination paralysis:</strong> "I can't act until everyone agrees"</li>
+                    <li><strong>Analysis paralysis:</strong> "We need more studies before acting"</li>
+                </ul>
+                
+                <p>
+                    The Atlas addresses this by providing <strong>decision-safe pathways</strong>: frameworks that allow 
+                    institutional actors to take meaningful action while minimizing personal and organizational risk.
+                </p>
+            </div>
+
+            <!-- KEY PRINCIPLES -->
+            <div class="principles-box">
+                <h3>🎯 Core Principles</h3>
+                
+                <div class="principle-item">
+                    <span class="principle-icon">🛡️</span>
+                    <div class="principle-title">Zero-Harm First</div>
+                    <div class="principle-description">
+                        Every recommendation prioritizes beneficiary safety, dignity, and autonomy. No coercion, 
+                        no targeting, no exploitation—even in service of nutrition goals.
+                    </div>
+                </div>
+                
+                <div class="principle-item">
+                    <span class="principle-icon">🚪</span>
+                    <div class="principle-title">Decision-Safe Design</div>
+                    <div class="principle-description">
+                        Frameworks remove institutional barriers by providing professional cover, face-saving 
+                        language, and legitimate technical justifications for action.
+                    </div>
+                </div>
+                
+                <div class="principle-item">
+                    <span class="principle-icon">🔄</span>
+                    <div class="principle-title">Actionable Over Comprehensive</div>
+                    <div class="principle-description">
+                        Better to provide five implementable options than fifty theoretical ones. Focus on what 
+                        can actually be done given real-world constraints.
+                    </div>
+                </div>
+                
+                <div class="principle-item">
+                    <span class="principle-icon">🤝</span>
+                    <div class="principle-title">Multi-Stakeholder Accessibility</div>
+                    <div class="principle-description">
+                        Different actors need different entry points. Policymakers need different language than 
+                        implementers; communities need accessible, empowering guidance.
+                    </div>
+                </div>
+                
+                <div class="principle-item">
+                    <span class="principle-icon">⚡</span>
+                    <div class="principle-title">Deployment-Ready</div>
+                    <div class="principle-description">
+                        Everything works offline, standalone, with zero external dependencies. Can be deployed 
+                        in restrictive institutional environments or low-connectivity settings.
+                    </div>
+                </div>
+            </div>
+
+            <!-- HOW TO USE -->
+            <div class="content-section">
+                <h2>How to Use This Atlas</h2>
+                
+                <div class="diagram">
+                    <div class="diagram-title">Your Journey Through the Atlas</div>
+                    <div class="flow-diagram">
+                        <div class="flow-step">
+                            <span class="flow-number">1</span>
+                            <div class="flow-content">
+                                <div class="flow-title">Start with Your Role</div>
+                                <div class="flow-description">
+                                    Choose your entry point based on who you are: Policymaker, Implementer, Funder, 
+                                    Researcher, or Community member. Each portal provides role-specific guidance.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flow-step">
+                            <span class="flow-number">2</span>
+                            <div class="flow-content">
+                                <div class="flow-title">Understand Your Context</div>
+                                <div class="flow-description">
+                                    Use the Constraints Mapper to identify barriers in your situation. Understand what's 
+                                    blocking action so you can find workarounds.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flow-step">
+                            <span class="flow-number">3</span>
+                            <div class="flow-content">
+                                <div class="flow-title">Explore Options</div>
+                                <div class="flow-description">
+                                    Use the Intervention Selector to match approaches to your constraints, capacity, 
+                                    and context. Compare cost-effectiveness and feasibility.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flow-step">
+                            <span class="flow-number">4</span>
+                            <div class="flow-content">
+                                <div class="flow-title">Plan Implementation</div>
+                                <div class="flow-description">
+                                    Access practical tools: data collection protocols, measurement frameworks, rapid 
+                                    deployment checklists. Everything designed for real-world constraints.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flow-step">
+                            <span class="flow-number">5</span>
+                            <div class="flow-content">
+                                <div class="flow-title">Act with Confidence</div>
+                                <div class="flow-description">
+                                    Implement knowing you have evidence-based approaches, safety protocols, and 
+                                    decision-safe framing to protect beneficiaries and your institution.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STRUCTURE -->
+            <div class="content-section">
+                <h2>Atlas Structure</h2>
+                <p>The Atlas is organized around different needs and entry points:</p>
+                
+                <div class="structure-grid">
+                    <div class="structure-card">
+                        <span class="structure-icon">👥</span>
+                        <div class="structure-title">Role-Based Portals</div>
+                        <div class="structure-description">
+                            Five specialized portals provide targeted guidance for policymakers, implementers, 
+                            funders, researchers, and communities.
+                        </div>
+                        <a href="../index.html#portals" class="structure-link">Explore Portals →</a>
+                    </div>
+                    
+                    <div class="structure-card">
+                        <span class="structure-icon">🛠️</span>
+                        <div class="structure-title">Interactive Tools</div>
+                        <div class="structure-description">
+                            Practical tools help you ask better questions, map constraints, select interventions, 
+                            design data systems, and build measurement plans.
+                        </div>
+                        <a href="../index.html#tools" class="structure-link">View Tools →</a>
+                    </div>
+                    
+                    <div class="structure-card">
+                        <span class="structure-icon">📚</span>
+                        <div class="structure-title">Learning Resources</div>
+                        <div class="structure-description">
+                            Deep-dive resources explain key concepts, research foundations, and cross-domain 
+                            connections in accessible language.
+                        </div>
+                        <a href="../index.html#learn" class="structure-link">Learn More →</a>
+                    </div>
+                    
+                    <div class="structure-card">
+                        <span class="structure-icon">⚡</span>
+                        <div class="structure-title">Action Resources</div>
+                        <div class="structure-description">
+                            Rapid-start guides, country templates, procurement frameworks, and training materials 
+                            for immediate deployment.
+                        </div>
+                        <a href="../index.html#act" class="structure-link">Take Action →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WHAT MAKES IT DIFFERENT -->
+            <div class="content-section">
+                <h2>What Makes This Different</h2>
+                
+                <h3>Not Another Technical Manual</h3>
+                <p>
+                    Most nutrition guidance assumes you need more technical knowledge. The Atlas assumes you need 
+                    <strong>safer pathways to act</strong> on what you already know.
+                </p>
+                
+                <h3>Decision-Safe Framing</h3>
+                <p>
+                    Every section includes language, frameworks, and justifications designed to give institutional 
+                    actors professional cover. We acknowledge that "politically naive" recommendations, no matter how 
+                    technically sound, don't get implemented.
+                </p>
+                
+                <h3>Anti-Harm by Design</h3>
+                <p>
+                    Zero-harm principles are embedded throughout, not tacked on. We refuse to trade beneficiary 
+                    dignity or safety for program efficiency. Every recommendation passes through an anti-coercion filter.
+                </p>
+                
+                <h3>Actually Offline-First</h3>
+                <p>
+                    This isn't "works offline if you cache it." Every file is standalone. No external APIs, no CDNs, 
+                    no cloud dependencies. Deploy behind restrictive firewalls or in low-connectivity environments.
+                </p>
+                
+                <h3>Regenerative Structure</h3>
+                <p>
+                    Clear, flat file structure with role-based entry points. No nested complexity. Easy to navigate, 
+                    extend, and adapt. You can find what you need without getting lost in hierarchies.
+                </p>
+            </div>
+
+            <!-- WHO IS THIS FOR -->
+            <div class="content-section">
+                <h2>Who Is This For?</h2>
+                
+                <div class="callout info">
+                    <h4>🎯 Primary Audience</h4>
+                    <p>
+                        <strong>Institutional decision-makers</strong> who understand the problem but face barriers to action: 
+                        senior policymakers, foundation program officers, UN agency staff, government officials, NGO directors, 
+                        and others navigating complex organizational constraints.
+                    </p>
+                </div>
+                
+                <h3>But Also Useful For:</h3>
+                <ul>
+                    <li><strong>Field implementers</strong> who need practical, evidence-based protocols they can actually execute</li>
+                    <li><strong>Researchers</strong> looking to connect their work to implementation pathways</li>
+                    <li><strong>Funders</strong> seeking to deploy capital more effectively without excessive due diligence burden</li>
+                    <li><strong>Communities</strong> who want to understand their rights and hold programs accountable</li>
+                    <li><strong>Students and advocates</strong> learning about nutrition programming in real-world contexts</li>
+                </ul>
+            </div>
+
+            <!-- LIMITATIONS -->
+            <div class="content-section">
+                <h2>What This Atlas Is NOT</h2>
+                
+                <p>Honesty about limitations:</p>
+                
+                <ul>
+                    <li><strong>Not a substitute for local expertise:</strong> Context matters immensely. These frameworks 
+                    provide starting points, not prescriptions.</li>
+                    
+                    <li><strong>Not comprehensive:</strong> We prioritize actionable over exhaustive. Some important topics 
+                    are deliberately omitted to keep this usable.</li>
+                    
+                    <li><strong>Not updated in real-time:</strong> Evidence and policies change. Use this as a foundation, 
+                    but verify current information for your context.</li>
+                    
+                    <li><strong>Not magic:</strong> Decision-safe frameworks reduce barriers but can't eliminate all risk. 
+                    You still need courage and judgment.</li>
+                    
+                    <li><strong>Not politically neutral:</strong> We have values. We prioritize beneficiary dignity over 
+                    program efficiency. We reject coercive approaches even if they "work."</li>
+                </ul>
+                
+                <div class="callout success">
+                    <h4>✅ What It Is</h4>
+                    <p>
+                        A practical, values-aligned resource that removes unnecessary barriers between intention and 
+                        action. It won't make hard decisions easy, but it will make necessary decisions safer.
+                    </p>
+                </div>
+            </div>
+
+            <!-- FAQ -->
+            <div class="content-section">
+                <h2>Frequently Asked Questions</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Can I use this for my specific country/context?</div>
+                    <div class="faq-answer">
+                        Yes, but adapt it. The frameworks are designed to be context-agnostic starting points. 
+                        You'll need to incorporate local regulations, cultural contexts, and specific constraints. 
+                        Use the Constraints Mapper to identify what needs adaptation.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">How often is this updated?</div>
+                    <div class="faq-answer">
+                        This is a static resource, not a live database. The frameworks and principles are relatively 
+                        stable, but specific evidence and policies evolve. Verify current information for your context, 
+                        especially around regulations, costs, and recent research.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Can I share or adapt this content?</div>
+                    <div class="faq-answer">
+                        Yes, within the bounds of appropriate attribution and the zero-harm principles. This work is 
+                        meant to be useful, not locked away. However, don't remove safety guardrails or anti-coercion 
+                        language when adapting.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">What if my organization blocks access to some features?</div>
+                    <div class="faq-answer">
+                        Everything works as standalone HTML. No external dependencies means no features break behind 
+                        firewalls. If JavaScript is disabled, most pages degrade gracefully to readable content.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Where's the evidence base for these recommendations?</div>
+                    <div class="faq-answer">
+                        The Research Hub in the Learn section synthesizes evidence foundations. Each intervention in 
+                        the Intervention Selector includes evidence quality ratings. The Question Engine helps you 
+                        understand what's known vs. uncertain.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">How do I know if an approach is safe for beneficiaries?</div>
+                    <div class="faq-answer">
+                        Every recommendation has been filtered through anti-harm criteria. The Governance section 
+                        details zero-harm principles. When in doubt, consult the "Zero Harm & Anti-Coercion" policy 
+                        and prioritize beneficiary voice, informed consent, and dignity.
+                    </div>
+                </div>
+            </div>
+
+            <!-- NEXT STEPS -->
+            <div class="next-steps">
+                <h3>🚀 Ready to Get Started?</h3>
+                <p>Choose your next step based on what you need:</p>
+                
+                <div class="next-steps-grid">
+                    <div class="next-step-card">
+                        <a href="../index.html">
+                            <span class="next-step-icon">🏠</span>
+                            Return to Home
+                        </a>
+                    </div>
+                    
+                    <div class="next-step-card">
+                        <a href="../for/policymakers.html">
+                            <span class="next-step-icon">📋</span>
+                            Policymakers Portal
+                        </a>
+                    </div>
+                    
+                    <div class="next-step-card">
+                        <a href="../for/implementers.html">
+                            <span class="next-step-icon">⚙️</span>
+                            Implementers Portal
+                        </a>
+                    </div>
+                    
+                    <div class="next-step-card">
+                        <a href="../tools/ask.html">
+                            <span class="next-step-icon">🔍</span>
+                            Interactive Tools
+                        </a>
+                    </div>
+                    
+                    <div class="next-step-card">
+                        <a href="../governance.html">
+                            <span class="next-step-icon">🛡️</span>
+                            Zero Harm Policy
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <p>
+                <strong>How It Works</strong> | Part of Feed Children ASAP Atlas<br>
+                <a href="../governance.html">Zero Harm Policy</a> • 
+                <a href="../about.html">About This Project</a> • 
+                <a href="../index.html">Return to Atlas</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Accessibility: Reduced motion support
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('*').forEach(el => {
+                el.style.animation = 'none';
+                el.style.transition = 'none';
+            });
+        }
+    </script>
+</body>
+</html>
