@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive question engine that maps critical nutrition questions to evidence, hypotheses, and research approaches. Clarifies what is known, unknown, and testable.">
+    <title>Question Engine | Feed Children ASAP Atlas</title>
+    
+    <style>
+        /* ============================================
+           RESET & BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --earth-dark: #2d3e2f;
+            --earth-medium: #5a7c5e;
+            --earth-light: #8ba888;
+            --healing-green: #a8c5a0;
+            --warm-sand: #e8dcc4;
+            --soft-blue: #7a9eb8;
+            --research-purple: #7a6b9e;
+            --evidence-teal: #5a9e9e;
+            --question-gold: #c9a961;
+            --neutral-gray: #6b7280;
+            --background-light: #f9f9f7;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --card-background: #ffffff;
+            --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --border-radius: 8px;
+            --transition-smooth: all 0.3s ease;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--background-light);
+            overflow-x: hidden;
+        }
+        
+        /* ============================================
+           TYPOGRAPHY
+           ============================================ */
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+        }
+        
+        h1 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            color: var(--earth-dark);
+        }
+        
+        h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--earth-medium);
+            margin-top: 2rem;
+        }
+        
+        h3 {
+            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+            color: var(--earth-medium);
+            margin-top: 1.5rem;
+        }
+        
+        h4 {
+            font-size: clamp(1.125rem, 2vw, 1.25rem);
+            color: var(--earth-dark);
+            margin-top: 1rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        /* ============================================
+           LAYOUT
+           ============================================ */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .narrow-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        .top-nav {
+            background: var(--earth-dark);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .nav-home {
+            color: var(--warm-sand);
+            font-weight: 600;
+            font-size: 1.125rem;
+            text-decoration: none;
+        }
+        
+        .nav-home:hover {
+            color: var(--healing-green);
+        }
+        
+        .tool-name {
+            color: var(--warm-sand);
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        /* ============================================
+           HEADER
+           ============================================ */
+        header {
+            background: linear-gradient(135deg, var(--question-gold) 0%, var(--warm-sand) 100%);
+            padding: 3rem 0 2rem;
+            color: var(--earth-dark);
+        }
+        
+        .tool-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 400;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* ============================================
+           INTERFACE SECTIONS
+           ============================================ */
+        .interface-section {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        /* ============================================
+           QUESTION INPUT
+           ============================================ */
+        .question-input-area {
+            margin-bottom: 2rem;
+        }
+        
+        .question-textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 1rem;
+            font-size: 1.05rem;
+            border: 2px solid var(--earth-light);
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            resize: vertical;
+            transition: var(--transition-smooth);
+        }
+        
+        .question-textarea:focus {
+            outline: none;
+            border-color: var(--question-gold);
+            box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.1);
+        }
+        
+        .question-textarea::placeholder {
+            color: var(--neutral-gray);
+            opacity: 0.6;
+        }
+        
+        .input-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            font-family: inherit;
+        }
+        
+        .btn-primary {
+            background: var(--question-gold);
+            color: var(--earth-dark);
+        }
+        
+        .btn-primary:hover {
+            background: #b89850;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .btn-secondary {
+            background: var(--earth-light);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--earth-medium);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--earth-light);
+            color: var(--earth-medium);
+        }
+        
+        .btn-outline:hover {
+            background: var(--background-light);
+        }
+        
+        /* ============================================
+           QUESTION LIBRARY
+           ============================================ */
+        .question-library {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .question-category {
+            background: var(--background-light);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            border-top: 4px solid var(--question-gold);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+        
+        .question-category:hover {
+            box-shadow: var(--shadow-medium);
+            transform: translateY(-2px);
+        }
+        
+        .category-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+        
+        .category-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--earth-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .category-count {
+            font-size: 0.875rem;
+            color: var(--neutral-gray);
+        }
+        
+        /* ============================================
+           QUESTION CARDS
+           ============================================ */
+        .questions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .question-card {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            border-left: 4px solid var(--question-gold);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+        
+        .question-card:hover {
+            box-shadow: var(--shadow-medium);
+            transform: translateX(4px);
+        }
+        
+        .question-card.selected {
+            border-left-color: var(--healing-green);
+            background: linear-gradient(135deg, rgba(168, 197, 160, 0.1) 0%, var(--card-background) 100%);
+        }
+        
+        .question-text {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--earth-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .question-meta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 0.75rem;
+        }
+        
+        .meta-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .evidence-tag {
+            background: var(--evidence-teal);
+            color: white;
+        }
+        
+        .urgency-tag {
+            background: var(--community-orange);
+            color: white;
+        }
+        
+        .domain-tag {
+            background: var(--soft-blue);
+            color: white;
+        }
+        
+        /* ============================================
+           ANALYSIS PANEL
+           ============================================ */
+        .analysis-panel {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 2px solid var(--earth-light);
+        }
+        
+        .analysis-panel.hidden {
+            display: none;
+        }
+        
+        .analysis-section {
+            margin-bottom: 2rem;
+        }
+        
+        .analysis-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .analysis-section h3 {
+            margin-top: 0;
+            color: var(--question-gold);
+        }
+        
+        .evidence-status {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .status-box {
+            background: var(--background-light);
+            border-radius: 6px;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .status-label {
+            font-size: 0.875rem;
+            color: var(--neutral-gray);
+            margin-bottom: 0.5rem;
+        }
+        
+        .status-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--earth-dark);
+        }
+        
+        .status-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .hypothesis-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .hypothesis-list li {
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            background: var(--background-light);
+            border-radius: 6px;
+            border-left: 3px solid var(--research-purple);
+        }
+        
+        .hypothesis-list li strong {
+            color: var(--research-purple);
+        }
+        
+        .research-approaches {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .approach-card {
+            background: var(--background-light);
+            border-radius: 6px;
+            padding: 1.25rem;
+            border-left: 4px solid var(--soft-blue);
+        }
+        
+        .approach-name {
+            font-weight: 600;
+            color: var(--earth-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .approach-description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+        
+        /* ============================================
+           SAVED QUESTIONS
+           ============================================ */
+        .saved-questions {
+            background: var(--warm-sand);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .saved-questions h3 {
+            margin-top: 0;
+        }
+        
+        .saved-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        
+        .saved-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: white;
+            border-radius: 6px;
+            gap: 1rem;
+        }
+        
+        .saved-question-text {
+            flex: 1;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+        
+        .saved-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.25rem;
+            padding: 0.25rem;
+            opacity: 0.6;
+            transition: var(--transition-smooth);
+        }
+        
+        .icon-btn:hover {
+            opacity: 1;
+        }
+        
+        /* ============================================
+           TABS
+           ============================================ */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 2px solid var(--earth-light);
+            margin-bottom: 2rem;
+        }
+        
+        .tab {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--neutral-gray);
+            border-bottom: 3px solid transparent;
+            transition: var(--transition-smooth);
+        }
+        
+        .tab.active {
+            color: var(--question-gold);
+            border-bottom-color: var(--question-gold);
+        }
+        
+        .tab:hover {
+            color: var(--earth-medium);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* ============================================
+           EMPTY STATES
+           ============================================ */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--neutral-gray);
+        }
+        
+        .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .interface-section {
+                padding: 1.5rem;
+            }
+            
+            .question-library {
+                grid-template-columns: 1fr;
+            }
+            
+            .evidence-status {
+                grid-template-columns: 1fr;
+            }
+            
+            .tabs {
+                flex-wrap: wrap;
+            }
+            
+            .tab {
+                flex: 1;
+                min-width: 120px;
+            }
+            
+            .input-actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+        
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: var(--earth-dark);
+            color: var(--warm-sand);
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            text-align: center;
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+        
+        .footer-content a {
+            color: var(--healing-green);
+            text-decoration: none;
+        }
+        
+        .footer-content a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="top-nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="../index.html" class="nav-home">← Feed Children ASAP Atlas</a>
+                <span class="tool-name">Question Engine</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header>
+        <div class="narrow-container">
+            <span class="tool-badge">🔍 Interactive Tool</span>
+            <h1>Question Engine</h1>
+            <p class="subtitle">
+                Map critical questions to evidence, clarify what's known versus unknown, generate testable hypotheses, 
+                and identify research approaches. Turn uncertainty into actionable investigation.
+            </p>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <div class="container">
+            
+            <!-- TABS -->
+            <div class="tabs">
+                <button class="tab active" data-tab="explore">Explore Questions</button>
+                <button class="tab" data-tab="custom">Ask Your Own</button>
+                <button class="tab" data-tab="saved">Saved Questions</button>
+            </div>
+
+            <!-- TAB: EXPLORE QUESTIONS -->
+            <div class="tab-content active" id="explore-tab">
+                <div class="interface-section">
+                    <h2>Question Library by Category</h2>
+                    <p>Select a category to explore critical questions in that domain.</p>
+                    
+                    <div class="question-library">
+                        <div class="question-category" data-category="effectiveness">
+                            <span class="category-icon">⚡</span>
+                            <h3 class="category-title">Effectiveness</h3>
+                            <p class="category-count">12 questions</p>
+                        </div>
+                        
+                        <div class="question-category" data-category="cost">
+                            <span class="category-icon">💰</span>
+                            <h3 class="category-title">Cost-Effectiveness</h3>
+                            <p class="category-count">8 questions</p>
+                        </div>
+                        
+                        <div class="question-category" data-category="implementation">
+                            <span class="category-icon">🛠️</span>
+                            <h3 class="category-title">Implementation</h3>
+                            <p class="category-count">10 questions</p>
+                        </div>
+                        
+                        <div class="question-category" data-category="equity">
+                            <span class="category-icon">⚖️</span>
+                            <h3 class="category-title">Equity & Access</h3>
+                            <p class="category-count">9 questions</p>
+                        </div>
+                        
+                        <div class="question-category" data-category="systems">
+                            <span class="category-icon">🌐</span>
+                            <h3 class="category-title">Systems Change</h3>
+                            <p class="category-count">7 questions</p>
+                        </div>
+                        
+                        <div class="question-category" data-category="emergency">
+                            <span class="category-icon">🚨</span>
+                            <h3 class="category-title">Emergency Response</h3>
+                            <p class="category-count">6 questions</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- QUESTIONS LIST (Initially Hidden) -->
+                <div class="interface-section hidden" id="questions-container">
+                    <h2>Questions in <span id="category-name"></span></h2>
+                    <div class="questions-list" id="questions-list"></div>
+                </div>
+
+                <!-- ANALYSIS PANEL (Initially Hidden) -->
+                <div class="analysis-panel hidden" id="analysis-panel">
+                    <h2>Question Analysis</h2>
+                    
+                    <div class="analysis-section">
+                        <h3>Current Evidence Status</h3>
+                        <div class="evidence-status">
+                            <div class="status-box">
+                                <div class="status-icon">✅</div>
+                                <div class="status-label">Evidence Quality</div>
+                                <div class="status-value" id="evidence-quality">—</div>
+                            </div>
+                            <div class="status-box">
+                                <div class="status-icon">📊</div>
+                                <div class="status-label">Studies Available</div>
+                                <div class="status-value" id="studies-count">—</div>
+                            </div>
+                            <div class="status-box">
+                                <div class="status-icon">🎯</div>
+                                <div class="status-label">Confidence Level</div>
+                                <div class="status-value" id="confidence">—</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="analysis-section">
+                        <h3>What We Know</h3>
+                        <div id="known-section"></div>
+                    </div>
+                    
+                    <div class="analysis-section">
+                        <h3>What We Don't Know</h3>
+                        <div id="unknown-section"></div>
+                    </div>
+                    
+                    <div class="analysis-section">
+                        <h3>Testable Hypotheses</h3>
+                        <ul class="hypothesis-list" id="hypotheses-list"></ul>
+                    </div>
+                    
+                    <div class="analysis-section">
+                        <h3>Recommended Research Approaches</h3>
+                        <div class="research-approaches" id="approaches-list"></div>
+                    </div>
+                    
+                    <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <button class="btn btn-primary" onclick="saveQuestion()">💾 Save This Question</button>
+                        <button class="btn btn-outline" onclick="exportAnalysis()">📤 Export Analysis</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: CUSTOM QUESTION -->
+            <div class="tab-content" id="custom-tab">
+                <div class="interface-section">
+                    <h2>Ask Your Own Question</h2>
+                    <p>Enter a question about child nutrition that you need to investigate. The engine will help you 
+                    clarify what's known, what's unknown, and how to approach finding answers.</p>
+                    
+                    <div class="question-input-area">
+                        <textarea 
+                            class="question-textarea" 
+                            id="custom-question"
+                            placeholder="Example: How does household food insecurity in urban slums affect children's cognitive development compared to rural food insecurity?"
+                        ></textarea>
+                        
+                        <div class="input-actions">
+                            <button class="btn btn-primary" onclick="analyzeCustomQuestion()">🔍 Analyze Question</button>
+                            <button class="btn btn-secondary" onclick="clearCustomQuestion()">Clear</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CUSTOM ANALYSIS (Initially Hidden) -->
+                <div class="analysis-panel hidden" id="custom-analysis"></div>
+            </div>
+
+            <!-- TAB: SAVED QUESTIONS -->
+            <div class="tab-content" id="saved-tab">
+                <div class="interface-section">
+                    <h2>Your Saved Questions</h2>
+                    <p>Questions you've saved for reference or further investigation.</p>
+                    
+                    <div class="saved-questions">
+                        <div id="saved-list"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>
+                    <strong>Question Engine</strong> | Part of Feed Children ASAP Atlas<br>
+                    <a href="../governance.html">Zero Harm Policy</a> • 
+                    <a href="../index.html">Return to Atlas</a>
+                </p>
+                <p style="margin-top: 1rem; font-size: 0.8rem;">
+                    All data stored locally in your browser. No tracking. No external servers.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // ============================================
+        // DATA: QUESTION BANK
+        // ============================================
+        const questionBank = {
+            effectiveness: [
+                {
+                    id: 'eff-1',
+                    text: 'What is the comparative effectiveness of cash transfers versus in-kind food assistance for reducing child malnutrition?',
+                    evidenceQuality: 'Moderate',
+                    studiesCount: '15-20',
+                    confidence: 'Medium',
+                    known: 'Both approaches can improve child nutrition outcomes. Cash provides household flexibility; food ensures direct consumption. Effectiveness depends heavily on market functionality and household decision-making.',
+                    unknown: 'Optimal mix of cash vs. food in different contexts. Long-term cognitive impacts. Cost-effectiveness accounting for delivery infrastructure. Effects on intra-household allocation.',
+                    hypotheses: [
+                        'Cash transfers are more effective in stable markets with functional supply chains',
+                        'Food assistance outperforms cash during acute crises or market collapse',
+                        'Hybrid approaches (cash + nutrition counseling) may yield best outcomes'
+                    ],
+                    approaches: [
+                        { name: 'Cluster RCT', description: 'Randomize villages to cash, food, or hybrid arms. Measure anthropometrics, dietary diversity, cognitive development over 12-24 months.' },
+                        { name: 'Natural Experiment', description: 'Compare outcomes in adjacent regions with different program types due to implementing organization preferences.' }
+                    ],
+                    urgency: 'High',
+                    domains: ['Economics', 'Public Health']
+                },
+                {
+                    id: 'eff-2',
+                    text: 'Do school feeding programs improve learning outcomes independent of nutritional status improvements?',
+                    evidenceQuality: 'Moderate',
+                    studiesCount: '25-30',
+                    confidence: 'Medium',
+                    known: 'School feeding increases attendance (well-documented). Some evidence of improved test scores. Mechanisms unclear: better nutrition, reduced hunger during class, or incentive effects?',
+                    unknown: 'Causal pathway between feeding and learning. Dose-response relationship. Differential effects by baseline nutrition status. Long-term educational attainment.',
+                    hypotheses: [
+                        'School meals reduce short-term hunger, improving concentration even without nutritional gains',
+                        'Effects are larger for initially malnourished children',
+                        'Attendance gains drive learning improvements more than direct cognitive effects'
+                    ],
+                    approaches: [
+                        { name: 'RCT with Mediation Analysis', description: 'Randomize schools to feeding vs. control. Measure attendance, anthropometrics, and learning. Test mediation pathways.' },
+                        { name: 'Regression Discontinuity', description: 'Exploit program eligibility thresholds based on school or community characteristics.' }
+                    ],
+                    urgency: 'Medium',
+                    domains: ['Education', 'Nutrition']
+                }
+            ],
+            cost: [
+                {
+                    id: 'cost-1',
+                    text: 'What are the true delivered costs per child for nutrition interventions across different implementation models?',
+                    evidenceQuality: 'Low',
+                    studiesCount: '5-10',
+                    confidence: 'Low',
+                    known: 'Published cost-effectiveness estimates vary wildly (often 5-10x differences). Delivery costs often exceed commodity costs. Most studies exclude overhead, coordination, or systems costs.',
+                    unknown: 'Comprehensive cost breakdowns by context. Hidden costs (volunteer time, community contribution). Costs at different scales. True comparison across modalities.',
+                    hypotheses: [
+                        'Actual delivery costs are 40-60% higher than published estimates once overhead included',
+                        'Cost-effectiveness improves dramatically with scale due to fixed cost spreading',
+                        'Local procurement reduces costs more than international competitive bidding in most contexts'
+                    ],
+                    approaches: [
+                        { name: 'Comparative Costing Study', description: 'Collect detailed expenditure data from multiple programs using same methodology. Include all cost categories.' },
+                        { name: 'Activity-Based Costing', description: 'Time-and-motion studies to capture labor costs. Track all inputs from procurement to beneficiary.' }
+                    ],
+                    urgency: 'High',
+                    domains: ['Economics', 'Operations']
+                }
+            ],
+            implementation: [
+                {
+                    id: 'impl-1',
+                    text: 'What factors predict successful community-led nutrition program sustainability after external support ends?',
+                    evidenceQuality: 'Low',
+                    studiesCount: '<5',
+                    confidence: 'Low',
+                    known: 'Most programs fail to sustain after external funding withdrawal. Community ownership rhetoric common; actual transfer rare. Some examples of successful handover exist but not systematically studied.',
+                    unknown: 'Predictive factors for sustainability. Optimal handover timeline. Role of government integration vs. pure community management. Cost models for sustained operation.',
+                    hypotheses: [
+                        'Programs with local revenue generation mechanisms (user fees, cooperative models) sustain better',
+                        'Government integration pathway more sustainable than pure community management in low-capacity settings',
+                        'Minimum 2-3 year transition period required for sustainable handover'
+                    ],
+                    approaches: [
+                        { name: 'Longitudinal Case Studies', description: 'Follow 20-30 programs 2-5 years post-exit. Document factors associated with continuation vs. collapse.' },
+                        { name: 'Qualitative Comparative Analysis', description: 'Systematic comparison across cases to identify necessary and sufficient conditions for sustainability.' }
+                    ],
+                    urgency: 'High',
+                    domains: ['Implementation Science', 'Community Development']
+                }
+            ],
+            equity: [
+                {
+                    id: 'equity-1',
+                    text: 'How do nutrition programs reach (or fail to reach) the most marginalized children within communities?',
+                    evidenceQuality: 'Low',
+                    studiesCount: '10-15',
+                    confidence: 'Medium',
+                    known: 'Programs often miss most vulnerable children despite targeting. Social exclusion, geographic barriers, documentation requirements, and informal power structures create access barriers.',
+                    unknown: 'Magnitude of coverage gaps by marginalization type. Effective strategies to reach excluded groups without creating dependency or stigma. Trade-offs between universal vs. targeted approaches.',
+                    hypotheses: [
+                        'Universal programs reach marginalized groups better than targeted programs despite lower cost-effectiveness',
+                        'Community-based targeting replicates existing power structures and exclusion patterns',
+                        'Proactive outreach (door-to-door) required to reach most isolated households'
+                    ],
+                    approaches: [
+                        { name: 'Mixed Methods Evaluation', description: 'Quantify coverage by vulnerability indicators. Qualitative research on barriers faced by excluded groups.' },
+                        { name: 'RCT of Targeting Approaches', description: 'Compare community-based vs. administrative vs. hybrid targeting. Measure coverage and leakage by subgroup.' }
+                    ],
+                    urgency: 'Medium',
+                    domains: ['Equity', 'Social Protection']
+                }
+            ],
+            systems: [
+                {
+                    id: 'sys-1',
+                    text: 'What governance structures enable coordination across nutrition, health, agriculture, and social protection sectors?',
+                    evidenceQuality: 'Very Low',
+                    studiesCount: '<5',
+                    confidence: 'Low',
+                    known: 'Multi-sectoral coordination is universally acknowledged as important and universally weak in practice. Siloed budgets, mandates, and incentives create barriers. Some countries have coordination platforms; effectiveness unclear.',
+                    unknown: 'What governance models actually work (vs. just exist on paper). Role of political leadership vs. technical coordination. Budget vs. coordination authority. Optimal level (national vs. subnational).',
+                    hypotheses: [
+                        'Coordination improves only when accompanied by joint budgeting authority, not just information sharing',
+                        'District-level coordination more effective than national-level for implementation',
+                        'Dedicated coordination units fail without political mandate and budget control'
+                    ],
+                    approaches: [
+                        { name: 'Comparative Case Study', description: 'Study 10-15 countries with different coordination structures. Analyze budget flows, decision authority, and outcome improvements.' },
+                        { name: 'Systems Mapping', description: 'Map information flows, decision points, budget authorities. Identify bottlenecks and leverage points.' }
+                    ],
+                    urgency: 'Medium',
+                    domains: ['Governance', 'Systems Thinking']
+                }
+            ],
+            emergency: [
+                {
+                    id: 'emerg-1',
+                    text: 'What pre-positioning strategies minimize child mortality during acute nutrition crises?',
+                    evidenceQuality: 'Low',
+                    studiesCount: '5-10',
+                    confidence: 'Low',
+                    known: 'Response speed is critical; every week of delay increases mortality. Pre-positioned supplies enable faster response. Cost of pre-positioning (storage, spoilage, opportunity cost) creates hesitation.',
+                    unknown: 'Optimal inventory levels by context. Trade-off between centralized vs. distributed pre-positioning. Trigger mechanisms for release. Effectiveness of different stockpile contents.',
+                    hypotheses: [
+                        'Pre-positioned ready-to-use therapeutic food (RUTF) reduces under-5 mortality by 15-25% in predictable crises',
+                        'Distributed pre-positioning (regional hubs) more cost-effective than central stockpiles',
+                        'Forecast-based financing triggers reduce pre-positioning costs while maintaining response speed'
+                    ],
+                    approaches: [
+                        { name: 'Quasi-Experimental Study', description: 'Compare mortality outcomes in crises with vs. without pre-positioned supplies. Control for crisis severity.' },
+                        { name: 'Simulation Modeling', description: 'Model different pre-positioning scenarios. Optimize inventory levels vs. cost vs. response time.' }
+                    ],
+                    urgency: 'High',
+                    domains: ['Emergency Response', 'Supply Chain']
+                }
+            ]
+        };
+
+        // ============================================
+        // STATE MANAGEMENT
+        // ============================================
+        let currentCategory = null;
+        let selectedQuestion = null;
+        let savedQuestions = [];
+
+        // Load saved questions from localStorage
+        function loadSavedQuestions() {
+            const saved = localStorage.getItem('feedChildrenAtlas_savedQuestions');
+            if (saved) {
+                try {
+                    savedQuestions = JSON.parse(saved);
+                } catch (e) {
+                    savedQuestions = [];
+                }
+            }
+            updateSavedList();
+        }
+
+        // Save questions to localStorage
+        function saveSavedQuestions() {
+            localStorage.setItem('feedChildrenAtlas_savedQuestions', JSON.stringify(savedQuestions));
+            updateSavedList();
+        }
+
+        // ============================================
+        // TAB SWITCHING
+        // ============================================
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetTab = tab.dataset.tab;
+                
+                // Update tab buttons
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Update tab content
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                document.getElementById(`${targetTab}-tab`).classList.add('active');
+            });
+        });
+
+        // ============================================
+        // CATEGORY SELECTION
+        // ============================================
+        document.querySelectorAll('.question-category').forEach(category => {
+            category.addEventListener('click', () => {
+                const categoryId = category.dataset.category;
+                showQuestions(categoryId);
+            });
+        });
+
+        function showQuestions(categoryId) {
+            currentCategory = categoryId;
+            const questions = questionBank[categoryId] || [];
+            
+            const categoryName = document.querySelector(`[data-category="${categoryId}"] .category-title`).textContent;
+            document.getElementById('category-name').textContent = categoryName;
+            
+            const container = document.getElementById('questions-container');
+            const list = document.getElementById('questions-list');
+            
+            list.innerHTML = '';
+            
+            questions.forEach(q => {
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                card.innerHTML = `
+                    <div class="question-text">${q.text}</div>
+                    <div class="question-meta">
+                        <span class="meta-tag evidence-tag">Evidence: ${q.evidenceQuality}</span>
+                        <span class="meta-tag urgency-tag">Urgency: ${q.urgency}</span>
+                        <span class="meta-tag domain-tag">${q.domains[0]}</span>
+                    </div>
+                `;
+                card.addEventListener('click', () => selectQuestion(q));
+                list.appendChild(card);
+            });
+            
+            container.classList.remove('hidden');
+            document.getElementById('analysis-panel').classList.add('hidden');
+        }
+
+        function selectQuestion(question) {
+            selectedQuestion = question;
+            
+            // Update UI
+            document.querySelectorAll('.question-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+            
+            // Populate analysis panel
+            document.getElementById('evidence-quality').textContent = question.evidenceQuality;
+            document.getElementById('studies-count').textContent = question.studiesCount;
+            document.getElementById('confidence').textContent = question.confidence;
+            
+            document.getElementById('known-section').innerHTML = `<p>${question.known}</p>`;
+            document.getElementById('unknown-section').innerHTML = `<p>${question.unknown}</p>`;
+            
+            const hypothesesList = document.getElementById('hypotheses-list');
+            hypothesesList.innerHTML = '';
+            question.hypotheses.forEach(h => {
+                const li = document.createElement('li');
+                li.innerHTML = `<strong>H:</strong> ${h}`;
+                hypothesesList.appendChild(li);
+            });
+            
+            const approachesList = document.getElementById('approaches-list');
+            approachesList.innerHTML = '';
+            question.approaches.forEach(a => {
+                const div = document.createElement('div');
+                div.className = 'approach-card';
+                div.innerHTML = `
+                    <div class="approach-name">${a.name}</div>
+                    <div class="approach-description">${a.description}</div>
+                `;
+                approachesList.appendChild(div);
+            });
+            
+            // Show analysis panel
+            document.getElementById('analysis-panel').classList.remove('hidden');
+            
+            // Smooth scroll to analysis
+            document.getElementById('analysis-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // ============================================
+        // CUSTOM QUESTION ANALYSIS
+        // ============================================
+        function analyzeCustomQuestion() {
+            const question = document.getElementById('custom-question').value.trim();
+            
+            if (!question) {
+                alert('Please enter a question first.');
+                return;
+            }
+            
+            // Simple analysis based on keywords (in production, this would be more sophisticated)
+            const analysisPanel = document.getElementById('custom-analysis');
+            
+            analysisPanel.innerHTML = `
+                <h2>Analysis: Your Question</h2>
+                
+                <div class="analysis-section">
+                    <h3>Your Question</h3>
+                    <p style="font-size: 1.125rem; font-style: italic; color: var(--earth-dark);">"${question}"</p>
+                </div>
+                
+                <div class="analysis-section">
+                    <h3>Question Clarity Assessment</h3>
+                    <p>A well-formed research question should specify:</p>
+                    <ul>
+                        <li><strong>Population:</strong> Who are you asking about? (e.g., children under 5, pregnant women)</li>
+                        <li><strong>Intervention/Exposure:</strong> What factor are you examining?</li>
+                        <li><strong>Comparison:</strong> Compared to what?</li>
+                        <li><strong>Outcome:</strong> What are you measuring?</li>
+                        <li><strong>Context:</strong> Where and when?</li>
+                    </ul>
+                </div>
+                
+                <div class="analysis-section">
+                    <h3>Next Steps to Investigate This Question</h3>
+                    <ol style="margin-left: 1.5rem;">
+                        <li><strong>Literature Review:</strong> Search PubMed, Google Scholar, and grey literature for existing studies on your topic.</li>
+                        <li><strong>Stakeholder Consultation:</strong> Talk to practitioners, policymakers, and affected communities about what they know.</li>
+                        <li><strong>Data Availability Check:</strong> Identify what data already exists (surveys, program records, administrative data).</li>
+                        <li><strong>Hypothesis Generation:</strong> Based on theory and existing evidence, what do you expect to find?</li>
+                        <li><strong>Method Selection:</strong> What research design would best answer your question given constraints?</li>
+                    </ol>
+                </div>
+                
+                <div class="analysis-section">
+                    <h3>Potential Research Approaches</h3>
+                    <div class="research-approaches">
+                        <div class="approach-card">
+                            <div class="approach-name">Systematic Review</div>
+                            <div class="approach-description">If substantial prior research exists, synthesize existing evidence before collecting new data.</div>
+                        </div>
+                        <div class="approach-card">
+                            <div class="approach-name">Mixed Methods</div>
+                            <div class="approach-description">Combine quantitative measurement with qualitative exploration of mechanisms and context.</div>
+                        </div>
+                        <div class="approach-card">
+                            <div class="approach-name">Implementation Research</div>
+                            <div class="approach-description">Study how interventions work in real-world settings, not just whether they work under ideal conditions.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <button class="btn btn-primary" onclick="saveCustomQuestion('${question.replace(/'/g, "\\'")}')">💾 Save This Question</button>
+                    <button class="btn btn-outline" onclick="exportCustomAnalysis('${question.replace(/'/g, "\\'")}')">📤 Export Analysis</button>
+                </div>
+            `;
+            
+            analysisPanel.classList.remove('hidden');
+            analysisPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function clearCustomQuestion() {
+            document.getElementById('custom-question').value = '';
+            document.getElementById('custom-analysis').classList.add('hidden');
+        }
+
+        function saveCustomQuestion(question) {
+            const q = {
+                id: 'custom-' + Date.now(),
+                text: question,
+                timestamp: new Date().toISOString(),
+                type: 'custom'
+            };
+            
+            savedQuestions.push(q);
+            saveSavedQuestions();
+            
+            alert('Question saved! View it in the "Saved Questions" tab.');
+        }
+
+        // ============================================
+        // SAVE/EXPORT FUNCTIONS
+        // ============================================
+        function saveQuestion() {
+            if (!selectedQuestion) return;
+            
+            const exists = savedQuestions.find(q => q.id === selectedQuestion.id);
+            if (exists) {
+                alert('This question is already saved.');
+                return;
+            }
+            
+            savedQuestions.push({
+                ...selectedQuestion,
+                timestamp: new Date().toISOString()
+            });
+            
+            saveSavedQuestions();
+            alert('Question saved! View it in the "Saved Questions" tab.');
+        }
+
+        function updateSavedList() {
+            const container = document.getElementById('saved-list');
+            
+            if (savedQuestions.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">📭</div>
+                        <p>No saved questions yet.</p>
+                        <p>Explore the question library or ask your own to get started.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = '<div class="saved-list"></div>';
+            const list = container.querySelector('.saved-list');
+            
+            savedQuestions.forEach((q, index) => {
+                const item = document.createElement('div');
+                item.className = 'saved-item';
+                item.innerHTML = `
+                    <div class="saved-question-text">${q.text}</div>
+                    <div class="saved-actions">
+                        <button class="icon-btn" onclick="viewSavedQuestion(${index})" title="View">👁️</button>
+                        <button class="icon-btn" onclick="deleteSavedQuestion(${index})" title="Delete">🗑️</button>
+                    </div>
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        function viewSavedQuestion(index) {
+            const question = savedQuestions[index];
+            
+            if (question.type === 'custom') {
+                // Switch to custom tab and populate
+                document.querySelector('[data-tab="custom"]').click();
+                document.getElementById('custom-question').value = question.text;
+                analyzeCustomQuestion();
+            } else {
+                // Switch to explore tab and select question
+                document.querySelector('[data-tab="explore"]').click();
+                
+                // Find category
+                for (const [category, questions] of Object.entries(questionBank)) {
+                    const q = questions.find(qu => qu.id === question.id);
+                    if (q) {
+                        showQuestions(category);
+                        setTimeout(() => {
+                            const cards = document.querySelectorAll('.question-card');
+                            const cardIndex = questions.indexOf(q);
+                            if (cards[cardIndex]) {
+                                cards[cardIndex].click();
+                            }
+                        }, 100);
+                        break;
+                    }
+                }
+            }
+        }
+
+        function deleteSavedQuestion(index) {
+            if (confirm('Remove this question from your saved list?')) {
+                savedQuestions.splice(index, 1);
+                saveSavedQuestions();
+            }
+        }
+
+        function exportAnalysis() {
+            if (!selectedQuestion) return;
+            
+            const analysis = `
+QUESTION ANALYSIS REPORT
+Feed Children ASAP Atlas - Question Engine
+Generated: ${new Date().toLocaleString()}
+
+════════════════════════════════════════════════════════════
+
+QUESTION:
+${selectedQuestion.text}
+
+────────────────────────────────────────────────────────────
+
+EVIDENCE STATUS:
+- Quality: ${selectedQuestion.evidenceQuality}
+- Studies Available: ${selectedQuestion.studiesCount}
+- Confidence Level: ${selectedQuestion.confidence}
+
+────────────────────────────────────────────────────────────
+
+WHAT WE KNOW:
+${selectedQuestion.known}
+
+────────────────────────────────────────────────────────────
+
+WHAT WE DON'T KNOW:
+${selectedQuestion.unknown}
+
+────────────────────────────────────────────────────────────
+
+TESTABLE HYPOTHESES:
+${selectedQuestion.hypotheses.map((h, i) => `${i + 1}. ${h}`).join('\n')}
+
+────────────────────────────────────────────────────────────
+
+RECOMMENDED RESEARCH APPROACHES:
+${selectedQuestion.approaches.map((a, i) => `
+${i + 1}. ${a.name}
+   ${a.description}
+`).join('\n')}
+
+════════════════════════════════════════════════════════════
+
+This analysis was generated by the Feed Children ASAP Atlas Question Engine.
+For more information, visit the Atlas at your deployment location.
+
+Zero Harm Policy: All research should prioritize participant safety, 
+informed consent, and community benefit.
+            `.trim();
+            
+            // Create download
+            const blob = new Blob([analysis], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `question-analysis-${selectedQuestion.id}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function exportCustomAnalysis(question) {
+            const analysis = `
+CUSTOM QUESTION ANALYSIS
+Feed Children ASAP Atlas - Question Engine
+Generated: ${new Date().toLocaleString()}
+
+════════════════════════════════════════════════════════════
+
+YOUR QUESTION:
+${question}
+
+────────────────────────────────────────────────────────────
+
+NEXT STEPS:
+1. Literature Review - Search existing research
+2. Stakeholder Consultation - Talk to practitioners
+3. Data Availability Check - Identify existing data
+4. Hypothesis Generation - Develop testable predictions
+5. Method Selection - Choose appropriate research design
+
+────────────────────────────────────────────────────────────
+
+For detailed guidance on each step, refer to the For Researchers
+section of the Feed Children ASAP Atlas.
+
+════════════════════════════════════════════════════════════
+            `.trim();
+            
+            const blob = new Blob([analysis], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `custom-question-analysis-${Date.now()}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSavedQuestions();
+        });
+
+        // Accessibility: Reduced motion support
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('*').forEach(el => {
+                el.style.animation = 'none';
+                el.style.transition = 'none';
+            });
+        }
+    </script>
+    
+    <!--
+    ZERO HARM COMPLIANCE NOTICE:
+    
+    This tool contains:
+    - No tracking or analytics
+    - No external API calls
+    - No data transmission to servers
+    - localStorage used only for user's saved questions (local to their browser)
+    - No surveillance mechanisms
+    
+    All question analysis is performed client-side.
+    All data remains on the user's device.
+    
+    Research should always prioritize participant safety, informed consent,
+    and community benefit. This tool is for planning only - actual research
+    requires proper ethical review and approval.
+    -->
+</body>
+</html>
