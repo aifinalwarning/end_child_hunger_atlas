@@ -1,0 +1,807 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-12",
+  "interventions": [
+    {
+      "id": "int_001",
+      "name": "Community-Based Management of Acute Malnutrition (CMAM)",
+      "shortName": "CMAM",
+      "category": "treatment",
+      "subcategory": "SAM treatment",
+      "description": "Community-based treatment of severe acute malnutrition using ready-to-use therapeutic food (RUTF). Children treated at home with weekly check-ins rather than hospitalization.",
+      "targetOutcomes": ["SAM treatment", "mortality reduction", "wasting reduction"],
+      "targetPopulation": "Children 6-59 months with SAM (MUAC <115mm or WHZ <-3 or bilateral oedema)",
+      "evidenceStrength": "strong",
+      "costLevel": "medium-high",
+      "implementationComplexity": "medium",
+      "timeToImpact": "immediate",
+      "durationRequired": "6-8 weeks per child",
+      "prerequisites": [
+        "RUTF supply chain",
+        "Trained health workers",
+        "Weekly follow-up capacity",
+        "Referral system for complicated cases"
+      ],
+      "staffingNeeds": {
+        "technical": "High - nutritionists, trained health workers",
+        "community": "Medium - community health workers for screening and follow-up"
+      },
+      "keyIndicators": [
+        "Coverage of SAM treatment",
+        "Cure rate (target >75%)",
+        "Death rate (target <10%)",
+        "Default rate (target <15%)",
+        "Average length of stay"
+      ],
+      "costPerBeneficiary": {
+        "range": "$150-300",
+        "notes": "Includes RUTF, staff time, medical supplies. Varies by context and treatment duration."
+      },
+      "suitableContexts": {
+        "stable": "yes",
+        "fragile": "yes",
+        "emergency": "yes",
+        "urban": "yes",
+        "rural": "yes"
+      },
+      "constraintFit": {
+        "worksWellWith": ["pol_002", "log_001", "tech_004"],
+        "challengedBy": ["log_002", "sec_002", "soc_005"],
+        "requiredCapacity": ["tech_001", "log_001"]
+      },
+      "scalability": "high",
+      "sustainability": "medium",
+      "evidenceSources": [
+        "Cochrane review on CMAM effectiveness",
+        "Multiple country program evaluations",
+        "WHO/UNICEF guidelines"
+      ],
+      "commonChallenges": [
+        "RUTF supply chain disruptions",
+        "Defaulters and loss to follow-up",
+        "Identifying and referring complicated cases",
+        "Maintaining quality at scale"
+      ],
+      "successFactors": [
+        "Reliable RUTF supply",
+        "Strong community mobilization",
+        "Regular supervision and quality assurance",
+        "Functional referral system"
+      ],
+      "integrationOpportunities": [
+        "Health facility outreach",
+        "Immunization campaigns",
+        "Food security programs",
+        "WASH interventions"
+      ]
+    },
+    {
+      "id": "int_002",
+      "name": "Supplementary Feeding for Moderate Acute Malnutrition",
+      "shortName": "SFP/MAM Treatment",
+      "category": "treatment",
+      "subcategory": "MAM treatment",
+      "description": "Provision of supplementary food (fortified blended flour, ready-to-use supplementary food) to children with moderate acute malnutrition to prevent deterioration to SAM.",
+      "targetOutcomes": ["MAM treatment", "SAM prevention", "wasting reduction"],
+      "targetPopulation": "Children 6-59 months with MAM (MUAC 115-124mm or WHZ -3 to -2)",
+      "evidenceStrength": "moderate",
+      "costLevel": "medium",
+      "implementationComplexity": "medium",
+      "timeToImpact": "short-term",
+      "durationRequired": "8-12 weeks per child",
+      "prerequisites": [
+        "Food supply (RUSF or fortified flour)",
+        "Distribution sites or health facilities",
+        "Basic anthropometric screening capacity"
+      ],
+      "staffingNeeds": {
+        "technical": "Medium - basic nutrition training",
+        "community": "High - for distribution and follow-up"
+      },
+      "keyIndicators": [
+        "Coverage of MAM treatment",
+        "Recovery rate (target >75%)",
+        "Default rate",
+        "Progression to SAM rate (target <3%)",
+        "Average weight gain"
+      ],
+      "costPerBeneficiary": {
+        "range": "$50-120",
+        "notes": "Includes supplementary food, distribution costs. Lower than SAM treatment."
+      },
+      "suitableContexts": {
+        "stable": "yes",
+        "fragile": "yes",
+        "emergency": "yes",
+        "urban": "yes",
+        "rural": "yes"
+      },
+      "constraintFit": {
+        "worksWellWith": ["fin_001", "tech_002", "pol_002"],
+        "challengedBy": ["log_002", "soc_005", "env_004"],
+        "requiredCapacity": ["log_001"]
+      },
+      "scalability": "high",
+      "sustainability": "low-medium",
+      "evidenceSources": [
+        "Multiple program evaluations",
+        "SPHERE standards",
+        "Mixed evidence on long-term outcomes"
+      ],
+      "commonChallenges": [
+        "Sharing within household (ration not consumed by target child)",
+        "High default rates",
+        "Distinguishing MAM from mild malnutrition",
+        "Sustainability when external support ends"
+      ],
+      "successFactors": [
+        "Regular distribution (weekly or bi-weekly)",
+        "Community understanding of targeting",
+        "Combined with behavior change communication",
+        "Clear graduation criteria"
+      ],
+      "integrationOpportunities": [
+        "Link with SAM treatment programs",
+        "Integrate into health services",
+        "Combine with livelihood support",
+        "Connect to food security interventions"
+      ]
+    },
+    {
+      "id": "int_003",
+      "name": "Infant and Young Child Feeding (IYCF) Counseling",
+      "shortName": "IYCF Counseling",
+      "category": "prevention",
+      "subcategory": "behavior change",
+      "description": "One-on-one or small-group counseling on optimal breastfeeding, complementary feeding, and responsive feeding practices using WHO/UNICEF methodology.",
+      "targetOutcomes": ["stunting prevention", "wasting prevention", "optimal growth"],
+      "targetPopulation": "Pregnant women and caregivers of children 0-23 months",
+      "evidenceStrength": "moderate",
+      "costLevel": "low-medium",
+      "implementationComplexity": "medium-high",
+      "timeToImpact": "medium-term",
+      "durationRequired": "Continuous, multiple contacts over 2 years",
+      "prerequisites": [
+        "Trained counselors (health workers or community workers)",
+        "Counseling cards and job aids",
+        "Time for individual or small-group sessions",
+        "Functional health system for contact points"
+      ],
+      "staffingNeeds": {
+        "technical": "High - requires well-trained counselors with supervision",
+        "community": "High - community-based counselors or health workers"
+      },
+      "keyIndicators": [
+        "Exclusive breastfeeding rate (0-6 months)",
+        "Timely introduction of complementary foods (6 months)",
+        "Minimum dietary diversity (6-23 months)",
+        "Minimum meal frequency",
+        "Counseling coverage"
+      ],
+      "costPerBeneficiary": {
+        "range": "$10-40 per year",
+        "notes": "Low commodity costs but high staff time costs. Varies with contact frequency."
+      },
+      "suitableContexts": {
+        "stable": "yes",
+        "fragile": "conditional",
+        "emergency": "limited",
+        "urban": "yes",
+        "rural": "yes"
+      },
+      "constraintFit": {
+        "worksWellWith": ["pol_002", "fin_001", "tech_005"],
+        "challengedBy": ["soc_003", "env_004", "tech_002"],
+        "requiredCapacity": ["tech_001"]
+      },
+      "scalability": "medium",
+      "sustainability": "high",
+      "evidenceSources": [
+        "Lancet series on maternal and child undernutrition",
+        "WHO/UNICEF IYCF guidelines",
+        "Mixed evidence on impact at scale"
+      ],
+      "commonChallenges": [
+        "Quality of counseling varies widely",
+        "Effectiveness depends on food availability (can't counsel to buy what families can't afford)",
+        "High staff time requirement limits scale",
+        "Difficult to maintain quality with high caseloads"
+      ],
+      "successFactors": [
+        "Well-trained, supervised counselors",
+        "Frequent, repeated contacts",
+        "Combined with food assistance where food insecurity is high",
+        "Community support for recommended practices"
+      ],
+      "integrationOpportunities": [
+        "Antenatal and postnatal care",
+        "Child health visits (immunization, growth monitoring)",
+        "Community health programs",
+        "Mother-to-mother support groups"
+      ]
+    },
+    {
+      "id": "int_004",
+      "name": "Micronutrient Supplementation",
+      "shortName": "Vitamin/Mineral Supplements",
+      "category": "prevention",
+      "subcategory": "micronutrients",
+      "description": "Distribution of vitamin and mineral supplements (Vitamin A, iron, zinc, multiple micronutrient powders) to prevent and treat deficiencies.",
+      "targetOutcomes": ["micronutrient deficiency reduction", "mortality reduction", "morbidity reduction"],
+      "targetPopulation": "Children 6-59 months, pregnant women (iron-folic acid)",
+      "evidenceStrength": "strong",
+      "costLevel": "low",
+      "implementationComplexity": "low-medium",
+      "timeToImpact": "short-term",
+      "durationRequired": "Vitamin A: bi-annual. Iron/zinc: daily for 2-3 months. MNPs: daily for 2-3 months.",
+      "prerequisites": [
+        "Supplement supply",
+        "Distribution mechanism (campaigns or facility-based)",
+        "Basic training for distributors"
+      ],
+      "staffingNeeds": {
+        "technical": "Low - minimal training needed",
+        "community": "Medium - for distribution campaigns"
+      },
+      "keyIndicators": [
+        "Coverage of vitamin A supplementation (target >80%)",
+        "Prevalence of vitamin A deficiency",
+        "Prevalence of anemia",
+        "Adherence to iron/zinc supplementation"
+      ],
+      "costPerBeneficiary": {
+        "range": "$1-10 per year",
+        "notes": "Very low commodity costs. Main costs are distribution. Vitamin A campaigns ~$1-2 per child per year."
+      },
+      "suitableContexts": {
+        "stable": "yes",
+        "fragile": "yes",
+        "emergency": "yes",
+        "urban": "yes",
+        "rural": "yes"
+      },
+      "constraintFit": {
+        "worksWellWith": ["fin_001", "pol_002", "tech_004"],
+        "challengedBy": ["log_002", "tech_003", "soc_005"],
+        "requiredCapacity": ["log_001"]
+      },
+      "scalability": "very high",
+      "sustainability": "high",
+      "evidenceSources": [
+        "Cochrane reviews on vitamin A, iron, zinc",
+        "Decades of program experience",
+        "WHO recommendations"
+      ],
+      "commonChallenges": [
+        "Adherence to daily supplements (iron, MNPs)",
+        "Side effects (iron causes constipation/nausea)",
+        "Supply chain for campaigns",
+        "Reaching hard-to-reach populations"
+      ],
+      "successFactors": [
+        "Integration with immunization or health days",
+        "Community mobilization for campaigns",
+        "Clear dosing instructions",
+        "Combining with nutrition education"
+      ],
+      "integrationOpportunities": [
+        "Vitamin A with measles vaccination campaigns",
+        "Iron-folic acid with antenatal care",
+        "MNPs with food distribution",
+        "Zinc with diarrhea treatment"
+      ]
+    },
+    {
+      "id": "int_005",
+      "name": "School Feeding Programs",
+      "shortName": "School Feeding",
+      "category": "prevention",
+      "subcategory": "food assistance",
+      "description": "Provision of meals or snacks at school to improve nutrition, school attendance, and learning. Can be on-site meals, take-home rations, or both.",
+      "targetOutcomes": ["short-term hunger reduction", "school attendance", "educational outcomes"],
+      "targetPopulation": "School-age children (typically 5-14 years)",
+      "evidenceStrength": "moderate",
+      "costLevel": "medium-high",
+      "implementationComplexity": "medium-high",
+      "timeToImpact": "immediate",
+      "durationRequired": "Continuous during school year",
+      "prerequisites": [
+        "Schools with adequate facilities",
+        "Food supply and logistics",
+        "Kitchen staff or cooking capacity",
+        "Storage facilities"
+      ],
+      "staffingNeeds": {
+        "technical": "Medium - nutrition planning, food safety",
+        "community": "High - cooks, distributors, monitors"
+      },
+      "keyIndicators": [
+        "Feeding days achieved",
+        "Number of children fed",
+        "School attendance rates",
+        "Dietary diversity of meals",
+        "Anemia prevalence (if measured)"
+      ],
+      "costPerBeneficiary": {
+        "range": "$30-100 per child per year",
+        "notes": "Varies widely by meal type (snack vs full meal), local vs imported food, cooking arrangements."
+      },
+      "suitableContexts": {
+        "stable": "yes",
+        "fragile": "conditional",
+        "emergency": "limited",
+        "urban": "yes",
+        "rural": "yes"
+      },
+      "constraintFit": {
+        "worksWellWith": ["pol_001", "log_001", "soc_004"],
+        "challengedBy": ["log_002", "fin_001", "env_001"],
+        "requiredCapacity": ["log_001", "pol_002"]
+      },
+      "scalability": "high",
+      "sustainability": "medium",
+      "evidenceSources": [
+        "World Food Programme evaluations",
+        "Systematic reviews showing attendance benefits",
+        "Mixed evidence on learning and nutrition outcomes"
+      ],
+      "commonChallenges": [
+        "High costs limit coverage",
+        "Logistics complex (food transport, storage, preparation)",
+        "Quality and nutritional content often poor",
+        "Doesn't reach out-of-school children",
+        "Gender dynamics (girls may eat less)"
+      ],
+      "successFactors": [
+        "Government ownership and co-financing",
+        "Use of local food procurement",
+        "Quality control and menu diversity",
+        "Community participation in management",
+        "Integration with school health programs"
+      ],
+      "integrationOpportunities": [
+        "Nutrition education in curriculum",
+        "School gardens for fresh food",
+        "Deworming programs",
+        "Micronutrient supplementation",
+        "Water and sanitation in schools"
+      ]
+    },
+    {
+      "id": "int_006",
+      "name": "Cash Transfers for Nutrition",
+      "shortName": "Cash Transfers",
+      "category": "prevention",
+      "subcategory": "food security",
+      "description": "Unconditional or conditional cash transfers to households to improve food security and nutrition. Can be one-time, seasonal, or regular monthly payments.",
+      "targetOutcomes": ["food security", "dietary diversity", "prevention of wasting"],
+      "targetPopulation": "Poor households with children under 5, pregnant/lactating women",
+      "evidenceStrength": "moderate",
+      "costLevel": "high",
+      "implementationComplexity": "high",
+      "timeToImpact": "short-term",
+      "durationRequired": "Minimum 6 months; ideally 12-24 months",
+      "prerequisites": [
+        "Functioning markets with food available",
+        "Payment delivery mechanism (mobile money, banks, cash agents)",
+        "Beneficiary identification and registration system",
+        "Monitoring system"
+      ],
+      "staffingNeeds": {
+        "technical": "High - targeting, payment systems, M&E",
+        "community": "Medium - registration, verification"
+      },
+      "keyIndicators": [
+        "Household food security score",
+        "Dietary diversity score",
+        "Wasting prevalence (if measured)",
+        "Percentage of transfer spent on food",
+        "Coverage and payment reliability"
+      ],
+      "costPerBeneficiary": {
+        "range": "$100-400 per household per year",
+        "notes": "Transfer value varies by context (typically $10-30 per month). Admin costs add 10-30%."
+      },
+      "suitableContexts": {
+        "stable": "yes",
+        "fragile": "conditional",
+        "emergency": "yes",
+        "urban": "yes",
+        "rural": "conditional"
+      },
+      "constraintFit": {
+        "worksWellWith": ["env_004", "soc_003", "fin_001"],
+        "challengedBy": ["tech_004", "sec_003", "pol_005"],
+        "requiredCapacity": ["tech_003", "tech_004"]
+      },
+      "scalability": "medium-high",
+      "sustainability": "low-medium",
+      "evidenceSources": [
+        "Systematic reviews on cash and nutrition",
+        "Evidence shows improved food security",
+        "Mixed evidence on anthropometric outcomes",
+        "More effective when combined with nutrition education"
+      ],
+      "commonChallenges": [
+        "Limited impact on nutrition outcomes alone",
+        "Requires functioning markets",
+        "Targeting errors (inclusion/exclusion)",
+        "Payment system failures",
+        "Household decision-making (may not prioritize child nutrition)",
+        "Sustainability and exit strategy"
+      ],
+      "successFactors": [
+        "Markets have nutritious foods available",
+        "Transfer size adequate for dietary needs",
+        "Combined with behavior change messaging",
+        "Regular, predictable payments",
+        "Women control resources"
+      ],
+      "integrationOpportunities": [
+        "Combine with nutrition counseling ('cash plus')",
+        "Link to social protection systems",
+        "Coordinate with health services",
+        "Integrate with livelihoods programs"
+      ]
+    },
+    {
+      "id": "int_007",
+      "name": "Food Fortification",
+      "shortName": "Fortification",
+      "category": "prevention",
+      "subcategory": "micronutrients",
+      "description": "Adding vitamins and minerals to commonly consumed foods during processing (flour, oil, salt, etc.). Population-level approach to address micronutrient deficiencies.",
+      "targetOutcomes": ["micronutrient deficiency reduction", "anemia reduction", "iodine deficiency prevention"],
+      "targetPopulation": "General population consuming fortified foods",
+      "evidenceStrength": "strong",
+      "costLevel": "very low",
+      "implementationComplexity": "high",
+      "timeToImpact": "medium-term",
+      "durationRequired": "Continuous (permanent system change)",
+      "prerequisites": [
+        "Industrial food processing sector",
+        "Regulatory framework and enforcement",
+        "Quality control laboratory capacity",
+        "Supply of fortificants (premix)"
+      ],
+      "staffingNeeds": {
+        "technical": "High - food technologists, regulatory staff, lab technicians",
+        "community": "Low - consumer awareness"
+      },
+      "keyIndicators": [
+        "Percentage of foods adequately fortified",
+        "Population coverage (% consuming fortified foods)",
+        "Prevalence of micronutrient deficiencies",
+        "Compliance by industry"
+      ],
+      "costPerBeneficiary": {
+        "range": "$0.10-0.50 per person per year",
+        "notes": "Extremely cost-effective at scale. Industry absorbs most costs."
+      },
+      "suitableContexts": {
+        "stable": "yes",
+        "fragile": "limited",
+        "emergency": "no",
+        "urban": "yes",
+        "rural": "conditional"
+      },
+      "constraintFit": {
+        "worksWellWith": ["pol_001", "fin_001", "tech_004"],
+        "challengedBy": ["pol_002", "pol_005", "log_001"],
+        "requiredCapacity": ["tech_001", "pol_002"]
+      },
+      "scalability": "very high",
+      "sustainability": "very high",
+      "evidenceSources": [
+        "Strong evidence for salt iodization",
+        "Good evidence for flour fortification",
+        "Decades of successful programs globally"
+      ],
+      "commonChallenges": [
+        "Requires functional food processing industry",
+        "Regulatory capacity for enforcement",
+        "Rural poor may not consume processed foods",
+        "Quality control and monitoring difficult",
+        "Political will and industry buy-in needed"
+      ],
+      "successFactors": [
+        "Mandatory standards with enforcement",
+        "Industry capacity and willingness",
+        "Quality assurance systems",
+        "Consumer awareness and demand",
+        "Long-term government commitment"
+      ],
+      "integrationOpportunities": [
+        "Part of broader food policy",
+        "Link to trade and industry policy",
+        "Consumer protection systems",
+        "Public health monitoring"
+      ]
+    },
+    {
+      "id": "int_008",
+      "name": "Homestead Food Production",
+      "shortName": "Kitchen Gardens",
+      "category": "prevention",
+      "subcategory": "food security",
+      "description": "Supporting households to produce nutrient-rich foods (vegetables, eggs, small livestock) for home consumption. Includes seeds, training, and inputs.",
+      "targetOutcomes": ["dietary diversity", "food security", "income"],
+      "targetPopulation": "Rural households with land access",
+      "evidenceStrength": "moderate",
+      "costLevel": "low-medium",
+      "implementationComplexity": "medium",
+      "timeToImpact": "medium-term",
+      "durationRequired": "12-24 months to establish sustainable production",
+      "prerequisites": [
+        "Access to land (even small plots)",
+        "Water availability",
+        "Seeds, tools, and initial inputs",
+        "Extension workers or training capacity"
+      ],
+      "staffingNeeds": {
+        "technical": "Medium - agricultural extension with nutrition knowledge",
+        "community": "High - community-based trainers"
+      },
+      "keyIndicators": [
+        "Household dietary diversity score",
+        "Production diversity (# of food groups produced)",
+        "Consumption of home-produced foods",
+        "Women's empowerment (control of production/income)"
+      ],
+      "costPerBeneficiary": {
+        "range": "$50-150 per household",
+        "notes": "Includes seeds/inputs, training, follow-up. Lower in subsequent years."
+      },
+      "suitableContexts": {
+        "stable": "yes",
+        "fragile": "conditional",
+        "emergency": "limited",
+        "urban": "limited",
+        "rural": "yes"
+      },
+      "constraintFit": {
+        "worksWellWith": ["env_004", "soc_003", "fin_001"],
+        "challengedBy": ["env_001", "log_001", "soc_005"],
+        "requiredCapacity": ["tech_005"]
+      },
+      "scalability": "medium",
+      "sustainability": "high",
+      "evidenceSources": [
+        "Evidence of improved dietary diversity",
+        "Mixed evidence on child nutrition outcomes",
+        "Strong evidence when combined with nutrition education"
+      ],
+      "commonChallenges": [
+        "Seasonality and water constraints",
+        "Time burden on women (who often manage gardens)",
+        "Household consumption vs. sale of produce",
+        "Climate/weather risks",
+        "Pest and disease management"
+      ],
+      "successFactors": [
+        "Women control production and income",
+        "Combined with nutrition behavior change",
+        "Appropriate crop/animal selection for context",
+        "Year-round production strategies",
+        "Market linkages for excess production"
+      ],
+      "integrationOpportunities": [
+        "Agriculture extension services",
+        "Women's empowerment programs",
+        "WASH (safe water for gardens)",
+        "Nutrition education",
+        "Livelihood diversification"
+      ]
+    },
+    {
+      "id": "int_009",
+      "name": "Growth Monitoring and Promotion",
+      "shortName": "Growth Monitoring",
+      "category": "prevention",
+      "subcategory": "early detection",
+      "description": "Regular weighing and measuring of children, plotting on growth charts, and counseling caregivers when growth falters. Platform for nutrition messaging.",
+      "targetOutcomes": ["early detection of growth faltering", "nutrition counseling platform", "referral to services"],
+      "targetPopulation": "Children 0-59 months",
+      "evidenceStrength": "weak",
+      "costLevel": "low-medium",
+      "implementationComplexity": "medium",
+      "timeToImpact": "long-term",
+      "durationRequired": "Continuous (monthly or quarterly weighing)",
+      "prerequisites": [
+        "Weighing scales and height boards",
+        "Growth cards or charts",
+        "Trained health workers",
+        "Regular contact with caregivers"
+      ],
+      "staffingNeeds": {
+        "technical": "Medium - health workers trained in anthropometry",
+        "community": "Medium - community health workers for outreach"
+      },
+      "keyIndicators": [
+        "Coverage of growth monitoring",
+        "Percentage of children with growth faltering identified",
+        "Referral completion rate",
+        "Caregiver understanding of growth status"
+      ],
+      "costPerBeneficiary": {
+        "range": "$5-15 per child per year",
+        "notes": "Low incremental cost if integrated into health services. Main costs are staff time."
+      },
+      "suitableContexts": {
+        "stable": "yes",
+        "fragile": "conditional",
+        "emergency": "limited",
+        "urban": "yes",
+        "rural": "yes"
+      },
+      "constraintFit": {
+        "worksWellWith": ["pol_002", "tech_004", "fin_001"],
+        "challengedBy": ["tech_002", "soc_002", "soc_005"],
+        "requiredCapacity": ["tech_001"]
+      },
+      "scalability": "high",
+      "sustainability": "high",
+      "evidenceSources": [
+        "Weak evidence of direct nutrition impact",
+        "More effective as platform for counseling than as intervention itself",
+        "Evidence of low coverage and quality in many settings"
+      ],
+      "commonChallenges": [
+        "Often poorly implemented (weighing without counseling)",
+        "Low caregiver attendance",
+        "Difficult to sustain quality at scale",
+        "Unclear what action to take when growth falters",
+        "Equipment maintenance"
+      ],
+      "successFactors": [
+        "Combined with quality nutrition counseling",
+        "Clear action protocols for growth faltering",
+        "Community mobilization for attendance",
+        "Regular supervision and quality assurance",
+        "Link to referral services"
+      ],
+      "integrationOpportunities": [
+        "Immunization services",
+        "Well-child visits",
+        "Community health programs",
+        "IYCF counseling platform"
+      ]
+    },
+    {
+      "id": "int_010",
+      "name": "Integrated WASH and Nutrition",
+      "shortName": "WASH + Nutrition",
+      "category": "prevention",
+      "subcategory": "integrated",
+      "description": "Combining water, sanitation, and hygiene improvements with nutrition interventions. Addresses disease burden that prevents nutrient absorption.",
+      "targetOutcomes": ["diarrhea reduction", "environmental enteropathy", "improved nutrition outcomes"],
+      "targetPopulation": "Households with children under 5",
+      "evidenceStrength": "moderate",
+      "costLevel": "high",
+      "implementationComplexity": "high",
+      "timeToImpact": "medium-long term",
+      "durationRequired": "12-24 months minimum",
+      "prerequisites": [
+        "WASH infrastructure (water points, latrines)",
+        "Behavior change programming",
+        "Integration with nutrition services",
+        "Community engagement"
+      ],
+      "staffingNeeds": {
+        "technical": "High - WASH engineers, hygiene promoters, nutritionists",
+        "community": "High - community mobilizers, promoters"
+      },
+      "keyIndicators": [
+        "Handwashing at critical times",
+        "Safe water use",
+        "Sanitation coverage and use",
+        "Food hygiene practices",
+        "Diarrhea prevalence",
+        "Nutrition outcomes (stunting, wasting)"
+      ],
+      "costPerBeneficiary": {
+        "range": "$100-500 per household",
+        "notes": "High upfront infrastructure costs. Varies widely by WASH technology (piped water vs. protected well)."
+      },
+      "suitableContexts": {
+        "stable": "yes",
+        "fragile": "conditional",
+        "emergency": "conditional",
+        "urban": "yes",
+        "rural": "yes"
+      },
+      "constraintFit": {
+        "worksWellWith": ["env_003", "pol_004", "fin_001"],
+        "challengedBy": ["log_001", "soc_001", "env_001"],
+        "requiredCapacity": ["tech_001", "pol_002"]
+      },
+      "scalability": "medium",
+      "sustainability": "medium-high",
+      "evidenceSources": [
+        "Strong biological plausibility",
+        "Large trials showed smaller effects than expected",
+        "Benefits depend on quality and intensity of WASH improvements",
+        "More effective in high disease burden areas"
+      ],
+      "commonChallenges": [
+        "High cost of comprehensive WASH",
+        "Behavior change difficult to sustain",
+        "Infrastructure maintenance",
+        "Separating WASH from nutrition effects",
+        "Long time to impact"
+      ],
+      "successFactors": [
+        "Comprehensive package (not just hardware)",
+        "Strong hygiene behavior change component",
+        "Community ownership and maintenance systems",
+        "Sustained engagement over time",
+        "Integration with health and nutrition messaging"
+      ],
+      "integrationOpportunities": [
+        "Community health programs",
+        "Nutrition treatment and counseling",
+        "School health programs",
+        "Community-led total sanitation (CLTS)"
+      ]
+    }
+  ],
+  "categories": {
+    "treatment": {
+      "label": "Treatment",
+      "description": "Interventions that treat existing malnutrition",
+      "color": "#d97757"
+    },
+    "prevention": {
+      "label": "Prevention",
+      "description": "Interventions that prevent malnutrition before it occurs",
+      "color": "#6b9e6b"
+    },
+    "systemStrengthening": {
+      "label": "System Strengthening",
+      "description": "Building capacity and systems for sustainable nutrition programming",
+      "color": "#7a9eb8"
+    }
+  },
+  "evidenceLevels": {
+    "strong": {
+      "label": "Strong Evidence",
+      "description": "Multiple high-quality studies showing consistent effects",
+      "color": "#6b9e6b"
+    },
+    "moderate": {
+      "label": "Moderate Evidence",
+      "description": "Some good evidence but gaps remain or results mixed",
+      "color": "#e8bc7c"
+    },
+    "weak": {
+      "label": "Weak Evidence",
+      "description": "Limited or low-quality evidence; effectiveness uncertain",
+      "color": "#d97757"
+    },
+    "emerging": {
+      "label": "Emerging Evidence",
+      "description": "Promising but needs more rigorous evaluation",
+      "color": "#7a9eb8"
+    }
+  },
+  "costLevels": {
+    "very-low": "< $10 per beneficiary per year",
+    "low": "$10-50 per beneficiary per year",
+    "low-medium": "$50-100 per beneficiary per year",
+    "medium": "$100-200 per beneficiary per year",
+    "medium-high": "$200-400 per beneficiary per year",
+    "high": "> $400 per beneficiary per year"
+  },
+  "complexityLevels": {
+    "low": "Simple to implement with basic capacity",
+    "medium": "Moderate complexity requiring some specialized capacity",
+    "high": "Complex requiring substantial technical capacity and systems",
+    "very-high": "Highly complex requiring advanced technical capacity and infrastructure"
+  },
+  "timeToImpact": {
+    "immediate": "Effects visible within weeks",
+    "short-term": "Effects visible within 1-3 months",
+    "medium-term": "Effects visible within 3-12 months",
+    "long-term": "Effects visible after 12+ months"
+  }
+}
