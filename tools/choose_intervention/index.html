@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive intervention selector. Match nutrition interventions to your context, constraints, and capacity. Compare approaches, estimate costs, and build implementation roadmaps.">
+    <title>Intervention Selector | Feed Children ASAP Atlas</title>
+    
+    <style>
+        /* ============================================
+           RESET & BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --earth-dark: #2d3e2f;
+            --earth-medium: #5a7c5e;
+            --earth-light: #8ba888;
+            --healing-green: #a8c5a0;
+            --warm-sand: #e8dcc4;
+            --soft-blue: #7a9eb8;
+            --intervention-blue: #5a8bb8;
+            --intervention-teal: #5a9e9e;
+            --action-orange: #e8a87c;
+            --neutral-gray: #6b7280;
+            --background-light: #f9f9f7;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --card-background: #ffffff;
+            --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --border-radius: 8px;
+            --transition-smooth: all 0.3s ease;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--background-light);
+            overflow-x: hidden;
+        }
+        
+        /* ============================================
+           TYPOGRAPHY
+           ============================================ */
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+        }
+        
+        h1 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            color: var(--earth-dark);
+        }
+        
+        h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--earth-medium);
+            margin-top: 2rem;
+        }
+        
+        h3 {
+            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+            color: var(--earth-medium);
+            margin-top: 1.5rem;
+        }
+        
+        h4 {
+            font-size: clamp(1.125rem, 2vw, 1.25rem);
+            color: var(--earth-dark);
+            margin-top: 1rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        label {
+            display: block;
+            font-weight: 500;
+            color: var(--earth-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* ============================================
+           LAYOUT
+           ============================================ */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .narrow-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        .top-nav {
+            background: var(--earth-dark);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .nav-home {
+            color: var(--warm-sand);
+            font-weight: 600;
+            font-size: 1.125rem;
+            text-decoration: none;
+        }
+        
+        .nav-home:hover {
+            color: var(--healing-green);
+        }
+        
+        .tool-name {
+            color: var(--warm-sand);
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        /* ============================================
+           HEADER
+           ============================================ */
+        header {
+            background: linear-gradient(135deg, var(--intervention-blue) 0%, var(--intervention-teal) 100%);
+            padding: 3rem 0 2rem;
+            color: white;
+        }
+        
+        .tool-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.25);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 400;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* ============================================
+           INTERFACE SECTIONS
+           ============================================ */
+        .interface-section {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        /* ============================================
+           STEP INDICATOR
+           ============================================ */
+        .steps-indicator {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .steps-indicator::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--earth-light);
+            z-index: 0;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            flex: 1;
+        }
+        
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--background-light);
+            border: 3px solid var(--earth-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--neutral-gray);
+            margin-bottom: 0.5rem;
+            transition: var(--transition-smooth);
+        }
+        
+        .step.active .step-circle {
+            background: var(--intervention-blue);
+            border-color: var(--intervention-blue);
+            color: white;
+        }
+        
+        .step.completed .step-circle {
+            background: var(--healing-green);
+            border-color: var(--healing-green);
+            color: white;
+        }
+        
+        .step-label {
+            font-size: 0.875rem;
+            color: var(--neutral-gray);
+            text-align: center;
+        }
+        
+        .step.active .step-label {
+            color: var(--intervention-blue);
+            font-weight: 600;
+        }
+        
+        /* ============================================
+           FILTER CARDS
+           ============================================ */
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .filter-card {
+            background: var(--background-light);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            border: 3px solid transparent;
+        }
+        
+        .filter-card:hover {
+            box-shadow: var(--shadow-medium);
+            transform: translateY(-2px);
+        }
+        
+        .filter-card.selected {
+            border-color: var(--intervention-blue);
+            background: white;
+        }
+        
+        .filter-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+        
+        .filter-title {
+            font-weight: 600;
+            color: var(--earth-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .filter-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        /* ============================================
+           INTERVENTION CARDS
+           ============================================ */
+        .interventions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .intervention-card {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 1.75rem;
+            box-shadow: var(--shadow-subtle);
+            border-top: 4px solid var(--intervention-teal);
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+        
+        .intervention-card:hover {
+            box-shadow: var(--shadow-medium);
+            transform: translateY(-2px);
+        }
+        
+        .intervention-card.selected {
+            border-top-color: var(--healing-green);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .intervention-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            gap: 1rem;
+        }
+        
+        .intervention-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--earth-dark);
+        }
+        
+        .match-score {
+            background: var(--healing-green);
+            color: var(--earth-dark);
+            padding: 0.375rem 0.75rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            white-space: nowrap;
+        }
+        
+        .intervention-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+        
+        .intervention-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .meta-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            background: var(--soft-blue);
+            color: white;
+        }
+        
+        .intervention-details {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--earth-light);
+        }
+        
+        .intervention-card.expanded .intervention-details {
+            display: block;
+        }
+        
+        .details-section {
+            margin-bottom: 1rem;
+        }
+        
+        .details-title {
+            font-weight: 600;
+            color: var(--earth-medium);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .details-content {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        /* ============================================
+           COMPARISON TABLE
+           ============================================ */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .comparison-table th {
+            background: var(--intervention-blue);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            color: var(--text-secondary);
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .comparison-table tr:hover {
+            background: var(--background-light);
+        }
+        
+        /* ============================================
+           BUTTONS
+           ============================================ */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            font-family: inherit;
+        }
+        
+        .btn-primary {
+            background: var(--intervention-blue);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--intervention-teal);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .btn-primary:disabled {
+            background: var(--neutral-gray);
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-secondary {
+            background: var(--earth-light);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--earth-medium);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--earth-light);
+            color: var(--earth-medium);
+        }
+        
+        .btn-outline:hover {
+            background: var(--background-light);
+        }
+        
+        .btn-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        /* ============================================
+           STEP CONTENT
+           ============================================ */
+        .step-content {
+            display: none;
+        }
+        
+        .step-content.active {
+            display: block;
+        }
+        
+        /* ============================================
+           RESULTS SUMMARY
+           ============================================ */
+        .results-summary {
+            background: linear-gradient(135deg, var(--healing-green) 0%, var(--earth-light) 100%);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            color: white;
+            margin-bottom: 2rem;
+        }
+        
+        .results-summary h2 {
+            color: white;
+            margin-top: 0;
+        }
+        
+        .summary-stat {
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .summary-stat strong {
+            font-weight: 600;
+        }
+        
+        /* ============================================
+           SELECTED INTERVENTIONS
+           ============================================ */
+        .selected-interventions {
+            background: var(--warm-sand);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .selected-interventions h3 {
+            margin-top: 0;
+            color: var(--earth-dark);
+        }
+        
+        .selected-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        
+        .selected-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: white;
+            border-radius: 6px;
+            gap: 1rem;
+        }
+        
+        .selected-name {
+            flex: 1;
+            font-weight: 500;
+            color: var(--earth-dark);
+        }
+        
+        .remove-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.25rem;
+            opacity: 0.6;
+            transition: var(--transition-smooth);
+        }
+        
+        .remove-btn:hover {
+            opacity: 1;
+            color: var(--constraint-red);
+        }
+        
+        /* ============================================
+           EMPTY STATE
+           ============================================ */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--neutral-gray);
+        }
+        
+        .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .interface-section {
+                padding: 1.5rem;
+            }
+            
+            .filter-grid,
+            .interventions-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .steps-indicator {
+                overflow-x: auto;
+                margin-bottom: 2rem;
+            }
+            
+            .step {
+                min-width: 80px;
+            }
+            
+            .btn-actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .comparison-table {
+                font-size: 0.875rem;
+            }
+            
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.75rem 0.5rem;
+            }
+        }
+        
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: var(--earth-dark);
+            color: var(--warm-sand);
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            text-align: center;
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+        
+        .footer-content a {
+            color: var(--healing-green);
+            text-decoration: none;
+        }
+        
+        .footer-content a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="top-nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="../index.html" class="nav-home">← Feed Children ASAP Atlas</a>
+                <span class="tool-name">Intervention Selector</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header>
+        <div class="narrow-container">
+            <span class="tool-badge">🎯 Interactive Tool</span>
+            <h1>Intervention Selector</h1>
+            <p class="subtitle">
+                Match nutrition interventions to your context, constraints, and capacity. Filter by population, 
+                setting, resources, and timeframe. Compare options and build implementation roadmaps.
+            </p>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <div class="container">
+            
+            <!-- STEP INDICATOR -->
+            <div class="steps-indicator">
+                <div class="step active" data-step="1">
+                    <div class="step-circle">1</div>
+                    <div class="step-label">Context</div>
+                </div>
+                <div class="step" data-step="2">
+                    <div class="step-circle">2</div>
+                    <div class="step-label">Target Population</div>
+                </div>
+                <div class="step" data-step="3">
+                    <div class="step-circle">3</div>
+                    <div class="step-label">Resources</div>
+                </div>
+                <div class="step" data-step="4">
+                    <div class="step-circle">4</div>
+                    <div class="step-label">Select Interventions</div>
+                </div>
+                <div class="step" data-step="5">
+                    <div class="step-circle">5</div>
+                    <div class="step-label">Compare & Plan</div>
+                </div>
+            </div>
+
+            <!-- STEP 1: CONTEXT -->
+            <div class="step-content active" id="step-1">
+                <div class="interface-section">
+                    <h2>Step 1: Define Your Context</h2>
+                    <p>What kind of setting are you working in?</p>
+                    
+                    <div class="filter-grid">
+                        <div class="filter-card" data-filter="context" data-value="stable-rural">
+                            <span class="filter-icon">🌾</span>
+                            <div class="filter-title">Stable Rural</div>
+                            <div class="filter-description">Rural areas with functioning markets and infrastructure</div>
+                        </div>
+                        
+                        <div class="filter-card" data-filter="context" data-value="stable-urban">
+                            <span class="filter-icon">🏙️</span>
+                            <div class="filter-title">Stable Urban</div>
+                            <div class="filter-description">Urban or peri-urban areas with market access</div>
+                        </div>
+                        
+                        <div class="filter-card" data-filter="context" data-value="fragile">
+                            <span class="filter-icon">⚠️</span>
+                            <div class="filter-title">Fragile/Conflict</div>
+                            <div class="filter-description">Areas with security concerns or institutional weakness</div>
+                        </div>
+                        
+                        <div class="filter-card" data-filter="context" data-value="emergency">
+                            <span class="filter-icon">🚨</span>
+                            <div class="filter-title">Acute Emergency</div>
+                            <div class="filter-description">Crisis response, displaced populations, or acute needs</div>
+                        </div>
+                    </div>
+                    
+                    <div class="btn-actions">
+                        <button class="btn btn-primary" onclick="nextStep()" disabled id="step-1-next">Next: Target Population →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 2: TARGET POPULATION -->
+            <div class="step-content" id="step-2">
+                <div class="interface-section">
+                    <h2>Step 2: Target Population</h2>
+                    <p>Which age group(s) are you prioritizing? (Select all that apply)</p>
+                    
+                    <div class="filter-grid">
+                        <div class="filter-card" data-filter="population" data-value="pregnant">
+                            <span class="filter-icon">🤰</span>
+                            <div class="filter-title">Pregnant Women</div>
+                            <div class="filter-description">Prenatal nutrition and support</div>
+                        </div>
+                        
+                        <div class="filter-card" data-filter="population" data-value="0-6months">
+                            <span class="filter-icon">👶</span>
+                            <div class="filter-title">0-6 Months</div>
+                            <div class="filter-description">Infants, breastfeeding support</div>
+                        </div>
+                        
+                        <div class="filter-card" data-filter="population" data-value="6-24months">
+                            <span class="filter-icon">🍼</span>
+                            <div class="filter-title">6-24 Months</div>
+                            <div class="filter-description">Complementary feeding period</div>
+                        </div>
+                        
+                        <div class="filter-card" data-filter="population" data-value="2-5years">
+                            <span class="filter-icon">👧</span>
+                            <div class="filter-title">2-5 Years</div>
+                            <div class="filter-description">Preschool children</div>
+                        </div>
+                        
+                        <div class="filter-card" data-filter="population" data-value="school-age">
+                            <span class="filter-icon">🎒</span>
+                            <div class="filter-title">School-Age</div>
+                            <div class="filter-description">Primary school children (5-12 years)</div>
+                        </div>
+                        
+                        <div class="filter-card" data-filter="population" data-value="adolescent">
+                            <span class="filter-icon">🧑</span>
+                            <div class="filter-title">Adolescents</div>
+                            <div class="filter-description">Youth 10-19 years</div>
+                        </div>
+                    </div>
+                    
+                    <div class="btn-actions">
+                        <button class="btn btn-outline" onclick="previousStep()">← Back</button>
+                        <button class="btn btn-primary" onclick="nextStep()" disabled id="step-2-next">Next: Resources →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 3: RESOURCES -->
+            <div class="step-content" id="step-3">
+                <div class="interface-section">
+                    <h2>Step 3: Available Resources</h2>
+                    <p>What resources and timeframe do you have?</p>
+                    
+                    <h3>Budget Level</h3>
+                    <div class="filter-grid">
+                        <div class="filter-card" data-filter="budget" data-value="low">
+                            <span class="filter-icon">💵</span>
+                            <div class="filter-title">Limited Budget</div>
+                            <div class="filter-description">< $50 per child per year</div>
+                        </div>
+                        
+                        <div class="filter-card" data-filter="budget" data-value="medium">
+                            <span class="filter-icon">💰</span>
+                            <div class="filter-title">Moderate Budget</div>
+                            <div class="filter-description">$50-150 per child per year</div>
+                        </div>
+                        
+                        <div class="filter-card" data-filter="budget" data-value="high">
+                            <span class="filter-icon">💎</span>
+                            <div class="filter-title">Substantial Budget</div>
+                            <div class="filter-description">> $150 per child per year</div>
+                        </div>
+                    </div>
+                    
+                    <h3 style="margin-top: 2rem;">Implementation Timeframe</h3>
+                    <div class="filter-grid">
+                        <div class="filter-card" data-filter="timeframe" data-value="immediate">
+                            <span class="filter-icon">⚡</span>
+                            <div class="filter-title">Immediate</div>
+                            <div class="filter-description">Deploy within weeks</div>
+                        </div>
+                        
+                        <div class="filter-card" data-filter="timeframe" data-value="short">
+                            <span class="filter-icon">📅</span>
+                            <div class="filter-title">Short-term</div>
+                            <div class="filter-description">3-12 months</div>
+                        </div>
+                        
+                        <div class="filter-card" data-filter="timeframe" data-value="long">
+                            <span class="filter-icon">🗓️</span>
+                            <div class="filter-title">Long-term</div>
+                            <div class="filter-description">1+ years, sustainable programs</div>
+                        </div>
+                    </div>
+                    
+                    <div class="btn-actions">
+                        <button class="btn btn-outline" onclick="previousStep()">← Back</button>
+                        <button class="btn btn-primary" onclick="nextStep()" disabled id="step-3-next">Next: Select Interventions →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 4: SELECT INTERVENTIONS -->
+            <div class="step-content" id="step-4">
+                <div class="interface-section">
+                    <h2>Step 4: Select Interventions</h2>
+                    <p>Based on your context, these interventions are recommended. Select those you want to compare or implement.</p>
+                    
+                    <div class="selected-interventions" id="selected-basket">
+                        <h3>Selected Interventions (0)</h3>
+                        <div class="selected-list" id="selected-list"></div>
+                    </div>
+                    
+                    <div class="interventions-grid" id="interventions-grid"></div>
+                    
+                    <div class="btn-actions">
+                        <button class="btn btn-outline" onclick="previousStep()">← Back</button>
+                        <button class="btn btn-primary" onclick="nextStep()" disabled id="step-4-next">Next: Compare & Plan →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 5: COMPARE & PLAN -->
+            <div class="step-content" id="step-5">
+                <div class="interface-section">
+                    <h2>Step 5: Compare & Plan Implementation</h2>
+                    
+                    <div class="results-summary">
+                        <h2>Your Intervention Package</h2>
+                        <div class="summary-stat"><strong>Context:</strong> <span id="summary-context"></span></div>
+                        <div class="summary-stat"><strong>Target Groups:</strong> <span id="summary-population"></span></div>
+                        <div class="summary-stat"><strong>Selected Interventions:</strong> <span id="summary-count"></span></div>
+                    </div>
+                    
+                    <h3>Comparison Table</h3>
+                    <div style="overflow-x: auto;">
+                        <table class="comparison-table" id="comparison-table"></table>
+                    </div>
+                    
+                    <div class="btn-actions">
+                        <button class="btn btn-outline" onclick="previousStep()">← Back</button>
+                        <button class="btn btn-secondary" onclick="exportPlan()">📤 Export Plan</button>
+                        <button class="btn btn-primary" onclick="resetTool()">🔄 Start Over</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>
+                    <strong>Intervention Selector</strong> | Part of Feed Children ASAP Atlas<br>
+                    <a href="../governance.html">Zero Harm Policy</a> • 
+                    <a href="../index.html">Return to Atlas</a>
+                </p>
+                <p style="margin-top: 1rem; font-size: 0.8rem;">
+                    All data stored locally in your browser. No tracking. No external servers.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // ============================================
+        // DATA: INTERVENTION DATABASE
+        // ============================================
+        const interventions = [
+            {
+                id: 'sam-treatment',
+                name: 'Severe Acute Malnutrition Treatment',
+                description: 'Community-based management using ready-to-use therapeutic food (RUTF) for children with SAM',
+                contexts: ['stable-rural', 'stable-urban', 'fragile', 'emergency'],
+                populations: ['6-24months', '2-5years'],
+                budget: ['medium', 'high'],
+                timeframe: ['immediate', 'short'],
+                costPerChild: 150,
+                complexity: 'Medium',
+                evidence: 'Strong',
+                timeToImpact: '2-8 weeks',
+                requirements: 'RUTF supply chain, trained health workers, screening protocols',
+                strengths: 'Life-saving, evidence-based, rapid impact',
+                limitations: 'Requires supply chain, moderate cost, treats but doesn\'t prevent',
+                sustainability: 'Requires ongoing commodities; can be integrated into health systems'
+            },
+            {
+                id: 'mam-treatment',
+                name: 'Moderate Acute Malnutrition Treatment',
+                description: 'Supplementary feeding programs for children with MAM using fortified blended foods',
+                contexts: ['stable-rural', 'stable-urban', 'fragile', 'emergency'],
+                populations: ['6-24months', '2-5years'],
+                budget: ['low', 'medium'],
+                timeframe: ['immediate', 'short'],
+                costPerChild: 80,
+                complexity: 'Low-Medium',
+                evidence: 'Strong',
+                timeToImpact: '8-12 weeks',
+                requirements: 'Supplementary food supply, basic screening, distribution points',
+                strengths: 'Prevents progression to SAM, cost-effective, simpler than SAM treatment',
+                limitations: 'Lower impact than SAM treatment, requires sustained feeding',
+                sustainability: 'Can transition to prevention programs or government systems'
+            },
+            {
+                id: 'school-feeding',
+                name: 'School Feeding Program',
+                description: 'Daily meals or snacks provided at schools to improve nutrition and attendance',
+                contexts: ['stable-rural', 'stable-urban', 'fragile'],
+                populations: ['school-age'],
+                budget: ['medium', 'high'],
+                timeframe: ['short', 'long'],
+                costPerChild: 60,
+                complexity: 'Medium',
+                evidence: 'Strong',
+                timeToImpact: '3-6 months',
+                requirements: 'Kitchen facilities, food supply, school partnership, cooks',
+                strengths: 'Improves attendance, learning; provides incentive for education',
+                limitations: 'Misses out-of-school children, requires infrastructure',
+                sustainability: 'Often transitioned to government management'
+            },
+            {
+                id: 'cash-transfers',
+                name: 'Cash Transfers (Conditional or Unconditional)',
+                description: 'Direct cash payments to households to improve food access and dietary diversity',
+                contexts: ['stable-rural', 'stable-urban'],
+                populations: ['pregnant', '0-6months', '6-24months', '2-5years'],
+                budget: ['medium', 'high'],
+                timeframe: ['short', 'long'],
+                costPerChild: 120,
+                complexity: 'Medium-High',
+                evidence: 'Moderate-Strong',
+                timeToImpact: '3-9 months',
+                requirements: 'Payment infrastructure, beneficiary registry, monitoring system',
+                strengths: 'Household flexibility, dignity, multiple benefits beyond nutrition',
+                limitations: 'Requires functioning markets, may not guarantee nutrition spending',
+                sustainability: 'Can integrate with social protection systems'
+            },
+            {
+                id: 'micronutrient-supplementation',
+                name: 'Micronutrient Supplementation',
+                description: 'Distribution of vitamin A, iron, zinc supplements to address specific deficiencies',
+                contexts: ['stable-rural', 'stable-urban', 'fragile', 'emergency'],
+                populations: ['6-24months', '2-5years', 'pregnant'],
+                budget: ['low'],
+                timeframe: ['immediate', 'short', 'long'],
+                costPerChild: 5,
+                complexity: 'Low',
+                evidence: 'Strong',
+                timeToImpact: '1-3 months',
+                requirements: 'Supplements supply, basic distribution network',
+                strengths: 'Very low cost, proven effectiveness, easy to deliver',
+                limitations: 'Addresses only micronutrients, requires sustained delivery',
+                sustainability: 'Can integrate with health services or campaigns'
+            },
+            {
+                id: 'food-fortification',
+                name: 'Food Fortification',
+                description: 'Adding micronutrients to staple foods (flour, salt, oil) at processing level',
+                contexts: ['stable-urban'],
+                populations: ['pregnant', '6-24months', '2-5years', 'school-age', 'adolescent'],
+                budget: ['low', 'medium'],
+                timeframe: ['long'],
+                costPerChild: 3,
+                complexity: 'High',
+                evidence: 'Strong',
+                timeToImpact: '6-18 months',
+                requirements: 'Food processing industry, regulatory framework, quality control',
+                strengths: 'Extremely cost-effective at scale, reaches whole population',
+                limitations: 'Requires industrial food chain, long setup time, policy change',
+                sustainability: 'Highly sustainable once established, minimal ongoing cost'
+            },
+            {
+                id: 'iycf-counseling',
+                name: 'Infant & Young Child Feeding Counseling',
+                description: 'Behavior change communication promoting breastfeeding and complementary feeding',
+                contexts: ['stable-rural', 'stable-urban', 'fragile'],
+                populations: ['pregnant', '0-6months', '6-24months'],
+                budget: ['low', 'medium'],
+                timeframe: ['short', 'long'],
+                costPerChild: 25,
+                complexity: 'Medium',
+                evidence: 'Strong',
+                timeToImpact: '3-12 months',
+                requirements: 'Trained counselors, community engagement, behavior change materials',
+                strengths: 'Addresses root causes, low cost, sustainable behavior change',
+                limitations: 'Slower impact, requires skilled staff, variable adoption',
+                sustainability: 'Very sustainable; builds local capacity and knowledge'
+            },
+            {
+                id: 'cash-plus',
+                name: 'Cash Plus Nutrition Counseling',
+                description: 'Cash transfers combined with nutrition education and behavior change support',
+                contexts: ['stable-rural', 'stable-urban'],
+                populations: ['pregnant', '6-24months', '2-5years'],
+                budget: ['high'],
+                timeframe: ['short', 'long'],
+                costPerChild: 150,
+                complexity: 'High',
+                evidence: 'Moderate',
+                timeToImpact: '6-12 months',
+                requirements: 'Cash infrastructure, trained counselors, integrated systems',
+                strengths: 'Addresses both access and knowledge, strong evidence of effectiveness',
+                limitations: 'High cost, complex implementation, requires coordination',
+                sustainability: 'Can integrate with social protection if government capacity exists'
+            },
+            {
+                id: 'home-gardens',
+                name: 'Homestead Food Production',
+                description: 'Support for household gardens and small livestock to improve dietary diversity',
+                contexts: ['stable-rural'],
+                populations: ['pregnant', '6-24months', '2-5years', 'school-age'],
+                budget: ['low', 'medium'],
+                timeframe: ['long'],
+                costPerChild: 40,
+                complexity: 'Medium',
+                evidence: 'Moderate',
+                timeToImpact: '6-18 months',
+                requirements: 'Seeds/inputs, agricultural training, land access',
+                strengths: 'Sustainable, builds self-reliance, improves dietary diversity',
+                limitations: 'Slow impact, requires land and water, seasonal',
+                sustainability: 'Very high; households own production after initial support'
+            },
+            {
+                id: 'blanket-feeding',
+                name: 'Blanket Supplementary Feeding',
+                description: 'Preventive distribution of fortified foods to all children in high-risk areas',
+                contexts: ['emergency', 'fragile'],
+                populations: ['6-24months', '2-5years'],
+                budget: ['high'],
+                timeframe: ['immediate', 'short'],
+                costPerChild: 100,
+                complexity: 'Medium',
+                evidence: 'Moderate',
+                timeToImpact: '2-6 months',
+                requirements: 'Large-scale commodity procurement, distribution network',
+                strengths: 'Prevents malnutrition in high-risk settings, reaches all children',
+                limitations: 'High cost, only appropriate in crises, not targeted',
+                sustainability: 'Not sustainable; emergency measure only'
+            },
+            {
+                id: 'wash-integration',
+                name: 'WASH + Nutrition Integration',
+                description: 'Combining water, sanitation, hygiene improvements with nutrition programs',
+                contexts: ['stable-rural', 'stable-urban', 'fragile'],
+                populations: ['6-24months', '2-5years'],
+                budget: ['medium', 'high'],
+                timeframe: ['long'],
+                costPerChild: 90,
+                complexity: 'High',
+                evidence: 'Moderate',
+                timeToImpact: '12-24 months',
+                requirements: 'WASH infrastructure, behavior change, multi-sector coordination',
+                strengths: 'Addresses underlying causes, multiple health benefits',
+                limitations: 'Complex coordination, slow impact, requires infrastructure investment',
+                sustainability: 'High if infrastructure maintained; behavior change persists'
+            },
+            {
+                id: 'community-kitchens',
+                name: 'Community Kitchens / Feeding Centers',
+                description: 'Central locations providing prepared meals to children and pregnant women',
+                contexts: ['stable-urban', 'emergency', 'fragile'],
+                populations: ['6-24months', '2-5years', 'pregnant'],
+                budget: ['medium', 'high'],
+                timeframe: ['immediate', 'short'],
+                costPerChild: 110,
+                complexity: 'Medium',
+                evidence: 'Moderate',
+                timeToImpact: '1-3 months',
+                requirements: 'Facility space, cooking equipment, food supply, cooks',
+                strengths: 'Quality control, community gathering, can include education',
+                limitations: 'Requires attendance, infrastructure needs, not home-based',
+                sustainability: 'Can transition to community ownership or government support'
+            }
+        ];
+
+        // ============================================
+        // STATE MANAGEMENT
+        // ============================================
+        let currentStep = 1;
+        let selections = {
+            context: null,
+            population: [],
+            budget: null,
+            timeframe: null,
+            selectedInterventions: []
+        };
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+        document.addEventListener('DOMContentLoaded', () => {
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            // Filter card selection
+            document.querySelectorAll('.filter-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    handleFilterSelection(card);
+                });
+            });
+        }
+
+        // ============================================
+        // FILTER SELECTION
+        // ============================================
+        function handleFilterSelection(card) {
+            const filter = card.dataset.filter;
+            const value = card.dataset.value;
+            
+            if (filter === 'population') {
+                // Multi-select for population
+                if (card.classList.contains('selected')) {
+                    card.classList.remove('selected');
+                    selections.population = selections.population.filter(p => p !== value);
+                } else {
+                    card.classList.add('selected');
+                    selections.population.push(value);
+                }
+            } else {
+                // Single select for other filters
+                document.querySelectorAll(`[data-filter="${filter}"]`).forEach(c => {
+                    c.classList.remove('selected');
+                });
+                card.classList.add('selected');
+                selections[filter] = value;
+            }
+            
+            updateStepButton();
+        }
+
+        function updateStepButton() {
+            let canProceed = false;
+            
+            if (currentStep === 1) {
+                canProceed = selections.context !== null;
+            } else if (currentStep === 2) {
+                canProceed = selections.population.length > 0;
+            } else if (currentStep === 3) {
+                canProceed = selections.budget !== null && selections.timeframe !== null;
+            } else if (currentStep === 4) {
+                canProceed = selections.selectedInterventions.length > 0;
+            }
+            
+            const nextBtn = document.getElementById(`step-${currentStep}-next`);
+            if (nextBtn) {
+                nextBtn.disabled = !canProceed;
+            }
+        }
+
+        // ============================================
+        // STEP NAVIGATION
+        // ============================================
+        function nextStep() {
+            if (currentStep === 3) {
+                // Generate and display interventions
+                displayMatchedInterventions();
+            } else if (currentStep === 4) {
+                // Generate comparison
+                generateComparison();
+            }
+            
+            currentStep++;
+            updateStepDisplay();
+        }
+
+        function previousStep() {
+            currentStep--;
+            updateStepDisplay();
+        }
+
+        function updateStepDisplay() {
+            // Update step indicator
+            document.querySelectorAll('.step').forEach(step => {
+                const stepNum = parseInt(step.dataset.step);
+                step.classList.remove('active', 'completed');
+                
+                if (stepNum === currentStep) {
+                    step.classList.add('active');
+                } else if (stepNum < currentStep) {
+                    step.classList.add('completed');
+                }
+            });
+            
+            // Update content
+            document.querySelectorAll('.step-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(`step-${currentStep}`).classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ============================================
+        // INTERVENTION MATCHING
+        // ============================================
+        function displayMatchedInterventions() {
+            const container = document.getElementById('interventions-grid');
+            container.innerHTML = '';
+            
+            // Filter and score interventions
+            const matched = interventions
+                .map(intervention => ({
+                    ...intervention,
+                    score: calculateMatchScore(intervention)
+                }))
+                .filter(intervention => intervention.score > 0)
+                .sort((a, b) => b.score - a.score);
+            
+            if (matched.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">🔍</div>
+                        <p>No interventions match your exact criteria.</p>
+                        <p>Try adjusting your filters or contact an implementation specialist.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            matched.forEach(intervention => {
+                const card = createInterventionCard(intervention);
+                container.appendChild(card);
+            });
+        }
+
+        function calculateMatchScore(intervention) {
+            let score = 0;
+            
+            // Context match (required)
+            if (!intervention.contexts.includes(selections.context)) return 0;
+            score += 30;
+            
+            // Population match
+            const popMatch = intervention.populations.some(p => selections.population.includes(p));
+            if (!popMatch) return 0;
+            score += 30;
+            
+            // Budget match
+            if (intervention.budget.includes(selections.budget)) {
+                score += 20;
+            }
+            
+            // Timeframe match
+            if (intervention.timeframe.includes(selections.timeframe)) {
+                score += 20;
+            }
+            
+            return score;
+        }
+
+        function createInterventionCard(intervention) {
+            const card = document.createElement('div');
+            card.className = 'intervention-card';
+            card.dataset.id = intervention.id;
+            
+            if (selections.selectedInterventions.includes(intervention.id)) {
+                card.classList.add('selected');
+            }
+            
+            card.innerHTML = `
+                <div class="intervention-header">
+                    <div class="intervention-name">${intervention.name}</div>
+                    <div class="match-score">${intervention.score}% match</div>
+                </div>
+                <div class="intervention-description">${intervention.description}</div>
+                <div class="intervention-meta">
+                    <span class="meta-badge">$${intervention.costPerChild}/child/year</span>
+                    <span class="meta-badge">${intervention.complexity}</span>
+                    <span class="meta-badge">${intervention.evidence} evidence</span>
+                </div>
+                <div class="intervention-details">
+                    <div class="details-section">
+                        <div class="details-title">⏱️ Time to Impact</div>
+                        <div class="details-content">${intervention.timeToImpact}</div>
+                    </div>
+                    <div class="details-section">
+                        <div class="details-title">📋 Requirements</div>
+                        <div class="details-content">${intervention.requirements}</div>
+                    </div>
+                    <div class="details-section">
+                        <div class="details-title">✅ Strengths</div>
+                        <div class="details-content">${intervention.strengths}</div>
+                    </div>
+                    <div class="details-section">
+                        <div class="details-title">⚠️ Limitations</div>
+                        <div class="details-content">${intervention.limitations}</div>
+                    </div>
+                    <div class="details-section">
+                        <div class="details-title">♻️ Sustainability</div>
+                        <div class="details-content">${intervention.sustainability}</div>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem;">
+                    <button class="btn btn-outline" onclick="toggleDetails('${intervention.id}')" style="margin-right: 0.5rem;">
+                        ${card.classList.contains('expanded') ? 'Hide' : 'Show'} Details
+                    </button>
+                    <button class="btn ${selections.selectedInterventions.includes(intervention.id) ? 'btn-secondary' : 'btn-primary'}" 
+                            onclick="toggleSelection('${intervention.id}')">
+                        ${selections.selectedInterventions.includes(intervention.id) ? '✓ Selected' : 'Select'}
+                    </button>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        function toggleDetails(id) {
+            const card = document.querySelector(`[data-id="${id}"]`);
+            card.classList.toggle('expanded');
+            
+            const btn = card.querySelector('.btn-outline');
+            btn.textContent = card.classList.contains('expanded') ? 'Hide Details' : 'Show Details';
+        }
+
+        function toggleSelection(id) {
+            const index = selections.selectedInterventions.indexOf(id);
+            
+            if (index > -1) {
+                selections.selectedInterventions.splice(index, 1);
+            } else {
+                selections.selectedInterventions.push(id);
+            }
+            
+            updateSelectedBasket();
+            updateStepButton();
+            
+            // Update card appearance
+            const card = document.querySelector(`[data-id="${id}"]`);
+            card.classList.toggle('selected');
+            
+            const btn = card.querySelector('.btn-primary, .btn-secondary');
+            if (selections.selectedInterventions.includes(id)) {
+                btn.className = 'btn btn-secondary';
+                btn.textContent = '✓ Selected';
+            } else {
+                btn.className = 'btn btn-primary';
+                btn.textContent = 'Select';
+            }
+        }
+
+        function updateSelectedBasket() {
+            const container = document.getElementById('selected-basket');
+            const list = document.getElementById('selected-list');
+            
+            container.querySelector('h3').textContent = `Selected Interventions (${selections.selectedInterventions.length})`;
+            
+            if (selections.selectedInterventions.length === 0) {
+                list.innerHTML = '<p style="text-align: center; color: var(--neutral-gray); padding: 1rem;">No interventions selected yet.</p>';
+                return;
+            }
+            
+            list.innerHTML = '';
+            
+            selections.selectedInterventions.forEach(id => {
+                const intervention = interventions.find(i => i.id === id);
+                const item = document.createElement('div');
+                item.className = 'selected-item';
+                item.innerHTML = `
+                    <div class="selected-name">${intervention.name}</div>
+                    <button class="remove-btn" onclick="toggleSelection('${id}')" title="Remove">✕</button>
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        // ============================================
+        // COMPARISON GENERATION
+        // ============================================
+        function generateComparison() {
+            // Update summary
+            const contextLabels = {
+                'stable-rural': 'Stable Rural',
+                'stable-urban': 'Stable Urban',
+                'fragile': 'Fragile/Conflict',
+                'emergency': 'Acute Emergency'
+            };
+            
+            const popLabels = {
+                'pregnant': 'Pregnant Women',
+                '0-6months': '0-6 Months',
+                '6-24months': '6-24 Months',
+                '2-5years': '2-5 Years',
+                'school-age': 'School-Age',
+                'adolescent': 'Adolescents'
+            };
+            
+            document.getElementById('summary-context').textContent = contextLabels[selections.context];
+            document.getElementById('summary-population').textContent = selections.population.map(p => popLabels[p]).join(', ');
+            document.getElementById('summary-count').textContent = selections.selectedInterventions.length;
+            
+            // Generate comparison table
+            const table = document.getElementById('comparison-table');
+            
+            const headers = ['Intervention', 'Cost/Child/Year', 'Complexity', 'Evidence', 'Time to Impact', 'Sustainability'];
+            
+            let html = '<thead><tr>';
+            headers.forEach(h => {
+                html += `<th>${h}</th>`;
+            });
+            html += '</tr></thead><tbody>';
+            
+            selections.selectedInterventions.forEach(id => {
+                const intervention = interventions.find(i => i.id === id);
+                html += `
+                    <tr>
+                        <td><strong>${intervention.name}</strong></td>
+                        <td>$${intervention.costPerChild}</td>
+                        <td>${intervention.complexity}</td>
+                        <td>${intervention.evidence}</td>
+                        <td>${intervention.timeToImpact}</td>
+                        <td>${intervention.sustainability.substring(0, 50)}...</td>
+                    </tr>
+                `;
+            });
+            
+            html += '</tbody>';
+            table.innerHTML = html;
+        }
+
+        // ============================================
+        // EXPORT
+        // ============================================
+        function exportPlan() {
+            const contextLabels = {
+                'stable-rural': 'Stable Rural',
+                'stable-urban': 'Stable Urban',
+                'fragile': 'Fragile/Conflict',
+                'emergency': 'Acute Emergency'
+            };
+            
+            const popLabels = {
+                'pregnant': 'Pregnant Women',
+                '0-6months': '0-6 Months',
+                '6-24months': '6-24 Months',
+                '2-5years': '2-5 Years',
+                'school-age': 'School-Age',
+                'adolescent': 'Adolescents'
+            };
+            
+            const report = `
+NUTRITION INTERVENTION PLAN
+Feed Children ASAP Atlas - Intervention Selector
+Generated: ${new Date().toLocaleString()}
+
+════════════════════════════════════════════════════════════
+
+CONTEXT SUMMARY:
+- Setting: ${contextLabels[selections.context]}
+- Target Populations: ${selections.population.map(p => popLabels[p]).join(', ')}
+- Budget Level: ${selections.budget}
+- Timeframe: ${selections.timeframe}
+
+════════════════════════════════════════════════════════════
+
+SELECTED INTERVENTIONS (${selections.selectedInterventions.length}):
+
+${selections.selectedInterventions.map((id, i) => {
+    const intervention = interventions.find(int => int.id === id);
+    return `
+${i + 1}. ${intervention.name.toUpperCase()}
+
+   Description: ${intervention.description}
+   
+   Cost per Child per Year: $${intervention.costPerChild}
+   Implementation Complexity: ${intervention.complexity}
+   Evidence Quality: ${intervention.evidence}
+   Time to Impact: ${intervention.timeToImpact}
+   
+   Requirements:
+   ${intervention.requirements}
+   
+   Strengths:
+   ${intervention.strengths}
+   
+   Limitations:
+   ${intervention.limitations}
+   
+   Sustainability:
+   ${intervention.sustainability}
+
+────────────────────────────────────────────────────────────`;
+}).join('\n')}
+
+════════════════════════════════════════════════════════════
+
+NEXT STEPS:
+1. Conduct detailed feasibility assessment for each intervention
+2. Engage local stakeholders and government partners
+3. Develop detailed implementation plans with timelines
+4. Secure funding and establish supply chains
+5. Build monitoring and evaluation systems
+6. Plan for sustainability and handover from project start
+
+════════════════════════════════════════════════════════════
+
+This plan was generated by the Feed Children ASAP Atlas Intervention Selector.
+For implementation guidance, consult the For Implementers section of the Atlas.
+
+Zero Harm Policy: All interventions must prioritize beneficiary safety,
+informed consent, and community ownership.
+            `.trim();
+            
+            // Create download
+            const blob = new Blob([report], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `intervention-plan-${Date.now()}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // ============================================
+        // RESET
+        // ============================================
+        function resetTool() {
+            if (confirm('Start over? This will clear all your selections.')) {
+                selections = {
+                    context: null,
+                    population: [],
+                    budget: null,
+                    timeframe: null,
+                    selectedInterventions: []
+                };
+                
+                currentStep = 1;
+                updateStepDisplay();
+                
+                document.querySelectorAll('.filter-card').forEach(card => {
+                    card.classList.remove('selected');
+                });
+                
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Accessibility: Reduced motion support
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('*').forEach(el => {
+                el.style.animation = 'none';
+                el.style.transition = 'none';
+            });
+        }
+    </script>
+    
+    <!--
+    ZERO HARM COMPLIANCE NOTICE:
+    
+    This tool contains:
+    - No tracking or analytics
+    - No external API calls
+    - No data transmission to servers
+    - No data storage (selections not persisted)
+    - No surveillance mechanisms
+    
+    All intervention selection is performed client-side.
+    All data remains on the user's device during session only.
+    
+    This tool provides general guidance only. Actual intervention selection
+    should involve local stakeholders, needs assessment, and ethical review.
+    
+    Always prioritize community voice, beneficiary safety, and sustainable
+    local ownership in intervention design and implementation.
+    -->
+</body>
+</html>
