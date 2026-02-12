@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ground-level action playbooks for NGOs, humanitarian operators, field coordinators, and on-the-ground implementers. Rapid-start kits, logistics protocols, and field-tested frameworks.">
+    <title>For Implementers | Feed Children ASAP Atlas</title>
+    
+    <style>
+        /* ============================================
+           RESET & BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --earth-dark: #2d3e2f;
+            --earth-medium: #5a7c5e;
+            --earth-light: #8ba888;
+            --healing-green: #a8c5a0;
+            --warm-sand: #e8dcc4;
+            --soft-blue: #7a9eb8;
+            --action-orange: #e8a87c;
+            --alert-red: #d97757;
+            --neutral-gray: #6b7280;
+            --background-light: #f9f9f7;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --card-background: #ffffff;
+            --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --border-radius: 8px;
+            --transition-smooth: all 0.3s ease;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--background-light);
+            overflow-x: hidden;
+        }
+        
+        /* ============================================
+           TYPOGRAPHY
+           ============================================ */
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+        }
+        
+        h1 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            color: var(--earth-dark);
+        }
+        
+        h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--earth-medium);
+            margin-top: 3rem;
+        }
+        
+        h3 {
+            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+            color: var(--earth-medium);
+            margin-top: 2rem;
+        }
+        
+        h4 {
+            font-size: clamp(1.125rem, 2vw, 1.25rem);
+            color: var(--earth-dark);
+            margin-top: 1.5rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        a {
+            color: var(--soft-blue);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+        
+        a:hover {
+            color: var(--earth-medium);
+        }
+        
+        strong {
+            color: var(--earth-dark);
+            font-weight: 600;
+        }
+        
+        em {
+            color: var(--earth-medium);
+        }
+        
+        /* ============================================
+           LAYOUT
+           ============================================ */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .wide-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        section {
+            padding: 3rem 0;
+        }
+        
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        .top-nav {
+            background: var(--earth-dark);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .nav-home {
+            color: var(--warm-sand);
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+        
+        .nav-home:hover {
+            color: var(--healing-green);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links a {
+            color: var(--warm-sand);
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        
+        .nav-links a:hover {
+            opacity: 1;
+            color: var(--healing-green);
+        }
+        
+        /* ============================================
+           HEADER
+           ============================================ */
+        header {
+            background: linear-gradient(135deg, var(--earth-medium) 0%, var(--healing-green) 100%);
+            color: var(--earth-dark);
+            padding: 3rem 0 2rem;
+            position: relative;
+        }
+        
+        .audience-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: var(--earth-dark);
+        }
+        
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+        
+        /* ============================================
+           QUICK REFERENCE CARDS
+           ============================================ */
+        .quick-ref-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .quick-ref-card {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-subtle);
+            border-top: 4px solid var(--action-orange);
+            transition: var(--transition-smooth);
+        }
+        
+        .quick-ref-card:hover {
+            box-shadow: var(--shadow-medium);
+            transform: translateY(-2px);
+        }
+        
+        .quick-ref-card h3 {
+            margin-top: 0;
+            font-size: 1.125rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .quick-ref-card .icon {
+            font-size: 1.5rem;
+        }
+        
+        /* ============================================
+           PROTOCOL SECTIONS
+           ============================================ */
+        .protocol-section {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-subtle);
+            border-left: 6px solid var(--earth-medium);
+        }
+        
+        .protocol-section.urgent {
+            border-left-color: var(--action-orange);
+        }
+        
+        .protocol-section.critical {
+            border-left-color: var(--alert-red);
+            background: linear-gradient(135deg, rgba(217, 119, 87, 0.05) 0%, var(--card-background) 100%);
+        }
+        
+        /* ============================================
+           CHECKLISTS
+           ============================================ */
+        .checklist {
+            background: var(--background-light);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .checklist-title {
+            font-size: 1.125rem;
+            color: var(--earth-dark);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .checklist ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .checklist li {
+            padding: 0.75rem 0 0.75rem 2rem;
+            position: relative;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .checklist li:last-child {
+            border-bottom: none;
+        }
+        
+        .checklist li::before {
+            content: '☐';
+            position: absolute;
+            left: 0;
+            font-size: 1.25rem;
+            color: var(--earth-medium);
+        }
+        
+        /* ============================================
+           DECISION TREES
+           ============================================ */
+        .decision-tree {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 2px solid var(--earth-light);
+        }
+        
+        .decision-node {
+            background: var(--background-light);
+            border-left: 4px solid var(--soft-blue);
+            padding: 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        
+        .decision-question {
+            font-weight: 600;
+            color: var(--earth-dark);
+            margin-bottom: 0.75rem;
+        }
+        
+        .decision-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        
+        .decision-option {
+            padding: 1rem;
+            background: var(--card-background);
+            border-radius: 6px;
+            border-left: 3px solid var(--healing-green);
+        }
+        
+        .decision-option strong {
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+        
+        /* ============================================
+           PHASE BLOCKS
+           ============================================ */
+        .phase-block {
+            background: linear-gradient(135deg, var(--warm-sand) 0%, var(--card-background) 100%);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-left: 6px solid var(--action-orange);
+        }
+        
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .phase-number {
+            background: var(--action-orange);
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        .phase-title {
+            font-size: 1.5rem;
+            color: var(--earth-dark);
+            margin: 0;
+        }
+        
+        .phase-timeline {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--earth-medium);
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        /* ============================================
+           ALERT BOXES
+           ============================================ */
+        .alert-box {
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+            border-left: 5px solid;
+        }
+        
+        .alert-box.safety {
+            background: rgba(217, 119, 87, 0.1);
+            border-left-color: var(--alert-red);
+        }
+        
+        .alert-box.warning {
+            background: rgba(232, 168, 124, 0.15);
+            border-left-color: var(--action-orange);
+        }
+        
+        .alert-box.info {
+            background: rgba(122, 158, 184, 0.1);
+            border-left-color: var(--soft-blue);
+        }
+        
+        .alert-box.success {
+            background: rgba(168, 197, 160, 0.15);
+            border-left-color: var(--healing-green);
+        }
+        
+        .alert-title {
+            font-weight: 600;
+            color: var(--earth-dark);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .alert-content {
+            color: var(--text-secondary);
+        }
+        
+        /* ============================================
+           RESOURCE TABLES
+           ============================================ */
+        .resource-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .resource-table th {
+            background: var(--earth-medium);
+            color: var(--warm-sand);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .resource-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            color: var(--text-secondary);
+        }
+        
+        .resource-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .resource-table tr:hover {
+            background: var(--background-light);
+        }
+        
+        /* ============================================
+           COORDINATION MATRIX
+           ============================================ */
+        .coordination-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .stakeholder-card {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-subtle);
+            border-top: 3px solid var(--soft-blue);
+        }
+        
+        .stakeholder-name {
+            font-weight: 600;
+            color: var(--earth-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stakeholder-role {
+            font-size: 0.875rem;
+            color: var(--neutral-gray);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        
+        .engagement-points {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+        
+        /* ============================================
+           ZERO HARM BADGE
+           ============================================ */
+        .zero-harm-badge {
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--earth-dark);
+            color: var(--warm-sand);
+            padding: 0.75rem 1.25rem;
+            border-radius: 50px;
+            box-shadow: var(--shadow-medium);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: var(--transition-smooth);
+        }
+        
+        .zero-harm-badge:hover {
+            background: var(--earth-medium);
+            transform: scale(1.05);
+        }
+        
+        .zero-harm-badge::before {
+            content: '🛡️';
+            margin-right: 0.5rem;
+        }
+        
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: var(--earth-dark);
+            color: var(--warm-sand);
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .footer-nav a {
+            color: var(--warm-sand);
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        
+        .footer-nav a:hover {
+            opacity: 1;
+            color: var(--healing-green);
+        }
+        
+        .zero-harm-statement {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-left: 4px solid var(--healing-green);
+        }
+        
+        .zero-harm-statement h3 {
+            color: var(--healing-green);
+            margin-top: 0;
+        }
+        
+        .zero-harm-statement p {
+            color: var(--warm-sand);
+            font-size: 0.95rem;
+            margin: 0.5rem 0;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            margin-top: 2rem;
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+        
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .protocol-section {
+                padding: 1.5rem;
+            }
+            
+            .phase-block {
+                padding: 1.5rem;
+            }
+            
+            .decision-tree {
+                padding: 1.5rem;
+            }
+            
+            .nav-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .nav-links {
+                width: 100%;
+            }
+            
+            .zero-harm-badge {
+                top: auto;
+                bottom: 20px;
+                font-size: 0.75rem;
+                padding: 0.5rem 1rem;
+            }
+            
+            .quick-ref-grid,
+            .coordination-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .resource-table {
+                font-size: 0.875rem;
+            }
+            
+            .resource-table th,
+            .resource-table td {
+                padding: 0.75rem 0.5rem;
+            }
+        }
+        
+        /* ============================================
+           PRINT STYLES
+           ============================================ */
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .top-nav,
+            .zero-harm-badge {
+                display: none;
+            }
+            
+            .protocol-section,
+            .phase-block,
+            .checklist {
+                page-break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+            
+            a[href^="http"]::after {
+                content: " (" attr(href) ")";
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- TOP NAVIGATION -->
+    <nav class="top-nav">
+        <div class="wide-container">
+            <div class="nav-content">
+                <a href="../index.html" class="nav-home">← Feed Children ASAP Atlas</a>
+                <ul class="nav-links">
+                    <li><a href="policymakers.html">For Policymakers</a></li>
+                    <li><a href="funders.html">For Funders</a></li>
+                    <li><a href="researchers.html">For Researchers</a></li>
+                    <li><a href="communities.html">For Communities</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ZERO HARM BADGE -->
+    <aside class="zero-harm-badge">
+        <a href="../governance.html">Zero Harm Policy</a>
+    </aside>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <span class="audience-badge">🌾 For Implementers & Field Teams</span>
+            <h1>Ground-Level Action Playbook</h1>
+            <p class="subtitle">
+                Practical protocols for NGOs, humanitarian operators, local coordinators, and field teams 
+                deploying nutrition interventions in resource-constrained environments
+            </p>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <div class="container">
+            
+            <!-- QUICK REFERENCE -->
+            <section>
+                <h2>Quick Reference: Core Principles</h2>
+                <p>
+                    Before diving into protocols, anchor in these non-negotiable principles that guide all 
+                    implementation decisions:
+                </p>
+                
+                <div class="quick-ref-grid">
+                    <div class="quick-ref-card">
+                        <h3><span class="icon">🎯</span> Speed + Safety</h3>
+                        <p>
+                            Fast deployment does not mean reckless deployment. Build safety checks into rapid 
+                            processes rather than treating them as separate phases.
+                        </p>
+                    </div>
+                    
+                    <div class="quick-ref-card">
+                        <h3><span class="icon">🤝</span> Community First</h3>
+                        <p>
+                            Local knowledge always beats external expertise. Design with communities, not for them. 
+                            Transfer agency, not just resources.
+                        </p>
+                    </div>
+                    
+                    <div class="quick-ref-card">
+                        <h3><span class="icon">🔄</span> Adapt or Fail</h3>
+                        <p>
+                            No plan survives first contact with reality. Build feedback loops into every phase. 
+                            Measure, adjust, repeat.
+                        </p>
+                    </div>
+                    
+                    <div class="quick-ref-card">
+                        <h3><span class="icon">📊</span> Data = Accountability</h3>
+                        <p>
+                            Collect data to serve communities and funders, not to perform. Privacy-first, 
+                            transparent, actionable metrics only.
+                        </p>
+                    </div>
+                    
+                    <div class="quick-ref-card">
+                        <h3><span class="icon">🛡️</span> Do No Harm</h3>
+                        <p>
+                            Zero tolerance for exploitation, coercion, or dependency creation. If an intervention 
+                            can't be sustained locally, redesign it.
+                        </p>
+                    </div>
+                    
+                    <div class="quick-ref-card">
+                        <h3><span class="icon">🌍</span> Context is King</h3>
+                        <p>
+                            What works in urban Kenya won't work in rural Yemen. Conflict zones require different 
+                            protocols than stable regions. Always localize.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RAPID DEPLOYMENT FRAMEWORK -->
+            <section>
+                <h2>Rapid Deployment Framework (72-Hour Activation)</h2>
+                <p>
+                    When speed matters—emergency contexts, acute crises, or time-sensitive opportunities—this 
+                    framework enables deployment within 72 hours while maintaining safety and community consent.
+                </p>
+                
+                <div class="phase-block">
+                    <div class="phase-header">
+                        <div class="phase-number">1</div>
+                        <h3 class="phase-title">Hour 0-24: Assessment & Authorization</h3>
+                    </div>
+                    <span class="phase-timeline">⏱️ First 24 Hours</span>
+                    
+                    <div class="checklist">
+                        <div class="checklist-title">Critical First Steps</div>
+                        <ul>
+                            <li>Confirm immediate safety for team deployment (security, access, legal clearance)</li>
+                            <li>Identify local partners or community leaders for initial contact</li>
+                            <li>Assess baseline need: number of children, age distribution, acute malnutrition rates if available</li>
+                            <li>Map existing services to avoid duplication or displacement</li>
+                            <li>Verify supply chain access: roads, ports, warehouses, last-mile options</li>
+                            <li>Secure initial funding authorization or emergency reserves release</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="alert-box safety">
+                        <div class="alert-title">
+                            <span>⚠️</span>
+                            <span>Safety Gate: Do Not Proceed If</span>
+                        </div>
+                        <div class="alert-content">
+                            <ul>
+                                <li>Active conflict in deployment zone with no safe corridors</li>
+                                <li>Legal barriers that could endanger team or beneficiaries</li>
+                                <li>Community leadership explicitly opposes intervention</li>
+                                <li>No secure communication channels for team coordination</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="phase-block">
+                    <div class="phase-header">
+                        <div class="phase-number">2</div>
+                        <h3 class="phase-title">Hour 24-48: Community Engagement & Setup</h3>
+                    </div>
+                    <span class="phase-timeline">⏱️ Day 2</span>
+                    
+                    <div class="checklist">
+                        <div class="checklist-title">Community Integration Protocol</div>
+                        <ul>
+                            <li>Convene community leaders, elders, women's groups, youth representatives</li>
+                            <li>Present intervention plan in local language with visual aids</li>
+                            <li>Solicit feedback on timing, location, cultural considerations, and potential barriers</li>
+                            <li>Co-design distribution or delivery mechanisms with community input</li>
+                            <li>Identify local volunteers for program support (paid or acknowledged)</li>
+                            <li>Establish grievance mechanism and feedback channels</li>
+                            <li>Secure physical infrastructure: distribution points, storage, clean water access</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="alert-box info">
+                        <div class="alert-title">
+                            <span>💡</span>
+                            <span>Cultural Adaptation Checkpoint</span>
+                        </div>
+                        <div class="alert-content">
+                            <p>
+                                Before finalizing any plan, ask: "Could this intervention inadvertently exclude, 
+                                shame, or endanger any subgroup?" Consider gender dynamics, ethnic tensions, 
+                                religious practices, and local power structures.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="phase-block">
+                    <div class="phase-header">
+                        <div class="phase-number">3</div>
+                        <h3 class="phase-title">Hour 48-72: Launch & Monitor</h3>
+                    </div>
+                    <span class="phase-timeline">⏱️ Day 3</span>
+                    
+                    <div class="checklist">
+                        <div class="checklist-title">Go-Live Sequence</div>
+                        <ul>
+                            <li>Pre-position supplies and verify inventory against expected beneficiary count</li>
+                            <li>Conduct team briefing on safety, cultural protocols, and emergency procedures</li>
+                            <li>Activate data collection systems (offline-capable forms, photo documentation)</li>
+                            <li>Begin distribution or service delivery with community volunteers integrated</li>
+                            <li>Monitor in real-time for bottlenecks, safety incidents, or community concerns</li>
+                            <li>Document first-day lessons and adjust processes immediately</li>
+                            <li>Establish daily check-in protocol with coordination hub</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="alert-box success">
+                        <div class="alert-title">
+                            <span>✓</span>
+                            <span>Success Indicators (First 72 Hours)</span>
+                        </div>
+                        <div class="alert-content">
+                            <ul>
+                                <li>Children receiving nutrition support without reported incidents</li>
+                                <li>Community feedback channels active and responsive</li>
+                                <li>Team safety protocols functioning</li>
+                                <li>Supply chain stable for at least next 7 days</li>
+                                <li>Data flowing back to coordination hub</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- INTERVENTION SELECTION DECISION TREE -->
+            <section>
+                <h2>Intervention Selection: Context-Based Decision Tree</h2>
+                <p>
+                    Different contexts require different approaches. Use this decision framework to match 
+                    interventions to ground realities.
+                </p>
+                
+                <div class="decision-tree">
+                    <div class="decision-node">
+                        <div class="decision-question">
+                            ❓ What is the primary constraint?
+                        </div>
+                        <div class="decision-options">
+                            <div class="decision-option">
+                                <strong>Food Availability:</strong> Food exists but children can't access it due to poverty, 
+                                distance, or market failure → <em>Cash transfers, vouchers, or direct distribution</em>
+                            </div>
+                            <div class="decision-option">
+                                <strong>Infrastructure:</strong> No functioning markets, roads impassable, services collapsed 
+                                → <em>Emergency feeding centers, mobile distribution, airlifts</em>
+                            </div>
+                            <div class="decision-option">
+                                <strong>Knowledge/Behavior:</strong> Food available but not reaching children due to feeding 
+                                practices, care patterns → <em>Nutrition education, counseling, IYCF programs</em>
+                            </div>
+                            <div class="decision-option">
+                                <strong>Quality/Diversity:</strong> Calories sufficient but micronutrient deficiencies present 
+                                → <em>Fortification, supplementation, kitchen gardens</em>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="decision-node">
+                        <div class="decision-question">
+                            ❓ What is the security environment?
+                        </div>
+                        <div class="decision-options">
+                            <div class="decision-option">
+                                <strong>Stable:</strong> Normal operations possible, staff can move freely 
+                                → <em>Full range of interventions, long-term programs</em>
+                            </div>
+                            <div class="decision-option">
+                                <strong>Volatile:</strong> Intermittent access, security incidents possible 
+                                → <em>Community-led delivery, remote monitoring, rapid response kits</em>
+                            </div>
+                            <div class="decision-option">
+                                <strong>Active Conflict:</strong> Direct presence too dangerous 
+                                → <em>Partner through local organizations, cross-line negotiations, humanitarian corridors</em>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="decision-node">
+                        <div class="decision-question">
+                            ❓ What is the timeline?
+                        </div>
+                        <div class="decision-options">
+                            <div class="decision-option">
+                                <strong>Emergency (0-3 months):</strong> Prevent mortality, stabilize acute malnutrition 
+                                → <em>Therapeutic feeding, RUTF, emergency food aid</em>
+                            </div>
+                            <div class="decision-option">
+                                <strong>Recovery (3-12 months):</strong> Restore functionality, rebuild capacity 
+                                → <em>School feeding, cash-for-work, agricultural support</em>
+                            </div>
+                            <div class="decision-option">
+                                <strong>Development (1+ years):</strong> Sustainable systems change 
+                                → <em>Fortification programs, policy advocacy, market strengthening</em>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STAKEHOLDER COORDINATION -->
+            <section>
+                <h2>Stakeholder Coordination Matrix</h2>
+                <p>
+                    Field operations require simultaneous engagement with multiple actors. This matrix clarifies 
+                    roles and engagement strategies for each stakeholder type.
+                </p>
+                
+                <div class="coordination-grid">
+                    <div class="stakeholder-card">
+                        <div class="stakeholder-name">🏛️ Government Authorities</div>
+                        <div class="stakeholder-role">Legitimacy, permissions, policy alignment</div>
+                        <div class="engagement-points">
+                            <strong>Engage on:</strong> Legal clearance, integration with national programs, 
+                            data sharing protocols, sustainability handover<br>
+                            <strong>Frequency:</strong> Weekly coordination meetings, formal MOUs
+                        </div>
+                    </div>
+                    
+                    <div class="stakeholder-card">
+                        <div class="stakeholder-name">🤝 Community Leaders</div>
+                        <div class="stakeholder-role">Trust, local knowledge, implementation partners</div>
+                        <div class="engagement-points">
+                            <strong>Engage on:</strong> Site selection, beneficiary identification, cultural 
+                            adaptation, conflict resolution<br>
+                            <strong>Frequency:</strong> Daily informal check-ins, formal meetings weekly
+                        </div>
+                    </div>
+                    
+                    <div class="stakeholder-card">
+                        <div class="stakeholder-name">🏥 Health Facilities</div>
+                        <div class="stakeholder-role">Screening, treatment, referrals, medical oversight</div>
+                        <div class="engagement-points">
+                            <strong>Engage on:</strong> Malnutrition case detection, therapeutic feeding protocols, 
+                            data integration, supply coordination<br>
+                            <strong>Frequency:</strong> Bi-weekly clinical reviews, as-needed consultations
+                        </div>
+                    </div>
+                    
+                    <div class="stakeholder-card">
+                        <div class="stakeholder-name">🏫 Schools & Educators</div>
+                        <div class="stakeholder-role">Access to children, education integration, behavior change</div>
+                        <div class="engagement-points">
+                            <strong>Engage on:</strong> School feeding programs, nutrition education curriculum, 
+                            attendance monitoring, parent outreach<br>
+                            <strong>Frequency:</strong> Monthly planning, daily meal coordination if applicable
+                        </div>
+                    </div>
+                    
+                    <div class="stakeholder-card">
+                        <div class="stakeholder-name">💼 Other NGOs/UN</div>
+                        <div class="stakeholder-role">Coordination, resource sharing, expertise exchange</div>
+                        <div class="engagement-points">
+                            <strong>Engage on:</strong> Avoiding duplication, joint assessments, shared logistics, 
+                            advocacy coordination<br>
+                            <strong>Frequency:</strong> Cluster meetings monthly, bilateral as needed
+                        </div>
+                    </div>
+                    
+                    <div class="stakeholder-card">
+                        <div class="stakeholder-name">🚚 Supply Partners</div>
+                        <div class="stakeholder-role">Procurement, logistics, warehouse management</div>
+                        <div class="engagement-points">
+                            <strong>Engage on:</strong> Delivery schedules, quality assurance, storage capacity, 
+                            emergency restocking<br>
+                            <strong>Frequency:</strong> Weekly pipeline reviews, real-time alerts for shortages
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DATA COLLECTION PROTOCOL -->
+            <section class="protocol-section">
+                <h2>Field Data Collection: Privacy-First Protocol</h2>
+                <p>
+                    Data serves accountability and learning, not surveillance. This protocol ensures ethical, 
+                    useful data collection without compromising beneficiary privacy or safety.
+                </p>
+                
+                <h3>Minimum Required Data Points</h3>
+                <table class="resource-table">
+                    <thead>
+                        <tr>
+                            <th>Data Type</th>
+                            <th>Purpose</th>
+                            <th>Privacy Level</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Geographic Area</strong><br>(district/village level only)</td>
+                            <td>Service coverage mapping</td>
+                            <td>🟢 Safe to share publicly</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Age Brackets</strong><br>(0-6mo, 6-24mo, 2-5yr, 5-12yr)</td>
+                            <td>Targeting accuracy</td>
+                            <td>🟢 Safe to share publicly</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Number of Beneficiaries</strong></td>
+                            <td>Reach and efficiency metrics</td>
+                            <td>🟢 Safe to share publicly</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Intervention Type</strong><br>(e.g., feeding, cash, education)</td>
+                            <td>Program effectiveness comparison</td>
+                            <td>🟢 Safe to share publicly</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Anthropometric Measurements</strong><br>(MUAC, weight-for-height)</td>
+                            <td>Nutrition status tracking</td>
+                            <td>🟡 Aggregate only, never individual</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Household Registration</strong><br>(unique ID, no names)</td>
+                            <td>Prevent duplication, track continuity</td>
+                            <td>🔴 Internal only, encrypted storage</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="alert-box safety">
+                    <div class="alert-title">
+                        <span>🚫</span>
+                        <span>Never Collect or Store</span>
+                    </div>
+                    <div class="alert-content">
+                        <ul>
+                            <li>Full names (use household IDs only)</li>
+                            <li>Precise GPS coordinates of individual homes</li>
+                            <li>Photos showing faces without explicit consent</li>
+                            <li>Political affiliation, ethnic identity, or religious belief</li>
+                            <li>HIV status, disability status, or other stigmatizing health information</li>
+                            <li>Citizenship documentation or asylum status</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h3>Data Security Checklist</h3>
+                <div class="checklist">
+                    <ul>
+                        <li>All field devices use encrypted storage (minimum AES-256)</li>
+                        <li>Forms function offline; sync only over secure connections</li>
+                        <li>No cloud storage without organization-level data protection agreement</li>
+                        <li>Team trained on consent protocols and data minimization</li>
+                        <li>Audit trail for all data access and modifications</li>
+                        <li>Data retention policy: delete individual records after aggregation (typically 90 days)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- SAFETY & SECURITY -->
+            <section class="protocol-section critical">
+                <h2>Team Safety & Security Protocols</h2>
+                <p>
+                    No program objective justifies team endangerment. These protocols are non-negotiable for 
+                    all deployment contexts.
+                </p>
+                
+                <div class="alert-box safety">
+                    <div class="alert-title">
+                        <span>🚨</span>
+                        <span>Immediate Evacuation Triggers</span>
+                    </div>
+                    <div class="alert-content">
+                        <p><strong>Stop operations and evacuate immediately if:</strong></p>
+                        <ul>
+                            <li>Direct threats to team safety (violence, kidnapping risk, targeted threats)</li>
+                            <li>Government revocation of operating permission</li>
+                            <li>Sudden escalation of conflict in operational area</li>
+                            <li>Outbreak of communicable disease endangering team</li>
+                            <li>Loss of secure communication with coordination hub for >48 hours</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h3>Daily Safety Protocol</h3>
+                <div class="checklist">
+                    <ul>
+                        <li>Morning team briefing: route plan, security updates, emergency contacts reviewed</li>
+                        <li>Check-in with coordination hub at deployment and return (minimum twice daily)</li>
+                        <li>Buddy system enforced: no solo field visits</li>
+                        <li>Local staff lead in areas where international presence increases risk</li>
+                        <li>Vehicles clearly marked, alternate routes pre-identified</li>
+                        <li>Emergency cash and first-aid kits in all field vehicles</li>
+                        <li>Evening debrief: incidents logged, next-day plan adjusted</li>
+                    </ul>
+                </div>
+                
+                <h3>Communication Continuity</h3>
+                <p>
+                    In low-infrastructure or insecure environments, maintain redundant communication channels:
+                </p>
+                <ul>
+                    <li><strong>Primary:</strong> Mobile phones (local SIM cards, secure messaging apps)</li>
+                    <li><strong>Secondary:</strong> Satellite phones (for areas without cell coverage)</li>
+                    <li><strong>Tertiary:</strong> Radio network (if operating in humanitarian coordination system)</li>
+                    <li><strong>Emergency:</strong> Pre-arranged check-in schedule; if missed, trigger search protocol</li>
+                </ul>
+            </section>
+
+            <!-- SUSTAINABILITY & HANDOVER -->
+            <section class="protocol-section">
+                <h2>Sustainability & Handover Planning</h2>
+                <p>
+                    External support should phase out as local capacity grows. Plan for handover from day one 
+                    to avoid creating dependency or sudden disruption when funding ends.
+                </p>
+                
+                <h3>Capacity Transfer Milestones</h3>
+                <table class="resource-table">
+                    <thead>
+                        <tr>
+                            <th>Phase</th>
+                            <th>Timeline</th>
+                            <th>Key Transitions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Phase 1: Co-Implementation</strong></td>
+                            <td>Months 1-6</td>
+                            <td>
+                                External team leads, local partners observe and assist. Training begins on 
+                                technical skills, data systems, supply management.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phase 2: Shared Leadership</strong></td>
+                            <td>Months 6-12</td>
+                            <td>
+                                Local partners lead daily operations, external team provides oversight and 
+                                troubleshooting. Financial management gradually transferred.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phase 3: Light-Touch Support</strong></td>
+                            <td>Months 12-18</td>
+                            <td>
+                                Local team fully autonomous, external team provides quarterly reviews, 
+                                emergency backup, fundraising support.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phase 4: Full Handover</strong></td>
+                            <td>Month 18+</td>
+                            <td>
+                                Program integrated into government systems or sustained by local organization. 
+                                External team exits, peer learning continues remotely.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="alert-box warning">
+                    <div class="alert-title">
+                        <span>⚠️</span>
+                        <span>Red Flags: Signs of Unsustainable Design</span>
+                    </div>
+                    <div class="alert-content">
+                        <ul>
+                            <li>Program depends on imported supplies with no local procurement plan</li>
+                            <li>Only international staff hold technical knowledge</li>
+                            <li>Community perceives program as foreign aid, not their own system</li>
+                            <li>No government co-financing or policy integration after 12 months</li>
+                            <li>Beneficiaries have no role in governance or decision-making</li>
+                        </ul>
+                        <p style="margin-top: 1rem;">
+                            <strong>If you see these patterns, pause and redesign before scaling.</strong>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NEXT STEPS -->
+            <section>
+                <h2>Ready to Deploy?</h2>
+                <p>
+                    This playbook provides frameworks, but every context is unique. Use these protocols as 
+                    starting points, adapt aggressively based on ground realities, and always prioritize 
+                    community voice over external templates.
+                </p>
+                
+                <div class="alert-box info">
+                    <div class="alert-title">
+                        <span>📚</span>
+                        <span>Additional Resources in Atlas</span>
+                    </div>
+                    <div class="alert-content">
+                        <ul>
+                            <li><a href="../act-rapid-start.html">Rapid Start Kits</a> – Pre-packaged checklists and templates</li>
+                            <li><a href="../act-country-templates.html">Country Templates</a> – Context-specific playbooks</li>
+                            <li><a href="../tool-constraints-mapper.html">Constraints Mapper</a> – Identify barriers before deployment</li>
+                            <li><a href="../tool-data-collector.html">Data Collector</a> – Offline-first field forms</li>
+                            <li><a href="../learn-research-hub.html">Research Hub</a> – Evidence base for intervention selection</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <nav class="footer-nav">
+                <a href="../index.html">Home</a>
+                <a href="policymakers.html">For Policymakers</a>
+                <a href="funders.html">For Funders</a>
+                <a href="researchers.html">For Researchers</a>
+                <a href="communities.html">For Communities</a>
+                <a href="../governance.html">Governance</a>
+                <a href="../about.html">About</a>
+            </nav>
+            
+            <div class="zero-harm-statement">
+                <h3>Zero Harm & Anti-Coercion Commitment</h3>
+                <p>
+                    All protocols prioritize beneficiary safety, privacy, and agency. No surveillance. No dependency 
+                    creation. No coercion. Programs must be designed for eventual local ownership and sustainability.
+                </p>
+                <p>
+                    Field teams operate under duty of care for both beneficiaries and staff. Safety protocols are 
+                    mandatory, not optional. If context becomes unsafe, operations stop immediately.
+                </p>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>Feed Children ASAP Atlas | For Implementers & Field Teams</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem;">
+                    Offline-First | No Tracking | Zero Surveillance | Licensed for Regenerative Use
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT (MINIMAL PROGRESSIVE ENHANCEMENT) -->
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Track that user visited implementers section
+        try {
+            localStorage.setItem('feedChildrenAtlas_lastRole', 'implementers');
+        } catch (e) {
+            // Silent fail if localStorage unavailable
+        }
+        
+        // Accessibility: Reduced motion support
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('*').forEach(el => {
+                el.style.animation = 'none';
+                el.style.transition = 'none';
+            });
+        }
+        
+        // Print optimization: Expand all sections before print
+        window.addEventListener('beforeprint', function() {
+            document.querySelectorAll('details').forEach(detail => {
+                detail.setAttribute('open', '');
+            });
+        });
+    </script>
+    
+    <!--
+    ZERO HARM COMPLIANCE NOTICE:
+    
+    This page contains:
+    - No tracking or analytics
+    - No external API calls
+    - No data collection beyond localStorage for navigation preferences
+    - No surveillance mechanisms
+    
+    All protocols emphasize:
+    - Community consent and agency
+    - Privacy-first data practices
+    - Staff and beneficiary safety
+    - Sustainable, locally-owned solutions
+    - Immediate operations halt if safety compromised
+    
+    Field operations must respect local laws, cultural norms, and human dignity.
+    -->
+</body>
+</html>
