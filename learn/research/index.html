@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Research foundations and evidence synthesis for child nutrition interventions. Understanding what works, what we know, what we don't, and how to evaluate evidence quality.">
+    <title>Research Hub | Feed Children ASAP Atlas</title>
+    
+    <style>
+        /* ============================================
+           RESET & BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --earth-dark: #2d3e2f;
+            --earth-medium: #5a7c5e;
+            --earth-light: #8ba888;
+            --healing-green: #a8c5a0;
+            --warm-sand: #e8dcc4;
+            --soft-blue: #7a9eb8;
+            --research-purple: #7a6b9e;
+            --evidence-teal: #5a9e9e;
+            --high-confidence: #6b9e6b;
+            --moderate-confidence: #e8bc7c;
+            --low-confidence: #d97757;
+            --neutral-gray: #6b7280;
+            --background-light: #f9f9f7;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --card-background: #ffffff;
+            --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --border-radius: 8px;
+            --transition-smooth: all 0.3s ease;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--background-light);
+            overflow-x: hidden;
+        }
+        
+        /* ============================================
+           TYPOGRAPHY
+           ============================================ */
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+        }
+        
+        h1 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            color: var(--earth-dark);
+        }
+        
+        h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--earth-medium);
+            margin-top: 3rem;
+        }
+        
+        h3 {
+            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+            color: var(--earth-medium);
+            margin-top: 2rem;
+        }
+        
+        h4 {
+            font-size: clamp(1.125rem, 2vw, 1.25rem);
+            color: var(--earth-dark);
+            margin-top: 1.5rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        ul, ol {
+            margin-bottom: 1rem;
+            margin-left: 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        strong {
+            color: var(--earth-dark);
+        }
+        
+        /* ============================================
+           LAYOUT
+           ============================================ */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        .top-nav {
+            background: var(--earth-dark);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .nav-home {
+            color: var(--warm-sand);
+            font-weight: 600;
+            font-size: 1.125rem;
+            text-decoration: none;
+        }
+        
+        .nav-home:hover {
+            color: var(--healing-green);
+        }
+        
+        .breadcrumb {
+            color: var(--warm-sand);
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+        
+        /* ============================================
+           HEADER
+           ============================================ */
+        header {
+            background: linear-gradient(135deg, var(--research-purple) 0%, var(--evidence-teal) 100%);
+            padding: 3rem 0 2rem;
+            color: white;
+        }
+        
+        .page-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.25);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 400;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* ============================================
+           CONTENT SECTIONS
+           ============================================ */
+        .content-section {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        /* ============================================
+           EVIDENCE PYRAMID
+           ============================================ */
+        .evidence-pyramid {
+            background: var(--background-light);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .pyramid-levels {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .pyramid-level {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-subtle);
+            border-left: 6px solid;
+            transition: var(--transition-smooth);
+        }
+        
+        .pyramid-level:hover {
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .pyramid-level.level-1 { border-left-color: var(--high-confidence); }
+        .pyramid-level.level-2 { border-left-color: #7a9e7a; }
+        .pyramid-level.level-3 { border-left-color: var(--soft-blue); }
+        .pyramid-level.level-4 { border-left-color: var(--moderate-confidence); }
+        .pyramid-level.level-5 { border-left-color: var(--low-confidence); }
+        
+        .level-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            gap: 1rem;
+        }
+        
+        .level-name {
+            font-weight: 600;
+            color: var(--earth-dark);
+            font-size: 1.125rem;
+        }
+        
+        .level-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: white;
+            white-space: nowrap;
+        }
+        
+        .badge-highest { background: var(--high-confidence); }
+        .badge-high { background: #7a9e7a; }
+        .badge-moderate { background: var(--soft-blue); }
+        .badge-foundational { background: var(--moderate-confidence); color: var(--earth-dark); }
+        .badge-contextual { background: var(--low-confidence); }
+        
+        .level-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        /* ============================================
+           WHAT WORKS CARDS
+           ============================================ */
+        .what-works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .works-card {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 1.75rem;
+            box-shadow: var(--shadow-subtle);
+            border-top: 4px solid;
+        }
+        
+        .works-card.strong { border-top-color: var(--high-confidence); }
+        .works-card.moderate { border-top-color: var(--moderate-confidence); }
+        .works-card.emerging { border-top-color: var(--low-confidence); }
+        
+        .works-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            gap: 1rem;
+        }
+        
+        .works-title {
+            font-weight: 600;
+            color: var(--earth-dark);
+            font-size: 1.125rem;
+        }
+        
+        .confidence-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        
+        .confidence-strong {
+            background: var(--high-confidence);
+            color: white;
+        }
+        
+        .confidence-moderate {
+            background: var(--moderate-confidence);
+            color: var(--earth-dark);
+        }
+        
+        .confidence-emerging {
+            background: var(--low-confidence);
+            color: white;
+        }
+        
+        .works-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .works-caveat {
+            background: var(--background-light);
+            padding: 0.75rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+        
+        /* ============================================
+           EVIDENCE GAPS
+           ============================================ */
+        .gaps-section {
+            background: rgba(217, 119, 87, 0.1);
+            border: 2px solid var(--low-confidence);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .gaps-section h3 {
+            color: var(--low-confidence);
+            margin-top: 0;
+        }
+        
+        .gap-item {
+            background: white;
+            padding: 1.25rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .gap-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .gap-question {
+            font-weight: 600;
+            color: var(--earth-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .gap-why {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        /* ============================================
+           CRITICAL THINKING BOX
+           ============================================ */
+        .critical-thinking {
+            background: linear-gradient(135deg, rgba(122, 107, 158, 0.15) 0%, rgba(90, 158, 158, 0.15) 100%);
+            border: 2px solid var(--research-purple);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .critical-thinking h3 {
+            color: var(--research-purple);
+            margin-top: 0;
+        }
+        
+        .thinking-checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .thinking-checklist li {
+            padding: 0.75rem 0 0.75rem 2rem;
+            position: relative;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .thinking-checklist li:last-child {
+            border-bottom: none;
+        }
+        
+        .thinking-checklist li::before {
+            content: '🤔';
+            position: absolute;
+            left: 0;
+            font-size: 1.25rem;
+        }
+        
+        /* ============================================
+           RESEARCH RESOURCES
+           ============================================ */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .resource-card {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-subtle);
+            transition: var(--transition-smooth);
+        }
+        
+        .resource-card:hover {
+            box-shadow: var(--shadow-medium);
+            transform: translateY(-2px);
+        }
+        
+        .resource-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+        
+        .resource-title {
+            font-weight: 600;
+            color: var(--earth-dark);
+            font-size: 1.05rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .resource-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        /* ============================================
+           CALLOUT BOXES
+           ============================================ */
+        .callout {
+            border-left: 4px solid;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        .callout.info {
+            background: rgba(122, 158, 184, 0.1);
+            border-left-color: var(--soft-blue);
+        }
+        
+        .callout.warning {
+            background: rgba(217, 119, 87, 0.1);
+            border-left-color: var(--low-confidence);
+        }
+        
+        .callout.success {
+            background: rgba(168, 197, 160, 0.1);
+            border-left-color: var(--healing-green);
+        }
+        
+        .callout h4 {
+            margin-top: 0;
+        }
+        
+        /* ============================================
+           NEXT STEPS
+           ============================================ */
+        .next-steps {
+            background: linear-gradient(135deg, var(--research-purple) 0%, var(--evidence-teal) 100%);
+            color: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .next-steps h3 {
+            color: white;
+            margin-top: 0;
+        }
+        
+        .next-steps-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .next-step-link {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1.25rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            transition: var(--transition-smooth);
+            text-decoration: none;
+            color: white;
+        }
+        
+        .next-step-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .next-step-icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .next-step-label {
+            font-weight: 600;
+        }
+        
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 1.5rem;
+            }
+            
+            .what-works-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: var(--earth-dark);
+            color: var(--warm-sand);
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            text-align: center;
+            font-size: 0.875rem;
+            opacity: 0.9;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .footer-content a {
+            color: var(--healing-green);
+            text-decoration: none;
+        }
+        
+        .footer-content a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="top-nav">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-home">← Feed Children ASAP Atlas</a>
+            <span class="breadcrumb">Learn → Research Hub</span>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <span class="page-badge">📚 Learning Resource</span>
+            <h1>Research Hub</h1>
+            <p class="subtitle">
+                Understanding the evidence base for child nutrition interventions: what works, what we know, 
+                what we don't, and how to think critically about research findings.
+            </p>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <div class="container">
+            
+            <!-- INTRODUCTION -->
+            <div class="content-section">
+                <h2>Understanding Nutrition Research</h2>
+                <p>
+                    <strong>Evidence matters, but it's complex.</strong> Some nutrition interventions have decades 
+                    of rigorous research showing they work. Others are promising but understudied. Some work brilliantly 
+                    in controlled settings but fail when scaled. Context always matters.
+                </p>
+                
+                <p>
+                    This hub helps you:
+                </p>
+                <ul>
+                    <li>Understand what "strong evidence" actually means</li>
+                    <li>Know which interventions have the best research support</li>
+                    <li>Identify important evidence gaps</li>
+                    <li>Think critically about research claims</li>
+                    <li>Navigate the difference between "works in trials" and "works at scale"</li>
+                </ul>
+                
+                <div class="callout warning">
+                    <h4>⚠️ Important Caveat</h4>
+                    <p>
+                        <strong>Research evidence is necessary but not sufficient.</strong> Even interventions with 
+                        strong evidence require adaptation to local context, political feasibility, implementation capacity, 
+                        and community acceptance. Don't let "evidence-based" become an excuse for ignoring on-the-ground reality.
+                    </p>
+                </div>
+            </div>
+
+            <!-- EVIDENCE HIERARCHY -->
+            <div class="content-section">
+                <h2>The Evidence Pyramid</h2>
+                <p>
+                    Not all research is created equal. Here's how to assess evidence quality:
+                </p>
+                
+                <div class="evidence-pyramid">
+                    <div class="pyramid-levels">
+                        <div class="pyramid-level level-1">
+                            <div class="level-header">
+                                <div class="level-name">Level 1: Systematic Reviews & Meta-Analyses</div>
+                                <span class="level-badge badge-highest">Highest Quality</span>
+                            </div>
+                            <div class="level-description">
+                                Synthesis of multiple high-quality studies using rigorous methods. Provides most 
+                                reliable evidence of what works across contexts. Look for Cochrane reviews, academic 
+                                meta-analyses in peer-reviewed journals.
+                            </div>
+                        </div>
+                        
+                        <div class="pyramid-level level-2">
+                            <div class="level-header">
+                                <div class="level-name">Level 2: Randomized Controlled Trials (RCTs)</div>
+                                <span class="level-badge badge-high">High Quality</span>
+                            </div>
+                            <div class="level-description">
+                                Experimental studies with random assignment to treatment vs. control groups. Best for 
+                                establishing causality ("Did this intervention cause the improvement?"). Limitations: 
+                                Often artificial settings, may not reflect real-world implementation.
+                            </div>
+                        </div>
+                        
+                        <div class="pyramid-level level-3">
+                            <div class="level-header">
+                                <div class="level-name">Level 3: Quasi-Experimental Studies</div>
+                                <span class="level-badge badge-moderate">Moderate Quality</span>
+                            </div>
+                            <div class="level-description">
+                                Studies with comparison groups but not random assignment. Examples: difference-in-differences, 
+                                regression discontinuity, propensity score matching. More realistic than RCTs but harder to 
+                                rule out confounding factors.
+                            </div>
+                        </div>
+                        
+                        <div class="pyramid-level level-4">
+                            <div class="level-header">
+                                <div class="level-name">Level 4: Observational & Descriptive Studies</div>
+                                <span class="level-badge badge-foundational">Foundational</span>
+                            </div>
+                            <div class="level-description">
+                                Cross-sectional surveys, cohort studies, program monitoring data. Can't prove causation but 
+                                useful for understanding associations, prevalence, and trends. Critical for understanding context.
+                            </div>
+                        </div>
+                        
+                        <div class="pyramid-level level-5">
+                            <div class="level-header">
+                                <div class="level-name">Level 5: Expert Opinion & Case Studies</div>
+                                <span class="level-badge badge-contextual">Contextual</span>
+                            </div>
+                            <div class="level-description">
+                                Professional judgment, individual program reports, lessons learned documents. Lowest on 
+                                hierarchy but valuable for context, implementation insights, and identifying questions for 
+                                rigorous study.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="callout info">
+                    <h4>💡 Using the Pyramid</h4>
+                    <p>
+                        <strong>Start at the top, move down as needed.</strong> If systematic reviews exist, start there. 
+                        If not, look for RCTs. But don't dismiss lower-level evidence—it's often the only evidence available 
+                        for emerging interventions or specific contexts. The key is knowing what each level can and can't tell you.
+                    </p>
+                </div>
+            </div>
+
+            <!-- WHAT WORKS -->
+            <div class="content-section">
+                <h2>What We Know Works</h2>
+                <p>
+                    These interventions have strong research support across multiple contexts:
+                </p>
+                
+                <div class="what-works-grid">
+                    <div class="works-card strong">
+                        <div class="works-header">
+                            <div class="works-title">Treatment of Severe Acute Malnutrition</div>
+                            <span class="confidence-badge confidence-strong">Strong Evidence</span>
+                        </div>
+                        <div class="works-description">
+                            Community-based management using ready-to-use therapeutic food (RUTF) dramatically reduces 
+                            mortality in severely malnourished children. Multiple systematic reviews confirm effectiveness.
+                        </div>
+                        <div class="works-caveat">
+                            Caveat: Requires reliable supply chains and trained health workers. Treats but doesn't prevent.
+                        </div>
+                    </div>
+                    
+                    <div class="works-card strong">
+                        <div class="works-header">
+                            <div class="works-title">Micronutrient Supplementation</div>
+                            <span class="confidence-badge confidence-strong">Strong Evidence</span>
+                        </div>
+                        <div class="works-description">
+                            Vitamin A, zinc, iron supplementation reduce specific deficiency diseases and improve child 
+                            survival. Decades of research across diverse settings.
+                        </div>
+                        <div class="works-caveat">
+                            Caveat: Doesn't address underlying dietary quality. Requires sustained delivery.
+                        </div>
+                    </div>
+                    
+                    <div class="works-card strong">
+                        <div class="works-header">
+                            <div class="works-title">Breastfeeding Promotion</div>
+                            <span class="confidence-badge confidence-strong">Strong Evidence</span>
+                        </div>
+                        <div class="works-description">
+                            Exclusive breastfeeding to 6 months reduces infant mortality, diarrhea, and respiratory infections. 
+                            Strong biological and epidemiological evidence.
+                        </div>
+                        <div class="works-caveat">
+                            Caveat: Requires supportive policies (maternity leave, workplace accommodations). Behavior change is complex.
+                        </div>
+                    </div>
+                    
+                    <div class="works-card moderate">
+                        <div class="works-header">
+                            <div class="works-title">School Feeding Programs</div>
+                            <span class="confidence-badge confidence-moderate">Moderate Evidence</span>
+                        </div>
+                        <div class="works-description">
+                            Improves school attendance and reduces short-term hunger. Evidence on learning and long-term 
+                            nutrition outcomes is mixed and context-dependent.
+                        </div>
+                        <div class="works-caveat">
+                            Caveat: Quality and nutritional content matter. Misses out-of-school children. Cost-effectiveness varies.
+                        </div>
+                    </div>
+                    
+                    <div class="works-card moderate">
+                        <div class="works-header">
+                            <div class="works-title">Cash Transfer Programs</div>
+                            <span class="confidence-badge confidence-moderate">Moderate Evidence</span>
+                        </div>
+                        <div class="works-description">
+                            Improves household food security and dietary diversity when markets function. Mixed evidence on 
+                            anthropometric outcomes—often improves but not always.
+                        </div>
+                        <div class="works-caveat">
+                            Caveat: Effectiveness depends on market availability, household decision-making, and whether 
+                            combined with nutrition counseling.
+                        </div>
+                    </div>
+                    
+                    <div class="works-card moderate">
+                        <div class="works-header">
+                            <div class="works-title">Food Fortification</div>
+                            <span class="confidence-badge confidence-moderate">Moderate Evidence</span>
+                        </div>
+                        <div class="works-description">
+                            Large-scale fortification (flour, salt, oil) reduces micronutrient deficiencies cost-effectively 
+                            at population level. Strong evidence for some nutrients (iodine, folic acid), moderate for others.
+                        </div>
+                        <div class="works-caveat">
+                            Caveat: Requires industrial food processing. Benefits populations with access to fortified foods, 
+                            may miss rural poor.
+                        </div>
+                    </div>
+                    
+                    <div class="works-card emerging">
+                        <div class="works-header">
+                            <div class="works-title">Behavior Change Communication</div>
+                            <span class="confidence-badge confidence-emerging">Emerging Evidence</span>
+                        </div>
+                        <div class="works-description">
+                            Nutrition counseling and education can improve practices when well-designed. Evidence quality and 
+                            effect sizes vary widely. Promising but understudied.
+                        </div>
+                        <div class="works-caveat">
+                            Caveat: Effectiveness depends heavily on quality of counselors, frequency of contact, and whether 
+                            households can afford recommended foods.
+                        </div>
+                    </div>
+                    
+                    <div class="works-card emerging">
+                        <div class="works-header">
+                            <div class="works-title">WASH + Nutrition Integration</div>
+                            <span class="confidence-badge confidence-emerging">Emerging Evidence</span>
+                        </div>
+                        <div class="works-description">
+                            Biological plausibility is strong (diarrhea prevents nutrient absorption), but large trials have 
+                            shown smaller-than-expected effects. More research needed on which WASH interventions matter most.
+                        </div>
+                        <div class="works-caveat">
+                            Caveat: WASH alone insufficient; needs integration with nutrition interventions. Effects may be 
+                            context-specific.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EVIDENCE GAPS -->
+            <div class="gaps-section">
+                <h3>🔍 Critical Evidence Gaps</h3>
+                <p>
+                    <strong>Important questions we don't have good answers for:</strong>
+                </p>
+                
+                <div class="gap-item">
+                    <div class="gap-question">What are the true delivered costs of interventions at scale?</div>
+                    <div class="gap-why">
+                        Most cost-effectiveness estimates are based on pilot programs or exclude overhead. Real-world costs 
+                        often 2-5x higher. Makes it hard to prioritize interventions realistically.
+                    </div>
+                </div>
+                
+                <div class="gap-item">
+                    <div class="gap-question">How do interventions perform when implemented by government vs. NGOs?</div>
+                    <div class="gap-why">
+                        Most research evaluates NGO-led programs with external funding. Government implementation may have 
+                        different quality, reach, and sustainability—but less studied.
+                    </div>
+                </div>
+                
+                <div class="gap-item">
+                    <div class="gap-question">What makes programs sustainable after external support ends?</div>
+                    <div class="gap-why">
+                        Most programs collapse when funding stops. Very little rigorous research on factors that predict 
+                        sustainability. We know it's rare but not why.
+                    </div>
+                </div>
+                
+                <div class="gap-item">
+                    <div class="gap-question">What's the optimal sequence and combination of interventions?</div>
+                    <div class="gap-why">
+                        Most studies evaluate single interventions. Real programs combine multiple approaches, but we have 
+                        little evidence on synergies, optimal packages, or sequencing.
+                    </div>
+                </div>
+                
+                <div class="gap-item">
+                    <div class="gap-question">How do effects differ for the most marginalized vs. general population?</div>
+                    <div class="gap-why">
+                        Programs often miss most vulnerable children due to social exclusion, but few studies disaggregate 
+                        by marginalization status. May work for "average" poor but miss extreme poor.
+                    </div>
+                </div>
+            </div>
+
+            <!-- CRITICAL THINKING -->
+            <div class="critical-thinking">
+                <h3>🤔 Thinking Critically About Research</h3>
+                <p><strong>Ask these questions when reading research or hearing claims:</strong></p>
+                
+                <ul class="thinking-checklist">
+                    <li><strong>Who funded the study?</strong> Industry-funded research often shows more favorable results 
+                    than independent research.</li>
+                    
+                    <li><strong>Was it efficacy or effectiveness?</strong> Efficacy = ideal conditions. Effectiveness = 
+                    real-world conditions. Big difference.</li>
+                    
+                    <li><strong>What was the comparison group?</strong> Comparing to "no intervention" shows bigger effects 
+                    than comparing to "standard care."</li>
+                    
+                    <li><strong>How long was follow-up?</strong> Short-term effects often disappear. Beware studies with 
+                    <6 month follow-up.</li>
+                    
+                    <li><strong>What was the attrition rate?</strong> If >20% of participants dropped out, results may be biased.</li>
+                    
+                    <li><strong>Is it externally valid?</strong> Study in urban Kenya may not apply to rural Bangladesh. 
+                    Context matters immensely.</li>
+                    
+                    <li><strong>What was measured?</strong> Weight gain is easier to detect than reducing stunting. Absence 
+                    of evidence ≠ evidence of absence.</li>
+                    
+                    <li><strong>Was it adequately powered?</strong> Small sample sizes can miss real effects (Type II error).</li>
+                    
+                    <li><strong>Were harms reported?</strong> Studies often emphasize benefits and underreport harms or 
+                    unintended consequences.</li>
+                    
+                    <li><strong>Who's making the claim?</strong> Is it the researchers, or someone interpreting their work? 
+                    Read the actual paper if possible.</li>
+                </ul>
+            </div>
+
+            <!-- HOW TO FIND RESEARCH -->
+            <div class="content-section">
+                <h2>Finding Reliable Research</h2>
+                
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <span class="resource-icon">📖</span>
+                        <div class="resource-title">Cochrane Library</div>
+                        <div class="resource-description">
+                            Gold standard for systematic reviews. Independent, rigorous, regularly updated. Start here for 
+                            evidence on intervention effectiveness.
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <span class="resource-icon">🔬</span>
+                        <div class="resource-title">PubMed / Google Scholar</div>
+                        <div class="resource-description">
+                            Search academic literature. PubMed for biomedical research, Google Scholar for broader coverage. 
+                            Look for peer-reviewed journals.
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <span class="resource-icon">🌍</span>
+                        <div class="resource-title">3ie / Campbell Collaboration</div>
+                        <div class="resource-description">
+                            Systematic reviews and impact evaluations focused on development interventions. Free access, 
+                            development-focused.
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <span class="resource-icon">📊</span>
+                        <div class="resource-title">WHO Guidelines</div>
+                        <div class="resource-description">
+                            Evidence-based clinical and public health guidelines. GRADE methodology for evidence quality. 
+                            Authoritative but sometimes slow to update.
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <span class="resource-icon">💡</span>
+                        <div class="resource-title">J-PAL / IPA Evaluations</div>
+                        <div class="resource-description">
+                            Randomized evaluations of social programs. High quality, focus on cost-effectiveness and 
+                            scale-up potential.
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <span class="resource-icon">📚</span>
+                        <div class="resource-title">Grey Literature</div>
+                        <div class="resource-description">
+                            Program evaluations, government reports, NGO assessments. Not peer-reviewed but often more 
+                            recent and context-specific than academic literature.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RESEARCH TO ACTION -->
+            <div class="content-section">
+                <h2>From Research to Action</h2>
+                
+                <div class="callout success">
+                    <h4>✅ Don't Wait for Perfect Evidence</h4>
+                    <p>
+                        <strong>Perfect evidence rarely exists.</strong> Some of the most impactful public health interventions 
+                        (sanitation, vaccination, clean water) were implemented before RCTs existed. Use best available evidence, 
+                        acknowledge uncertainty, monitor outcomes, and adjust.
+                    </p>
+                    <p style="margin-bottom: 0;">
+                        The ethical question isn't "Do we have perfect evidence?" It's "Given what we know and don't know, what's 
+                        the most responsible action to take?"
+                    </p>
+                </div>
+                
+                <h3>Practical Steps</h3>
+                <ol>
+                    <li><strong>Start with systematic reviews</strong> if they exist for your intervention of interest</li>
+                    <li><strong>Look for evidence from similar contexts</strong> to yours—not just any context</li>
+                    <li><strong>Assess implementation feasibility</strong> separately from efficacy. Something can "work" but be impossible to implement</li>
+                    <li><strong>Pilot before scaling</strong> when evidence is limited or context is very different from study settings</li>
+                    <li><strong>Build in monitoring and learning</strong> systems from day one. You're contributing to evidence even if not doing formal research</li>
+                    <li><strong>Be transparent about uncertainty</strong> with stakeholders, beneficiaries, and funders</li>
+                </ol>
+            </div>
+
+            <!-- NEXT STEPS -->
+            <div class="next-steps">
+                <h3>🚀 Explore Further</h3>
+                <p>Continue learning or put knowledge into practice:</p>
