@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Strategic deployment frameworks for foundations, philanthropies, private donors, and impact investors. How to allocate capital for maximum systemic leverage without reputational risk or mission drift.">
+    <title>For Funders & Philanthropies | Feed Children ASAP Atlas</title>
+    
+    <style>
+        /* ============================================
+           RESET & BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --earth-dark: #2d3e2f;
+            --earth-medium: #5a7c5e;
+            --earth-light: #8ba888;
+            --healing-green: #a8c5a0;
+            --warm-sand: #e8dcc4;
+            --soft-blue: #7a9eb8;
+            --trust-blue: #5a8bb8;
+            --action-orange: #e8a87c;
+            --neutral-gray: #6b7280;
+            --background-light: #f9f9f7;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --card-background: #ffffff;
+            --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --border-radius: 8px;
+            --transition-smooth: all 0.3s ease;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--background-light);
+            overflow-x: hidden;
+        }
+        
+        /* ============================================
+           TYPOGRAPHY
+           ============================================ */
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+        }
+        
+        h1 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            color: var(--earth-dark);
+        }
+        
+        h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--earth-medium);
+            margin-top: 3rem;
+        }
+        
+        h3 {
+            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+            color: var(--earth-medium);
+            margin-top: 2rem;
+        }
+        
+        h4 {
+            font-size: clamp(1.125rem, 2vw, 1.25rem);
+            color: var(--earth-dark);
+            margin-top: 1.5rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        a {
+            color: var(--soft-blue);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+        
+        a:hover {
+            color: var(--earth-medium);
+        }
+        
+        strong {
+            color: var(--earth-dark);
+            font-weight: 600;
+        }
+        
+        em {
+            color: var(--earth-medium);
+        }
+        
+        /* ============================================
+           LAYOUT
+           ============================================ */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .wide-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        section {
+            padding: 3rem 0;
+        }
+        
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        .top-nav {
+            background: var(--earth-dark);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .nav-home {
+            color: var(--warm-sand);
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+        
+        .nav-home:hover {
+            color: var(--healing-green);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links a {
+            color: var(--warm-sand);
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        
+        .nav-links a:hover {
+            opacity: 1;
+            color: var(--healing-green);
+        }
+        
+        /* ============================================
+           HEADER
+           ============================================ */
+        header {
+            background: linear-gradient(135deg, var(--trust-blue) 0%, var(--soft-blue) 100%);
+            color: white;
+            padding: 3rem 0 2rem;
+            position: relative;
+        }
+        
+        .audience-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.25);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+        }
+        
+        /* ============================================
+           CONTENT SECTIONS
+           ============================================ */
+        .content-section {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .strategic-section {
+            border-left: 6px solid var(--trust-blue);
+        }
+        
+        .risk-section {
+            border-left: 6px solid var(--action-orange);
+        }
+        
+        /* ============================================
+           LEVERAGE POINTS CARDS
+           ============================================ */
+        .leverage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .leverage-card {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 1.75rem;
+            box-shadow: var(--shadow-subtle);
+            border-top: 4px solid var(--trust-blue);
+            transition: var(--transition-smooth);
+        }
+        
+        .leverage-card:hover {
+            box-shadow: var(--shadow-medium);
+            transform: translateY(-2px);
+        }
+        
+        .leverage-card h3 {
+            margin-top: 0;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .leverage-icon {
+            font-size: 1.75rem;
+        }
+        
+        .leverage-multiplier {
+            display: inline-block;
+            background: var(--healing-green);
+            color: var(--earth-dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+        
+        /* ============================================
+           PORTFOLIO MATRIX
+           ============================================ */
+        .portfolio-matrix {
+            background: var(--background-light);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .portfolio-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .portfolio-table th {
+            background: var(--trust-blue);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .portfolio-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            color: var(--text-secondary);
+        }
+        
+        .portfolio-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .portfolio-table tr:hover {
+            background: var(--background-light);
+        }
+        
+        /* ============================================
+           DUE DILIGENCE CHECKLIST
+           ============================================ */
+        .due-diligence {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 2px solid var(--earth-light);
+        }
+        
+        .dd-category {
+            margin-bottom: 2rem;
+        }
+        
+        .dd-category:last-child {
+            margin-bottom: 0;
+        }
+        
+        .dd-category h4 {
+            color: var(--trust-blue);
+            margin-top: 0;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .dd-checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .dd-checklist li {
+            padding: 0.75rem 0 0.75rem 2rem;
+            position: relative;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .dd-checklist li:last-child {
+            border-bottom: none;
+        }
+        
+        .dd-checklist li::before {
+            content: '☐';
+            position: absolute;
+            left: 0;
+            font-size: 1.25rem;
+            color: var(--trust-blue);
+        }
+        
+        /* ============================================
+           RISK ASSESSMENT GRID
+           ============================================ */
+        .risk-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .risk-card {
+            background: var(--background-light);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            border-left: 4px solid;
+        }
+        
+        .risk-card.low-risk {
+            border-left-color: var(--healing-green);
+        }
+        
+        .risk-card.medium-risk {
+            border-left-color: var(--action-orange);
+        }
+        
+        .risk-card.high-risk {
+            border-left-color: #d97757;
+        }
+        
+        .risk-level {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        
+        .risk-level.low {
+            background: var(--healing-green);
+            color: var(--earth-dark);
+        }
+        
+        .risk-level.medium {
+            background: var(--action-orange);
+            color: white;
+        }
+        
+        .risk-level.high {
+            background: #d97757;
+            color: white;
+        }
+        
+        /* ============================================
+           INVESTMENT TIERS
+           ============================================ */
+        .investment-tiers {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .tier-card {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-subtle);
+            border-left: 6px solid var(--trust-blue);
+        }
+        
+        .tier-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .tier-name {
+            font-size: 1.5rem;
+            color: var(--earth-dark);
+            margin: 0;
+        }
+        
+        .tier-range {
+            background: var(--trust-blue);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+        
+        .tier-description {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        .tier-examples {
+            background: var(--background-light);
+            border-radius: 6px;
+            padding: 1.25rem;
+        }
+        
+        .tier-examples h5 {
+            margin: 0 0 0.75rem 0;
+            color: var(--earth-medium);
+            font-size: 1rem;
+        }
+        
+        .tier-examples ul {
+            margin: 0;
+            padding-left: 1.5rem;
+        }
+        
+        .tier-examples li {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+        
+        /* ============================================
+           CALLOUT BOXES
+           ============================================ */
+        .callout {
+            background: var(--warm-sand);
+            border-radius: var(--border-radius);
+            padding: 1.75rem;
+            margin: 2rem 0;
+            border-left: 5px solid var(--earth-medium);
+        }
+        
+        .callout-title {
+            font-size: 1.25rem;
+            color: var(--earth-dark);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .callout-content {
+            color: var(--text-secondary);
+        }
+        
+        .warning-box {
+            background: rgba(232, 168, 124, 0.15);
+            border-left-color: var(--action-orange);
+        }
+        
+        .success-box {
+            background: rgba(168, 197, 160, 0.2);
+            border-left-color: var(--healing-green);
+        }
+        
+        .info-box {
+            background: rgba(122, 158, 184, 0.1);
+            border-left-color: var(--soft-blue);
+        }
+        
+        /* ============================================
+           QUOTE BOXES
+           ============================================ */
+        .quote-box {
+            background: var(--background-light);
+            border-left: 4px solid var(--trust-blue);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            font-style: italic;
+            font-size: 1.05rem;
+        }
+        
+        .quote-box strong {
+            font-style: normal;
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--earth-medium);
+        }
+        
+        /* ============================================
+           ZERO HARM BADGE
+           ============================================ */
+        .zero-harm-badge {
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--earth-dark);
+            color: var(--warm-sand);
+            padding: 0.75rem 1.25rem;
+            border-radius: 50px;
+            box-shadow: var(--shadow-medium);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: var(--transition-smooth);
+        }
+        
+        .zero-harm-badge:hover {
+            background: var(--earth-medium);
+            transform: scale(1.05);
+        }
+        
+        .zero-harm-badge::before {
+            content: '🛡️';
+            margin-right: 0.5rem;
+        }
+        
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: var(--earth-dark);
+            color: var(--warm-sand);
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .footer-nav a {
+            color: var(--warm-sand);
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        
+        .footer-nav a:hover {
+            opacity: 1;
+            color: var(--healing-green);
+        }
+        
+        .zero-harm-statement {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-left: 4px solid var(--healing-green);
+        }
+        
+        .zero-harm-statement h3 {
+            color: var(--healing-green);
+            margin-top: 0;
+        }
+        
+        .zero-harm-statement p {
+            color: var(--warm-sand);
+            font-size: 0.95rem;
+            margin: 0.5rem 0;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            margin-top: 2rem;
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+        
+        /* ============================================
+           LISTS
+           ============================================ */
+        ul {
+            margin: 1rem 0 1rem 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 1.5rem;
+            }
+            
+            .tier-card {
+                padding: 1.5rem;
+            }
+            
+            .portfolio-matrix {
+                padding: 1.5rem;
+            }
+            
+            .nav-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .nav-links {
+                width: 100%;
+            }
+            
+            .zero-harm-badge {
+                top: auto;
+                bottom: 20px;
+                font-size: 0.75rem;
+                padding: 0.5rem 1rem;
+            }
+            
+            .leverage-grid,
+            .risk-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .portfolio-table {
+                font-size: 0.875rem;
+            }
+            
+            .portfolio-table th,
+            .portfolio-table td {
+                padding: 0.75rem 0.5rem;
+            }
+            
+            .tier-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+        
+        /* ============================================
+           PRINT STYLES
+           ============================================ */
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .top-nav,
+            .zero-harm-badge {
+                display: none;
+            }
+            
+            .content-section,
+            .tier-card,
+            .due-diligence {
+                page-break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+            
+            a[href^="http"]::after {
+                content: " (" attr(href) ")";
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- TOP NAVIGATION -->
+    <nav class="top-nav">
+        <div class="wide-container">
+            <div class="nav-content">
+                <a href="../index.html" class="nav-home">← Feed Children ASAP Atlas</a>
+                <ul class="nav-links">
+                    <li><a href="policymakers.html">For Policymakers</a></li>
+                    <li><a href="implementers.html">For Implementers</a></li>
+                    <li><a href="researchers.html">For Researchers</a></li>
+                    <li><a href="communities.html">For Communities</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ZERO HARM BADGE -->
+    <aside class="zero-harm-badge">
+        <a href="../governance.html">Zero Harm Policy</a>
+    </aside>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <span class="audience-badge">💼 For Funders & Philanthropies</span>
+            <h1>Strategic Capital Deployment Framework</h1>
+            <p class="subtitle">
+                How foundations, private donors, and impact investors can allocate resources for maximum systemic 
+                leverage without reputational risk, legal exposure, or mission drift
+            </p>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <div class="container">
+            
+            <!-- CORE THESIS -->
+            <section class="content-section strategic-section">
+                <h2>The Funding Paradox</h2>
+                <p>
+                    Philanthropic capital is simultaneously too cautious and too impatient. Foundations conduct 
+                    years of due diligence on $500k grants while missing billion-dollar leverage points. Meanwhile, 
+                    they demand "measurable impact" within grant cycles too short for systemic change.
+                </p>
+                <p>
+                    <strong>The result:</strong> Capital flows to safe, proven interventions that scale incrementally, 
+                    while structural barriers—policy gaps, market failures, coordination breakdowns—remain unaddressed.
+                </p>
+                
+                <div class="quote-box">
+                    "The question is not 'Will this $1M feed children?' but rather 'Will this $1M create conditions 
+                    where $100M flows to children without our involvement?'"
+                </div>
+                
+                <p>
+                    This guide reframes funding strategy around <strong>catalytic leverage</strong> rather than 
+                    direct service delivery. It provides decision frameworks for funders who want to move faster 
+                    without compromising fiduciary responsibility.
+                </p>
+            </section>
+
+            <!-- LEVERAGE POINTS -->
+            <section>
+                <h2>High-Leverage Funding Targets</h2>
+                <p>
+                    Not all funding creates equal impact. These leverage points generate multiplier effects that 
+                    exceed direct service delivery by orders of magnitude.
+                </p>
+                
+                <div class="leverage-grid">
+                    <div class="leverage-card">
+                        <h3>
+                            <span class="leverage-icon">📜</span>
+                            <span>Policy Infrastructure</span>
+                        </h3>
+                        <p>
+                            Fund policy research, legislative drafting support, and advocacy campaigns that change 
+                            the rules governing food systems. A single policy change can redirect billions in 
+                            government spending.
+                        </p>
+                        <span class="leverage-multiplier">10-100x multiplier</span>
+                    </div>
+                    
+                    <div class="leverage-card">
+                        <h3>
+                            <span class="leverage-icon">🔗</span>
+                            <span>Coordination Platforms</span>
+                        </h3>
+                        <p>
+                            Build shared infrastructure that reduces transaction costs for all actors: data systems, 
+                            logistics networks, procurement cooperatives. These enable faster, cheaper action by 
+                            dozens of organizations.
+                        </p>
+                        <span class="leverage-multiplier">5-20x multiplier</span>
+                    </div>
+                    
+                    <div class="leverage-card">
+                        <h3>
+                            <span class="leverage-icon">🌱</span>
+                            <span>Market Shaping</span>
+                        </h3>
+                        <p>
+                            De-risk new markets (fortified foods, local agriculture value chains) through first-loss 
+                            capital, demand guarantees, or technical assistance that attracts commercial investment.
+                        </p>
+                        <span class="leverage-multiplier">3-15x multiplier</span>
+                    </div>
+                    
+                    <div class="leverage-card">
+                        <h3>
+                            <span class="leverage-icon">🎓</span>
+                            <span>Knowledge Production</span>
+                        </h3>
+                        <p>
+                            Fund rigorous research that generates evidence used by hundreds of implementers. One 
+                            well-designed study can shift $10M+ in allocation decisions across the sector.
+                        </p>
+                        <span class="leverage-multiplier">5-30x multiplier</span>
+                    </div>
+                    
+                    <div class="leverage-card">
+                        <h3>
+                            <span class="leverage-icon">🛠️</span>
+                            <span>Capacity Building</span>
+                        </h3>
+                        <p>
+                            Invest in organizations that strengthen local implementing capacity: training programs, 
+                            technical assistance, operational systems. Builds long-term absorptive capacity for 
+                            future funding.
+                        </p>
+                        <span class="leverage-multiplier">2-10x multiplier</span>
+                    </div>
+                    
+                    <div class="leverage-card">
+                        <h3>
+                            <span class="leverage-icon">🚨</span>
+                            <span>Emergency Response Systems</span>
+                        </h3>
+                        <p>
+                            Pre-position capital, logistics, and partnerships that enable rapid deployment when 
+                            crises hit. Readiness funding prevents mortality and reduces total crisis response costs.
+                        </p>
+                        <span class="leverage-multiplier">3-10x multiplier</span>
+                    </div>
+                </div>
+                
+                <div class="callout info-box">
+                    <div class="callout-title">
+                        <span>💡</span>
+                        <span>Leverage vs. Direct Service</span>
+                    </div>
+                    <div class="callout-content">
+                        <p>
+                            <strong>Direct Service:</strong> "Our $1M fed 10,000 children for one year."<br>
+                            <strong>Leverage:</strong> "Our $1M changed a procurement policy, now $50M in government 
+                            funds reach children annually."
+                        </p>
+                        <p style="margin-top: 1rem;">
+                            Both matter. But funders often over-index on direct service because it's easier to measure 
+                            and communicate. Strategic portfolios balance both.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PORTFOLIO APPROACH -->
+            <section class="content-section">
+                <h2>Portfolio Strategy: Balancing Risk and Impact</h2>
+                <p>
+                    No single grant category is optimal. Effective funders construct portfolios that balance quick 
+                    wins with long-term systems change, proven approaches with innovation, and direct delivery with 
+                    enabling infrastructure.
+                </p>
+                
+                <div class="portfolio-matrix">
+                    <h3>Recommended Portfolio Allocation</h3>
+                    <p>
+                        This framework applies to overall child nutrition portfolios. Adjust based on your theory of 
+                        change, risk tolerance, and existing sector gaps.
+                    </p>
+                    
+                    <table class="portfolio-table">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>% of Portfolio</th>
+                                <th>Purpose</th>
+                                <th>Time Horizon</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Direct Service Delivery</strong></td>
+                                <td>30-40%</td>
+                                <td>Immediate impact, proven models, rapid scale</td>
+                                <td>1-3 years</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Systems & Infrastructure</strong></td>
+                                <td>25-35%</td>
+                                <td>Coordination platforms, data systems, logistics networks</td>
+                                <td>3-7 years</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Policy & Advocacy</strong></td>
+                                <td>15-20%</td>
+                                <td>Change rules governing resource allocation</td>
+                                <td>3-10 years</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Research & Evidence</strong></td>
+                                <td>10-15%</td>
+                                <td>Generate knowledge for sector-wide use</td>
+                                <td>2-5 years</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Innovation & Experimentation</strong></td>
+                                <td>5-10%</td>
+                                <td>Test new approaches, informed risk-taking</td>
+                                <td>1-4 years</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Emergency Reserves</strong></td>
+                                <td>5-10%</td>
+                                <td>Rapid response to acute crises</td>
+                                <td>Deployed as needed</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="callout warning-box">
+                    <div class="callout-title">
+                        <span>⚠️</span>
+                        <span>Portfolio Red Flags</span>
+                    </div>
+                    <div class="callout-content">
+                        <ul>
+                            <li><strong>100% direct service:</strong> You're funding symptoms, not causes. No systemic change.</li>
+                            <li><strong>100% policy/research:</strong> No one is actually feeding children now. Theory without practice.</li>
+                            <li><strong>No reserves:</strong> Cannot respond to emergencies. Reactivity over strategy.</li>
+                            <li><strong>No innovation budget:</strong> Portfolio ossifies. Sector doesn't learn.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DUE DILIGENCE -->
+            <section>
+                <h2>Accelerated Due Diligence Framework</h2>
+                <p>
+                    Rigor without paralysis. This framework enables fast decisions without compromising fiduciary 
+                    responsibility. Most foundations can complete this in 2-4 weeks for grants under $500K.
+                </p>
+                
+                <div class="due-diligence">
+                    <div class="dd-category">
+                        <h4>🎯 Theory of Change Validation</h4>
+                        <ul class="dd-checklist">
+                            <li>Can they explain in one paragraph why their approach will work?</li>
+                            <li>Have they articulated key assumptions that must hold true?</li>
+                            <li>Do they have a plan to test those assumptions?</li>
+                            <li>Is the intervention matched to the actual constraint (not just a good idea)?</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="dd-category">
+                        <h4>🏢 Organizational Capacity</h4>
+                        <ul class="dd-checklist">
+                            <li>Do they have relevant prior experience (sector, geography, scale)?</li>
+                            <li>Financial controls in place (audits, bank reconciliation, separation of duties)?</li>
+                            <li>Key staff retention and succession planning addressed?</li>
+                            <li>Clear decision-making authority and accountability?</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="dd-category">
+                        <h4>🤝 Community & Partner Relationships</h4>
+                        <ul class="dd-checklist">
+                            <li>Demonstrated trust from target communities (ask for references)?</li>
+                            <li>Active partnerships with local organizations (not just MOUs)?</li>
+                            <li>Engagement with government for sustainability and scale?</li>
+                            <li>Grievance mechanisms and feedback loops operational?</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="dd-category">
+                        <h4>📊 Monitoring & Learning</h4>
+                        <ul class="dd-checklist">
+                            <li>Clear, measurable indicators aligned to outcomes (not just activities)?</li>
+                            <li>Data collection systems that respect beneficiary privacy?</li>
+                            <li>Plan to share learning publicly (even failures)?</li>
+                            <li>Willingness to adjust approach based on evidence?</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="dd-category">
+                        <h4>🛡️ Risk Management</h4>
+                        <ul class="dd-checklist">
+                            <li>Identified key risks (operational, financial, reputational, safety)?</li>
+                            <li>Mitigation strategies for each major risk?</li>
+                            <li>Compliance with anti-terrorism, anti-corruption regulations?</li>
+                            <li>Insurance and liability coverage appropriate to context?</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="dd-category">
+                        <h4>♻️ Sustainability Planning</h4>
+                        <ul class="dd-checklist">
+                            <li>Diversified funding sources (not dependent on single funder)?</li>
+                            <li>Plan for local capacity transfer or government integration?</li>
+                            <li>Exit strategy that doesn't create dependency?</li>
+                            <li>Cost structure sustainable at scale?</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="callout success-box">
+                    <div class="callout-title">
+                        <span>✓</span>
+                        <span>Fast-Track Indicators</span>
+                    </div>
+                    <div class="callout-content">
+                        <p><strong>You can move faster if the organization:</strong></p>
+                        <ul>
+                            <li>Has successfully deployed your funding before</li>
+                            <li>Comes recommended by trusted peer funders</li>
+                            <li>Has recent clean audit and strong financial controls</li>
+                            <li>Is using proven intervention models (not experimental)</li>
+                            <li>Operates in stable (not conflict) environments</li>
+                        </ul>
+                        <p style="margin-top: 1rem;">
+                            <em>For repeat grantees with strong track records, you can complete diligence in 1-2 weeks.</em>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- INVESTMENT TIERS -->
+            <section>
+                <h2>Investment Tiers: Matching Capital to Strategy</h2>
+                <p>
+                    Different grant sizes enable different strategies. This framework helps you think about 
+                    appropriate interventions for each funding tier.
+                </p>
+                
+                <div class="investment-tiers">
+                    <div class="tier-card">
+                        <div class="tier-header">
+                            <h3 class="tier-name">Seed Funding</h3>
+                            <span class="tier-range">$10K - $100K</span>
+                        </div>
+                        <div class="tier-description">
+                            <p>
+                                Test new ideas, support emerging organizations, conduct feasibility studies, or 
+                                provide emergency rapid response. Expect higher failure rates but also breakthrough 
+                                discoveries.
+                            </p>
+                        </div>
+                        <div class="tier-examples">
+                            <h5>Appropriate Uses:</h5>
+                            <ul>
+                                <li>Pilot programs in new geographies or with new partners</li>
+                                <li>Rapid needs assessments after crises</li>
+                                <li>Small-scale research or evaluation studies</li>
+                                <li>Capacity building for grassroots organizations</li>
+                                <li>Emergency supplies for acute malnutrition cases (100-500 children)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tier-card">
+                        <div class="tier-header">
+                            <h3 class="tier-name">Growth Capital</h3>
+                            <span class="tier-range">$100K - $1M</span>
+                        </div>
+                        <div class="tier-description">
+                            <p>
+                                Scale proven interventions, strengthen organizational systems, or launch multi-year 
+                                programs. Expect measurable outcomes within 2-3 years and path to sustainability.
+                            </p>
+                        </div>
+                        <div class="tier-examples">
+                            <h5>Appropriate Uses:</h5>
+                            <ul>
+                                <li>Scaling school feeding programs to multiple districts</li>
+                                <li>Building data systems or supply chain infrastructure</li>
+                                <li>Multi-year nutrition education campaigns</li>
+                                <li>Staff expansion and operational capacity building</li>
+                                <li>Coordination platforms serving multiple implementing partners</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tier-card">
+                        <div class="tier-header">
+                            <h3 class="tier-name">Systems Capital</h3>
+                            <span class="tier-range">$1M - $10M</span>
+                        </div>
+                        <div class="tier-description">
+                            <p>
+                                Change system-level conditions: policy, markets, institutions. Fund multi-stakeholder 
+                                initiatives, advocacy campaigns, or major infrastructure. Expect 5-10 year horizons 
+                                and indirect pathways to impact.
+                            </p>
+                        </div>
+                        <div class="tier-examples">
+                            <h5>Appropriate Uses:</h5>
+                            <ul>
+                                <li>National fortification programs with government partnerships</li>
+                                <li>Policy advocacy campaigns for legislative change</li>
+                                <li>Regional logistics hubs serving multiple countries</li>
+                                <li>Research consortia generating sector-wide evidence</li>
+                                <li>Market development initiatives (supply chains, financing mechanisms)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tier-card">
+                        <div class="tier-header">
+                            <h3 class="tier-name">Catalytic Capital</h3>
+                            <span class="tier-range">$10M+</span>
+                        </div>
+                        <div class="tier-description">
+                            <p>
+                                Fund large-scale transformation: shift government budgets, attract commercial capital, 
+                                or permanently change market structures. Requires deep expertise, long time horizons, 
+                                and tolerance for complexity.
+                            </p>
+                        </div>
+                        <div class="tier-examples">
+                            <h5>Appropriate Uses:</h5>
+                            <ul>
+                                <li>Country-level nutrition strategy implementation with government</li>
+                                <li>First-loss capital for commercial food system financing</li>
+                                <li>Multi-country coordination and harmonization initiatives</li>
+                                <li>Institutional capacity building (e.g., national nutrition agencies)</li>
+                                <li>Financing mechanisms that unlock billions in public/private capital</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RISK ASSESSMENT -->
+            <section class="content-section risk-section">
+                <h2>Risk Assessment: What Can Go Wrong</h2>
+                <p>
+                    All funding carries risk. The question is whether the potential impact justifies the risk profile. 
+                    This matrix helps you assess and mitigate major risk categories.
+                </p>
+                
+                <div class="risk-grid">
+                    <div class="risk-card low-risk">
+                        <span class="risk-level low">Low Risk</span>
+                        <h4>Operational Risks</h4>
+                        <p>
+                            <strong>Risk:</strong> Program doesn't reach intended beneficiaries or achieve planned outputs<br>
+                            <strong>Mitigation:</strong> Phased funding, clear milestones, regular monitoring, performance-based tranches
+                        </p>
+                    </div>
+                    
+                    <div class="risk-card medium-risk">
+                        <span class="risk-level medium">Medium Risk</span>
+                        <h4>Reputational Risks</h4>
+                        <p>
+                            <strong>Risk:</strong> Association with scandal, fraud, or controversial actions by grantee<br>
+                            <strong>Mitigation:</strong> Strong due diligence, clawback provisions, transparent communication, rapid response protocols
+                        </p>
+                    </div>
+                    
+                    <div class="risk-card medium-risk">
+                        <span class="risk-level medium">Medium Risk</span>
+                        <h4>Financial Risks</h4>
+                        <p>
+                            <strong>Risk:</strong> Misuse of funds, weak financial controls, cost overruns<br>
+                            <strong>Mitigation:</strong> Financial audits, restricted accounts, staged disbursements, external fiscal agents in high-risk contexts
+                        </p>
+                    </div>
+                    
+                    <div class="risk-card high-risk">
+                        <span class="risk-level high">High Risk</span>
+                        <h4>Safety & Security</h4>
+                        <p>
+                            <strong>Risk:</strong> Staff or beneficiaries endangered in conflict zones or unstable environments<br>
+                            <strong>Mitigation:</strong> Security assessments, insurance, remote management, partner through local organizations, clear evacuation protocols
+                        </p>
+                    </div>
+                    
+                    <div class="risk-card medium-risk">
+                        <span class="risk-level medium">Medium Risk</span>
+                        <h4>Compliance Risks</h4>
+                        <p>
+                            <strong>Risk:</strong> Violation of anti-terrorism, sanctions, or anti-corruption regulations<br>
+                            <strong>Mitigation:</strong> Legal review, screening against sanctions lists, anti-corruption training, clear policies, regular audits
+                        </p>
+                    </div>
+                    
+                    <div class="risk-card low-risk">
+                        <span class="risk-level low">Low Risk</span>
+                        <h4>Impact Risks</h4>
+                        <p>
+                            <strong>Risk:</strong> Program doesn't achieve intended outcomes or causes unintended harm<br>
+                            <strong>Mitigation:</strong> Theory of change validation, ongoing learning, adaptive management, exit strategies, community feedback loops
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="callout warning-box" style="margin-top: 2rem;">
+                    <div class="callout-title">
+                        <span>⚠️</span>
+                        <span>When to Walk Away</span>
+                    </div>
+                    <div class="callout-content">
+                        <p><strong>Do not fund if:</strong></p>
+                        <ul>
+                            <li>Organization refuses transparency or accountability measures</li>
+                            <li>Leadership has history of financial mismanagement or fraud</li>
+                            <li>Intervention could plausibly cause harm and no mitigation plan exists</li>
+                            <li>Legal or security risks exceed your institutional risk tolerance</li>
+                            <li>No credible path to sustainability or scale</li>
+                            <li>Conflicting agendas with other major funders create coordination failure</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MEASUREMENT -->
+            <section class="content-section">
+                <h2>Measurement: Accountability Without Performance Theater</h2>
+                <p>
+                    Funders need accountability. Grantees need flexibility. These principles balance both while 
+                    avoiding the measurement traps that plague the sector.
+                </p>
+                
+                <h3>Core Measurement Principles</h3>
+                
+                <div class="quote-box">
+                    <strong>Principle 1: Measure outcomes, not just outputs</strong>
+                    "We distributed 10,000 meals" is an output. "Child malnutrition rates declined by X%" is an outcome. 
+                    Fund for outcomes, measure what actually changed.
+                </div>
+                
+                <div class="quote-box">
+                    <strong>Principle 2: Accept attribution ambiguity</strong>
+                    In complex systems, you can't isolate your contribution. That's okay. Focus on contribution analysis 
+                    (did we play a meaningful role?) rather than pure attribution (did we cause all the change?).
+                </div>
+                
+                <div class="quote-box">
+                    <strong>Principle 3: Learn from failure</strong>
+                    If 100% of grants "succeed," you're not taking enough risk. Budget for 20-30% of experimental grants 
+                    to fail. Require public documentation of failures and lessons learned.
+                </div>
+                
+                <div class="quote-box">
+                    <strong>Principle 4: Aggregate, don't isolate</strong>
+                    Portfolio-level impact matters more than individual grant ROI. Some grants enable others. Judge 
+                    overall portfolio effectiveness, not each grant in isolation.
+                </div>
+                
+                <h3>Minimum Reporting Requirements</h3>
+                <p>
+                    Keep reporting burden low. Request only data you will actually use. This is sufficient for most grants:
+                </p>
+                <ul>
+                    <li><strong>Quarterly:</strong> Financial report (spending vs. budget), narrative progress update (1-2 pages), major risks or changes</li>
+                    <li><strong>Annually:</strong> Outcome data against indicators, learning brief (what worked, what didn't, why), financial audit if grant >$250K</li>
+                    <li><strong>Final:</strong> Comprehensive evaluation, financial close-out, sustainability plan or handover documentation</li>
+                </ul>
+                
+                <div class="callout success-box">
+                    <div class="callout-title">
+                        <span>✓</span>
+                        <span>Trust-Based Philanthropy Elements</span>
+                    </div>
+                    <div class="callout-content">
+                        <p>For strong grantees with track records, consider:</p>
+                        <ul>
+                            <li><strong>Multi-year unrestricted funding:</strong> Reduces reporting burden, allows flexibility</li>
+                            <li><strong>Simplified applications:</strong> 3-5 pages maximum for renewal grants</li>
+                            <li><strong>Operational support:</strong> Include overhead at real cost (25-30%), not artificially capped</li>
+                            <li><strong>Feedback loops:</strong> Ask grantees how you can improve as a funder</li>
+                            <li><strong>Exit conversations early:</strong> Discuss sustainability from grant start, not surprise withdrawal</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- COORDINATION -->
+            <section class="content-section">
+                <h2>Funder Coordination: Collaboration at Scale</h2>
+                <p>
+                    Individual funders are drops. Coordinated funding is a wave. These mechanisms enable collective 
+                    action without sacrificing institutional autonomy.
+                </p>
+                
+                <h3>Coordination Mechanisms (Low to High Integration)</h3>
+                
+                <div class="tier-card" style="margin: 1.5rem 0;">
+                    <h4>Information Sharing</h4>
+                    <p>
+                        <strong>Commitment Level:</strong> Low | <strong>Effort:</strong> Minimal<br>
+                        Share grantee lists, evaluation findings, and lessons learned through informal networks or 
+                        platforms. Prevents duplication, accelerates learning.
+                    </p>
+                </div>
+                
+                <div class="tier-card" style="margin: 1.5rem 0;">
+                    <h4>Joint Strategy Development</h4>
+                    <p>
+                        <strong>Commitment Level:</strong> Medium | <strong>Effort:</strong> Moderate<br>
+                        Collaborate on sector analysis, identify gaps, and agree on division of labor. Each funder 
+                        maintains independent grants but aligned to shared theory of change.
+                    </p>
+                </div>
+                
+                <div class="tier-card" style="margin: 1.5rem 0;">
+                    <h4>Co-Funding Agreements</h4>
+                    <p>
+                        <strong>Commitment Level:</strong> High | <strong>Effort:</strong> Significant<br>
+                        Multiple funders support same grantee or initiative with coordinated due diligence, shared 
+                        reporting, and joint decision-making. Reduces grantee burden, increases funding certainty.
+                    </p>
+                </div>
+                
+                <div class="tier-card" style="margin: 1.5rem 0;">
+                    <h4>Pooled Funds</h4>
+                    <p>
+                        <strong>Commitment Level:</strong> Very High | <strong>Effort:</strong> Intensive<br>
+                        Funders contribute to shared fund with independent governance. Enables large-scale initiatives 
+                        beyond any single funder's capacity. Requires trust, patience, and shared values.
+                    </p>
+                </div>
+                
+                <div class="callout info-box">
+                    <div class="callout-title">
+                        <span>💡</span>
+                        <span>When to Coordinate vs. Act Independently</span>
+                    </div>
+                    <div class="callout-content">
+                        <p><strong>Coordinate when:</strong></p>
+                        <ul>
+                            <li>Funding gap too large for any single funder</li>
+                            <li>Intervention requires multi-stakeholder alignment (e.g., policy change)</li>
+                            <li>Sector suffers from fragmentation or duplication</li>
+                            <li>Shared learning would benefit all funders</li>
+                        </ul>
+                        <p><strong>Act independently when:</strong></p>
+                        <ul>
+                            <li>Testing controversial or experimental approaches</li>
+                            <li>Speed matters more than consensus</li>
+                            <li>Funder has unique expertise or relationships</li>
+                            <li>Sector needs diversity of approaches, not alignment</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FINAL GUIDANCE -->
+            <section class="content-section strategic-section">
+                <h2>Final Guidance: Moving Capital Faster</h2>
+                <p>
+                    The humanitarian sector moves too slowly not because funders are incompetent, but because 
+                    incentive structures reward caution over speed. Changing this requires intentional design.
+                </p>
+                
+                <h3>Institutional Changes That Accelerate Funding</h3>
+                <ul>
+                    <li><strong>Pre-approved rapid response envelopes:</strong> Board authorizes CEO to deploy $X for emergencies without additional approval</li>
+                    <li><strong>Standing due diligence on trusted partners:</strong> Skip full process for repeat grantees; update annually instead</li>
+                    <li><strong>Failure budgets:</strong> Explicitly allocate 10-20% of portfolio to high-risk, high-reward bets</li>
+                    <li><strong>Learning over compliance:</strong> Shift from punitive to learning orientation when grants underperform</li>
+                    <li><strong>Longer grant cycles:</strong> 3-5 year commitments with annual check-ins, not 1-year grants with full reapplication</li>
+                    <li><strong>Flexible funding:</strong> Unrestricted or lightly restricted grants that allow grantees to adapt to changing conditions</li>
+                </ul>
+                
+                <div class="quote-box" style="margin-top: 2rem;">
+                    "The opposite of careful is not reckless. The opposite of careful is fast. You can move quickly 
+                    and still be responsible. You just need different systems."
+                </div>
+                
+                <p style="margin-top: 2rem;">
+                    Every foundation that accelerates funding without compromising integrity creates permission for 
+                    others to follow. You don't need consensus. You need courage and clear systems.
+                </p>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <nav class="footer-nav">
+                <a href="../index.html">Home</a>
+                <a href="policymakers.html">For Policymakers</a>
+                <a href="implementers.html">For Implementers</a>
+                <a href="researchers.html">For Researchers</a>
+                <a href="communities.html">For Communities</a>
+                <a href="../governance.html">Governance</a>
+                <a href="../about.html">About</a>
+            </nav>
+            
+            <div class="zero-harm-statement">
+                <h3>Zero Harm & Anti-Coercion Commitment</h3>
+                <p>
+                    All funding frameworks prioritize beneficiary safety, community agency, and sustainable outcomes. 
+                    No funding should create dependency, enable coercion, or compromise privacy.
+                </p>
+                <p>
+                    Funders have fiduciary responsibility to ensure grants comply with anti-terrorism, anti-corruption, 
+                    and human rights standards. Due diligence is mandatory, not optional.
+                </p>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>Feed Children ASAP Atlas | For Funders & Philanthropies</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem;">
+                    Offline-First | No Tracking | Zero Surveillance | Licensed for Regenerative Use
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT (MINIMAL PROGRESSIVE ENHANCEMENT) -->
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Track that user visited funders section
+        try {
+            localStorage.setItem('feedChildrenAtlas_lastRole', 'funders');
+        } catch (e) {
+            // Silent fail if localStorage unavailable
+        }
+        
+        // Accessibility: Reduced motion support
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('*').forEach(el => {
+                el.style.animation = 'none';
+                el.style.transition = 'none';
+            });
+        }
+        
+        // Print optimization: Expand all sections before print
+        window.addEventListener('beforeprint', function() {
+            document.querySelectorAll('details').forEach(detail => {
+                detail.setAttribute('open', '');
+            });
+        });
+    </script>
+    
+    <!--
+    ZERO HARM COMPLIANCE NOTICE:
+    
+    This page contains:
+    - No tracking or analytics
+    - No external API calls
+    - No data collection beyond localStorage for navigation preferences
+    - No surveillance mechanisms
+    
+    All funding frameworks emphasize:
+    - Fiduciary responsibility and compliance
+    - Beneficiary safety and community agency
+    - Evidence-based decision making
+    - Sustainable, locally-owned solutions
+    - Transparency and accountability
+    
+    Funders must ensure all grants comply with applicable laws and ethical standards.
+    -->
+</body>
+</html>
