@@ -1,0 +1,601 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-12",
+  "description": "Key nutrition indicators for program monitoring and evaluation",
+  "indicatorTypes": {
+    "process": {
+      "label": "Process Indicators",
+      "description": "Measure program activities and delivery quality",
+      "color": "#7a9eb8",
+      "priority": "essential"
+    },
+    "output": {
+      "label": "Output Indicators",
+      "description": "Measure direct results of program activities",
+      "color": "#7a6b9e",
+      "priority": "essential"
+    },
+    "outcome": {
+      "label": "Outcome Indicators",
+      "description": "Measure changes in beneficiary status or behavior",
+      "color": "#6b9e6b",
+      "priority": "high"
+    },
+    "impact": {
+      "label": "Impact Indicators",
+      "description": "Measure long-term population-level changes",
+      "color": "#e8a87c",
+      "priority": "optional"
+    }
+  },
+  "indicators": [
+    {
+      "id": "ind_001",
+      "name": "Stunting Prevalence",
+      "type": "outcome",
+      "definition": "Percentage of children under 5 years with height-for-age z-score (HAZ) below -2 standard deviations from WHO reference median",
+      "numerator": "Number of children 0-59 months with HAZ < -2",
+      "denominator": "Total number of children 0-59 months measured",
+      "calculation": "(Numerator / Denominator) × 100",
+      "targetValue": "Varies by context; WHO critical threshold >30%",
+      "dataSource": "Household surveys (DHS, MICS, SMART) or program anthropometric data",
+      "collectionMethod": "Anthropometric measurement (height/length boards, trained measurers, standardized technique)",
+      "frequency": "Baseline, midterm, endline for programs. Annually or bi-annually for monitoring.",
+      "disaggregation": ["Age group (0-23, 24-59 months)", "Sex", "Geographic area", "Wealth quintile", "Maternal education"],
+      "ease": "moderate",
+      "cost": "moderate",
+      "priority": "high",
+      "interpretation": {
+        "high": "> 30% is very high; indicates chronic, long-term malnutrition",
+        "medium": "20-29% is high; significant public health problem",
+        "low": "10-19% is medium; moderate public health concern",
+        "veryLow": "< 10% is low; acceptable for most contexts"
+      },
+      "limitations": [
+        "Reflects cumulative exposure over time; changes slowly",
+        "Requires large sample sizes to detect change",
+        "Measurement error can be substantial",
+        "Does not reflect acute nutritional stress"
+      ],
+      "relatedIndicators": ["ind_002", "ind_006", "ind_007"],
+      "technicalNotes": "Use WHO Anthro software for calculating z-scores. Flag implausible values (HAZ < -6 or > +6)."
+    },
+    {
+      "id": "ind_002",
+      "name": "Wasting Prevalence (Global Acute Malnutrition)",
+      "type": "outcome",
+      "definition": "Percentage of children 6-59 months with weight-for-height z-score (WHZ) below -2 or MUAC < 125mm or presence of bilateral pitting oedema",
+      "numerator": "Number of children with WHZ < -2 or MUAC < 125mm or oedema",
+      "denominator": "Total number of children 6-59 months assessed",
+      "calculation": "(Numerator / Denominator) × 100",
+      "targetValue": "< 5% acceptable; 5-9% poor; 10-14% serious; ≥15% critical (WHO thresholds)",
+      "dataSource": "SMART surveys, nutrition screening, health facility data",
+      "collectionMethod": "Anthropometric measurement (weight, height, MUAC tape) and oedema assessment",
+      "frequency": "Every 6-12 months in emergency contexts; annually in development contexts",
+      "disaggregation": ["Age group (6-23, 24-59 months)", "Sex", "Geographic area", "Livelihood zone"],
+      "ease": "moderate",
+      "cost": "moderate",
+      "priority": "high",
+      "interpretation": {
+        "critical": "≥ 15% indicates critical situation requiring urgent response",
+        "serious": "10-14% is serious; scaled-up response needed",
+        "poor": "5-9% is poor but not emergency",
+        "acceptable": "< 5% is acceptable in most contexts"
+      },
+      "limitations": [
+        "Point-in-time estimate; can fluctuate seasonally",
+        "WHZ and MUAC identify partially different children",
+        "Oedema rare in many settings; often missed"
+      ],
+      "relatedIndicators": ["ind_003", "ind_001", "ind_011"],
+      "technicalNotes": "SMART methodology is standard for surveys. Combined WHZ and MUAC recommended for screening."
+    },
+    {
+      "id": "ind_003",
+      "name": "Severe Acute Malnutrition (SAM) Prevalence",
+      "type": "outcome",
+      "definition": "Percentage of children 6-59 months with WHZ < -3 or MUAC < 115mm or bilateral pitting oedema",
+      "numerator": "Number of children with WHZ < -3 or MUAC < 115mm or oedema",
+      "denominator": "Total number of children 6-59 months assessed",
+      "calculation": "(Numerator / Denominator) × 100",
+      "targetValue": "< 2% acceptable; ≥2% indicates need for treatment programming",
+      "dataSource": "SMART surveys, nutrition screening, CMAM program data",
+      "collectionMethod": "Anthropometric measurement and clinical assessment",
+      "frequency": "Every 6 months in emergency; annually in development contexts",
+      "disaggregation": ["Age group", "Sex", "Geographic area", "Season"],
+      "ease": "moderate",
+      "cost": "moderate",
+      "priority": "high",
+      "interpretation": {
+        "emergency": "≥ 2% requires treatment program scale-up",
+        "concern": "1-2% requires treatment services available",
+        "low": "< 1% baseline level even in healthy populations"
+      },
+      "limitations": [
+        "Relatively rare; requires large samples for precision",
+        "Seasonal variation significant",
+        "Case-finding methods affect detection"
+      ],
+      "relatedIndicators": ["ind_002", "ind_012", "ind_013"],
+      "technicalNotes": "SAM subset of GAM. Combined MUAC and WHZ criteria capture most cases."
+    },
+    {
+      "id": "ind_004",
+      "name": "Exclusive Breastfeeding Rate (0-5 months)",
+      "type": "outcome",
+      "definition": "Percentage of infants 0-5 months who received only breastmilk in previous 24 hours (no other liquids or foods except medicines)",
+      "numerator": "Number of infants 0-5 months exclusively breastfed in last 24 hours",
+      "denominator": "Total number of infants 0-5 months",
+      "calculation": "(Numerator / Denominator) × 100",
+      "targetValue": "WHO target ≥70%; ≥90% is excellent",
+      "dataSource": "Household surveys (DHS, MICS), program monitoring",
+      "collectionMethod": "Caregiver interview using 24-hour dietary recall",
+      "frequency": "Annually for monitoring; baseline and endline for programs",
+      "disaggregation": ["Infant age (0-1, 2-3, 4-5 months)", "Maternal education", "Urban/rural", "Facility vs home delivery"],
+      "ease": "easy",
+      "cost": "low",
+      "priority": "high",
+      "interpretation": {
+        "excellent": "> 90% is excellent; rare globally",
+        "good": "50-90% is good progress",
+        "poor": "< 50% indicates substantial room for improvement"
+      },
+      "limitations": [
+        "Self-reported; subject to recall and social desirability bias",
+        "24-hour recall may not reflect usual practice",
+        "Small sample sizes due to narrow age range"
+      ],
+      "relatedIndicators": ["ind_005", "ind_001", "ind_002"],
+      "technicalNotes": "WHO standard indicator. Water and water-based drinks (teas) break exclusivity."
+    },
+    {
+      "id": "ind_005",
+      "name": "Minimum Dietary Diversity (6-23 months)",
+      "type": "outcome",
+      "definition": "Percentage of children 6-23 months who consumed foods from ≥5 out of 8 food groups in previous 24 hours",
+      "numerator": "Number of children 6-23 months who ate from ≥5 food groups yesterday",
+      "denominator": "Total number of children 6-23 months",
+      "calculation": "(Numerator / Denominator) × 100",
+      "targetValue": "≥70% indicates good dietary diversity at population level",
+      "dataSource": "Household surveys, program monitoring",
+      "collectionMethod": "Caregiver interview with 24-hour dietary recall",
+      "frequency": "Annually or at program baseline/endline",
+      "disaggregation": ["Age group (6-11, 12-17, 18-23 months)", "Sex", "Maternal education", "Wealth"],
+      "ease": "easy",
+      "cost": "low",
+      "priority": "high",
+      "interpretation": {
+        "good": "> 70% meets minimum diversity",
+        "moderate": "40-70% shows room for improvement",
+        "poor": "< 40% indicates very limited diet variety"
+      },
+      "limitations": [
+        "Measures variety not quantity or frequency",
+        "24-hour recall may not represent usual intake",
+        "Culturally appropriate food groups needed"
+      ],
+      "relatedIndicators": ["ind_006", "ind_001", "ind_002"],
+      "technicalNotes": "WHO revised 8-group indicator (2021). Food groups: breastmilk, grains/roots/tubers, legumes/nuts, dairy, flesh foods, eggs, vitamin A-rich fruits/vegetables, other fruits/vegetables."
+    },
+    {
+      "id": "ind_006",
+      "name": "Minimum Meal Frequency (6-23 months)",
+      "type": "outcome",
+      "definition": "Percentage of children 6-23 months who received minimum number of meals/snacks in previous 24 hours (varies by breastfeeding status and age)",
+      "numerator": "Number of children who received minimum meals/snacks",
+      "denominator": "Total children 6-23 months",
+      "calculation": "(Numerator / Denominator) × 100",
+      "targetValue": "≥70% at population level",
+      "dataSource": "Household surveys, program monitoring",
+      "collectionMethod": "Caregiver interview with 24-hour recall",
+      "frequency": "Annually or baseline/endline",
+      "disaggregation": ["Breastfeeding status", "Age group", "Maternal employment"],
+      "ease": "easy",
+      "cost": "low",
+      "priority": "medium",
+      "interpretation": {
+        "adequate": "> 70% feeding frequently enough",
+        "concerning": "< 50% indicates significant gaps in feeding frequency"
+      },
+      "limitations": [
+        "Definitions vary by age and breastfeeding status",
+        "Does not capture portion sizes",
+        "Cultural definitions of 'meal' vs 'snack' vary"
+      ],
+      "relatedIndicators": ["ind_005", "ind_004"],
+      "technicalNotes": "Minimum: breastfed 6-8 months = 2 times; 9-23 months = 3 times. Non-breastfed 6-23 months = 4 times including ≥2 milk feeds."
+    },
+    {
+      "id": "ind_007",
+      "name": "Anemia Prevalence",
+      "type": "outcome",
+      "definition": "Percentage of children 6-59 months with hemoglobin concentration below age-specific threshold",
+      "numerator": "Number of children with Hb < 11.0 g/dL (adjusted for altitude)",
+      "denominator": "Total children 6-59 months tested",
+      "calculation": "(Numerator / Denominator) × 100",
+      "targetValue": "< 20% is low; 20-39% moderate; ≥40% is severe public health problem (WHO)",
+      "dataSource": "Surveys with hemoglobin testing (DHS, MICS, specialized surveys)",
+      "collectionMethod": "Capillary blood sample with HemoCue or similar device",
+      "frequency": "Every 3-5 years (surveys); not typically program-level monitoring",
+      "disaggregation": ["Age group", "Sex", "Geographic area", "Wealth"],
+      "ease": "difficult",
+      "cost": "high",
+      "priority": "medium",
+      "interpretation": {
+        "severe": "≥ 40% is severe public health problem",
+        "moderate": "20-39% is moderate problem",
+        "low": "< 20% is low prevalence"
+      },
+      "limitations": [
+        "Expensive and invasive (blood sample)",
+        "Cannot distinguish causes (iron, folate, B12, malaria, infections)",
+        "Altitude adjustment needed",
+        "Requires trained phlebotomists"
+      ],
+      "relatedIndicators": ["ind_001", "ind_002"],
+      "technicalNotes": "Threshold: Hb < 11.0 g/dL for children 6-59 months. Adjust for altitude using WHO tables."
+    },
+    {
+      "id": "ind_008",
+      "name": "Vitamin A Supplementation Coverage",
+      "type": "output",
+      "definition": "Percentage of children 6-59 months who received high-dose vitamin A supplement in last 6 months",
+      "numerator": "Number of children 6-59 months who received vitamin A in last 6 months",
+      "denominator": "Total children 6-59 months",
+      "calculation": "(Numerator / Denominator) × 100",
+      "targetValue": "≥80% coverage is target (universal coverage campaigns)",
+      "dataSource": "Administrative records, household surveys, coverage surveys",
+      "collectionMethod": "Caregiver recall; verification of card/record if available",
+      "frequency": "After each campaign (every 6 months); annually in surveys",
+      "disaggregation": ["Age group", "Geographic area", "Campaign vs. routine"],
+      "ease": "easy",
+      "cost": "low",
+      "priority": "high",
+      "interpretation": {
+        "excellent": "> 90% is excellent coverage",
+        "good": "80-90% meets target",
+        "inadequate": "< 80% leaves substantial children unprotected"
+      },
+      "limitations": [
+        "Recall bias (caregivers may not remember)",
+        "Dose verification difficult without records",
+        "Coverage doesn't measure compliance or absorption"
+      ],
+      "relatedIndicators": ["ind_009", "ind_007"],
+      "technicalNotes": "Standard: 100,000 IU for 6-11 months; 200,000 IU for 12-59 months every 6 months."
+    },
+    {
+      "id": "ind_009",
+      "name": "Number of Beneficiaries Reached",
+      "type": "output",
+      "definition": "Total number of unique beneficiaries (children, pregnant women, etc.) who received program services during reporting period",
+      "numerator": "Count of unique beneficiaries receiving services",
+      "denominator": "N/A (absolute number)",
+      "calculation": "Sum of unique beneficiaries (avoid double-counting)",
+      "targetValue": "Program-specific based on coverage goals and target population",
+      "dataSource": "Program registration and attendance records",
+      "collectionMethod": "Service delivery records, registration databases",
+      "frequency": "Monthly, quarterly, or annually depending on program",
+      "disaggregation": ["Beneficiary type", "Geographic area", "Service type", "New vs. repeat"],
+      "ease": "easy",
+      "cost": "very-low",
+      "priority": "essential",
+      "interpretation": {
+        "onTarget": "Achieving planned coverage targets",
+        "behind": "Reaching fewer than planned; investigate barriers"
+      },
+      "limitations": [
+        "Number reached ≠ quality of services",
+        "Risk of double-counting across sites or time periods",
+        "Doesn't capture missed populations"
+      ],
+      "relatedIndicators": ["ind_010", "ind_011"],
+      "technicalNotes": "Use unique identifiers to avoid double-counting. Report 'individuals' not 'contacts' or 'visits'."
+    },
+    {
+      "id": "ind_010",
+      "name": "Geographic Coverage",
+      "type": "output",
+      "definition": "Percentage of target geographic areas (districts, villages, health facilities) with program services operational",
+      "numerator": "Number of target areas with operational services",
+      "denominator": "Total number of target areas",
+      "calculation": "(Numerator / Denominator) × 100",
+      "targetValue": "100% of planned areas; phased targets if gradual scale-up",
+      "dataSource": "Program implementation records, site lists",
+      "collectionMethod": "Administrative records and site monitoring",
+      "frequency": "Quarterly or as sites are added",
+      "disaggregation": ["Type of area (urban/rural)", "Service type", "Implementation partner"],
+      "ease": "easy",
+      "cost": "very-low",
+      "priority": "high",
+      "interpretation": {
+        "complete": "100% of planned areas operational",
+        "expanding": "Progressive increase toward target",
+        "gaps": "< 80% indicates significant geographic gaps"
+      },
+      "limitations": [
+        "Operational ≠ quality or utilization",
+        "Doesn't reflect population coverage (people reached)",
+        "May mask within-area inequities"
+      ],
+      "relatedIndicators": ["ind_009", "ind_016"],
+      "technicalNotes": "Define 'operational' clearly (e.g., services available at least 1 day per week with supplies)."
+    },
+    {
+      "id": "ind_011",
+      "name": "SAM Treatment Coverage",
+      "type": "output",
+      "definition": "Percentage of children with SAM in target area enrolled in treatment program",
+      "numerator": "Number of SAM children enrolled in treatment",
+      "denominator": "Estimated SAM caseload in target area",
+      "calculation": "(Numerator / Denominator) × 100",
+      "targetValue": "≥50% is minimum; ≥70% is good; ≥90% is excellent",
+      "dataSource": "Program enrollment data and population-based SAM prevalence estimates",
+      "collectionMethod": "Service statistics and SLEAC/SQUEAC coverage surveys",
+      "frequency": "Quarterly for monitoring; coverage surveys every 6-12 months",
+      "disaggregation": ["Geographic area", "Type of SAM (MUAC vs WHZ vs oedema)", "Age group"],
+      "ease": "moderate",
+      "cost": "moderate",
+      "priority": "high",
+      "interpretation": {
+        "excellent": "> 90% coverage",
+        "good": "70-90% coverage",
+        "inadequate": "< 50% coverage; most SAM children not reached"
+      },
+      "limitations": [
+        "Denominator estimates uncertain",
+        "Coverage varies seasonally",
+        "Geographic pockets of low coverage may be masked",
+        "Methodology (SLEAC vs SQUEAC) affects precision"
+      ],
+      "relatedIndicators": ["ind_003", "ind_012", "ind_013"],
+      "technicalNotes": "Use SLEAC (small area) or SQUEAC (small area and quality) methods. SPHERE standard ≥50% rural, ≥70% urban."
+    },
+    {
+      "id": "ind_012",
+      "name": "SAM Treatment Cure Rate",
+      "type": "outcome",
+      "definition": "Percentage of children enrolled in SAM treatment who recover and are discharged as cured",
+      "numerator": "Number of SAM admissions discharged as cured",
+      "denominator": "Total SAM admissions (excluding transfers)",
+      "calculation": "(Numerator / Denominator) × 100",
+      "targetValue": "SPHERE standard: >75% cure rate",
+      "dataSource": "SAM treatment program records",
+      "collectionMethod": "Program monitoring, routine service statistics",
+      "frequency": "Monthly reporting; quarterly analysis",
+      "disaggregation": ["Type of SAM (MUAC vs WHZ)", "Age group", "Geographic site", "With/without complications"],
+      "ease": "easy",
+      "cost": "very-low",
+      "priority": "essential",
+      "interpretation": {
+        "excellent": "> 90% cure rate",
+        "acceptable": "75-90% meets minimum standard",
+        "poor": "< 75% indicates quality problems"
+      },
+      "limitations": [
+        "Default rates affect denominator (if high defaults, cure rate inflated)",
+        "Definition of 'cured' must be standardized",
+        "Quality of measurement affects reliability"
+      ],
+      "relatedIndicators": ["ind_013", "ind_014", "ind_015"],
+      "technicalNotes": "Cure = child reaches discharge criteria (MUAC ≥125mm and/or WHZ ≥-2 and no oedema for 2 consecutive weeks)."
+    },
+    {
+      "id": "ind_013",
+      "name": "SAM Treatment Death Rate",
+      "type": "outcome",
+      "definition": "Percentage of children enrolled in SAM treatment who die during treatment",
+      "numerator": "Number of SAM admissions who died during treatment",
+      "denominator": "Total SAM admissions",
+      "calculation": "(Numerator / Denominator) × 100",
+      "targetValue": "SPHERE standard: <10% death rate",
+      "dataSource": "SAM treatment program records",
+      "collectionMethod": "Program monitoring with verification where possible",
+      "frequency": "Monthly reporting",
+      "disaggregation": ["Type of SAM", "Presence of complications", "Age group", "Time in program"],
+      "ease": "easy",
+      "cost": "very-low",
+      "priority": "essential",
+      "interpretation": {
+        "acceptable": "< 5% is excellent; < 10% is acceptable",
+        "concerning": "10-15% indicates quality or referral issues",
+        "critical": "> 15% requires urgent quality improvement"
+      },
+      "limitations": [
+        "Deaths after default or discharge not captured",
+        "Verification difficult in community settings",
+        "May undercount if families don't report deaths"
+      ],
+      "relatedIndicators": ["ind_012", "ind_014"],
+      "technicalNotes": "Report deaths in treatment separately from deaths post-discharge. Investigate all deaths for quality improvement."
+    },
+    {
+      "id": "ind_014",
+      "name": "SAM Treatment Default Rate",
+      "type": "process",
+      "definition": "Percentage of children enrolled in SAM treatment who are absent for 3+ consecutive visits without formal discharge",
+      "numerator": "Number of SAM admissions who defaulted",
+      "denominator": "Total SAM admissions",
+      "calculation": "(Numerator / Denominator) × 100",
+      "targetValue": "SPHERE standard: <15% default rate",
+      "dataSource": "SAM treatment program records",
+      "collectionMethod": "Attendance tracking and defaulter follow-up records",
+      "frequency": "Monthly reporting",
+      "disaggregation": ["Geographic site", "Distance from site", "Timing in treatment course"],
+      "ease": "easy",
+      "cost": "very-low",
+      "priority": "high",
+      "interpretation": {
+        "good": "< 10% default rate",
+        "acceptable": "10-15% meets standard",
+        "poor": "> 15% indicates access or quality barriers"
+      },
+      "limitations": [
+        "Some 'defaults' are actually undocumented cures or deaths",
+        "Definition of default (3 weeks absent) is arbitrary",
+        "Defaulter tracing often incomplete"
+      ],
+      "relatedIndicators": ["ind_012", "ind_016"],
+      "technicalNotes": "Active defaulter tracing improves data quality. Investigate reasons: access barriers, side effects, family issues."
+    },
+    {
+      "id": "ind_015",
+      "name": "Average Length of Stay in SAM Treatment",
+      "type": "process",
+      "definition": "Average number of weeks children spend in SAM treatment from admission to discharge",
+      "numerator": "Sum of weeks in treatment for all discharged children",
+      "denominator": "Number of children discharged (any outcome)",
+      "calculation": "Total weeks / Number discharged",
+      "targetValue": "6-8 weeks typical; shorter is better if outcomes good",
+      "dataSource": "SAM treatment program records",
+      "collectionMethod": "Calculate from admission and discharge dates",
+      "frequency": "Quarterly analysis",
+      "disaggregation": ["Discharge outcome (cured/died/defaulted)", "Initial severity", "Complications"],
+      "ease": "easy",
+      "cost": "very-low",
+      "priority": "medium",
+      "interpretation": {
+        "efficient": "6-8 weeks indicates good recovery rate",
+        "slow": "> 10 weeks may indicate quality or supply issues",
+        "fast": "< 6 weeks may indicate premature discharge"
+      },
+      "limitations": [
+        "Varies by initial severity",
+        "Complicated cases skew average",
+        "Shorter not always better if quality compromised"
+      ],
+      "relatedIndicators": ["ind_012", "ind_016"],
+      "technicalNotes": "Track separately for children with vs without medical complications. Monitor alongside cure rate."
+    },
+    {
+      "id": "ind_016",
+      "name": "Timeliness of Service Delivery",
+      "type": "process",
+      "definition": "Percentage of planned service delivery events (distributions, sessions, visits) that occurred on schedule",
+      "numerator": "Number of events delivered on time",
+      "denominator": "Total number of planned events",
+      "calculation": "(Numerator / Denominator) × 100",
+      "targetValue": ">90% of events on time",
+      "dataSource": "Program implementation schedules and activity logs",
+      "collectionMethod": "Activity tracking, site visit reports",
+      "frequency": "Monthly monitoring",
+      "disaggregation": ["Service type", "Geographic area", "Reason for delay"],
+      "ease": "easy",
+      "cost": "very-low",
+      "priority": "medium",
+      "interpretation": {
+        "reliable": "> 90% on time builds beneficiary trust",
+        "inconsistent": "70-90% causes some disruption",
+        "unreliable": "< 70% damages program credibility"
+      },
+      "limitations": [
+        "Doesn't measure quality of services delivered",
+        "May penalize programs in insecure or difficult contexts",
+        "Definition of 'on time' needs clear thresholds"
+      ],
+      "relatedIndicators": ["ind_017", "ind_009"],
+      "technicalNotes": "Track reasons for delays (supply, security, weather, staffing) to target improvements."
+    },
+    {
+      "id": "ind_017",
+      "name": "Stock-Out Rate",
+      "type": "process",
+      "definition": "Percentage of program sites that experienced stock-out of essential supplies (RUTF, supplements, etc.) during reporting period",
+      "numerator": "Number of sites with stock-out of key supplies",
+      "denominator": "Total number of operational sites",
+      "calculation": "(Numerator / Denominator) × 100",
+      "targetValue": "0% stock-outs (or <5% acceptable)",
+      "dataSource": "Supply inventory records, site visit reports",
+      "collectionMethod": "Stock cards, site monitoring, end-of-month stock reports",
+      "frequency": "Monthly monitoring",
+      "disaggregation": ["Type of commodity", "Duration of stock-out", "Geographic area"],
+      "ease": "easy",
+      "cost": "very-low",
+      "priority": "high",
+      "interpretation": {
+        "excellent": "0% stock-outs",
+        "acceptable": "< 5% with short duration",
+        "critical": "> 10% or prolonged stock-outs compromise program"
+      },
+      "limitations": [
+        "Point-in-time measurement may miss brief stock-outs",
+        "Doesn't capture quality of supplies (expired, damaged)",
+        "Sites may underreport to avoid blame"
+      ],
+      "relatedIndicators": ["ind_016", "ind_012"],
+      "technicalNotes": "Track both frequency and duration of stock-outs. Investigate root causes (forecasting, procurement, distribution)."
+    },
+    {
+      "id": "ind_018",
+      "name": "Under-5 Mortality Rate",
+      "type": "impact",
+      "definition": "Probability of dying between birth and age 5 years, expressed per 1,000 live births",
+      "numerator": "Number of deaths of children under 5 years",
+      "denominator": "Number of live births (over same time period or cohort)",
+      "calculation": "Complex calculation from survey or vital registration data",
+      "targetValue": "Sustainable Development Goal: <25 per 1,000 by 2030",
+      "dataSource": "DHS, MICS, vital registration, census",
+      "collectionMethod": "Birth history in household surveys or vital registration",
+      "frequency": "Every 3-5 years (surveys); continuous where vital registration exists",
+      "disaggregation": ["Urban/rural", "Wealth quintile", "Maternal education", "Geographic region"],
+      "ease": "difficult",
+      "cost": "high",
+      "priority": "low",
+      "interpretation": {
+        "low": "< 25 per 1,000 meets SDG target",
+        "moderate": "25-50 per 1,000",
+        "high": "50-100 per 1,000 indicates major child survival challenges",
+        "veryHigh": "> 100 per 1,000 is crisis level"
+      },
+      "limitations": [
+        "Not attributable to specific nutrition programs",
+        "Requires large sample sizes and complex methodology",
+        "5-year reference period; reflects past not current conditions",
+        "Attribution impossible"
+      ],
+      "relatedIndicators": ["ind_001", "ind_002", "ind_003"],
+      "technicalNotes": "Nutrition programs should NOT claim to measure impact on U5MR. Use population-level data for context only."
+    }
+  ],
+  "measurementGuidance": {
+    "dataQuality": {
+      "principles": [
+        "Accuracy: Measured correctly with minimal error",
+        "Reliability: Consistent results when repeated",
+        "Timeliness: Available when needed for decisions",
+        "Completeness: All required data collected",
+        "Validity: Measures what it claims to measure"
+      ],
+      "qualityChecks": [
+        "Training and standardization of measurers",
+        "Equipment calibration and maintenance",
+        "Supervision and spot-checks",
+        "Data validation rules (flagging implausible values)",
+        "Regular data quality assessments"
+      ]
+    },
+    "minimumPackage": {
+      "treatment": ["ind_011", "ind_012", "ind_013", "ind_014", "ind_017"],
+      "prevention": ["ind_004", "ind_005", "ind_008", "ind_009", "ind_016"],
+      "baseline": ["ind_001", "ind_002", "ind_003", "ind_004", "ind_005"]
+    },
+    "collectionFrequency": {
+      "continuous": "Service statistics, attendance, stock levels",
+      "monthly": "Process indicators, outputs, quality metrics",
+      "quarterly": "Outcome indicators from program data",
+      "annually": "Coverage surveys, outcome evaluations",
+      "baseline_endline": "Population-level outcomes, impact indicators"
+    }
+  },
+  "easeLevels": {
+    "easy": "Simple measurement with basic training; low resource requirements",
+    "moderate": "Requires trained staff and standardized methods; moderate resources",
+    "difficult": "Requires specialized equipment, extensive training, or invasive procedures; high resources"
+  },
+  "costLevels": {
+    "very-low": "< $1 per measurement",
+    "low": "$1-5 per measurement",
+    "moderate": "$5-20 per measurement",
+    "high": "> $20 per measurement"
+  }
+}
