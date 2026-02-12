@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rapid-start guide for child nutrition interventions. What to do in the first 24 hours, first week, and first month when you need to act fast.">
+    <title>Rapid Start Guide | Feed Children ASAP Atlas</title>
+    
+    <style>
+        /* ============================================
+           RESET & BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --earth-dark: #2d3e2f;
+            --earth-medium: #5a7c5e;
+            --earth-light: #8ba888;
+            --healing-green: #a8c5a0;
+            --warm-sand: #e8dcc4;
+            --soft-blue: #7a9eb8;
+            --urgent-red: #d97757;
+            --action-orange: #e8a87c;
+            --neutral-gray: #6b7280;
+            --background-light: #f9f9f7;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --card-background: #ffffff;
+            --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --border-radius: 8px;
+            --transition-smooth: all 0.3s ease;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--background-light);
+            overflow-x: hidden;
+        }
+        
+        /* ============================================
+           TYPOGRAPHY
+           ============================================ */
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+        }
+        
+        h1 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            color: var(--earth-dark);
+        }
+        
+        h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--earth-medium);
+            margin-top: 3rem;
+        }
+        
+        h3 {
+            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+            color: var(--earth-medium);
+            margin-top: 2rem;
+        }
+        
+        h4 {
+            font-size: clamp(1.125rem, 2vw, 1.25rem);
+            color: var(--earth-dark);
+            margin-top: 1.5rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        ul, ol {
+            margin-bottom: 1rem;
+            margin-left: 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        strong {
+            color: var(--earth-dark);
+        }
+        
+        /* ============================================
+           LAYOUT
+           ============================================ */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        .top-nav {
+            background: var(--earth-dark);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .nav-home {
+            color: var(--warm-sand);
+            font-weight: 600;
+            font-size: 1.125rem;
+            text-decoration: none;
+        }
+        
+        .nav-home:hover {
+            color: var(--healing-green);
+        }
+        
+        .breadcrumb {
+            color: var(--warm-sand);
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+        
+        /* ============================================
+           HEADER
+           ============================================ */
+        header {
+            background: linear-gradient(135deg, var(--urgent-red) 0%, var(--action-orange) 100%);
+            padding: 3rem 0 2rem;
+            color: white;
+        }
+        
+        .page-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.25);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 400;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* ============================================
+           CONTENT SECTIONS
+           ============================================ */
+        .content-section {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        /* ============================================
+           SITUATION SELECTOR
+           ============================================ */
+        .situation-selector {
+            background: var(--background-light);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .situation-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .situation-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-subtle);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            border-left: 4px solid;
+        }
+        
+        .situation-card.emergency { border-left-color: var(--urgent-red); }
+        .situation-card.expansion { border-left-color: var(--action-orange); }
+        .situation-card.newprogram { border-left-color: var(--soft-blue); }
+        
+        .situation-card:hover {
+            box-shadow: var(--shadow-medium);
+            transform: translateY(-2px);
+        }
+        
+        .situation-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+        
+        .situation-title {
+            font-weight: 600;
+            color: var(--earth-dark);
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .situation-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        /* ============================================
+           TIMELINE SECTIONS
+           ============================================ */
+        .timeline-section {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-subtle);
+            border-left: 6px solid;
+        }
+        
+        .timeline-section.hours { border-left-color: var(--urgent-red); }
+        .timeline-section.week { border-left-color: var(--action-orange); }
+        .timeline-section.month { border-left-color: var(--healing-green); }
+        
+        .timeline-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .timeline-icon {
+            font-size: 2rem;
+        }
+        
+        .timeline-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--earth-dark);
+        }
+        
+        .timeline-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        .action-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .action-item {
+            padding: 1rem 0 1rem 3rem;
+            position: relative;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .action-item:last-child {
+            border-bottom: none;
+        }
+        
+        .action-item::before {
+            content: '☐';
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+            color: var(--earth-medium);
+        }
+        
+        .action-item strong {
+            color: var(--earth-dark);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+        
+        .action-detail {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        /* ============================================
+           DECISION TREE
+           ============================================ */
+        .decision-tree {
+            background: var(--background-light);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .decision-node {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .decision-question {
+            font-weight: 600;
+            color: var(--earth-dark);
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+        }
+        
+        .decision-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .decision-option {
+            background: var(--background-light);
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 3px solid var(--earth-light);
+        }
+        
+        .option-label {
+            font-weight: 600;
+            color: var(--earth-medium);
+            margin-bottom: 0.25rem;
+        }
+        
+        .option-action {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        /* ============================================
+           CRITICAL WARNINGS
+           ============================================ */
+        .warning-box {
+            background: rgba(217, 119, 87, 0.1);
+            border: 2px solid var(--urgent-red);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .warning-box h3 {
+            color: var(--urgent-red);
+            margin-top: 0;
+        }
+        
+        /* ============================================
+           QUICK REFERENCE CARDS
+           ============================================ */
+        .quick-ref-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .quick-ref-card {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-subtle);
+            border-top: 4px solid var(--action-orange);
+        }
+        
+        .quick-ref-card h4 {
+            margin-top: 0;
+            color: var(--earth-dark);
+        }
+        
+        /* ============================================
+           CALLOUT BOXES
+           ============================================ */
+        .callout {
+            border-left: 4px solid;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        .callout.info {
+            background: rgba(122, 158, 184, 0.1);
+            border-left-color: var(--soft-blue);
+        }
+        
+        .callout.success {
+            background: rgba(168, 197, 160, 0.1);
+            border-left-color: var(--healing-green);
+        }
+        
+        .callout h4 {
+            margin-top: 0;
+        }
+        
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 1.5rem;
+            }
+            
+            .situation-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-ref-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-item {
+                padding-left: 2rem;
+            }
+        }
+        
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: var(--earth-dark);
+            color: var(--warm-sand);
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            text-align: center;
+            font-size: 0.875rem;
+            opacity: 0.9;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .footer-content a {
+            color: var(--healing-green);
+            text-decoration: none;
+        }
+        
+        .footer-content a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="top-nav">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-home">← Feed Children ASAP Atlas</a>
+            <span class="breadcrumb">Act → Rapid Start</span>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <span class="page-badge">⚡ Action Guide</span>
+            <h1>Rapid Start Guide</h1>
+            <p class="subtitle">
+                What to do in the first 24 hours, first week, and first month when you need to launch 
+                or expand child nutrition interventions quickly.
+            </p>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <div class="container">
+            
+            <!-- SITUATION SELECTOR -->
+            <div class="situation-selector">
+                <h2 style="margin-top: 0;">What's Your Situation?</h2>
+                <p>Choose the scenario that best matches where you are:</p>
+                
+                <div class="situation-cards">
+                    <a href="#emergency" class="situation-card emergency" style="text-decoration: none; color: inherit;">
+                        <span class="situation-icon">🚨</span>
+                        <div class="situation-title">Emergency Response</div>
+                        <div class="situation-description">
+                            Crisis situation, acute needs, children dying now. Need to act within days.
+                        </div>
+                    </a>
+                    
+                    <a href="#expansion" class="situation-card expansion" style="text-decoration: none; color: inherit;">
+                        <span class="situation-icon">📈</span>
+                        <div class="situation-title">Scaling Existing Program</div>
+                        <div class="situation-description">
+                            You have a working program and funding to expand. Need structured scale-up plan.
+                        </div>
+                    </a>
+                    
+                    <a href="#newprogram" class="situation-card newprogram" style="text-decoration: none; color: inherit;">
+                        <span class="situation-icon">🆕</span>
+                        <div class="situation-title">Starting from Scratch</div>
+                        <div class="situation-description">
+                            New program, new funding, planning phase. Have 1-3 months before launch.
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- EMERGENCY RESPONSE -->
+            <div id="emergency" class="content-section">
+                <h2>🚨 Emergency Response Mode</h2>
+                
+                <div class="warning-box">
+                    <h3>⚠️ Critical First Decisions</h3>
+                    <p><strong>In acute emergencies, speed matters more than perfection.</strong> Make these calls in the first 24 hours:</p>
+                    <ul>
+                        <li><strong>Triage:</strong> Who needs treatment NOW (SAM), who needs prevention (MAM), who can wait?</li>
+                        <li><strong>Treatment approach:</strong> Can you do community-based management, or do you need inpatient facilities?</li>
+                        <li><strong>Supply chains:</strong> Where will RUTF and supplies come from? How fast can they arrive?</li>
+                        <li><strong>Coordination:</strong> Who else is responding? Are you filling a gap or duplicating efforts?</li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-section hours">
+                    <div class="timeline-header">
+                        <span class="timeline-icon">⏱️</span>
+                        <div>
+                            <div class="timeline-title">First 24-48 Hours</div>
+                            <div class="timeline-subtitle">Immediate assessment and mobilization</div>
+                        </div>
+                    </div>
+                    
+                    <ul class="action-list">
+                        <li class="action-item">
+                            <strong>Rapid Needs Assessment</strong>
+                            <div class="action-detail">
+                                Screen sample of children for SAM/MAM using MUAC tapes. Don't wait for comprehensive surveys. 
+                                Quick MUAC screening can be done in 1-2 days and tells you if there's a crisis.
+                            </div>
+                        </li>
+                        
+                        <li class="action-item">
+                            <strong>Coordinate with Cluster/Sector Lead</strong>
+                            <div class="action-detail">
+                                Contact nutrition cluster coordinator or health ministry. Report what you're seeing. Find out 
+                                who's doing what where. Avoid gaps and duplication.
+                            </div>
+                        </li>
+                        
+                        <li class="action-item">
+                            <strong>Secure RUTF Supply</strong>
+                            <div class="action-detail">
+                                Contact UNICEF supply division, WFP, or commercial suppliers immediately. RUTF takes 4-8 weeks 
+                                to arrive. If SAM prevalence is >2%, you need RUTF urgently.
+                            </div>
+                        </li>
+                        
+                        <li class="action-item">
+                            <strong>Identify Treatment Sites</strong>
+                            <div class="action-detail">
+                                Which health facilities or community sites can serve as distribution points? Need refrigeration? 
+                                Secure storage? Trained staff? Map what exists before deciding approach.
+                            </div>
+                        </li>
+                        
+                        <li class="action-item">
+                            <strong>Mobilize Emergency Funding</strong>
+                            <div class="action-detail">
+                                Alert donors about the situation. Submit rapid response proposals. Many donors have emergency 
+                                mechanisms for crises (CERF, START Fund, internal emergency funds).
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-section week">
+                    <div class="timeline-header">
+                        <span class="timeline-icon">📅</span>
+                        <div>
+                            <div class="timeline-title">First Week</div>
+                            <div class="timeline-subtitle">Stand up treatment capacity</div>
+                        </div>
+                    </div>
+                    
+                    <ul class="action-list">
+                        <li class="action-item">
+                            <strong>Train Frontline Staff</strong>
+                            <div class="action-detail">
+                                3-day crash training on SAM/MAM identification, MUAC measurement, RUTF distribution, referral 
+                                protocols. Use WHO/UNICEF materials. Train 2x staff needed (attrition happens).
+                            </div>
+                        </li>
+                        
+                        <li class="action-item">
+                            <strong>Set Up Registration System</strong>
+                            <div class="action-detail">
+                                Even basic paper forms matter. Need to track: ID, MUAC/weight, date admitted, RUTF given, 
+                                follow-up dates. Prevents duplicate treatment and tracks progress.
+                            </div>
+                        </li>
+                        
+                        <li class="action-item">
+                            <strong>Establish Referral Pathways</strong>
+                            <div class="action-detail">
+                                Children with complications (medical problems, oedema, very young) need inpatient care. 
+                                Identify hospitals, arrange transport, brief hospital staff.
+                            </div>
+                        </li>
+                        
+                        <li class="action-item">
+                            <strong>Community Mobilization</strong>
+                            <div class="action-detail">
+                                Work with community leaders to announce screening. Explain what you're looking for and 
+                                where treatment is available. Use mosques, churches, markets, schools.
+                            </div>
+                        </li>
+                        
+                        <li class="action-item">
+                            <strong>Start Treatment (Even Without Perfect Setup)</strong>
+                            <div class="action-detail">
+                                If RUTF arrives and staff are trained, start treating. Don't wait for perfect systems. 
+                                Severely malnourished children die quickly. Improve systems while treating.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="callout info">
+                    <h4>📖 Essential Emergency Resources</h4>
+                    <ul style="margin-bottom: 0;">
+                        <li><strong>WHO/UNICEF CMAM Training Materials:</strong> Free downloadable curriculum</li>
+                        <li><strong>Sphere Standards:</strong> Minimum standards for humanitarian nutrition response</li>
+                        <li><strong>Emergency Nutrition Network (ENN):</strong> Technical guidance for acute situations</li>
+                        <li><strong>UNICEF Supply Catalogue:</strong> Pre-positioned RUTF stocks and lead times</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- PROGRAM EXPANSION -->
+            <div id="expansion" class="content-section">
+                <h2>📈 Scaling an Existing Program</h2>
+                
+                <div class="timeline-section week">
+                    <div class="timeline-header">
+                        <span class="timeline-icon">🔍</span>
+                        <div>
+                            <div class="timeline-title">Week 1: Assessment & Planning</div>
+                            <div class="timeline-subtitle">Before you scale, understand what works and what doesn't</div>
+                        </div>
+                    </div>
+                    
+                    <ul class="action-list">
+                        <li class="action-item">
+                            <strong>Analyze Current Program Performance</strong>
+                            <div class="action-detail">
+                                What's the cure rate? Default rate? Coverage? Cost per beneficiary? Don't scale a broken 
+                                program—fix quality issues first.
+                            </div>
+                        </li>
+                        
+                        <li class="action-item">
+                            <strong>Identify Successful vs. Struggling Sites</strong>
+                            <div class="action-detail">
+                                Which sites have best outcomes? Why? Document what high-performing sites do differently. 
+                                Use their practices as your scaling model.
+                            </div>
+                        </li>
+                        
+                        <li class="action-item">
+                            <strong>Calculate True Delivered Costs</strong>
+                            <div class="action-detail">
+                                Include EVERYTHING: supplies, staff time, supervision, transport, overhead. Budget for 
+                                new sites at 1.5-2x pilot costs (scaling is more expensive than you think).
+                            </div>
+                        </li>
+                        
+                        <li class="action-item">
+                            <strong>Map New Coverage Areas</strong>
+                            <div class="action-detail">
+                                Where are gaps? Where is need highest? Where do you have capacity? Prioritize areas with: 
+                                high malnutrition, low current coverage, existing health infrastructure.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-section month">
+                    <div class="timeline-header">
+                        <span class="timeline-icon">🚀</span>
+                        <div>
+                            <div class="timeline-title">Month 1: Staged Rollout</div>
+                            <div class="timeline-subtitle">Scale in waves, not all at once</div>
+                        </div>
+                    </div>
+                    
+                    <ul class="action-list">
+                        <li class="action-item">
+                            <strong>Phase 1: Pilot New Sites (Week 1-2)</strong>
+                            <div class="action-detail">
+                                Start with 2-3 new sites closest to existing successful sites. Use same staff to supervise. 
+                                Test your systems before full expansion.
+                            </div>
+                        </li>
+                        
+                        <li class="action-item">
+                            <strong>Phase 2: Near Expansion (Week 3-4)</strong>
+                            <div class="action-detail">
+                                Add 5-10 sites in same region. Staff can still travel for supervision. Supply chains are 
+                                similar. Learn and adjust before going further.
+                            </div>
+                        </li>
+                        
+                        <li class="action-item">
+                            <strong>Phase 3: Geographic Expansion (Month 2+)</strong>
+                            <div class="action-detail">
+                                Only after Phases 1-2 are stable, expand to new regions. Requires new supervisors, separate 
+                                supply chains, adapted protocols for different contexts.
+                            </div>
+                        </li>
+                        
+                        <li class="action-item">
+                            <strong>Build Supervision Capacity</strong>
+                            <div class="action-detail">
+                                Your best frontline staff become trainers/supervisors. Budget 1 supervisor per 8-12 sites. 
+                                Supervision is what separates successful scaling from quality collapse.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="warning-box">
+                    <h3>🛑 Common Scaling Mistakes to Avoid</h3>
+                    <ul style="margin-bottom: 0;">
+                        <li><strong>Scaling before stabilizing:</strong> Fix quality at existing sites before adding new ones</li>
+                        <li><strong>Underestimating costs:</strong> Scaling is more expensive per beneficiary than pilots</li>
+                        <li><strong>Neglecting supervision:</strong> Quality collapses without adequate oversight</li>
+                        <li><strong>Assuming homogeneity:</strong> New areas have different contexts—adapt protocols</li>
+                        <li><strong>Speed over sustainability:</strong> Slow, solid scaling beats rapid expansion with collapse</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- NEW PROGRAM -->
+            <div id="newprogram" class="content-section">
+                <h2>🆕 Starting a New Program (1-3 Month Timeline)</h2>
+                
+                <div class="decision-tree">
+                    <h3>First: What's Your Core Intervention?</h3>
+                    <p>Your timeline and approach depend on what you're doing:</p>
+                    
+                    <div class="decision-node">
+                        <div class="decision-question">What type of program are you starting?</div>
+                        <div class="decision-options">
+                            <div class="decision-option">
+                                <div class="option-label">→ SAM/MAM Treatment Program</div>
+                                <div class="option-action">
+                                    Fastest to start (4-6 weeks). Main barrier is RUTF procurement. Partner with health facilities. 
+                                    Use <a href="../tools/choose-intervention.html" style="color: var(--soft-blue);">Intervention Selector</a> for details.
+                                </div>
+                            </div>
+                            
+                            <div class="decision-option">
+                                <div class="option-label">→ Supplementary Feeding / Prevention</div>
+                                <div class="option-action">
+                                    6-8 weeks. Need targeting criteria, food supply, distribution infrastructure. Consider school 
+                                    feeding or community kitchens depending on context.
+                                </div>
+                            </div>
+                            
+                            <div class="decision-option">
+                                <div class="option-label">→ Cash Transfer for Nutrition</div>
+                                <div class="option-action">
+                                    8-12 weeks. Need: beneficiary registration, payment mechanism (mobile money, banks, cash), 
+                                    market assessment. Simplest if piggybacking on existing social protection system.
+                                </div>
+                            </div>
+                            
+                            <div class="decision-option">
+                                <div class="option-label">→ Behavior Change / Counseling</div>
+                                <div class="option-action">
+                                    8-12 weeks for quality implementation. Fast to start but takes time to train counselors well. 
+                                    Most effective when combined with food or cash interventions.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-section month">
+                    <div class="timeline-header">
+                        <span class="timeline-icon">📋</span>
+                        <div>
+                            <div class="timeline-title">Month 1: Foundation</div>
+                            <div class="timeline-subtitle">Get the basics right</div>
+                        </div>
+                    </div>
+                    
+                    <ul class="action-list">
+                        <li class="action-item">
+                            <strong>Baseline Assessment</strong>
+                            <div class="action-detail">
+                                Measure malnutrition prevalence in target area using SMART survey methodology (if time allows) 
+                                or rapid MUAC screening. Baseline lets you prove impact later.
+                            </div>
+                        </li>
+                        
+                        <li class="action-item">
+                            <strong>Stakeholder Mapping & Engagement</strong>
+                            <div class="action-detail">
+                                Meet: health ministry, local government, other NGOs, community leaders. Find out what exists, 
+                                avoid duplication, identify partners. Get permissions/MOUs signed.
+                            </div>
+                        </li>
+                        
+                        <li class="action-item">
+                            <strong>Hire Core Team</strong>
+                            <div class="action-detail">
+                                Program manager, M&E officer, logistics coordinator FIRST. They hire the rest. Don't try to 
+                                hire 20 people at once—build the team in stages.
+                            </div>
+                        </li>
+                        
+                        <li class="action-item">
+                            <strong>Design M&E System (Before Implementation!)</strong>
+                            <div class="action-detail">
+                                Decide what you'll measure, how, when. Design forms. Set up database or system. 
+                                Use <a href="../tools/measure.html" style="color: var(--soft-blue);">Metrics Builder</a>. 
+                                Much harder to retrofit measurement systems later.
+                            </div>
+                        </li>
+                        
+                        <li class="action-item">
+                            <strong>Procurement Initiation</strong>
+                            <div class="action-detail">
+                                Order long-lead-time items NOW: RUTF, equipment, vehicles. These take 2-4 months. 
+                                Everything else can wait.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-section month">
+                    <div class="timeline-header">
+                        <span class="timeline-icon">🛠️</span>
+                        <div>
+                            <div class="timeline-title">Month 2: Setup & Training</div>
+                            <div class="timeline-subtitle">Build capacity before launching</div>
+                        </div>
+                    </div>
+                    
+                    <ul class="action-list">
+                        <li class="action-item">
+                            <strong>Staff Training (2-3 weeks intensive)</strong>
+                            <div class="action-detail">
+                                Don't rush training. Well-trained staff are the difference between success and failure. 
+                                Include: technical skills, data collection, beneficiary communication, safety protocols.
+                            </div>
+                        </li>
+                        
+                        <li class="action-item">
+                            <strong>Pilot Test Everything</strong>
+                            <div class="action-detail">
+                                Test forms, procedures, data flow, supply chains with small pilot (1-2 sites, 50 beneficiaries). 
+                                Find and fix problems before full launch.
+                            </div>
+                        </li>
+                        
+                        <li class="action-item">
+                            <strong>Community Sensitization</strong>
+                            <div class="action-detail">
+                                Explain program to communities BEFORE launching. Use community meetings, radio, posters. 
+                                Manage expectations—be clear about who qualifies and what benefits are.
+                            </div>
+                        </li>
+                        
+                        <li class="action-item">
+                            <strong>Establish Feedback Mechanisms</strong>
+                            <div class="action-detail">
+                                How will beneficiaries report problems or complaints? Hotline? Suggestion boxes? Community 
+                                meetings? Build accountability from day one.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-section month">
+                    <div class="timeline-header">
+                        <span class="timeline-icon">🎯</span>
+                        <div>
+                            <div class="timeline-title">Month 3: Launch & Monitor</div>
+                            <div class="timeline-subtitle">Start small, learn fast, adjust</div>
+                        </div>
+                    </div>
+                    
+                    <ul class="action-list">
+                        <li class="action-item">
+                            <strong>Phased Launch (Not All Sites at Once)</strong>
+                            <div class="action-detail">
+                                Start with 20-30% of planned sites. Get these working smoothly before adding more. 
+                                Easier to fix problems with 3 sites than 30 sites.
+                            </div>
+                        </li>
+                        
+                        <li class="action-item">
+                            <strong>Daily Monitoring First 2 Weeks</strong>
+                            <div class="action-detail">
+                                Supervisors visit sites daily. Fix problems immediately. Are supplies reaching sites? Are staff 
+                                following protocols? Are beneficiaries showing up?
+                            </div>
+                        </li>
+                        
+                        <li class="action-item">
+                            <strong>Weekly Data Review</strong>
+                            <div class="action-detail">
+                                Review numbers weekly: enrollment, attendance, stock levels, defaulters. Spot problems early. 
+                                Data is useless if you don't act on it.
+                            </div>
+                        </li>
+                        
+                        <li class="action-item">
+                            <strong>Rapid Adjustment</strong>
+                            <div class="action-detail">
+                                Something not working? Change it. Now. Don't wait for "approval" or "the next review meeting." 
+                                Field realities matter more than your original plan.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- QUICK REFERENCE -->
+            <div class="content-section">
+                <h2>⚡ Quick Reference: What You Need When</h2>
+                
+                <div class="quick-ref-grid">
+                    <div class="quick-ref-card">
+                        <h4>Week 1 Essentials</h4>
+                        <ul style="margin: 0; font-size: 0.95rem; color: var(--text-secondary);">
+                            <li>MUAC tapes for screening</li>
+                            <li>Program manager hired</li>
+                            <li>Bank account opened</li>
+                            <li>Initial stakeholder meetings</li>
+                            <li>Office space secured</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="quick-ref-card">
+                        <h4>Month 1 Essentials</h4>
+                        <ul style="margin: 0; font-size: 0.95rem; color: var(--text-secondary);">
+                            <li>Core team hired</li>
+                            <li>RUTF/supplies ordered</li>
+                            <li>MOUs with partners signed</li>
+                            <li>Data collection system designed</li>
+                            <li>Target communities identified</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="quick-ref-card">
+                        <h4>Before Launch</h4>
+                        <ul style="margin: 0; font-size: 0.95rem; color: var(--text-secondary);">
+                            <li>Staff trained (not just briefed)</li>
+                            <li>Supplies at distribution sites</li>
+                            <li>Registration system tested</li>
+                            <li>Community sensitization done</li>
+                            <li>Supervision plan established</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="quick-ref-card">
+                        <h4>First Month Operations</h4>
+                        <ul style="margin: 0; font-size: 0.95rem; color: var(--text-secondary);">
+                            <li>Daily site visits</li>
+                            <li>Weekly data review meetings</li>
+                            <li>Bi-weekly stock checks</li>
+                            <li>Monthly staff refresher training</li>
+                            <li>Continuous problem-solving</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FINAL GUIDANCE -->
+            <div class="content-section">
+                <h2>🎯 Final Guidance: Principles for Moving Fast</h2>
+                
+                <div class="callout success">
+                    <h4>✅ Do These Things</h4>
+                    <ul style="margin-bottom: 0;">
+                        <li><strong>Start before you're ready:</strong> Severely malnourished children can't wait for perfect systems</li>
+                        <li><strong>Learn by doing:</strong> Pilot, learn, adjust, scale. Don't try to plan everything in advance</li>
+                        <li><strong>Prioritize quality over coverage:</strong> Better to reach 100 well than 1000 poorly</li>
+                        <li><strong>Build in flexibility:</strong> Plans will change—design systems that can adapt</li>
+                        <li><strong>Invest in supervision:</strong> This is what makes programs work at scale</li>
+                    </ul>
+                </div>
+                
+                <div class="callout info">
+                    <h4>🛑 Don't Do These Things</h4>
+                    <ul style="margin-bottom: 0;">
+                        <li><strong>Wait for perfect data:</strong> Rapid assessments are good enough to start</li>
+                        <li><strong>Skip community engagement:</strong> Programs without community buy-in fail</li>
+                        <li><strong>Forget about sustainability:</strong> Build for handover from day one</li>
+                        <li><strong>Ignore staff wellbeing:</strong> Burned-out staff deliver poor quality</li>
+                        <li><strong>Scale success before understanding it:</strong> Know WHY it works before expanding</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <p>
+                <strong>Rapid Start Guide</strong> | Part of Feed Children ASAP Atlas<br>
+                <a href="../governance.html">Zero Harm Policy</a> • 
+                <a href="../about.html">About This Project</a> • 
+                <a href="../index.html">Return to Atlas</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Accessibility: Reduced motion support
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('*').forEach(el => {
+                el.style.animation = 'none';
+                el.style.transition = 'none';
+            });
+        }
+    </script>
+</body>
+</html>
