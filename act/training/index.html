@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Training resources and curricula for child nutrition programs. Staff training, community worker training, supervision skills, and capacity building materials.">
+    <title>Training Resources | Feed Children ASAP Atlas</title>
+    
+    <style>
+        /* ============================================
+           RESET & BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --earth-dark: #2d3e2f;
+            --earth-medium: #5a7c5e;
+            --earth-light: #8ba888;
+            --healing-green: #a8c5a0;
+            --warm-sand: #e8dcc4;
+            --soft-blue: #7a9eb8;
+            --training-orange: #e8a87c;
+            --training-purple: #7a6b9e;
+            --neutral-gray: #6b7280;
+            --background-light: #f9f9f7;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --card-background: #ffffff;
+            --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --border-radius: 8px;
+            --transition-smooth: all 0.3s ease;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--background-light);
+            overflow-x: hidden;
+        }
+        
+        /* ============================================
+           TYPOGRAPHY
+           ============================================ */
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+        }
+        
+        h1 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            color: var(--earth-dark);
+        }
+        
+        h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--earth-medium);
+            margin-top: 3rem;
+        }
+        
+        h3 {
+            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+            color: var(--earth-medium);
+            margin-top: 2rem;
+        }
+        
+        h4 {
+            font-size: clamp(1.125rem, 2vw, 1.25rem);
+            color: var(--earth-dark);
+            margin-top: 1.5rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        ul, ol {
+            margin-bottom: 1rem;
+            margin-left: 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        strong {
+            color: var(--earth-dark);
+        }
+        
+        /* ============================================
+           LAYOUT
+           ============================================ */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        .top-nav {
+            background: var(--earth-dark);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .nav-home {
+            color: var(--warm-sand);
+            font-weight: 600;
+            font-size: 1.125rem;
+            text-decoration: none;
+        }
+        
+        .nav-home:hover {
+            color: var(--healing-green);
+        }
+        
+        .breadcrumb {
+            color: var(--warm-sand);
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+        
+        /* ============================================
+           HEADER
+           ============================================ */
+        header {
+            background: linear-gradient(135deg, var(--training-orange) 0%, var(--training-purple) 100%);
+            padding: 3rem 0 2rem;
+            color: white;
+        }
+        
+        .page-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.25);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 400;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* ============================================
+           CONTENT SECTIONS
+           ============================================ */
+        .content-section {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        /* ============================================
+           AUDIENCE SELECTOR
+           ============================================ */
+        .audience-selector {
+            background: var(--background-light);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .audience-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .audience-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-subtle);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            border-top: 4px solid;
+            text-align: center;
+        }
+        
+        .audience-card.staff { border-top-color: var(--training-purple); }
+        .audience-card.community { border-top-color: var(--training-orange); }
+        .audience-card.supervisors { border-top-color: var(--soft-blue); }
+        .audience-card.trainers { border-top-color: var(--healing-green); }
+        
+        .audience-card:hover {
+            box-shadow: var(--shadow-medium);
+            transform: translateY(-2px);
+        }
+        
+        .audience-icon {
+            font-size: 3rem;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+        
+        .audience-title {
+            font-weight: 600;
+            color: var(--earth-dark);
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .audience-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        /* ============================================
+           CURRICULUM CARDS
+           ============================================ */
+        .curriculum-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .curriculum-card {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-subtle);
+            transition: var(--transition-smooth);
+            border-left: 6px solid;
+        }
+        
+        .curriculum-card.technical { border-left-color: var(--training-purple); }
+        .curriculum-card.community { border-left-color: var(--training-orange); }
+        .curriculum-card.supervision { border-left-color: var(--soft-blue); }
+        
+        .curriculum-card:hover {
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .curriculum-header {
+            margin-bottom: 1.5rem;
+        }
+        
+        .curriculum-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--earth-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .curriculum-meta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        
+        .meta-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            background: var(--background-light);
+            color: var(--earth-medium);
+        }
+        
+        .curriculum-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+        }
+        
+        .curriculum-modules {
+            background: var(--background-light);
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1.25rem;
+        }
+        
+        .modules-title {
+            font-weight: 600;
+            color: var(--earth-dark);
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .modules-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .modules-list li {
+            padding: 0.5rem 0 0.5rem 1.5rem;
+            position: relative;
+            font-size: 0.95rem;
+        }
+        
+        .modules-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--healing-green);
+            font-weight: 600;
+        }
+        
+        .curriculum-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+        
+        .btn-curriculum {
+            flex: 1;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            font-family: inherit;
+        }
+        
+        .btn-view {
+            background: var(--earth-light);
+            color: white;
+        }
+        
+        .btn-view:hover {
+            background: var(--earth-medium);
+        }
+        
+        .btn-download {
+            background: var(--training-purple);
+            color: white;
+        }
+        
+        .btn-download:hover {
+            background: var(--training-orange);
+        }
+        
+        /* ============================================
+           TRAINING PRINCIPLES
+           ============================================ */
+        .principles-box {
+            background: linear-gradient(135deg, rgba(232, 168, 124, 0.15) 0%, rgba(122, 107, 158, 0.15) 100%);
+            border: 2px solid var(--training-orange);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .principles-box h3 {
+            color: var(--training-orange);
+            margin-top: 0;
+        }
+        
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .principle-item {
+            background: white;
+            padding: 1.25rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .principle-icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .principle-title {
+            font-weight: 600;
+            color: var(--earth-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .principle-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        /* ============================================
+           ASSESSMENT TOOLS
+           ============================================ */
+        .assessment-tools {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .assessment-card {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-subtle);
+            border-top: 4px solid var(--soft-blue);
+        }
+        
+        .assessment-title {
+            font-weight: 600;
+            color: var(--earth-dark);
+            margin-bottom: 0.75rem;
+        }
+        
+        .assessment-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+        
+        .assessment-link {
+            color: var(--soft-blue);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        
+        .assessment-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* ============================================
+           CALLOUT BOXES
+           ============================================ */
+        .callout {
+            border-left: 4px solid;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        .callout.info {
+            background: rgba(122, 158, 184, 0.1);
+            border-left-color: var(--soft-blue);
+        }
+        
+        .callout.success {
+            background: rgba(168, 197, 160, 0.1);
+            border-left-color: var(--healing-green);
+        }
+        
+        .callout.warning {
+            background: rgba(232, 168, 124, 0.1);
+            border-left-color: var(--training-orange);
+        }
+        
+        .callout h4 {
+            margin-top: 0;
+        }
+        
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 1.5rem;
+            }
+            
+            .audience-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .curriculum-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .principles-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .assessment-tools {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: var(--earth-dark);
+            color: var(--warm-sand);
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            text-align: center;
+            font-size: 0.875rem;
+            opacity: 0.9;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .footer-content a {
+            color: var(--healing-green);
+            text-decoration: none;
+        }
+        
+        .footer-content a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="top-nav">
+        <div class="nav-content">
+            <a href="../../index.html" class="nav-home">← Feed Children ASAP Atlas</a>
+            <span class="breadcrumb">Act → Training Resources</span>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <span class="page-badge">🎓 Training Hub</span>
+            <h1>Training Resources</h1>
+            <p class="subtitle">
+                Curricula, training materials, and capacity building resources for nutrition program staff, 
+                community workers, supervisors, and trainers. Practical, field-tested, and ready to adapt.
+            </p>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <div class="container">
+            
+            <!-- AUDIENCE SELECTOR -->
+            <div class="audience-selector">
+                <h2 style="margin-top: 0;">Who Are You Training?</h2>
+                <p>Select your audience to see relevant training materials:</p>
+                
+                <div class="audience-cards">
+                    <div class="audience-card staff">
+                        <span class="audience-icon">👥</span>
+                        <div class="audience-title">Program Staff</div>
+                        <div class="audience-description">
+                            Professional staff: nutritionists, program officers, data collectors
+                        </div>
+                    </div>
+                    
+                    <div class="audience-card community">
+                        <span class="audience-icon">🤝</span>
+                        <div class="audience-title">Community Workers</div>
+                        <div class="audience-description">
+                            Volunteers, CHWs, peer educators, community mobilizers
+                        </div>
+                    </div>
+                    
+                    <div class="audience-card supervisors">
+                        <span class="audience-icon">📊</span>
+                        <div class="audience-title">Supervisors</div>
+                        <div class="audience-description">
+                            Field supervisors, team leaders, coordinators
+                        </div>
+                    </div>
+                    
+                    <div class="audience-card trainers">
+                        <span class="audience-icon">🎓</span>
+                        <div class="audience-title">Master Trainers</div>
+                        <div class="audience-description">
+                            Training of trainers (ToT), building training capacity
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TRAINING PRINCIPLES -->
+            <div class="principles-box">
+                <h3>🎯 Principles of Effective Nutrition Training</h3>
+                <p>
+                    <strong>Good training changes behavior, not just knowledge.</strong> Follow these principles 
+                    to ensure your training translates into improved program quality:
+                </p>
+                
+                <div class="principles-grid">
+                    <div class="principle-item">
+                        <span class="principle-icon">👐</span>
+                        <div class="principle-title">Hands-On Practice</div>
+                        <div class="principle-text">
+                            60%+ of training should be practice: measuring MUAC, weighing children, filling forms, 
+                            counseling scenarios. Lectures don't build skills.
+                        </div>
+                    </div>
+                    
+                    <div class="principle-item">
+                        <span class="principle-icon">🔄</span>
+                        <div class="principle-title">Frequent Refreshers</div>
+                        <div class="principle-text">
+                            One-time training isn't enough. Monthly refreshers, on-site coaching, and peer learning 
+                            maintain quality over time.
+                        </div>
+                    </div>
+                    
+                    <div class="principle-item">
+                        <span class="principle-icon">✅</span>
+                        <div class="principle-title">Competency-Based</div>
+                        <div class="principle-text">
+                            Test skills, not memory. Can they actually measure a child correctly? Can they counsel 
+                            a mother effectively? Demonstrate, don't just recite.
+                        </div>
+                    </div>
+                    
+                    <div class="principle-item">
+                        <span class="principle-icon">🗣️</span>
+                        <div class="principle-title">Local Language</div>
+                        <div class="principle-text">
+                            Train in the language trainees will use with beneficiaries. Technical English is useless 
+                            if they need to explain in Swahili, Hausa, or Pashto.
+                        </div>
+                    </div>
+                    
+                    <div class="principle-item">
+                        <span class="principle-icon">⏱️</span>
+                        <div class="principle-title">Realistic Duration</div>
+                        <div class="principle-text">
+                            3-5 days for technical staff, 2-3 days for community workers. One-day "trainings" 
+                            are orientations, not skill-building.
+                        </div>
+                    </div>
+                    
+                    <div class="principle-item">
+                        <span class="principle-icon">📋</span>
+                        <div class="principle-title">Job Aids Provided</div>
+                        <div class="principle-text">
+                            Give trainees tools they can use in the field: laminated guides, reference cards, 
+                            counseling cards. Memory fades, tools remain.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CURRICULA LIBRARY -->
+            <div class="content-section">
+                <h2>📚 Training Curricula</h2>
+                <p>
+                    These curricula are adapted from WHO, UNICEF, and field-tested programs. Download and adapt 
+                    for your context.
+                </p>
+                
+                <div class="curriculum-grid">
+                    <!-- CMAM Training -->
+                    <div class="curriculum-card technical">
+                        <div class="curriculum-header">
+                            <div class="curriculum-title">CMAM Technical Training</div>
+                            <div class="curriculum-meta">
+                                <span class="meta-badge">5 days</span>
+                                <span class="meta-badge">Program Staff</span>
+                                <span class="meta-badge">Advanced</span>
+                            </div>
+                        </div>
+                        <div class="curriculum-description">
+                            Comprehensive training on community-based management of acute malnutrition. For health 
+                            workers and nutritionists implementing SAM/MAM treatment programs.
+                        </div>
+                        <div class="curriculum-modules">
+                            <div class="modules-title">Modules Covered:</div>
+                            <ul class="modules-list">
+                                <li>Acute malnutrition assessment (MUAC, WHZ, oedema)</li>
+                                <li>Appetite test and admission criteria</li>
+                                <li>RUTF dosage and distribution</li>
+                                <li>Monitoring weight gain and progress</li>
+                                <li>Complications and referral criteria</li>
+                                <li>Defaulter tracing and follow-up</li>
+                                <li>Data recording and reporting</li>
+                            </ul>
+                        </div>
+                        <div class="curriculum-actions">
+                            <button class="btn-curriculum btn-view" onclick="alert('Full curriculum available in downloadable resources')">View Outline</button>
+                            <button class="btn-curriculum btn-download" onclick="alert('Download functionality would export curriculum package')">Download</button>
+                        </div>
+                    </div>
+
+                    <!-- Community Worker Training -->
+                    <div class="curriculum-card community">
+                        <div class="curriculum-header">
+                            <div class="curriculum-title">Community Health Worker Training</div>
+                            <div class="curriculum-meta">
+                                <span class="meta-badge">3 days</span>
+                                <span class="meta-badge">Community Workers</span>
+                                <span class="meta-badge">Basic</span>
+                            </div>
+                        </div>
+                        <div class="curriculum-description">
+                            Essential nutrition skills for community volunteers and CHWs. Focus on screening, 
+                            referral, and basic nutrition counseling.
+                        </div>
+                        <div class="curriculum-modules">
+                            <div class="modules-title">Modules Covered:</div>
+                            <ul class="modules-list">
+                                <li>MUAC screening technique</li>
+                                <li>Identifying danger signs</li>
+                                <li>Referral procedures</li>
+                                <li>IYCF key messages</li>
+                                <li>Home visits and counseling basics</li>
+                                <li>Community mobilization</li>
+                                <li>Simple record keeping</li>
+                            </ul>
+                        </div>
+                        <div class="curriculum-actions">
+                            <button class="btn-curriculum btn-view" onclick="alert('Full curriculum available in downloadable resources')">View Outline</button>
+                            <button class="btn-curriculum btn-download" onclick="alert('Download functionality would export curriculum package')">Download</button>
+                        </div>
+                    </div>
+
+                    <!-- IYCF Counseling -->
+                    <div class="curriculum-card technical">
+                        <div class="curriculum-header">
+                            <div class="curriculum-title">IYCF Counseling Skills</div>
+                            <div class="curriculum-meta">
+                                <span class="meta-badge">4 days</span>
+                                <span class="meta-badge">Program Staff</span>
+                                <span class="meta-badge">Intermediate</span>
+                            </div>
+                        </div>
+                        <div class="curriculum-description">
+                            Infant and young child feeding counseling using WHO methodology. Build skills in 
+                            listening, learning difficulties, building confidence, and supporting practices.
+                        </div>
+                        <div class="curriculum-modules">
+                            <div class="modules-title">Modules Covered:</div>
+                            <ul class="modules-list">
+                                <li>Counseling skills (listening, building confidence)</li>
+                                <li>Exclusive breastfeeding promotion</li>
+                                <li>Complementary feeding guidance</li>
+                                <li>Feeding sick children</li>
+                                <li>Dietary diversity assessment</li>
+                                <li>Responsive feeding practices</li>
+                                <li>Using counseling cards effectively</li>
+                            </ul>
+                        </div>
+                        <div class="curriculum-actions">
+                            <button class="btn-curriculum btn-view" onclick="alert('Full curriculum available in downloadable resources')">View Outline</button>
+                            <button class="btn-curriculum btn-download" onclick="alert('Download functionality would export curriculum package')">Download</button>
+                        </div>
+                    </div>
+
+                    <!-- Supervision Training -->
+                    <div class="curriculum-card supervision">
+                        <div class="curriculum-header">
+                            <div class="curriculum-title">Supportive Supervision</div>
+                            <div class="curriculum-meta">
+                                <span class="meta-badge">3 days</span>
+                                <span class="meta-badge">Supervisors</span>
+                                <span class="meta-badge">Intermediate</span>
+                            </div>
+                        </div>
+                        <div class="curriculum-description">
+                            Training supervisors to provide supportive (not punitive) supervision. Focus on 
+                            mentoring, problem-solving, and quality improvement.
+                        </div>
+                        <div class="curriculum-modules">
+                            <div class="modules-title">Modules Covered:</div>
+                            <ul class="modules-list">
+                                <li>Principles of supportive supervision</li>
+                                <li>Observation and feedback techniques</li>
+                                <li>Data review and interpretation</li>
+                                <li>Problem-solving with teams</li>
+                                <li>On-site coaching and mentoring</li>
+                                <li>Quality assurance checklists</li>
+                                <li>Supervision planning and reporting</li>
+                            </ul>
+                        </div>
+                        <div class="curriculum-actions">
+                            <button class="btn-curriculum btn-view" onclick="alert('Full curriculum available in downloadable resources')">View Outline</button>
+                            <button class="btn-curriculum btn-download" onclick="alert('Download functionality would export curriculum package')">Download</button>
+                        </div>
+                    </div>
+
+                    <!-- M&E Training -->
+                    <div class="curriculum-card technical">
+                        <div class="curriculum-header">
+                            <div class="curriculum-title">Nutrition M&E Essentials</div>
+                            <div class="curriculum-meta">
+                                <span class="meta-badge">4 days</span>
+                                <span class="meta-badge">M&E Staff</span>
+                                <span class="meta-badge">Intermediate</span>
+                            </div>
+                        </div>
+                        <div class="curriculum-description">
+                            Training M&E officers and data staff on nutrition indicators, anthropometry, data 
+                            quality, and analysis basics.
+                        </div>
+                        <div class="curriculum-modules">
+                            <div class="modules-title">Modules Covered:</div>
+                            <ul class="modules-list">
+                                <li>Key nutrition indicators (HAZ, WHZ, MUAC)</li>
+                                <li>Anthropometric measurement standardization</li>
+                                <li>Data quality assurance</li>
+                                <li>Database management basics</li>
+                                <li>Data analysis and visualization</li>
+                                <li>Reporting and interpretation</li>
+                                <li>Using data for program improvement</li>
+                            </ul>
+                        </div>
+                        <div class="curriculum-actions">
+                            <button class="btn-curriculum btn-view" onclick="alert('Full curriculum available in downloadable resources')">View Outline</button>
+                            <button class="btn-curriculum btn-download" onclick="alert('Download functionality would export curriculum package')">Download</button>
+                        </div>
+                    </div>
+
+                    <!-- ToT Training -->
+                    <div class="curriculum-card supervision">
+                        <div class="curriculum-header">
+                            <div class="curriculum-title">Training of Trainers (ToT)</div>
+                            <div class="curriculum-meta">
+                                <span class="meta-badge">5 days</span>
+                                <span class="meta-badge">Master Trainers</span>
+                                <span class="meta-badge">Advanced</span>
+                            </div>
+                        </div>
+                        <div class="curriculum-description">
+                            Building master trainers who can deliver quality training to others. Focus on adult 
+                            learning principles, training delivery, and training management.
+                        </div>
+                        <div class="curriculum-modules">
+                            <div class="modules-title">Modules Covered:</div>
+                            <ul class="modules-list">
+                                <li>Adult learning principles</li>
+                                <li>Training session planning</li>
+                                <li>Facilitation techniques</li>
+                                <li>Practical demonstration skills</li>
+                                <li>Competency assessment methods</li>
+                                <li>Managing training logistics</li>
+                                <li>Post-training follow-up and support</li>
+                            </ul>
+                        </div>
+                        <div class="curriculum-actions">
+                            <button class="btn-curriculum btn-view" onclick="alert('Full curriculum available in downloadable resources')">View Outline</button>
+                            <button class="btn-curriculum btn-download" onclick="alert('Download functionality would export curriculum package')">Download</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ASSESSMENT TOOLS -->
+            <div class="content-section">
+                <h2>📋 Assessment & Certification Tools</h2>
+                <p>
+                    Use these tools to assess trainee competency and certify skills. Competency-based assessment 
+                    ensures quality practice.
+                </p>
+                
+                <div class="assessment-tools">
+                    <div class="assessment-card">
+                        <div class="assessment-title">MUAC Measurement Competency Test</div>
+                        <div class="assessment-description">
+                            Practical assessment: trainee measures 5 children, results compared to standardized 
+                            measurements. Pass: 4/5 within 2mm accuracy.
+                        </div>
+                        <a href="#" class="assessment-link" onclick="alert('Assessment tool would be available for download'); return false;">Download Assessment Form →</a>
+                    </div>
+                    
+                    <div class="assessment-card">
+                        <div class="assessment-title">Counseling Skills Checklist</div>
+                        <div class="assessment-description">
+                            Observation checklist for IYCF counseling: uses open questions, listens actively, 
+                            builds confidence, provides 1-2 recommendations. Role-play assessment.
+                        </div>
+                        <a href="#" class="assessment-link" onclick="alert('Assessment tool would be available for download'); return false;">Download Checklist →</a>
+                    </div>
+                    
+                    <div class="assessment-card">
+                        <div class="assessment-title">Data Recording Accuracy Test</div>
+                        <div class="assessment-description">
+                            Trainee records information from 3 mock cases. Assessed on completeness, accuracy, 
+                            and legibility. Pass: 90% accuracy on all required fields.
+                        </div>
+                        <a href="#" class="assessment-link" onclick="alert('Assessment tool would be available for download'); return false;">Download Test Cases →</a>
+                    </div>
+                    
+                    <div class="assessment-card">
+                        <div class="assessment-title">Knowledge Assessment (Written)</div>
+                        <div class="assessment-description">
+                            Multiple choice and short answer questions covering key technical content. Use as 
+                            pre/post test to measure knowledge gain. 20-30 questions.
+                        </div>
+                        <a href="#" class="assessment-link" onclick="alert('Assessment tool would be available for download'); return false;">Download Question Bank →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TRAINING DELIVERY GUIDANCE -->
+            <div class="content-section">
+                <h2>🎓 Training Delivery Best Practices</h2>
+                
+                <div class="callout success">
+                    <h4>✅ Before Training Starts</h4>
+                    <ul style="margin-bottom: 0;">
+                        <li><strong>Pre-test trainees:</strong> Understand baseline knowledge to adjust training level</li>
+                        <li><strong>Prepare materials in advance:</strong> Print handouts, prepare equipment, test projectors</li>
+                        <li><strong>Arrange practice materials:</strong> MUAC tapes, scales, height boards, RUTF packets for demonstration</li>
+                        <li><strong>Identify practice sites:</strong> Where will trainees practice with real children?</li>
+                        <li><strong>Brief trainees on expectations:</strong> Share agenda, learning objectives, assessment methods</li>
+                    </ul>
+                </div>
+                
+                <div class="callout info">
+                    <h4>📖 During Training</h4>
+                    <ul style="margin-bottom: 0;">
+                        <li><strong>60/40 rule:</strong> 60% practice, 40% instruction. More doing, less lecturing</li>
+                        <li><strong>Demonstrate first:</strong> Show how to do it correctly before asking trainees to practice</li>
+                        <li><strong>Practice in pairs:</strong> One trainee practices while another observes and provides feedback</li>
+                        <li><strong>Repeat until competent:</strong> Don't move on until everyone can perform the skill correctly</li>
+                        <li><strong>Use real scenarios:</strong> Practice counseling with real cases, not abstract examples</li>
+                        <li><strong>Correct mistakes immediately:</strong> Don't let incorrect techniques become habits</li>
+                    </ul>
+                </div>
+                
+                <div class="callout warning">
+                    <h4>🔄 After Training</h4>
+                    <ul style="margin-bottom: 0;">
+                        <li><strong>Post-test to measure learning:</strong> Compare pre/post test results to assess improvement</li>
+                        <li><strong>Certify competent trainees only:</strong> Don't certify everyone just because they attended</li>
+                        <li><strong>Plan follow-up support:</strong> Schedule on-site coaching visits within 2-4 weeks</li>
+                        <li><strong>Provide job aids:</strong> Give trainees laminated guides and reference materials</li>
+                        <li><strong>Schedule refresher training:</strong> Plan monthly or quarterly refreshers to maintain quality</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ADDITIONAL RESOURCES -->
+            <div class="content-section">
+                <h2>📚 Additional Training Resources</h2>
+                
+                <h3>External Training Materials</h3>
+                <p>These organizations provide high-quality, free nutrition training resources:</p>
+                
+                <ul>
+                    <li><strong>WHO/UNICEF CMAM Training Materials:</strong> Comprehensive curriculum for community-based management of acute malnutrition</li>
+                    <li><strong>IYCF Counseling Course:</strong> WHO/UNICEF infant and young child feeding counseling training package</li>
+                    <li><strong>Emergency Nutrition Network (ENN):</strong> Technical briefs and training guides for emergency nutrition</li>
+                    <li><strong>FANTA (Food and Nutrition Technical Assistance):</strong> Nutrition assessment and counseling tools</li>
+                    <li><strong>Global Nutrition Cluster:</strong> Standardized training packages for humanitarian contexts</li>
+                </ul>
+                
+                <h3>Job Aids & Reference Materials</h3>
+                <p>Downloadable job aids to give trainees for field reference:</p>
+                
+                <ul>
+                    <li>MUAC tape interpretation guide (color-coded)</li>
+                    <li>RUTF dosage chart by weight</li>
+                    <li>IYCF key messages (laminated cards)</li>
+                    <li>Referral criteria checklist</li>
+                    <li>Counseling cards with local images</li>
+                    <li>Data recording quick reference</li>
+                </ul>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <p>
+                <strong>Training Resources</strong> | Part of Feed Children ASAP Atlas<br>
+                <a href="../../governance.html">Zero Harm Policy</a> • 
+                <a href="../../about.html">About This Project</a> • 
+                <a href="../../index.html">Return to Atlas</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Accessibility: Reduced motion support
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('*').forEach(el => {
+                el.style.animation = 'none';
+                el.style.transition = 'none';
+            });
+        }
+    </script>
+</body>
+</html>
