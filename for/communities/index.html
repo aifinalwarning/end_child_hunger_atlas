@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Accessible, locally adaptable resources for communities. Plain-language guides, participation frameworks, and accountability tools designed for direct use by affected populations and community leaders.">
+    <title>For Communities | Feed Children ASAP Atlas</title>
+    
+    <style>
+        /* ============================================
+           RESET & BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --earth-dark: #2d3e2f;
+            --earth-medium: #5a7c5e;
+            --earth-light: #8ba888;
+            --healing-green: #a8c5a0;
+            --warm-sand: #e8dcc4;
+            --community-orange: #d4956c;
+            --community-yellow: #e8bc7c;
+            --soft-blue: #7a9eb8;
+            --neutral-gray: #6b7280;
+            --background-light: #f9f9f7;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --card-background: #ffffff;
+            --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --border-radius: 8px;
+            --transition-smooth: all 0.3s ease;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.8;
+            color: var(--text-primary);
+            background-color: var(--background-light);
+            overflow-x: hidden;
+        }
+        
+        /* ============================================
+           TYPOGRAPHY (MORE READABLE FOR DIVERSE AUDIENCES)
+           ============================================ */
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+        }
+        
+        h1 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            color: var(--earth-dark);
+        }
+        
+        h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--earth-medium);
+            margin-top: 3rem;
+        }
+        
+        h3 {
+            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+            color: var(--earth-medium);
+            margin-top: 2rem;
+        }
+        
+        h4 {
+            font-size: clamp(1.125rem, 2vw, 1.25rem);
+            color: var(--earth-dark);
+            margin-top: 1.5rem;
+        }
+        
+        p {
+            margin-bottom: 1.25rem;
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+        
+        a {
+            color: var(--soft-blue);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+        
+        a:hover {
+            color: var(--earth-medium);
+            text-decoration: underline;
+        }
+        
+        strong {
+            color: var(--earth-dark);
+            font-weight: 600;
+        }
+        
+        em {
+            color: var(--earth-medium);
+        }
+        
+        /* ============================================
+           LAYOUT
+           ============================================ */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .wide-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        section {
+            padding: 3rem 0;
+        }
+        
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        .top-nav {
+            background: var(--earth-dark);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .nav-home {
+            color: var(--warm-sand);
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+        
+        .nav-home:hover {
+            color: var(--healing-green);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links a {
+            color: var(--warm-sand);
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        
+        .nav-links a:hover {
+            opacity: 1;
+            color: var(--healing-green);
+        }
+        
+        /* ============================================
+           HEADER
+           ============================================ */
+        header {
+            background: linear-gradient(135deg, var(--community-orange) 0%, var(--community-yellow) 100%);
+            color: var(--earth-dark);
+            padding: 3rem 0 2rem;
+            position: relative;
+        }
+        
+        .audience-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            font-size: clamp(1.125rem, 2vw, 1.375rem);
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+        
+        /* ============================================
+           CONTENT SECTIONS
+           ============================================ */
+        .content-section {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .rights-section {
+            border-left: 6px solid var(--community-orange);
+        }
+        
+        .protection-section {
+            border-left: 6px solid #d97757;
+        }
+        
+        .empowerment-section {
+            border-left: 6px solid var(--healing-green);
+        }
+        
+        /* ============================================
+           RIGHTS CARDS (PROMINENT)
+           ============================================ */
+        .rights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .right-card {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-subtle);
+            border-top: 5px solid var(--community-orange);
+            transition: var(--transition-smooth);
+        }
+        
+        .right-card:hover {
+            box-shadow: var(--shadow-medium);
+            transform: translateY(-2px);
+        }
+        
+        .right-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .right-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--earth-dark);
+            margin-bottom: 0.75rem;
+        }
+        
+        .right-description {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        
+        /* ============================================
+           WARNING SIGNS (HIGH VISIBILITY)
+           ============================================ */
+        .warning-signs {
+            background: rgba(217, 119, 87, 0.1);
+            border: 2px solid #d97757;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .warning-signs h3 {
+            color: #d97757;
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+        
+        .warning-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .warning-list li {
+            padding: 1rem 0 1rem 3rem;
+            position: relative;
+            border-bottom: 1px solid rgba(217, 119, 87, 0.2);
+            font-size: 1.05rem;
+        }
+        
+        .warning-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .warning-list li::before {
+            content: '⚠️';
+            position: absolute;
+            left: 0;
+            font-size: 1.75rem;
+        }
+        
+        /* ============================================
+           ACCOUNTABILITY CHECKLIST
+           ============================================ */
+        .accountability-section {
+            background: linear-gradient(135deg, var(--background-light) 0%, var(--card-background) 100%);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .accountability-checklist {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .accountability-checklist h4 {
+            margin-top: 0;
+            color: var(--earth-medium);
+        }
+        
+        .accountability-checklist ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .accountability-checklist li {
+            padding: 0.75rem 0 0.75rem 2rem;
+            position: relative;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .accountability-checklist li:last-child {
+            border-bottom: none;
+        }
+        
+        .accountability-checklist li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            font-size: 1.25rem;
+            color: var(--healing-green);
+            font-weight: bold;
+        }
+        
+        /* ============================================
+           COMMUNITY SOLUTIONS
+           ============================================ */
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .solution-card {
+            background: var(--background-light);
+            border-radius: var(--border-radius);
+            padding: 1.75rem;
+            border-left: 4px solid var(--healing-green);
+        }
+        
+        .solution-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--earth-dark);
+            margin-bottom: 0.75rem;
+        }
+        
+        .solution-description {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .solution-example {
+            font-size: 0.95rem;
+            font-style: italic;
+            color: var(--earth-medium);
+        }
+        
+        /* ============================================
+           HELP RESOURCES (PROMINENT)
+           ============================================ */
+        .help-box {
+            background: linear-gradient(135deg, var(--healing-green) 0%, var(--earth-light) 100%);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            margin: 3rem 0;
+            color: white;
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .help-box h2 {
+            color: white;
+            margin-top: 0;
+        }
+        
+        .help-box p {
+            color: white;
+            font-size: 1.125rem;
+        }
+        
+        .help-contacts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .help-contact {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .help-contact h4 {
+            color: white;
+            margin-top: 0;
+        }
+        
+        .help-contact p {
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* ============================================
+           CALLOUT BOXES
+           ============================================ */
+        .callout {
+            background: var(--warm-sand);
+            border-radius: var(--border-radius);
+            padding: 1.75rem;
+            margin: 2rem 0;
+            border-left: 5px solid var(--earth-medium);
+        }
+        
+        .callout-title {
+            font-size: 1.25rem;
+            color: var(--earth-dark);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .callout-content {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+        
+        .info-box {
+            background: rgba(122, 158, 184, 0.1);
+            border-left-color: var(--soft-blue);
+        }
+        
+        .success-box {
+            background: rgba(168, 197, 160, 0.2);
+            border-left-color: var(--healing-green);
+        }
+        
+        .example-box {
+            background: rgba(212, 149, 108, 0.15);
+            border-left-color: var(--community-orange);
+        }
+        
+        /* ============================================
+           QUESTION & ANSWER
+           ============================================ */
+        .qa-section {
+            margin: 2rem 0;
+        }
+        
+        .qa-item {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-subtle);
+            border-left: 4px solid var(--community-orange);
+        }
+        
+        .question {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--earth-dark);
+            margin-bottom: 0.75rem;
+        }
+        
+        .answer {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        
+        /* ============================================
+           ZERO HARM BADGE
+           ============================================ */
+        .zero-harm-badge {
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--earth-dark);
+            color: var(--warm-sand);
+            padding: 0.75rem 1.25rem;
+            border-radius: 50px;
+            box-shadow: var(--shadow-medium);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: var(--transition-smooth);
+        }
+        
+        .zero-harm-badge:hover {
+            background: var(--earth-medium);
+            transform: scale(1.05);
+        }
+        
+        .zero-harm-badge::before {
+            content: '🛡️';
+            margin-right: 0.5rem;
+        }
+        
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: var(--earth-dark);
+            color: var(--warm-sand);
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .footer-nav a {
+            color: var(--warm-sand);
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        
+        .footer-nav a:hover {
+            opacity: 1;
+            color: var(--healing-green);
+        }
+        
+        .zero-harm-statement {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-left: 4px solid var(--healing-green);
+        }
+        
+        .zero-harm-statement h3 {
+            color: var(--healing-green);
+            margin-top: 0;
+        }
+        
+        .zero-harm-statement p {
+            color: var(--warm-sand);
+            font-size: 0.95rem;
+            margin: 0.5rem 0;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            margin-top: 2rem;
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+        
+        /* ============================================
+           LISTS
+           ============================================ */
+        ul {
+            margin: 1rem 0 1rem 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        li {
+            margin-bottom: 0.75rem;
+            font-size: 1.05rem;
+        }
+        
+        ol {
+            margin: 1rem 0 1rem 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        ol li {
+            margin-bottom: 0.75rem;
+            font-size: 1.05rem;
+        }
+        
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 1.5rem;
+            }
+            
+            .help-box {
+                padding: 2rem 1.5rem;
+            }
+            
+            .nav-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .nav-links {
+                width: 100%;
+            }
+            
+            .zero-harm-badge {
+                top: auto;
+                bottom: 20px;
+                font-size: 0.75rem;
+                padding: 0.5rem 1rem;
+            }
+            
+            .rights-grid,
+            .solutions-grid,
+            .help-contacts {
+                grid-template-columns: 1fr;
+            }
+            
+            .right-card,
+            .solution-card,
+            .qa-item {
+                padding: 1.5rem;
+            }
+        }
+        
+        /* ============================================
+           PRINT STYLES
+           ============================================ */
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .top-nav,
+            .zero-harm-badge {
+                display: none;
+            }
+            
+            .content-section,
+            .help-box,
+            .warning-signs {
+                page-break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+            
+            a[href^="http"]::after {
+                content: " (" attr(href) ")";
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- TOP NAVIGATION -->
+    <nav class="top-nav">
+        <div class="wide-container">
+            <div class="nav-content">
+                <a href="../index.html" class="nav-home">← Feed Children ASAP Atlas</a>
+                <ul class="nav-links">
+                    <li><a href="policymakers.html">For Policymakers</a></li>
+                    <li><a href="implementers.html">For Implementers</a></li>
+                    <li><a href="funders.html">For Funders</a></li>
+                    <li><a href="researchers.html">For Researchers</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ZERO HARM BADGE -->
+    <aside class="zero-harm-badge">
+        <a href="../governance.html">Zero Harm Policy</a>
+    </aside>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <span class="audience-badge">🤝 For Communities & Local Leaders</span>
+            <h1>Your Rights, Your Voice, Your Community</h1>
+            <p class="subtitle">
+                A guide for communities receiving nutrition support. Know your rights, recognize good programs, 
+                identify problems, and hold organizations accountable.
+            </p>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <div class="container">
+            
+            <!-- INTRODUCTION -->
+            <section class="content-section empowerment-section">
+                <h2>This Guide is For You</h2>
+                <p>
+                    If your community is receiving nutrition programs for children, or if organizations are working 
+                    in your area, you have rights. You deserve respect, transparency, and programs that work for you—not 
+                    just for the organizations running them.
+                </p>
+                <p>
+                    <strong>This guide explains:</strong>
+                </p>
+                <ul>
+                    <li>What rights you have when programs operate in your community</li>
+                    <li>What good programs look like (and what bad programs look like)</li>
+                    <li>How to participate in programs and make your voice heard</li>
+                    <li>Warning signs of exploitation or harmful programs</li>
+                    <li>How to report problems and hold programs accountable</li>
+                    <li>How your community can lead its own solutions</li>
+                </ul>
+                
+                <div class="callout success-box">
+                    <div class="callout-title">
+                        <span>💪</span>
+                        <span>You Are Not Just Recipients</span>
+                    </div>
+                    <div class="callout-content">
+                        <p>
+                            <strong>You are experts in your own community.</strong> You know what children need, what 
+                            families face, and what solutions will work. Good programs recognize this. They work with 
+                            you, not above you.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- YOUR RIGHTS -->
+            <section>
+                <h2>Your Rights When Programs Work in Your Community</h2>
+                <p>
+                    These rights apply to any organization—NGO, government, charity, or foundation—working on child 
+                    nutrition in your area. If they don't respect these rights, you can report them.
+                </p>
+                
+                <div class="rights-grid">
+                    <div class="right-card">
+                        <span class="right-icon">🗣️</span>
+                        <h3 class="right-title">Right to Information</h3>
+                        <p class="right-description">
+                            You have the right to know: What is the program? Who is running it? How long will it last? 
+                            What will it provide? All information should be in your language, explained clearly.
+                        </p>
+                    </div>
+                    
+                    <div class="right-card">
+                        <span class="right-icon">✋</span>
+                        <h3 class="right-title">Right to Say No</h3>
+                        <p class="right-description">
+                            You can refuse to participate. No one should pressure you, threaten you, or withhold other 
+                            services because you say no. Participation is always voluntary.
+                        </p>
+                    </div>
+                    
+                    <div class="right-card">
+                        <span class="right-icon">🤝</span>
+                        <h3 class="right-title">Right to Participation</h3>
+                        <p class="right-description">
+                            You should be involved in planning, not just receiving. Your feedback should matter. Good 
+                            programs ask your opinion and adjust based on what you say.
+                        </p>
+                    </div>
+                    
+                    <div class="right-card">
+                        <span class="right-icon">🔒</span>
+                        <h3 class="right-title">Right to Privacy</h3>
+                        <p class="right-description">
+                            Your personal information—names, addresses, health details—should be protected. No one should 
+                            share your information without your permission, especially not your children's photos or names.
+                        </p>
+                    </div>
+                    
+                    <div class="right-card">
+                        <span class="right-icon">⚖️</span>
+                        <h3 class="right-title">Right to Fair Treatment</h3>
+                        <p class="right-description">
+                            Programs should serve those who need help most, not just people with connections. Selection 
+                            should be transparent. Everyone eligible should have equal access.
+                        </p>
+                    </div>
+                    
+                    <div class="right-card">
+                        <span class="right-icon">📢</span>
+                        <h3 class="right-title">Right to Complain</h3>
+                        <p class="right-description">
+                            If something goes wrong, you can report it safely. There should be clear ways to file 
+                            complaints without fear of retaliation or losing services.
+                        </p>
+                    </div>
+                    
+                    <div class="right-card">
+                        <span class="right-icon">🛡️</span>
+                        <h3 class="right-title">Right to Safety</h3>
+                        <p class="right-description">
+                            Programs should never put you or your children in danger. Staff should not ask for bribes, 
+                            sexual favors, or personal services. Any abuse should be reported immediately.
+                        </p>
+                    </div>
+                    
+                    <div class="right-card">
+                        <span class="right-icon">🌱</span>
+                        <h3 class="right-title">Right to Local Control</h3>
+                        <p class="right-description">
+                            Your community should gradually take over programs. Outside organizations should not create 
+                            dependency. They should build your capacity to continue the work yourselves.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- WHAT GOOD PROGRAMS LOOK LIKE -->
+            <section class="content-section">
+                <h2>How to Recognize Good Programs</h2>
+                <p>
+                    Not all programs are run well. Here's what good programs do—and what you should expect.
+                </p>
+                
+                <h3>✓ Good Programs...</h3>
+                <div class="accountability-checklist">
+                    <ul>
+                        <li><strong>Meet with community leaders first</strong> before starting any work. They ask permission, explain their plans, and listen to concerns.</li>
+                        
+                        <li><strong>Speak your language</strong> or use translators. All materials, forms, and meetings happen in languages people understand.</li>
+                        
+                        <li><strong>Explain who they are</strong> clearly: which organization, where they're from, who funds them, how long they'll stay.</li>
+                        
+                        <li><strong>Hire locally</strong> when possible. They train community members and pay fair wages.</li>
+                        
+                        <li><strong>Ask for your input</strong> on timing, location, and how services are delivered. They adjust when you point out problems.</li>
+                        
+                        <li><strong>Show you the results</strong> of their work. They share data, explain what's working, and admit what isn't.</li>
+                        
+                        <li><strong>Have clear complaint processes</strong> that are easy to use and that actually lead to action.</li>
+                        
+                        <li><strong>Protect your privacy</strong> by using ID numbers instead of names, storing data securely, and never taking photos without permission.</li>
+                        
+                        <li><strong>Plan for the future</strong> by teaching skills, building systems, and gradually handing control to the community.</li>
+                        
+                        <li><strong>Treat everyone with respect</strong>—no favoritism, no corruption, no exploitation.</li>
+                    </ul>
+                </div>
+                
+                <div class="callout example-box">
+                    <div class="callout-title">
+                        <span>📖</span>
+                        <span>Example: A Good School Feeding Program</span>
+                    </div>
+                    <div class="callout-content">
+                        <p>
+                            A nutrition program wants to provide meals at the local school. Before starting, they:
+                        </p>
+                        <ol>
+                            <li>Meet with village elders, school administrators, and parent groups</li>
+                            <li>Explain the program in the local language with visual aids</li>
+                            <li>Ask what times work best for families and what foods children will actually eat</li>
+                            <li>Hire three local women as cooks and train them properly</li>
+                            <li>Set up a suggestion box at the school and hold monthly meetings</li>
+                            <li>Show attendance data and explain how they measure program success</li>
+                            <li>Train school staff to continue the program when they eventually leave</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <!-- WARNING SIGNS -->
+            <section>
+                <h2>Warning Signs: When Programs Are Harmful</h2>
+                <p>
+                    Some programs, even if they mean well, can cause harm. Here are warning signs that something is wrong. 
+                    If you see these patterns, speak up or report the organization.
+                </p>
+                
+                <div class="warning-signs">
+                    <h3>⚠️ Red Flags to Watch For</h3>
+                    
+                    <ul class="warning-list">
+                        <li>
+                            <strong>They don't explain who they are or what they're doing.</strong> 
+                            If an organization is secretive, vague, or won't answer basic questions, that's suspicious.
+                        </li>
+                        
+                        <li>
+                            <strong>They take photos or videos of children without permission.</strong> 
+                            Especially photos used for fundraising or publicity without your consent.
+                        </li>
+                        
+                        <li>
+                            <strong>They ask for money, favors, or sexual acts in exchange for services.</strong> 
+                            This is corruption and exploitation. Report it immediately.
+                        </li>
+                        
+                        <li>
+                            <strong>They favor certain families or groups unfairly.</strong> 
+                            If selection isn't transparent or seems based on personal connections, that's wrong.
+                        </li>
+                        
+                        <li>
+                            <strong>They ignore your feedback or punish people who complain.</strong> 
+                            Good programs welcome criticism. Bad programs silence it.
+                        </li>
+                        
+                        <li>
+                            <strong>They collect lots of personal information but won't explain why.</strong> 
+                            Data collection should have a clear purpose and your consent.
+                        </li>
+                        
+                        <li>
+                            <strong>They create dependency instead of building capacity.</strong> 
+                            If they do everything themselves and don't teach you, they're not helping long-term.
+                        </li>
+                        
+                        <li>
+                            <strong>They make promises they don't keep.</strong> 
+                            If they said they'd provide X for Y months and suddenly stop without explanation, that's a problem.
+                        </li>
+                        
+                        <li>
+                            <strong>They hire only outsiders, not locals.</strong> 
+                            If they won't employ people from your community, ask why.
+                        </li>
+                        
+                        <li>
+                            <strong>They leave suddenly without warning or handover.</strong> 
+                            Responsible organizations don't just disappear. They plan exits carefully.
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="callout info-box" style="margin-top: 2rem;">
+                    <div class="callout-title">
+                        <span>💡</span>
+                        <span>Trust Your Instincts</span>
+                    </div>
+                    <div class="callout-content">
+                        <p>
+                            If something feels wrong, it probably is. You know your community. If an organization's 
+                            behavior makes you uncomfortable or seems disrespectful, that's a valid concern. Don't 
+                            ignore it.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- HOW TO PARTICIPATE -->
+            <section class="content-section">
+                <h2>How to Participate Effectively in Programs</h2>
+                <p>
+                    You can help programs work better by participating actively. Here's how to make your voice heard 
+                    and ensure programs actually serve your needs.
+                </p>
+                
+                <h3>Ways to Get Involved</h3>
+                
+                <div class="accountability-section">
+                    <div class="accountability-checklist">
+                        <h4>1. Attend Community Meetings</h4>
+                        <ul>
+                            <li>Show up when programs hold information sessions or planning meetings</li>
+                            <li>Ask questions if something is unclear</li>
+                            <li>Share your honest opinion about what will or won't work</li>
+                            <li>Bring concerns from neighbors who couldn't attend</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="accountability-checklist">
+                        <h4>2. Join Community Committees</h4>
+                        <ul>
+                            <li>Volunteer for oversight or advisory committees if they exist</li>
+                            <li>Help monitor that programs are working as promised</li>
+                            <li>Serve as a liaison between the community and the organization</li>
+                            <li>Participate in decisions about beneficiary selection</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="accountability-checklist">
+                        <h4>3. Provide Regular Feedback</h4>
+                        <ul>
+                            <li>Use suggestion boxes, hotlines, or feedback forms</li>
+                            <li>Tell staff what's working well and what needs improvement</li>
+                            <li>Report problems early before they get worse</li>
+                            <li>Share ideas for how the program could be better</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="accountability-checklist">
+                        <h4>4. Document What Happens</h4>
+                        <ul>
+                            <li>Keep records of promises made by organizations</li>
+                            <li>Take photos (if safe and legal) of program activities</li>
+                            <li>Write down dates, names, and details of problems</li>
+                            <li>Gather testimony from others who experienced issues</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- HOW TO REPORT PROBLEMS -->
+            <section class="content-section protection-section">
+                <h2>How to Report Problems and Hold Programs Accountable</h2>
+                <p>
+                    If a program is not working, breaking promises, or causing harm, you have options. Here's how to 
+                    report problems effectively.
+                </p>
+                
+                <h3>Steps to Take When Something is Wrong</h3>
+                
+                <ol style="font-size: 1.05rem; line-height: 1.8;">
+                    <li>
+                        <strong>Start with the organization first.</strong> Many problems can be solved by talking to 
+                        program managers. Use their complaint process if they have one.
+                    </li>
+                    
+                    <li>
+                        <strong>Document the problem.</strong> Write down what happened, when, where, and who was involved. 
+                        Keep copies of any documents or messages.
+                    </li>
+                    
+                    <li>
+                        <strong>Report to local authorities if needed.</strong> If the organization won't respond, contact 
+                        local government offices, health departments, or social services.
+                    </li>
+                    
+                    <li>
+                        <strong>Contact the organization's headquarters.</strong> Many international NGOs have offices 
+                        in the capital or main cities. You can report problems there.
+                    </li>
+                    
+                    <li>
+                        <strong>Reach out to funders.</strong> If you know who funds the program (foundations, government 
+                        donors, UN agencies), you can contact them directly.
+                    </li>
+                    
+                    <li>
+                        <strong>Use ombudsmen or complaint mechanisms.</strong> Some humanitarian organizations have 
+                        independent complaint offices. UN agencies often have ombudsmen.
+                    </li>
+                    
+                    <li>
+                        <strong>Involve media if appropriate.</strong> Local journalists can expose problems and create 
+                        pressure for change. Only do this if safe.
+                    </li>
+                    
+                    <li>
+                        <strong>Connect with advocacy groups.</strong> NGOs focused on accountability or human rights 
+                        can help you report problems and demand action.
+                    </li>
+                </ol>
+                
+                <div class="callout info-box" style="margin-top: 2rem;">
+                    <div class="callout-title">
+                        <span>🔒</span>
+                        <span>Safety First</span>
+                    </div>
+                    <div class="callout-content">
+                        <p>
+                            <strong>Before reporting problems, consider your safety.</strong> In some contexts, reporting 
+                            corruption or abuse can be dangerous. If you fear retaliation:
+                        </p>
+                        <ul>
+                            <li>Report anonymously when possible</li>
+                            <li>Organize as a group rather than reporting individually</li>
+                            <li>Use intermediaries like local leaders or advocacy organizations</li>
+                            <li>Document everything in case you need evidence later</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- COMMUNITY-LED SOLUTIONS -->
+            <section>
+                <h2>Community-Led Solutions: Taking Control</h2>
+                <p>
+                    The best solutions often come from within communities, not from outside organizations. Here are 
+                    ways communities can address child nutrition without waiting for external help.
+                </p>
+                
+                <div class="solutions-grid">
+                    <div class="solution-card">
+                        <h3 class="solution-title">Community Food Banks</h3>
+                        <p class="solution-description">
+                            Families contribute what they can to a shared food store that helps those facing temporary 
+                            hardship. Managed by trusted community members.
+                        </p>
+                        <p class="solution-example">
+                            <strong>Example:</strong> A village in Kenya organizes monthly contributions of maize, beans, 
+                            or vegetables. When a family struggles, they can access supplies for 2-3 weeks.
+                        </p>
+                    </div>
+                    
+                    <div class="solution-card">
+                        <h3 class="solution-title">Cooperative Gardens</h3>
+                        <p class="solution-description">
+                            Community members work together on shared land to grow vegetables. Harvest is distributed 
+                            to families with young children first.
+                        </p>
+                        <p class="solution-example">
+                            <strong>Example:</strong> Women's groups in Bangladesh maintain community gardens growing 
+                            spinach, pumpkin, and other nutrient-rich vegetables.
+                        </p>
+                    </div>
+                    
+                    <div class="solution-card">
+                        <h3 class="solution-title">Mother-to-Mother Support</h3>
+                        <p class="solution-description">
+                            Experienced mothers mentor new mothers on breastfeeding, preparing nutritious meals, and 
+                            recognizing signs of malnutrition.
+                        </p>
+                        <p class="solution-example">
+                            <strong>Example:</strong> In Uganda, peer support groups meet weekly to share knowledge 
+                            and troubleshoot feeding challenges together.
+                        </p>
+                    </div>
+                    
+                    <div class="solution-card">
+                        <h3 class="solution-title">Community Savings Groups</h3>
+                        <p class="solution-description">
+                            Members contribute small amounts regularly. Families can borrow when they need to buy food 
+                            or pay for healthcare during emergencies.
+                        </p>
+                        <p class="solution-example">
+                            <strong>Example:</strong> Women's savings groups in Ethiopia provide emergency loans for 
+                            medical care or food during drought.
+                        </p>
+                    </div>
+                    
+                    <div class="solution-card">
+                        <h3 class="solution-title">Local Advocacy</h3>
+                        <p class="solution-description">
+                            Community members organize to demand government services, school feeding programs, or 
+                            health clinic improvements.
+                        </p>
+                        <p class="solution-example">
+                            <strong>Example:</strong> Parents in India successfully lobbied their local government to 
+                            include more protein and vegetables in school meals.
+                        </p>
+                    </div>
+                    
+                    <div class="solution-card">
+                        <h3 class="solution-title">Knowledge Sharing</h3>
+                        <p class="solution-description">
+                            Community health workers or traditional healers share nutrition knowledge through informal 
+                            gatherings and home visits.
+                        </p>
+                        <p class="solution-example">
+                            <strong>Example:</strong> Grandmothers in Malawi teach young mothers traditional recipes 
+                            using local, nutrient-dense foods.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="callout success-box" style="margin-top: 2rem;">
+                    <div class="callout-title">
+                        <span>🌟</span>
+                        <span>You Already Have Strengths</span>
+                    </div>
+                    <div class="callout-content">
+                        <p>
+                            Every community has resources: knowledge, networks, traditions, land, labor, and leadership. 
+                            External programs should strengthen what you already have, not replace it. The goal is your 
+                            independence, not your dependence.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- QUESTIONS & ANSWERS -->
+            <section>
+                <h2>Common Questions Answered</h2>
+                
+                <div class="qa-section">
+                    <div class="qa-item">
+                        <p class="question">Q: What if the organization says I can't participate in decisions?</p>
+                        <p class="answer">
+                            <strong>A:</strong> That's a warning sign. Legitimate programs should involve communities in 
+                            planning and implementation. If they refuse, ask why. If their answer isn't satisfactory, 
+                            report this to their supervisors or funders. You have a right to be heard.
+                        </p>
+                    </div>
+                    
+                    <div class="qa-item">
+                        <p class="question">Q: Can I refuse to answer questions or provide information?</p>
+                        <p class="answer">
+                            <strong>A:</strong> Yes. Participation is voluntary. If you don't want to answer certain 
+                            questions—especially about income, health, or family details—you can refuse. They should 
+                            explain why they need the information and how it will be protected.
+                        </p>
+                    </div>
+                    
+                    <div class="qa-item">
+                        <p class="question">Q: What if I report a problem and nothing changes?</p>
+                        <p class="answer">
+                            <strong>A:</strong> Don't give up. Try escalating to higher levels: the organization's 
+                            headquarters, their funders, government oversight bodies, or the media. Document everything. 
+                            Sometimes it takes multiple reports before action happens.
+                        </p>
+                    </div>
+                    
+                    <div class="qa-item">
+                        <p class="question">Q: How do I know if data collection is legitimate?</p>
+                        <p class="answer">
+                            <strong>A:</strong> Legitimate data collection has: (1) clear explanation of why it's needed, 
+                            (2) your informed consent, (3) protection of your privacy, (4) minimal information collected, 
+                            and (5) a plan to share results with you. If any of these are missing, ask questions.
+                        </p>
+                    </div>
+                    
+                    <div class="qa-item">
+                        <p class="question">Q: Can I ask to see how program money is spent?</p>
+                        <p class="answer">
+                            <strong>A:</strong> Yes. Transparency is a sign of good governance. While they may not show 
+                            you detailed budgets, they should be able to explain in general terms how money is allocated 
+                            and what results it achieves.
+                        </p>
+                    </div>
+                    
+                    <div class="qa-item">
+                        <p class="question">Q: What happens if the program suddenly ends?</p>
+                        <p class="answer">
+                            <strong>A:</strong> Good programs plan their exit from the beginning. They should give advance 
+                            notice, help transition to local control or government services, and ensure no one is left 
+                            worse off than before they arrived. If they leave suddenly, that's poor practice.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+        
+        <!-- HELP BOX (FULL WIDTH, PROMINENT) -->
+        <div class="help-box">
+            <div class="wide-container">
+                <h2>Need Help? Have Concerns?</h2>
+                <p>
+                    If you experience problems with a nutrition program or need support, there are places to turn. 
+                    You are not alone.
+                </p>
+                
+                <div class="help-contacts">
+                    <div class="help-contact">
+                        <h4>Local Government</h4>
+                        <p>
+                            Start with your local health department, social services office, or district administration. 
+                            They oversee programs in your area.
+                        </p>
+                    </div>
+                    
+                    <div class="help-contact">
+                        <h4>Community Leaders</h4>
+                        <p>
+                            Respected elders, religious leaders, or traditional authorities can advocate on behalf of 
+                            the community and mediate disputes.
+                        </p>
+                    </div>
+                    
+                    <div class="help-contact">
+                        <h4>NGO Headquarters</h4>
+                        <p>
+                            If a local program isn't responding, contact the organization's main office. Look for 
+                            "accountability" or "complaints" departments.
+                        </p>
+                    </div>
+                    
+                    <div class="help-contact">
+                        <h4>Humanitarian Ombudsman</h4>
+                        <p>
+                            Major humanitarian organizations often have independent ombudsmen. UN agencies have complaint 
+                            mechanisms you can use.
+                        </p>
+                    </div>
+                </div>
+                
+                <p style="margin-top: 2rem; font-size: 1.05rem;">
+                    <strong>Remember:</strong> You deserve respect, transparency, and programs that serve your children's 
+                    needs. Don't accept less. Your voice matters.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <nav class="footer-nav">
+                <a href="../index.html">Home</a>
+                <a href="policymakers.html">For Policymakers</a>
+                <a href="implementers.html">For Implementers</a>
+                <a href="funders.html">For Funders</a>
+                <a href="researchers.html">For Researchers</a>
+                <a href="../governance.html">Governance</a>
+                <a href="../about.html">About</a>
+            </nav>
+            
+            <div class="zero-harm-statement">
+                <h3>Zero Harm & Anti-Coercion Commitment</h3>
+                <p>
+                    All programs must respect community rights, obtain informed consent, and protect participant safety 
+                    and privacy. No program should create dependency, enable exploitation, or ignore community voice.
+                </p>
+                <p>
+                    Communities have the right to participate in decisions, report problems without retaliation, and 
+                    expect accountability from organizations. Your agency and dignity are non-negotiable.
+                </p>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>Feed Children ASAP Atlas | For Communities & Local Leaders</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem;">
+                    Offline-First | No Tracking | Zero Surveillance | Licensed for Regenerative Use
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT (MINIMAL PROGRESSIVE ENHANCEMENT) -->
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Track that user visited communities section
+        try {
+            localStorage.setItem('feedChildrenAtlas_lastRole', 'communities');
+        } catch (e) {
+            // Silent fail if localStorage unavailable
+        }
+        
+        // Accessibility: Reduced motion support
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('*').forEach(el => {
+                el.style.animation = 'none';
+                el.style.transition = 'none';
+            });
+        }
+        
+        // Print optimization: Expand all sections before print
+        window.addEventListener('beforeprint', function() {
+            document.querySelectorAll('details').forEach(detail => {
+                detail.setAttribute('open', '');
+            });
+        });
+    </script>
+    
+    <!--
+    ZERO HARM COMPLIANCE NOTICE:
+    
+    This page contains:
+    - No tracking or analytics
+    - No external API calls
+    - No data collection beyond localStorage for navigation preferences
+    - No surveillance mechanisms
+    
+    All content emphasizes:
+    - Community rights and agency
+    - Protection from exploitation
+    - Informed consent and voluntary participation
+    - Privacy and safety
+    - Accountability mechanisms
+    - Local ownership and control
+    
+    Communities deserve respect, transparency, and programs that serve their needs, 
+    not the interests of external organizations.
+    -->
+</body>
+</html>
