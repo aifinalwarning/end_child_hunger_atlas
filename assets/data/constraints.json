@@ -1,0 +1,673 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-12",
+  "categories": [
+    {
+      "id": "political",
+      "name": "Political & Institutional",
+      "description": "Government support, policy environment, institutional capacity",
+      "color": "#7a6b9e",
+      "constraints": [
+        {
+          "id": "pol_001",
+          "name": "No political will",
+          "description": "Government does not prioritize nutrition; competing priorities dominate",
+          "severity": "high",
+          "implications": [
+            "Budget allocations will be minimal",
+            "Policy reforms unlikely to pass",
+            "Government ownership will be weak",
+            "Sustainability after donor exit is questionable"
+          ],
+          "mitigations": [
+            "Frame nutrition as economic investment (productivity, healthcare cost savings)",
+            "Align with existing priorities (education, agriculture, health)",
+            "Build coalitions with influential champions",
+            "Start with small wins that demonstrate value"
+          ],
+          "relatedConstraints": ["pol_002", "fin_001"]
+        },
+        {
+          "id": "pol_002",
+          "name": "Weak institutional capacity",
+          "description": "Government lacks staff, systems, or expertise to manage nutrition programs",
+          "severity": "high",
+          "implications": [
+            "Government cannot absorb or scale programs",
+            "Handover to government will fail",
+            "Parallel systems may be necessary",
+            "Technical assistance will be long-term"
+          ],
+          "mitigations": [
+            "Invest in capacity building from day one",
+            "Embed advisors in government structures",
+            "Use phased handover with clear milestones",
+            "Simplify systems for limited capacity contexts"
+          ],
+          "relatedConstraints": ["pol_001", "tech_001"]
+        },
+        {
+          "id": "pol_003",
+          "name": "Political instability",
+          "description": "Frequent government changes, policy reversals, or political interference",
+          "severity": "high",
+          "implications": [
+            "Long-term programs at risk",
+            "Policy continuity cannot be assumed",
+            "Staff turnover will be high",
+            "Multi-year commitments are risky"
+          ],
+          "mitigations": [
+            "Build relationships across political spectrum",
+            "Document programs well for institutional memory",
+            "Focus on technical rather than political levels",
+            "Plan for shorter program cycles"
+          ],
+          "relatedConstraints": ["pol_001", "fin_003"]
+        },
+        {
+          "id": "pol_004",
+          "name": "Poor coordination",
+          "description": "Multiple actors working in silos; no coordination mechanism or leadership",
+          "severity": "medium",
+          "implications": [
+            "Duplication and gaps in coverage",
+            "Inefficient use of resources",
+            "Confused messaging to beneficiaries",
+            "Data not shared or standardized"
+          ],
+          "mitigations": [
+            "Strengthen or establish coordination platforms",
+            "Share data and plans transparently",
+            "Use common targeting criteria",
+            "Establish clear sector leadership"
+          ],
+          "relatedConstraints": ["pol_002", "tech_004"]
+        },
+        {
+          "id": "pol_005",
+          "name": "Restrictive operating environment",
+          "description": "Government restrictions on NGOs, access, or programming approaches",
+          "severity": "high",
+          "implications": [
+            "Program flexibility limited",
+            "Access to certain areas restricted",
+            "Advocacy or rights-based approaches constrained",
+            "Registration and permissions burdensome"
+          ],
+          "mitigations": [
+            "Build strong government relationships",
+            "Use local partners where possible",
+            "Frame programs as technical rather than political",
+            "Plan for bureaucratic delays"
+          ],
+          "relatedConstraints": ["pol_003", "sec_001"]
+        }
+      ]
+    },
+    {
+      "id": "financial",
+      "name": "Financial & Resource",
+      "description": "Funding availability, budget constraints, resource mobilization",
+      "color": "#5a8bb8",
+      "constraints": [
+        {
+          "id": "fin_001",
+          "name": "Limited budget",
+          "description": "Insufficient funds to implement comprehensive programming",
+          "severity": "high",
+          "implications": [
+            "Must prioritize interventions carefully",
+            "Coverage will be limited",
+            "Quality vs. quantity tradeoffs",
+            "May need to phase implementation"
+          ],
+          "mitigations": [
+            "Focus on high-impact, cost-effective interventions",
+            "Prioritize geographic areas or populations",
+            "Leverage existing systems and platforms",
+            "Seek efficiencies through partnerships"
+          ],
+          "relatedConstraints": ["fin_002", "tech_003"]
+        },
+        {
+          "id": "fin_002",
+          "name": "Short funding cycles",
+          "description": "Annual or shorter funding cycles prevent long-term planning",
+          "severity": "medium",
+          "implications": [
+            "Cannot commit to multi-year programs",
+            "Sustainability planning difficult",
+            "Staff retention challenging",
+            "Beneficiaries face program interruptions"
+          ],
+          "mitigations": [
+            "Advocate with donors for multi-year funding",
+            "Build cost-sharing with government",
+            "Diversify funding sources",
+            "Plan phase-out from start"
+          ],
+          "relatedConstraints": ["fin_001", "pol_002"]
+        },
+        {
+          "id": "fin_003",
+          "name": "Donor restrictions",
+          "description": "Earmarked funding, rigid categories, or limited flexibility to adapt",
+          "severity": "medium",
+          "implications": [
+            "Cannot pivot based on learning",
+            "Overhead and admin costs constrained",
+            "May fund low-priority activities",
+            "Reporting burden without added value"
+          ],
+          "mitigations": [
+            "Negotiate flexibility clauses upfront",
+            "Document adaptation needs clearly",
+            "Seek unrestricted funding when possible",
+            "Align donor priorities with community needs"
+          ],
+          "relatedConstraints": ["fin_002", "pol_001"]
+        },
+        {
+          "id": "fin_004",
+          "name": "High operational costs",
+          "description": "Remote locations, insecurity, or inflation drive costs above budget",
+          "severity": "medium",
+          "implications": [
+            "Coverage reduced",
+            "Quality compromised",
+            "Cost per beneficiary higher than planned",
+            "Budget overruns likely"
+          ],
+          "mitigations": [
+            "Budget realistic contingencies (15-20%)",
+            "Use local procurement where possible",
+            "Simplify logistics chains",
+            "Leverage government infrastructure"
+          ],
+          "relatedConstraints": ["fin_001", "log_001"]
+        }
+      ]
+    },
+    {
+      "id": "technical",
+      "name": "Technical & Capacity",
+      "description": "Staff skills, technical systems, implementation capacity",
+      "color": "#6b9e6b",
+      "constraints": [
+        {
+          "id": "tech_001",
+          "name": "Lack of technical expertise",
+          "description": "Insufficient skilled staff (nutritionists, data specialists, etc.)",
+          "severity": "high",
+          "implications": [
+            "Program quality at risk",
+            "Cannot implement complex interventions",
+            "Monitoring and data quality poor",
+            "Training needs are substantial"
+          ],
+          "mitigations": [
+            "Hire technical advisors or consultants",
+            "Partner with organizations that have expertise",
+            "Invest in staff training early",
+            "Simplify interventions to match capacity"
+          ],
+          "relatedConstraints": ["tech_002", "pol_002"]
+        },
+        {
+          "id": "tech_002",
+          "name": "High staff turnover",
+          "description": "Frequent staff departures create knowledge loss and inconsistency",
+          "severity": "medium",
+          "implications": [
+            "Institutional memory lost",
+            "Training investments wasted",
+            "Program continuity disrupted",
+            "Quality fluctuates with personnel changes"
+          ],
+          "mitigations": [
+            "Document processes thoroughly",
+            "Offer competitive compensation",
+            "Create career development pathways",
+            "Build redundancy in critical roles"
+          ],
+          "relatedConstraints": ["tech_001", "fin_002"]
+        },
+        {
+          "id": "tech_003",
+          "name": "Weak monitoring systems",
+          "description": "Cannot track beneficiaries, outcomes, or program performance reliably",
+          "severity": "high",
+          "implications": [
+            "Cannot demonstrate impact",
+            "Program improvement difficult",
+            "Accountability to beneficiaries weak",
+            "Donor reporting challenging"
+          ],
+          "mitigations": [
+            "Invest in M&E systems from start",
+            "Use simple, paper-based systems if necessary",
+            "Train staff on data quality",
+            "Leverage existing health information systems"
+          ],
+          "relatedConstraints": ["tech_001", "tech_004"]
+        },
+        {
+          "id": "tech_004",
+          "name": "Technology limitations",
+          "description": "Poor internet, unreliable electricity, limited device access",
+          "severity": "medium",
+          "implications": [
+            "Digital systems may not work",
+            "Communication with field difficult",
+            "Data collection slowed",
+            "Remote management challenging"
+          ],
+          "mitigations": [
+            "Design offline-first systems",
+            "Use paper backups",
+            "Provide devices and power solutions",
+            "Accept technology limitations"
+          ],
+          "relatedConstraints": ["tech_003", "log_002"]
+        },
+        {
+          "id": "tech_005",
+          "name": "Language barriers",
+          "description": "Multiple languages needed; materials must be translated and adapted",
+          "severity": "medium",
+          "implications": [
+            "Communication with beneficiaries difficult",
+            "Training materials need translation",
+            "Quality of translation varies",
+            "Costs and time increase"
+          ],
+          "mitigations": [
+            "Hire multilingual staff",
+            "Develop visual materials",
+            "Use community interpreters",
+            "Test materials with target populations"
+          ],
+          "relatedConstraints": ["tech_001", "soc_002"]
+        }
+      ]
+    },
+    {
+      "id": "logistical",
+      "name": "Logistical & Infrastructure",
+      "description": "Supply chains, transport, storage, facility access",
+      "color": "#e8a87c",
+      "constraints": [
+        {
+          "id": "log_001",
+          "name": "Poor infrastructure",
+          "description": "Bad roads, no storage facilities, limited health facilities",
+          "severity": "high",
+          "implications": [
+            "Transport costs very high",
+            "Supply delivery unreliable",
+            "Program sites limited to accessible areas",
+            "Cold chain impossible in some locations"
+          ],
+          "mitigations": [
+            "Use pre-positioned stocks",
+            "Work with existing distribution networks",
+            "Plan around rainy seasons",
+            "Accept lower coverage in remote areas"
+          ],
+          "relatedConstraints": ["log_002", "fin_004"]
+        },
+        {
+          "id": "log_002",
+          "name": "Supply chain disruptions",
+          "description": "Delays in procurement, border closures, supplier unreliability",
+          "severity": "high",
+          "implications": [
+            "Stock-outs interrupt treatment",
+            "Program credibility damaged",
+            "Beneficiaries lose trust",
+            "Health outcomes compromised"
+          ],
+          "mitigations": [
+            "Order supplies 2-3 months early",
+            "Maintain buffer stocks",
+            "Develop backup suppliers",
+            "Use local procurement when possible"
+          ],
+          "relatedConstraints": ["log_001", "log_003"]
+        },
+        {
+          "id": "log_003",
+          "name": "Procurement delays",
+          "description": "Long lead times or bureaucratic procurement processes",
+          "severity": "medium",
+          "implications": [
+            "Program start delayed",
+            "Seasonal windows missed",
+            "Budget execution slow",
+            "Momentum lost"
+          ],
+          "mitigations": [
+            "Start procurement early",
+            "Use framework agreements when possible",
+            "Advocate for expedited processes",
+            "Plan programs around procurement timelines"
+          ],
+          "relatedConstraints": ["log_002", "pol_005"]
+        },
+        {
+          "id": "log_004",
+          "name": "Storage limitations",
+          "description": "Insufficient secure storage for supplies and commodities",
+          "severity": "medium",
+          "implications": [
+            "Supplies damaged or stolen",
+            "Must deliver smaller quantities more frequently",
+            "Temperature-sensitive items at risk",
+            "Costs increase"
+          ],
+          "mitigations": [
+            "Invest in storage upgrades",
+            "Use existing government warehouses",
+            "Implement inventory management systems",
+            "Accept just-in-time delivery constraints"
+          ],
+          "relatedConstraints": ["log_001", "log_002"]
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security & Access",
+      "description": "Conflict, insecurity, access restrictions, safety concerns",
+      "color": "#d97757",
+      "constraints": [
+        {
+          "id": "sec_001",
+          "name": "Active conflict",
+          "description": "Armed conflict restricts access and endangers staff and beneficiaries",
+          "severity": "critical",
+          "implications": [
+            "Staff safety at risk",
+            "Access unpredictable",
+            "Programs may be suspended",
+            "Beneficiaries displaced"
+          ],
+          "mitigations": [
+            "Use remote management where necessary",
+            "Partner with local organizations",
+            "Negotiate humanitarian access",
+            "Have evacuation plans ready"
+          ],
+          "relatedConstraints": ["sec_002", "sec_003"]
+        },
+        {
+          "id": "sec_002",
+          "name": "Restricted access",
+          "description": "Some areas off-limits due to security, government, or armed groups",
+          "severity": "high",
+          "implications": [
+            "Cannot reach all who need help",
+            "Coverage gaps",
+            "Equity concerns",
+            "May miss most vulnerable"
+          ],
+          "mitigations": [
+            "Use area-based targeting where safe",
+            "Work through local partners",
+            "Negotiate access with all parties",
+            "Be transparent about coverage limitations"
+          ],
+          "relatedConstraints": ["sec_001", "pol_005"]
+        },
+        {
+          "id": "sec_003",
+          "name": "Criminality / banditry",
+          "description": "High rates of theft, robbery, or targeting of aid workers",
+          "severity": "high",
+          "implications": [
+            "Staff at risk",
+            "Supplies stolen",
+            "Program costs increase for security",
+            "Some areas may be no-go"
+          ],
+          "mitigations": [
+            "Invest in security measures",
+            "Low-profile operations",
+            "Community-based protection",
+            "Avoid transporting high-value items"
+          ],
+          "relatedConstraints": ["sec_001", "log_002"]
+        },
+        {
+          "id": "sec_004",
+          "name": "Gender-based violence risks",
+          "description": "Women and girls face safety risks accessing services or working in program",
+          "severity": "high",
+          "implications": [
+            "Women may not access services",
+            "Female staff face risks",
+            "Program creates new vulnerabilities",
+            "Ethical obligations to protect"
+          ],
+          "mitigations": [
+            "Locate services close to communities",
+            "Offer services at safe times",
+            "Provide transportation if needed",
+            "Train staff on GBV prevention and referral"
+          ],
+          "relatedConstraints": ["sec_001", "soc_001"]
+        }
+      ]
+    },
+    {
+      "id": "social",
+      "name": "Social & Cultural",
+      "description": "Community acceptance, cultural practices, social dynamics",
+      "color": "#a8c5a0",
+      "constraints": [
+        {
+          "id": "soc_001",
+          "name": "Cultural barriers",
+          "description": "Local beliefs or practices conflict with nutrition interventions",
+          "severity": "medium",
+          "implications": [
+            "Community resistance to interventions",
+            "Low uptake of services",
+            "Stigma around malnutrition",
+            "Messaging may backfire"
+          ],
+          "mitigations": [
+            "Conduct formative research",
+            "Adapt interventions to cultural context",
+            "Work with trusted community leaders",
+            "Frame messages in culturally appropriate ways"
+          ],
+          "relatedConstraints": ["soc_002", "soc_003"]
+        },
+        {
+          "id": "soc_002",
+          "name": "Low community trust",
+          "description": "Communities distrust external actors or previous programs failed",
+          "severity": "high",
+          "implications": [
+            "Low participation",
+            "Rumors and misinformation spread",
+            "Difficulty recruiting staff or volunteers",
+            "Program sabotage possible"
+          ],
+          "mitigations": [
+            "Invest time in community engagement",
+            "Be transparent about program goals and limitations",
+            "Deliver on promises consistently",
+            "Include communities in decision-making"
+          ],
+          "relatedConstraints": ["soc_001", "soc_003"]
+        },
+        {
+          "id": "soc_003",
+          "name": "Gender inequality",
+          "description": "Women lack decision-making power or control over resources",
+          "severity": "high",
+          "implications": [
+            "Women cannot make feeding decisions",
+            "Resources diverted from children",
+            "Programs may reinforce inequalities",
+            "Women's time burden increased"
+          ],
+          "mitigations": [
+            "Engage men as well as women",
+            "Provide resources directly to women when possible",
+            "Address workload concerns",
+            "Don't assume women control household resources"
+          ],
+          "relatedConstraints": ["soc_001", "sec_004"]
+        },
+        {
+          "id": "soc_004",
+          "name": "Social exclusion",
+          "description": "Marginalized groups (minorities, disabled, etc.) excluded from services",
+          "severity": "medium",
+          "implications": [
+            "Miss most vulnerable",
+            "Reinforce inequalities",
+            "Programs seen as discriminatory",
+            "Ethical concerns"
+          ],
+          "mitigations": [
+            "Actively target marginalized groups",
+            "Remove barriers to access",
+            "Use inclusive language and imagery",
+            "Monitor coverage by vulnerability"
+          ],
+          "relatedConstraints": ["soc_002", "pol_004"]
+        },
+        {
+          "id": "soc_005",
+          "name": "Mobility / migration",
+          "description": "Populations mobile (nomadic, seasonal migration, displacement)",
+          "severity": "medium",
+          "implications": [
+            "Hard to track beneficiaries",
+            "Treatment continuity breaks",
+            "Fixed-site services don't work",
+            "Coverage estimates unreliable"
+          ],
+          "mitigations": [
+            "Use mobile service delivery",
+            "Coordinate across areas",
+            "Flexible targeting criteria",
+            "Accept incomplete treatment for some"
+          ],
+          "relatedConstraints": ["log_001", "tech_003"]
+        }
+      ]
+    },
+    {
+      "id": "environmental",
+      "name": "Environmental & Contextual",
+      "description": "Climate, seasonality, natural disasters, epidemic disease",
+      "color": "#7a9eb8",
+      "constraints": [
+        {
+          "id": "env_001",
+          "name": "Climate / weather extremes",
+          "description": "Droughts, floods, or extreme heat affect program delivery and nutrition",
+          "severity": "high",
+          "implications": [
+            "Food insecurity worsens",
+            "Access cut off seasonally",
+            "Malnutrition peaks during lean season",
+            "Programs disrupted"
+          ],
+          "mitigations": [
+            "Pre-position supplies before rains",
+            "Scale up during lean seasons",
+            "Integrate climate adaptation",
+            "Link with food security programs"
+          ],
+          "relatedConstraints": ["env_002", "log_001"]
+        },
+        {
+          "id": "env_002",
+          "name": "Seasonal variation",
+          "description": "Malnutrition, disease burden, and access vary significantly by season",
+          "severity": "medium",
+          "implications": [
+            "Need varies throughout year",
+            "Staff workload peaks",
+            "Supplies must match seasonality",
+            "Coverage drops in difficult seasons"
+          ],
+          "mitigations": [
+            "Plan for seasonal peaks",
+            "Scale program intensity seasonally",
+            "Use seasonal targeting",
+            "Communicate seasonal patterns to stakeholders"
+          ],
+          "relatedConstraints": ["env_001", "env_003"]
+        },
+        {
+          "id": "env_003",
+          "name": "Disease outbreaks",
+          "description": "Epidemics (measles, cholera, etc.) worsen malnutrition and disrupt programs",
+          "severity": "high",
+          "implications": [
+            "Malnutrition rates spike",
+            "Health services overwhelmed",
+            "Program staff diverted",
+            "Supply chains disrupted"
+          ],
+          "mitigations": [
+            "Integrate with disease surveillance",
+            "Have surge capacity plans",
+            "Strengthen linkages with health services",
+            "Advocate for preventive measures (vaccination)"
+          ],
+          "relatedConstraints": ["env_002", "sec_001"]
+        },
+        {
+          "id": "env_004",
+          "name": "Food insecurity",
+          "description": "Chronic or acute food insecurity limits household food availability",
+          "severity": "critical",
+          "implications": [
+            "Nutrition outcomes limited without addressing food access",
+            "Treatment alone insufficient",
+            "Relapse rates high",
+            "Prevention impossible"
+          ],
+          "mitigations": [
+            "Combine nutrition with food assistance",
+            "Link to livelihoods programs",
+            "Advocate for food security interventions",
+            "Focus on treatment where prevention impossible"
+          ],
+          "relatedConstraints": ["env_001", "fin_001"]
+        }
+      ]
+    }
+  ],
+  "severityLevels": {
+    "critical": {
+      "label": "Critical",
+      "color": "#b91c1c",
+      "description": "Fundamental barrier that prevents most programs from functioning. Requires major mitigation or alternative approaches."
+    },
+    "high": {
+      "label": "High",
+      "color": "#d97757",
+      "description": "Major barrier that significantly limits program effectiveness. Requires substantial mitigation efforts."
+    },
+    "medium": {
+      "label": "Medium",
+      "color": "#e8bc7c",
+      "description": "Moderate barrier that complicates implementation. Can be managed with planning and resources."
+    },
+    "low": {
+      "label": "Low",
+      "color": "#a8c5a0",
+      "description": "Minor barrier that causes inconvenience but doesn't fundamentally limit programs."
+    }
+  }
+}
