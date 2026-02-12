@@ -1,0 +1,459 @@
+{
+  "version": "1.0",
+  "description": "Configuration for healing wave particle effects - gentle, flowing animations for backgrounds and transitions",
+  "waves": {
+    "type": "sine",
+    "count": 5,
+    "amplitude": {
+      "min": 30,
+      "max": 80,
+      "variance": 0.3
+    },
+    "wavelength": {
+      "min": 200,
+      "max": 400,
+      "variance": 0.2
+    },
+    "speed": {
+      "min": 0.0005,
+      "max": 0.002,
+      "direction": "horizontal"
+    },
+    "offset": {
+      "vertical": 50,
+      "horizontal": 0,
+      "randomize": true
+    },
+    "responsive": {
+      "mobile": {
+        "waveCount": 3,
+        "amplitudeMultiplier": 0.7,
+        "particleCount": 150
+      },
+      "tablet": {
+        "waveCount": 4,
+        "amplitudeMultiplier": 0.85,
+        "particleCount": 250
+      },
+      "desktop": {
+        "waveCount": 5,
+        "amplitudeMultiplier": 1.0,
+        "particleCount": 400
+      }
+    }
+  },
+  "particles": {
+    "count": 400,
+    "size": {
+      "min": 1.5,
+      "max": 4,
+      "default": 2.5,
+      "pulseEffect": true
+    },
+    "shape": "circle",
+    "color": {
+      "palette": "healing",
+      "colors": [
+        "#a8c5a0",
+        "#8ba888",
+        "#7a9eb8",
+        "#e8dcc4"
+      ],
+      "blendMode": "normal",
+      "opacity": {
+        "min": 0.2,
+        "max": 0.7,
+        "default": 0.5,
+        "fadeDistance": 100
+      }
+    },
+    "distribution": {
+      "pattern": "wave-aligned",
+      "spacing": {
+        "horizontal": 15,
+        "vertical": 30
+      },
+      "jitter": {
+        "horizontal": 5,
+        "vertical": 10
+      }
+    },
+    "glow": {
+      "enabled": true,
+      "radius": 6,
+      "intensity": 0.4,
+      "color": "inherit"
+    },
+    "trail": {
+      "enabled": false,
+      "length": 20,
+      "opacity": 0.3
+    }
+  },
+  "flow": {
+    "enabled": true,
+    "pattern": "organic",
+    "turbulence": {
+      "enabled": true,
+      "scale": 0.005,
+      "strength": 2,
+      "octaves": 3
+    },
+    "vortex": {
+      "enabled": false,
+      "centers": [],
+      "strength": 0.5
+    },
+    "edgeRepel": {
+      "enabled": true,
+      "strength": 0.3,
+      "distance": 50
+    }
+  },
+  "animation": {
+    "fps": 60,
+    "waveMovement": {
+      "enabled": true,
+      "speed": 0.0008,
+      "direction": "right-to-left",
+      "smoothing": 0.1
+    },
+    "particleFlow": {
+      "enabled": true,
+      "followWaves": true,
+      "independence": 0.3,
+      "speed": 0.5
+    },
+    "pulseEffect": {
+      "enabled": true,
+      "speed": 0.003,
+      "intensity": 0.15,
+      "synchronized": false
+    },
+    "breathingEffect": {
+      "enabled": true,
+      "speed": 0.001,
+      "amplitudeVariation": 0.1,
+      "wavelengthVariation": 0.05
+    },
+    "reducedMotion": {
+      "respectPreference": true,
+      "fallbackSpeed": 0.0002,
+      "disableTurbulence": true,
+      "simplifyWaves": true
+    }
+  },
+  "interaction": {
+    "mouseEffect": {
+      "enabled": true,
+      "type": "ripple",
+      "radius": 120,
+      "strength": 0.5,
+      "decay": 0.95
+    },
+    "touchEffect": {
+      "enabled": true,
+      "multiTouch": false,
+      "radius": 100,
+      "strength": 0.4
+    },
+    "scrollEffect": {
+      "enabled": true,
+      "parallax": {
+        "enabled": true,
+        "speed": 0.3,
+        "direction": "vertical"
+      },
+      "waveShift": {
+        "enabled": true,
+        "sensitivity": 0.05
+      }
+    }
+  },
+  "lighting": {
+    "ambient": {
+      "enabled": true,
+      "intensity": 0.7,
+      "color": "#ffffff"
+    },
+    "gradient": {
+      "enabled": true,
+      "direction": "vertical",
+      "stops": [
+        { "position": 0, "color": "#ffffff", "opacity": 0.8 },
+        { "position": 0.5, "color": "#f5f5f5", "opacity": 0.6 },
+        { "position": 1, "color": "#e8e8e8", "opacity": 0.4 }
+      ]
+    },
+    "depthShading": {
+      "enabled": true,
+      "nearBrightness": 1,
+      "farBrightness": 0.5
+    }
+  },
+  "layers": {
+    "count": 3,
+    "configs": [
+      {
+        "name": "foreground",
+        "zIndex": 3,
+        "particleCount": 100,
+        "speed": 1.2,
+        "opacity": 0.8,
+        "colors": ["#a8c5a0", "#8ba888"]
+      },
+      {
+        "name": "midground",
+        "zIndex": 2,
+        "particleCount": 150,
+        "speed": 1.0,
+        "opacity": 0.6,
+        "colors": ["#7a9eb8", "#8ba888"]
+      },
+      {
+        "name": "background",
+        "zIndex": 1,
+        "particleCount": 150,
+        "speed": 0.8,
+        "opacity": 0.4,
+        "colors": ["#e8dcc4", "#f9f9f7"]
+      }
+    ]
+  },
+  "connections": {
+    "enabled": true,
+    "type": "flowing",
+    "maxDistance": 60,
+    "lineWidth": 1,
+    "style": "curved",
+    "color": {
+      "type": "gradient",
+      "colors": ["#7a9eb8", "#a8c5a0"],
+      "opacity": 0.2
+    },
+    "flow": {
+      "enabled": true,
+      "speed": 0.01,
+      "direction": "bidirectional"
+    },
+    "maxConnections": 2
+  },
+  "background": {
+    "color": "transparent",
+    "gradient": {
+      "enabled": true,
+      "type": "radial",
+      "colors": [
+        "rgba(249, 249, 247, 0.0)",
+        "rgba(232, 220, 196, 0.3)"
+      ],
+      "position": {
+        "x": "50%",
+        "y": "50%"
+      }
+    },
+    "overlay": {
+      "enabled": false,
+      "color": "#ffffff",
+      "opacity": 0.1
+    }
+  },
+  "performance": {
+    "adaptiveQuality": {
+      "enabled": true,
+      "targetFps": 30,
+      "checkInterval": 2000,
+      "thresholds": {
+        "high": 55,
+        "medium": 40,
+        "low": 25
+      }
+    },
+    "qualityReduction": {
+      "particleCount": {
+        "high": 1.0,
+        "medium": 0.7,
+        "low": 0.5
+      },
+      "waveCount": {
+        "high": 1.0,
+        "medium": 0.8,
+        "low": 0.6
+      },
+      "connections": {
+        "high": true,
+        "medium": true,
+        "low": false
+      },
+      "glow": {
+        "high": true,
+        "medium": true,
+        "low": false
+      }
+    },
+    "pauseWhenHidden": true,
+    "throttleWhenInactive": true,
+    "useRequestAnimationFrame": true
+  },
+  "accessibility": {
+    "reducedMotion": {
+      "detectPreference": true,
+      "staticAlternative": {
+        "enabled": true,
+        "type": "static-gradient",
+        "preserveColors": true
+      },
+      "minimalAnimation": {
+        "enabled": true,
+        "speedMultiplier": 0.1,
+        "simplifyWaves": true
+      }
+    },
+    "highContrast": {
+      "detectPreference": true,
+      "alternatePalette": {
+        "colors": [
+          "#2d3e2f",
+          "#5a7c5e",
+          "#a8c5a0",
+          "#ffffff"
+        ],
+        "increaseOpacity": 0.2
+      }
+    },
+    "screenReaderSupport": {
+      "ariaLabel": "Decorative healing wave animation",
+      "ariaHidden": true
+    }
+  },
+  "presets": {
+    "gentle": {
+      "name": "Gentle Healing",
+      "description": "Soft, slow waves for calm backgrounds",
+      "waveCount": 3,
+      "particleCount": 250,
+      "speed": 0.0005,
+      "amplitude": 40,
+      "colors": ["#a8c5a0", "#e8dcc4"],
+      "turbulence": 0.002
+    },
+    "flowing": {
+      "name": "Flowing Energy",
+      "description": "Medium-speed waves with organic movement",
+      "waveCount": 4,
+      "particleCount": 350,
+      "speed": 0.001,
+      "amplitude": 60,
+      "colors": ["#8ba888", "#7a9eb8", "#a8c5a0"],
+      "turbulence": 0.005
+    },
+    "dynamic": {
+      "name": "Dynamic Waves",
+      "description": "Faster, more energetic wave patterns",
+      "waveCount": 5,
+      "particleCount": 400,
+      "speed": 0.0015,
+      "amplitude": 70,
+      "colors": ["#7a9eb8", "#8ba888", "#a8c5a0", "#e8dcc4"],
+      "turbulence": 0.008
+    },
+    "minimal": {
+      "name": "Minimal Calm",
+      "description": "Very subtle, performance-optimized",
+      "waveCount": 2,
+      "particleCount": 150,
+      "speed": 0.0003,
+      "amplitude": 30,
+      "colors": ["#e8dcc4", "#f9f9f7"],
+      "turbulence": 0.001,
+      "disableConnections": true
+    },
+    "peaceful": {
+      "name": "Peaceful Flow",
+      "description": "Balanced, meditative movement",
+      "waveCount": 4,
+      "particleCount": 300,
+      "speed": 0.0008,
+      "amplitude": 50,
+      "colors": ["#a8c5a0", "#8ba888", "#e8dcc4"],
+      "turbulence": 0.003,
+      "breathingEffect": true
+    }
+  },
+  "useCases": {
+    "sectionBackground": {
+      "preset": "gentle",
+      "opacity": 0.6,
+      "blendMode": "normal",
+      "zIndex": -1
+    },
+    "headerHero": {
+      "preset": "flowing",
+      "opacity": 0.8,
+      "fullWidth": true,
+      "height": "60vh"
+    },
+    "loadingState": {
+      "preset": "peaceful",
+      "opacity": 0.9,
+      "centerFocus": true,
+      "pulseEffect": true
+    },
+    "transition": {
+      "preset": "dynamic",
+      "opacity": 0.7,
+      "duration": 800,
+      "fadeIn": true,
+      "fadeOut": true
+    },
+    "ambientBackground": {
+      "preset": "minimal",
+      "opacity": 0.3,
+      "fixedPosition": true,
+      "fullViewport": true
+    }
+  },
+  "themes": {
+    "default": {
+      "name": "Atlas Default",
+      "colors": ["#a8c5a0", "#8ba888", "#7a9eb8", "#e8dcc4"],
+      "background": "rgba(249, 249, 247, 0.5)"
+    },
+    "earth": {
+      "name": "Earth Tones",
+      "colors": ["#6b9e6b", "#8ba888", "#5a7c5e", "#a8c5a0"],
+      "background": "rgba(232, 220, 196, 0.3)"
+    },
+    "ocean": {
+      "name": "Ocean Depths",
+      "colors": ["#5a9e9e", "#7a9eb8", "#8ba888", "#a8c5a0"],
+      "background": "rgba(122, 158, 184, 0.1)"
+    },
+    "warmth": {
+      "name": "Warm Healing",
+      "colors": ["#e8dcc4", "#e8a87c", "#a8c5a0", "#f9f9f7"],
+      "background": "rgba(232, 220, 196, 0.4)"
+    },
+    "peace": {
+      "name": "Peaceful Presence",
+      "colors": ["#e8dcc4", "#a8c5a0", "#f9f9f7", "#8ba888"],
+      "background": "rgba(249, 249, 247, 0.6)"
+    }
+  },
+  "documentation": {
+    "usage": "Healing wave animations for ambient backgrounds, section dividers, and transitional elements throughout the Atlas.",
+    "philosophy": "Gentle, flowing movement that evokes calm and healing without distraction. Respects reduced motion preferences.",
+    "implementation": "Can be used as full-page backgrounds, section backgrounds, or contained within specific elements.",
+    "performance": "Optimized for continuous display. Automatically reduces quality on low-performance devices.",
+    "accessibility": "Always respects prefers-reduced-motion. Provides static gradient alternative.",
+    "customization": "Use presets for quick setup or customize individual parameters for specific use cases.",
+    "colorPalette": "Uses Atlas healing-green color family. All colors tested for sufficient contrast with text.",
+    "bestPractices": [
+      "Use 'gentle' or 'minimal' presets for pages with heavy text content",
+      "Reserve 'dynamic' preset for hero sections or splash screens",
+      "Keep opacity at 0.3-0.6 for backgrounds to ensure text readability",
+      "Test with reduced motion enabled to ensure graceful degradation",
+      "Consider using static alternative for users who prefer no animation"
+    ]
+  }
+}
