@@ -1,0 +1,1564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Practical metrics and measurement framework builder. Design realistic M&E systems, select appropriate indicators, and create measurement plans that balance rigor with feasibility.">
+    <title>Metrics Dashboard Builder | Feed Children ASAP Atlas</title>
+    
+    <style>
+        /* ============================================
+           RESET & BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --earth-dark: #2d3e2f;
+            --earth-medium: #5a7c5e;
+            --earth-light: #8ba888;
+            --healing-green: #a8c5a0;
+            --warm-sand: #e8dcc4;
+            --soft-blue: #7a9eb8;
+            --metrics-blue: #5a8bb8;
+            --impact-green: #6b9e6b;
+            --warning-orange: #e8a87c;
+            --neutral-gray: #6b7280;
+            --background-light: #f9f9f7;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --card-background: #ffffff;
+            --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --border-radius: 8px;
+            --transition-smooth: all 0.3s ease;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--background-light);
+            overflow-x: hidden;
+        }
+        
+        /* ============================================
+           TYPOGRAPHY
+           ============================================ */
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+        }
+        
+        h1 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            color: var(--earth-dark);
+        }
+        
+        h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--earth-medium);
+            margin-top: 2rem;
+        }
+        
+        h3 {
+            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+            color: var(--earth-medium);
+            margin-top: 1.5rem;
+        }
+        
+        h4 {
+            font-size: clamp(1.125rem, 2vw, 1.25rem);
+            color: var(--earth-dark);
+            margin-top: 1rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        label {
+            display: block;
+            font-weight: 500;
+            color: var(--earth-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* ============================================
+           LAYOUT
+           ============================================ */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .narrow-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        .top-nav {
+            background: var(--earth-dark);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .nav-home {
+            color: var(--warm-sand);
+            font-weight: 600;
+            font-size: 1.125rem;
+            text-decoration: none;
+        }
+        
+        .nav-home:hover {
+            color: var(--healing-green);
+        }
+        
+        .tool-name {
+            color: var(--warm-sand);
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        /* ============================================
+           HEADER
+           ============================================ */
+        header {
+            background: linear-gradient(135deg, var(--metrics-blue) 0%, var(--impact-green) 100%);
+            padding: 3rem 0 2rem;
+            color: white;
+        }
+        
+        .tool-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.25);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 400;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* ============================================
+           INTERFACE SECTIONS
+           ============================================ */
+        .interface-section {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        /* ============================================
+           WARNING BOX
+           ============================================ */
+        .warning-box {
+            background: rgba(232, 168, 124, 0.15);
+            border: 2px solid var(--warning-orange);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .warning-box h3 {
+            color: var(--warning-orange);
+            margin-top: 0;
+        }
+        
+        /* ============================================
+           TABS
+           ============================================ */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 2px solid var(--earth-light);
+            margin-bottom: 2rem;
+        }
+        
+        .tab {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--neutral-gray);
+            border-bottom: 3px solid transparent;
+            transition: var(--transition-smooth);
+        }
+        
+        .tab.active {
+            color: var(--metrics-blue);
+            border-bottom-color: var(--metrics-blue);
+        }
+        
+        .tab:hover {
+            color: var(--earth-medium);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* ============================================
+           INDICATOR TYPES
+           ============================================ */
+        .indicator-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .type-card {
+            background: var(--background-light);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            border-top: 4px solid;
+            transition: var(--transition-smooth);
+        }
+        
+        .type-card.process {
+            border-top-color: var(--soft-blue);
+        }
+        
+        .type-card.output {
+            border-top-color: var(--healing-green);
+        }
+        
+        .type-card.outcome {
+            border-top-color: var(--impact-green);
+        }
+        
+        .type-card.impact {
+            border-top-color: var(--metrics-blue);
+        }
+        
+        .type-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+        
+        .type-name {
+            font-weight: 600;
+            color: var(--earth-dark);
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .type-description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .type-example {
+            font-size: 0.875rem;
+            color: var(--earth-medium);
+            font-style: italic;
+        }
+        
+        /* ============================================
+           INDICATOR LIBRARY
+           ============================================ */
+        .indicator-library {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .indicator-item {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-subtle);
+            border-left: 4px solid var(--metrics-blue);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+        
+        .indicator-item:hover {
+            box-shadow: var(--shadow-medium);
+            transform: translateX(4px);
+        }
+        
+        .indicator-item.selected {
+            border-left-color: var(--impact-green);
+            background: linear-gradient(135deg, rgba(107, 158, 107, 0.1) 0%, var(--card-background) 100%);
+        }
+        
+        .indicator-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .indicator-name {
+            font-weight: 600;
+            color: var(--earth-dark);
+            font-size: 1.05rem;
+            flex: 1;
+        }
+        
+        .indicator-badges {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .indicator-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        
+        .badge-type {
+            background: var(--soft-blue);
+            color: white;
+        }
+        
+        .badge-ease {
+            background: var(--healing-green);
+            color: white;
+        }
+        
+        .badge-cost {
+            background: var(--warning-orange);
+            color: white;
+        }
+        
+        .indicator-definition {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+        
+        .indicator-details {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--earth-light);
+            font-size: 0.9rem;
+        }
+        
+        .indicator-item.expanded .indicator-details {
+            display: block;
+        }
+        
+        .detail-row {
+            margin-bottom: 0.75rem;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: var(--earth-medium);
+            margin-bottom: 0.25rem;
+        }
+        
+        .detail-content {
+            color: var(--text-secondary);
+        }
+        
+        /* ============================================
+           SELECTED INDICATORS
+           ============================================ */
+        .selected-indicators {
+            background: var(--warm-sand);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .selected-indicators h3 {
+            margin-top: 0;
+            color: var(--earth-dark);
+        }
+        
+        .selected-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        
+        .selected-indicator-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: white;
+            border-radius: 6px;
+            gap: 1rem;
+        }
+        
+        .selected-indicator-info {
+            flex: 1;
+        }
+        
+        .selected-indicator-name {
+            font-weight: 600;
+            color: var(--earth-dark);
+            margin-bottom: 0.25rem;
+        }
+        
+        .selected-indicator-type {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .remove-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.25rem;
+            opacity: 0.6;
+            transition: var(--transition-smooth);
+            padding: 0.25rem;
+        }
+        
+        .remove-btn:hover {
+            opacity: 1;
+            color: var(--warning-orange);
+        }
+        
+        /* ============================================
+           MEASUREMENT PLAN
+           ============================================ */
+        .measurement-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .measurement-table th {
+            background: var(--metrics-blue);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        .measurement-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .measurement-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .measurement-table tr:hover {
+            background: var(--background-light);
+        }
+        
+        /* ============================================
+           FORM ELEMENTS
+           ============================================ */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--earth-light);
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: var(--transition-smooth);
+        }
+        
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--metrics-blue);
+            box-shadow: 0 0 0 3px rgba(90, 139, 184, 0.1);
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        /* ============================================
+           BUTTONS
+           ============================================ */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            font-family: inherit;
+        }
+        
+        .btn-primary {
+            background: var(--metrics-blue);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--impact-green);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .btn-primary:disabled {
+            background: var(--neutral-gray);
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-secondary {
+            background: var(--earth-light);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--earth-medium);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--earth-light);
+            color: var(--earth-medium);
+        }
+        
+        .btn-outline:hover {
+            background: var(--background-light);
+        }
+        
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+        
+        .btn-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        /* ============================================
+           EMPTY STATE
+           ============================================ */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--neutral-gray);
+        }
+        
+        .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .interface-section {
+                padding: 1.5rem;
+            }
+            
+            .indicator-types {
+                grid-template-columns: 1fr;
+            }
+            
+            .tabs {
+                flex-wrap: wrap;
+            }
+            
+            .tab {
+                flex: 1;
+                min-width: 100px;
+                font-size: 0.875rem;
+                padding: 0.5rem 1rem;
+            }
+            
+            .btn-actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .measurement-table {
+                font-size: 0.8rem;
+            }
+            
+            .measurement-table th,
+            .measurement-table td {
+                padding: 0.75rem 0.5rem;
+            }
+        }
+        
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: var(--earth-dark);
+            color: var(--warm-sand);
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            text-align: center;
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+        
+        .footer-content a {
+            color: var(--healing-green);
+            text-decoration: none;
+        }
+        
+        .footer-content a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="top-nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="../index.html" class="nav-home">← Feed Children ASAP Atlas</a>
+                <span class="tool-name">Metrics Dashboard Builder</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header>
+        <div class="narrow-container">
+            <span class="tool-badge">📊 Interactive Tool</span>
+            <h1>Metrics Dashboard Builder</h1>
+            <p class="subtitle">
+                Design practical M&E systems that balance rigor with feasibility. Select appropriate indicators, 
+                define measurement methods, and create realistic data collection plans without excessive burden.
+            </p>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <div class="container">
+            
+            <!-- WARNING BOX -->
+            <div class="warning-box">
+                <h3>⚖️ Balance Rigor with Feasibility</h3>
+                <p><strong>Avoid measurement theater:</strong> Don't create elaborate M&E systems that look impressive but are impossible to implement. Good measurement is:</p>
+                <ul style="margin-left: 1.5rem; color: var(--text-secondary);">
+                    <li><strong>Actionable:</strong> You'll actually use the data to make decisions</li>
+                    <li><strong>Feasible:</strong> You have capacity and resources to collect it reliably</li>
+                    <li><strong>Essential:</strong> It answers questions you genuinely need answered</li>
+                    <li><strong>Ethical:</strong> Benefits to learning outweigh burden on participants</li>
+                </ul>
+                <p style="margin-top: 1rem;"><strong>Default to measuring less, better.</strong> Five indicators tracked reliably beat twenty tracked poorly.</p>
+            </div>
+
+            <!-- TABS -->
+            <div class="tabs">
+                <button class="tab active" data-tab="learn">Understanding Indicators</button>
+                <button class="tab" data-tab="select">Select Indicators</button>
+                <button class="tab" data-tab="plan">Build Measurement Plan</button>
+                <button class="tab" data-tab="dashboard">View Dashboard</button>
+            </div>
+
+            <!-- TAB: UNDERSTANDING INDICATORS -->
+            <div class="tab-content active" id="learn-tab">
+                <div class="interface-section">
+                    <h2>Understanding Types of Indicators</h2>
+                    <p>Different indicators measure different things. Choose the right type for what you want to learn.</p>
+                    
+                    <div class="indicator-types">
+                        <div class="type-card process">
+                            <span class="type-icon">⚙️</span>
+                            <div class="type-name">Process Indicators</div>
+                            <div class="type-description">
+                                Measure what activities you're doing and how well you're doing them. Track implementation quality and fidelity.
+                            </div>
+                            <div class="type-example">
+                                Example: "% of scheduled distributions completed on time"
+                            </div>
+                        </div>
+                        
+                        <div class="type-card output">
+                            <span class="type-icon">📦</span>
+                            <div class="type-name">Output Indicators</div>
+                            <div class="type-description">
+                                Measure what you directly produce or deliver. Count beneficiaries reached, services provided, or goods distributed.
+                            </div>
+                            <div class="type-example">
+                                Example: "Number of children receiving supplementary food"
+                            </div>
+                        </div>
+                        
+                        <div class="type-card outcome">
+                            <span class="type-icon">🎯</span>
+                            <div class="type-name">Outcome Indicators</div>
+                            <div class="type-description">
+                                Measure short to medium-term changes in beneficiaries' behavior, knowledge, or status resulting from your program.
+                            </div>
+                            <div class="type-example">
+                                Example: "% of mothers exclusively breastfeeding to 6 months"
+                            </div>
+                        </div>
+                        
+                        <div class="type-card impact">
+                            <span class="type-icon">🌟</span>
+                            <div class="type-name">Impact Indicators</div>
+                            <div class="type-description">
+                                Measure long-term, fundamental changes in well-being. Often contributed to by multiple programs, hard to attribute.
+                            </div>
+                            <div class="type-example">
+                                Example: "Under-5 stunting rate in target communities"
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: var(--background-light); padding: 1.5rem; border-radius: var(--border-radius); margin-top: 2rem;">
+                        <h3>🎯 Which Type Should You Focus On?</h3>
+                        <p><strong>Most programs should prioritize output and outcome indicators.</strong></p>
+                        <ul style="margin-left: 1.5rem; color: var(--text-secondary);">
+                            <li><strong>Outputs</strong> are easiest to measure and prove you're doing what you said you'd do</li>
+                            <li><strong>Outcomes</strong> show whether your program is making a difference</li>
+                            <li><strong>Process</strong> indicators help you improve implementation quality</li>
+                            <li><strong>Impact</strong> is hardest to measure and attribute; often requires evaluation studies rather than routine monitoring</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="btn-actions">
+                        <button class="btn btn-primary" onclick="switchTab('select')">Next: Select Your Indicators →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: SELECT INDICATORS -->
+            <div class="tab-content" id="select-tab">
+                <div class="interface-section">
+                    <h2>Select Indicators for Your Program</h2>
+                    <p>Click indicators to add to your measurement plan. Focus on 5-10 indicators you can realistically track.</p>
+                    
+                    <div class="form-group">
+                        <label for="program-name-select">Program Name</label>
+                        <input type="text" id="program-name-select" placeholder="e.g., Community Nutrition Program">
+                    </div>
+                    
+                    <div class="selected-indicators" id="selected-basket">
+                        <h3>Selected Indicators (<span id="indicator-count">0</span>)</h3>
+                        <div class="selected-list" id="selected-list"></div>
+                    </div>
+                    
+                    <h3>Indicator Library</h3>
+                    <p>Browse and select from common nutrition program indicators. Click "Details" to see measurement guidance.</p>
+                    
+                    <div class="indicator-library" id="indicator-library"></div>
+                    
+                    <div class="btn-actions">
+                        <button class="btn btn-outline" onclick="switchTab('learn')">← Back</button>
+                        <button class="btn btn-primary" onclick="switchTab('plan')" id="next-to-plan" disabled>Next: Build Measurement Plan →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: MEASUREMENT PLAN -->
+            <div class="tab-content" id="plan-tab">
+                <div class="interface-section">
+                    <h2>Build Your Measurement Plan</h2>
+                    <p>Define when, how, and who will collect data for each indicator.</p>
+                    
+                    <div class="form-group">
+                        <label for="measurement-frequency">Overall Data Collection Frequency</label>
+                        <select id="measurement-frequency">
+                            <option value="">Select frequency</option>
+                            <option value="monthly">Monthly (high burden, use sparingly)</option>
+                            <option value="quarterly">Quarterly (most common)</option>
+                            <option value="biannual">Twice per year (baseline + endline)</option>
+                            <option value="annual">Annual only</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="data-responsibility">Who is Responsible for Data Collection?</label>
+                        <input type="text" id="data-responsibility" placeholder="e.g., M&E Officer, Program Staff, External Evaluator">
+                    </div>
+                    
+                    <h3>Measurement Plan Table</h3>
+                    <div style="overflow-x: auto;">
+                        <table class="measurement-table" id="measurement-plan-table"></table>
+                    </div>
+                    
+                    <div class="btn-actions">
+                        <button class="btn btn-outline" onclick="switchTab('select')">← Back</button>
+                        <button class="btn btn-secondary" onclick="exportMeasurementPlan()">📤 Export Measurement Plan</button>
+                        <button class="btn btn-primary" onclick="switchTab('dashboard')">Next: View Dashboard →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: DASHBOARD -->
+            <div class="tab-content" id="dashboard-tab">
+                <div class="interface-section">
+                    <h2>Your Metrics Dashboard</h2>
+                    <p>Summary of your measurement framework and key reminders.</p>
+                    
+                    <div id="dashboard-summary"></div>
+                    
+                    <div style="background: var(--background-light); padding: 1.5rem; border-radius: var(--border-radius); margin-top: 2rem;">
+                        <h3>📋 Implementation Checklist</h3>
+                        <ul style="list-style: none; padding-left: 0;">
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(0,0,0,0.05);">☐ Train staff on indicator definitions and data collection procedures</li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(0,0,0,0.05);">☐ Develop/adapt data collection forms based on selected indicators</li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(0,0,0,0.05);">☐ Set up data storage system (paper files, database, or spreadsheets)</li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(0,0,0,0.05);">☐ Establish data quality checks and validation procedures</li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(0,0,0,0.05);">☐ Create data analysis and reporting templates</li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(0,0,0,0.05);">☐ Schedule regular data review meetings with program team</li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(0,0,0,0.05);">☐ Conduct baseline measurements before program starts (if applicable)</li>
+                            <li style="padding: 0.5rem 0;">☐ Document any changes to indicators or methods over time</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: rgba(107, 158, 107, 0.15); padding: 1.5rem; border-radius: var(--border-radius); margin-top: 2rem; border-left: 4px solid var(--impact-green);">
+                        <h3 style="color: var(--impact-green); margin-top: 0;">💡 Using Your Data Well</h3>
+                        <p><strong>Data is only useful if you act on it.</strong> Schedule regular review sessions where you:</p>
+                        <ol style="margin-left: 1.5rem; color: var(--text-secondary);">
+                            <li>Look at trends over time, not just single data points</li>
+                            <li>Ask "why?" when numbers are surprising or concerning</li>
+                            <li>Make concrete decisions based on what you learn</li>
+                            <li>Adjust your program when data shows something isn't working</li>
+                            <li>Share findings with staff and beneficiaries transparently</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="btn-actions">
+                        <button class="btn btn-outline" onclick="switchTab('plan')">← Back</button>
+                        <button class="btn btn-secondary" onclick="exportFullFramework()">📤 Export Full M&E Framework</button>
+                        <button class="btn btn-primary" onclick="resetTool()">🔄 Start Over</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>
+                    <strong>Metrics Dashboard Builder</strong> | Part of Feed Children ASAP Atlas<br>
+                    <a href="../governance.html">Zero Harm Policy</a> • 
+                    <a href="../index.html">Return to Atlas</a>
+                </p>
+                <p style="margin-top: 1rem; font-size: 0.8rem;">
+                    All data stored locally in your browser. No tracking. No external servers.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // ============================================
+        // DATA: INDICATOR LIBRARY
+        // ============================================
+        const indicatorLibrary = [
+            // OUTPUT INDICATORS
+            {
+                id: 'output-beneficiaries',
+                name: 'Number of beneficiaries reached',
+                type: 'Output',
+                definition: 'Total number of unique individuals receiving program services/goods',
+                dataSource: 'Program registration records, distribution logs',
+                collectionMethod: 'Count from enrollment/attendance records',
+                frequency: 'Monthly or quarterly',
+                ease: 'Easy',
+                cost: 'Low'
+            },
+            {
+                id: 'output-distributions',
+                name: 'Number of food distributions completed',
+                type: 'Output',
+                definition: 'Count of scheduled distribution events successfully conducted',
+                dataSource: 'Distribution logs, staff reports',
+                collectionMethod: 'Count distribution events, record date and location',
+                frequency: 'Per distribution (ongoing)',
+                ease: 'Easy',
+                cost: 'Low'
+            },
+            {
+                id: 'output-sessions',
+                name: 'Number of nutrition education sessions conducted',
+                type: 'Output',
+                definition: 'Count of group or individual counseling sessions delivered',
+                dataSource: 'Session attendance sheets, counselor logs',
+                collectionMethod: 'Count sessions, record participants and topics covered',
+                frequency: 'Weekly or monthly',
+                ease: 'Easy',
+                cost: 'Low'
+            },
+            {
+                id: 'output-coverage',
+                name: 'Geographic coverage (communities/districts reached)',
+                type: 'Output',
+                definition: 'Number and names of geographic areas where program operates',
+                dataSource: 'Program implementation records',
+                collectionMethod: 'List of active sites, updated as program expands',
+                frequency: 'Quarterly',
+                ease: 'Easy',
+                cost: 'Low'
+            },
+            
+            // OUTCOME INDICATORS
+            {
+                id: 'outcome-wasting',
+                name: 'Prevalence of wasting (WHZ < -2)',
+                type: 'Outcome',
+                definition: 'Percentage of children with weight-for-height z-score below -2',
+                dataSource: 'Anthropometric measurements (height, weight, age)',
+                collectionMethod: 'Measure height and weight using calibrated equipment, calculate WHZ using WHO standards',
+                frequency: 'Baseline, midterm, endline (6-12 month intervals)',
+                ease: 'Moderate',
+                cost: 'Moderate'
+            },
+            {
+                id: 'outcome-stunting',
+                name: 'Prevalence of stunting (HAZ < -2)',
+                type: 'Outcome',
+                definition: 'Percentage of children with height-for-age z-score below -2',
+                dataSource: 'Anthropometric measurements (height, age)',
+                collectionMethod: 'Measure height using stadiometer/length board, calculate HAZ using WHO standards',
+                frequency: 'Baseline and endline (annual intervals)',
+                ease: 'Moderate',
+                cost: 'Moderate'
+            },
+            {
+                id: 'outcome-exclusive-bf',
+                name: 'Exclusive breastfeeding rate (0-6 months)',
+                type: 'Outcome',
+                definition: 'Percentage of infants 0-6 months receiving only breastmilk (no other foods or liquids)',
+                dataSource: 'Caregiver survey/interview',
+                collectionMethod: '24-hour dietary recall: ask what infant consumed in last 24 hours',
+                frequency: 'Quarterly or biannual',
+                ease: 'Easy',
+                cost: 'Low'
+            },
+            {
+                id: 'outcome-dietary-diversity',
+                name: 'Minimum dietary diversity (children 6-23 months)',
+                type: 'Outcome',
+                definition: 'Percentage of children 6-23 months consuming foods from ≥5 food groups in previous 24 hours',
+                dataSource: 'Caregiver survey using 24-hour recall',
+                collectionMethod: 'Ask about foods consumed yesterday from 7 food groups, score Yes/No for each',
+                frequency: 'Quarterly or biannual',
+                ease: 'Moderate',
+                cost: 'Low'
+            },
+            {
+                id: 'outcome-sam-recovery',
+                name: 'SAM treatment recovery rate',
+                type: 'Outcome',
+                definition: 'Percentage of children admitted with SAM who recover (reach WHZ > -2 or MUAC > 125mm)',
+                dataSource: 'Treatment program records',
+                collectionMethod: 'Track admission and discharge outcomes, calculate % recovered',
+                frequency: 'Monthly',
+                ease: 'Moderate',
+                cost: 'Low'
+            },
+            {
+                id: 'outcome-attendance',
+                name: 'School attendance rate',
+                type: 'Outcome',
+                definition: 'Percentage of enrolled students attending school (for school feeding programs)',
+                dataSource: 'School attendance registers',
+                collectionMethod: 'Review school records, calculate % days attended',
+                frequency: 'Monthly or termly',
+                ease: 'Easy',
+                cost: 'Low'
+            },
+            
+            // PROCESS INDICATORS
+            {
+                id: 'process-timeliness',
+                name: 'Distribution timeliness (% on schedule)',
+                type: 'Process',
+                definition: 'Percentage of planned distributions completed within scheduled timeframe',
+                dataSource: 'Distribution schedule vs. actual distribution logs',
+                collectionMethod: 'Compare planned dates to actual dates, calculate % on time',
+                frequency: 'Monthly',
+                ease: 'Easy',
+                cost: 'Low'
+            },
+            {
+                id: 'process-quality',
+                name: 'Food quality acceptance rate',
+                type: 'Process',
+                definition: 'Percentage of distributed food meeting quality standards (no damage, within expiry)',
+                dataSource: 'Quality inspection records, beneficiary feedback',
+                collectionMethod: 'Inspect samples, record defects, survey beneficiaries on quality',
+                frequency: 'Per distribution',
+                ease: 'Easy',
+                cost: 'Low'
+            },
+            {
+                id: 'process-referrals',
+                name: 'Referral completion rate',
+                type: 'Process',
+                definition: 'Percentage of referred cases (e.g., SAM) who successfully access treatment',
+                dataSource: 'Referral tracking forms',
+                collectionMethod: 'Follow up on referrals, record whether service was accessed',
+                frequency: 'Monthly',
+                ease: 'Moderate',
+                cost: 'Low'
+            },
+            {
+                id: 'process-staff-training',
+                name: 'Staff trained on protocols',
+                type: 'Process',
+                definition: 'Percentage of staff who have completed required training',
+                dataSource: 'Training attendance records',
+                collectionMethod: 'Track training participation, calculate % of total staff',
+                frequency: 'Quarterly',
+                ease: 'Easy',
+                cost: 'Low'
+            },
+            
+            // IMPACT INDICATORS (use cautiously)
+            {
+                id: 'impact-mortality',
+                name: 'Under-5 mortality rate',
+                type: 'Impact',
+                definition: 'Deaths per 1,000 live births in children under 5 years',
+                dataSource: 'Population surveys, health facility records',
+                collectionMethod: 'Requires population-level survey or health system data analysis',
+                frequency: 'Baseline and endline only (multi-year intervals)',
+                ease: 'Difficult',
+                cost: 'High'
+            },
+            {
+                id: 'impact-community-stunting',
+                name: 'Community-level stunting prevalence',
+                type: 'Impact',
+                definition: 'Overall stunting rate in target population (not just beneficiaries)',
+                dataSource: 'Community-wide nutrition survey',
+                collectionMethod: 'Random sample survey of all children in catchment area',
+                frequency: 'Baseline and endline (2+ year intervals)',
+                ease: 'Difficult',
+                cost: 'High'
+            }
+        ];
+
+        // ============================================
+        // STATE MANAGEMENT
+        // ============================================
+        let selectedIndicators = [];
+        let programName = '';
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+        document.addEventListener('DOMContentLoaded', () => {
+            setupEventListeners();
+            populateIndicatorLibrary();
+        });
+
+        function setupEventListeners() {
+            // Tab switching
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    switchTab(tab.dataset.tab);
+                });
+            });
+
+            // Program name
+            document.getElementById('program-name-select').addEventListener('input', () => {
+                programName = document.getElementById('program-name-select').value;
+            });
+        }
+
+        // ============================================
+        // TAB MANAGEMENT
+        // ============================================
+        function switchTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+            
+            // Update tab content
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+            
+            // Update specific content
+            if (tabName === 'plan') {
+                generateMeasurementPlanTable();
+            } else if (tabName === 'dashboard') {
+                generateDashboard();
+            }
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ============================================
+        // INDICATOR LIBRARY
+        // ============================================
+        function populateIndicatorLibrary() {
+            const container = document.getElementById('indicator-library');
+            
+            indicatorLibrary.forEach(indicator => {
+                const item = document.createElement('div');
+                item.className = 'indicator-item';
+                item.dataset.id = indicator.id;
+                
+                item.innerHTML = `
+                    <div class="indicator-header">
+                        <div class="indicator-name">${indicator.name}</div>
+                        <div class="indicator-badges">
+                            <span class="indicator-badge badge-type">${indicator.type}</span>
+                            <span class="indicator-badge badge-ease">${indicator.ease}</span>
+                            <span class="indicator-badge badge-cost">${indicator.cost} cost</span>
+                        </div>
+                    </div>
+                    <div class="indicator-definition">${indicator.definition}</div>
+                    <div class="indicator-details">
+                        <div class="detail-row">
+                            <div class="detail-label">📊 Data Source</div>
+                            <div class="detail-content">${indicator.dataSource}</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">📝 Collection Method</div>
+                            <div class="detail-content">${indicator.collectionMethod}</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">📅 Recommended Frequency</div>
+                            <div class="detail-content">${indicator.frequency}</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+                        <button class="btn btn-outline btn-small" onclick="toggleIndicatorDetails('${indicator.id}')">
+                            Show Details
+                        </button>
+                        <button class="btn btn-primary btn-small" onclick="toggleIndicatorSelection('${indicator.id}')">
+                            Select
+                        </button>
+                    </div>
+                `;
+                
+                container.appendChild(item);
+            });
+        }
+
+        function toggleIndicatorDetails(id) {
+            const item = document.querySelector(`[data-id="${id}"]`);
+            item.classList.toggle('expanded');
+            
+            const btn = item.querySelector('.btn-outline');
+            btn.textContent = item.classList.contains('expanded') ? 'Hide Details' : 'Show Details';
+        }
+
+        function toggleIndicatorSelection(id) {
+            const indicator = indicatorLibrary.find(i => i.id === id);
+            const index = selectedIndicators.findIndex(i => i.id === id);
+            
+            if (index > -1) {
+                // Remove
+                selectedIndicators.splice(index, 1);
+                document.querySelector(`[data-id="${id}"]`).classList.remove('selected');
+                document.querySelector(`[data-id="${id}"] .btn-primary`).textContent = 'Select';
+            } else {
+                // Add
+                selectedIndicators.push(indicator);
+                document.querySelector(`[data-id="${id}"]`).classList.add('selected');
+                document.querySelector(`[data-id="${id}"] .btn-primary`).textContent = '✓ Selected';
+            }
+            
+            updateSelectedList();
+            updateNavigationButtons();
+        }
+
+        function updateSelectedList() {
+            const container = document.getElementById('selected-list');
+            const count = document.getElementById('indicator-count');
+            
+            count.textContent = selectedIndicators.length;
+            
+            if (selectedIndicators.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--neutral-gray); padding: 1rem;">No indicators selected yet. Select 5-10 indicators from the library below.</p>';
+                return;
+            }
+            
+            container.innerHTML = '';
+            
+            selectedIndicators.forEach(indicator => {
+                const item = document.createElement('div');
+                item.className = 'selected-indicator-item';
+                item.innerHTML = `
+                    <div class="selected-indicator-info">
+                        <div class="selected-indicator-name">${indicator.name}</div>
+                        <div class="selected-indicator-type">${indicator.type} • ${indicator.ease} to collect • ${indicator.cost} cost</div>
+                    </div>
+                    <button class="remove-btn" onclick="toggleIndicatorSelection('${indicator.id}')" title="Remove">✕</button>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function updateNavigationButtons() {
+            const nextBtn = document.getElementById('next-to-plan');
+            nextBtn.disabled = selectedIndicators.length === 0;
+        }
+
+        // ============================================
+        // MEASUREMENT PLAN
+        // ============================================
+        function generateMeasurementPlanTable() {
+            const table = document.getElementById('measurement-plan-table');
+            
+            if (selectedIndicators.length === 0) {
+                table.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 2rem; color: var(--neutral-gray);">No indicators selected. Go back and select indicators first.</td></tr>';
+                return;
+            }
+            
+            let html = `
+                <thead>
+                    <tr>
+                        <th>Indicator</th>
+                        <th>Type</th>
+                        <th>Data Source</th>
+                        <th>Collection Method</th>
+                        <th>Frequency</th>
+                    </tr>
+                </thead>
+                <tbody>
+            `;
+            
+            selectedIndicators.forEach(indicator => {
+                html += `
+                    <tr>
+                        <td><strong>${indicator.name}</strong></td>
+                        <td>${indicator.type}</td>
+                        <td>${indicator.dataSource}</td>
+                        <td>${indicator.collectionMethod}</td>
+                        <td>${indicator.frequency}</td>
+                    </tr>
+                `;
+            });
+            
+            html += '</tbody>';
+            table.innerHTML = html;
+        }
+
+        // ============================================
+        // DASHBOARD
+        // ============================================
+        function generateDashboard() {
+            const container = document.getElementById('dashboard-summary');
+            
+            const byType = {
+                'Process': selectedIndicators.filter(i => i.type === 'Process').length,
+                'Output': selectedIndicators.filter(i => i.type === 'Output').length,
+                'Outcome': selectedIndicators.filter(i => i.type === 'Outcome').length,
+                'Impact': selectedIndicators.filter(i => i.type === 'Impact').length
+            };
+            
+            const easyCount = selectedIndicators.filter(i => i.ease === 'Easy').length;
+            const moderateCount = selectedIndicators.filter(i => i.ease === 'Moderate').length;
+            const difficultCount = selectedIndicators.filter(i => i.ease === 'Difficult').length;
+            
+            container.innerHTML = `
+                <div style="background: linear-gradient(135deg, var(--metrics-blue) 0%, var(--impact-green) 100%); color: white; padding: 2rem; border-radius: var(--border-radius); margin-bottom: 2rem;">
+                    <h3 style="color: white; margin-top: 0;">${programName || 'Your Program'} - Measurement Framework</h3>
+                    <p style="font-size: 1.125rem; color: white;">Total Indicators: <strong>${selectedIndicators.length}</strong></p>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                    <div style="background: var(--soft-blue); color: white; padding: 1.5rem; border-radius: var(--border-radius); text-align: center;">
+                        <div style="font-size: 2rem; font-weight: 700;">${byType['Process']}</div>
+                        <div>Process Indicators</div>
+                    </div>
+                    <div style="background: var(--healing-green); color: white; padding: 1.5rem; border-radius: var(--border-radius); text-align: center;">
+                        <div style="font-size: 2rem; font-weight: 700;">${byType['Output']}</div>
+                        <div>Output Indicators</div>
+                    </div>
+                    <div style="background: var(--impact-green); color: white; padding: 1.5rem; border-radius: var(--border-radius); text-align: center;">
+                        <div style="font-size: 2rem; font-weight: 700;">${byType['Outcome']}</div>
+                        <div>Outcome Indicators</div>
+                    </div>
+                    <div style="background: var(--metrics-blue); color: white; padding: 1.5rem; border-radius: var(--border-radius); text-align: center;">
+                        <div style="font-size: 2rem; font-weight: 700;">${byType['Impact']}</div>
+                        <div>Impact Indicators</div>
+                    </div>
+                </div>
+                
+                <div style="background: var(--background-light); padding: 1.5rem; border-radius: var(--border-radius);">
+                    <h4 style="margin-top: 0;">Feasibility Assessment</h4>
+                    <p>Based on your selected indicators:</p>
+                    <ul style="margin-left: 1.5rem; color: var(--text-secondary);">
+                        <li><strong>${easyCount} indicators</strong> are easy to collect with minimal resources</li>
+                        <li><strong>${moderateCount} indicators</strong> require moderate effort and training</li>
+                        ${difficultCount > 0 ? `<li style="color: var(--warning-orange);"><strong>${difficultCount} indicators</strong> are difficult and may require external expertise</li>` : ''}
+                    </ul>
+                    ${difficultCount > 2 ? `
+                        <p style="margin-top: 1rem; color: var(--warning-orange);"><strong>⚠️ Warning:</strong> You have selected several difficult indicators. Consider whether you have the capacity to collect these reliably, or if they should be reserved for special evaluation studies.</p>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        // ============================================
+        // EXPORT FUNCTIONS
+        // ============================================
+        function exportMeasurementPlan() {
+            const frequency = document.getElementById('measurement-frequency').value || 'Not specified';
+            const responsibility = document.getElementById('data-responsibility').value || 'Not specified';
+            
+            const plan = `
+MEASUREMENT PLAN
+${programName || 'Program Name Not Specified'}
+Generated: ${new Date().toLocaleString()}
+
+════════════════════════════════════════════════════════════
+
+OVERVIEW:
+- Total Indicators: ${selectedIndicators.length}
+- Data Collection Frequency: ${frequency}
+- Responsible Staff: ${responsibility}
+
+════════════════════════════════════════════════════════════
+
+SELECTED INDICATORS:
+
+${selectedIndicators.map((ind, i) => `
+${i + 1}. ${ind.name}
+   Type: ${ind.type}
+   Definition: ${ind.definition}
+   
+   Data Source: ${ind.dataSource}
+   Collection Method: ${ind.collectionMethod}
+   Frequency: ${ind.frequency}
+   
+   Ease: ${ind.ease}
+   Cost: ${ind.cost}
+
+────────────────────────────────────────────────────────────`).join('\n')}
+
+════════════════════════════════════════════════════════════
+            `.trim();
+            
+            downloadFile(plan, `measurement-plan-${Date.now()}.txt`);
+        }
+
+        function exportFullFramework() {
+            const byType = {
+                'Process': selectedIndicators.filter(i => i.type === 'Process'),
+                'Output': selectedIndicators.filter(i => i.type === 'Output'),
+                'Outcome': selectedIndicators.filter(i => i.type === 'Outcome'),
+                'Impact': selectedIndicators.filter(i => i.type === 'Impact')
+            };
+            
+            const framework = `
+MONITORING & EVALUATION FRAMEWORK
+${programName || 'Program Name Not Specified'}
+Generated: ${new Date().toLocaleString()}
+
+════════════════════════════════════════════════════════════
+
+1. FRAMEWORK SUMMARY
+   Total Indicators: ${selectedIndicators.length}
+   • Process Indicators: ${byType['Process'].length}
+   • Output Indicators: ${byType['Output'].length}
+   • Outcome Indicators: ${byType['Outcome'].length}
+   • Impact Indicators: ${byType['Impact'].length}
+
+2. INDICATORS BY TYPE
+
+${Object.entries(byType).filter(([type, indicators]) => indicators.length > 0).map(([type, indicators]) => `
+   ${type.toUpperCase()} INDICATORS (${indicators.length}):
+${indicators.map((ind, i) => `
+   ${i + 1}. ${ind.name}
+      Definition: ${ind.definition}
+      Data Source: ${ind.dataSource}
+      Method: ${ind.collectionMethod}
+      Frequency: ${ind.frequency}
+`).join('\n')}`).join('\n\n')}
+
+3. DATA COLLECTION PLAN
+   Responsibility: ${document.getElementById('data-responsibility').value || 'Not specified'}
+   Frequency: ${document.getElementById('measurement-frequency').value || 'Not specified'}
+   
+   Data Quality Standards:
+   • All data collectors trained on indicator definitions
+   • Regular supervision and spot-checks
+   • Data validation and cleaning procedures established
+   • Secure data storage (physical and digital)
+   • Clear data retention and deletion policies
+
+4. DATA USE & REPORTING
+   • Monthly: Review process and output indicators
+   • Quarterly: Analyze trends, share with program team
+   • Biannual: Comprehensive outcome assessment
+   • Annual: Full M&E report with recommendations
+   
+   Key Audiences:
+   • Program staff (for adaptation and improvement)
+   • Senior management (for strategic decisions)
+   • Donors (for accountability and reporting)
+   • Beneficiaries (for transparency)
+
+5. IMPLEMENTATION CHECKLIST
+   ☐ Train all staff on indicator definitions
+   ☐ Develop/adapt data collection tools
+   ☐ Set up data management system
+   ☐ Conduct baseline measurements
+   ☐ Establish data quality procedures
+   ☐ Create analysis and reporting templates
+   ☐ Schedule regular data review meetings
+   ☐ Document methods and changes
+
+════════════════════════════════════════════════════════════
+
+This framework was generated by the Feed Children ASAP Atlas
+Metrics Dashboard Builder.
+
+Remember: Good measurement is feasible, actionable, and ethical.
+Focus on learning and improvement, not just reporting.
+
+════════════════════════════════════════════════════════════
+            `.trim();
+            
+            downloadFile(framework, `me-framework-${Date.now()}.txt`);
+        }
+
+        function downloadFile(content, filename) {
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // ============================================
+        // RESET
+        // ============================================
+        function resetTool() {
+            if (confirm('Start over? This will clear all your selections.')) {
+                selectedIndicators = [];
+                programName = '';
+                
+                document.getElementById('program-name-select').value = '';
+                document.getElementById('measurement-frequency').value = '';
+                document.getElementById('data-responsibility').value = '';
+                
+                document.querySelectorAll('.indicator-item').forEach(item => {
+                    item.classList.remove('selected', 'expanded');
+                    item.querySelector('.btn-primary').textContent = 'Select';
+                    item.querySelector('.btn-outline').textContent = 'Show Details';
+                });
+                
+                updateSelectedList();
+                updateNavigationButtons();
+                
+                switchTab('learn');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Accessibility: Reduced motion support
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('*').forEach(el => {
+                el.style.animation = 'none';
+                el.style.transition = 'none';
+            });
+        }
+    </script>
+    
+    <!--
+    ZERO HARM COMPLIANCE NOTICE:
+    
+    This tool contains:
+    - No tracking or analytics
+    - No external API calls
+    - No data transmission to servers
+    - No data storage (selections not persisted)
+    - No surveillance mechanisms
+    
+    All measurement planning is performed client-side.
+    All data remains on the user's device during session only.
+    
+    This tool provides guidance only. Actual M&E implementation must:
+    - Respect beneficiary privacy and data protection
+    - Obtain informed consent for data collection
+    - Minimize burden on participants and staff
+    - Use data ethically and transparently
+    - Focus on learning and improvement, not just reporting
+    
+    Good measurement balances rigor with feasibility. Measure less, better.
+    -->
+</body>
+</html>
