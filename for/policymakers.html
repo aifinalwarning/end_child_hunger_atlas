@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A face-saving guide for policymakers, ministers, cabinet members, and institutional leaders. Exit ramps from systemic harm to healing without professional risk or destabilization.">
+    <title>For Policymakers & Leaders | Feed Children ASAP Atlas</title>
+    
+    <style>
+        /* ============================================
+           RESET & BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --earth-dark: #2d3e2f;
+            --earth-medium: #5a7c5e;
+            --earth-light: #8ba888;
+            --healing-green: #a8c5a0;
+            --warm-sand: #e8dcc4;
+            --soft-blue: #7a9eb8;
+            --neutral-gray: #6b7280;
+            --background-light: #f9f9f7;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --card-background: #ffffff;
+            --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --border-radius: 8px;
+            --transition-smooth: all 0.3s ease;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--background-light);
+            overflow-x: hidden;
+        }
+        
+        /* ============================================
+           TYPOGRAPHY
+           ============================================ */
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+        }
+        
+        h1 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            color: var(--earth-dark);
+        }
+        
+        h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--earth-medium);
+            margin-top: 3rem;
+        }
+        
+        h3 {
+            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+            color: var(--earth-medium);
+            margin-top: 2rem;
+        }
+        
+        h4 {
+            font-size: clamp(1.125rem, 2vw, 1.25rem);
+            color: var(--earth-dark);
+            margin-top: 1.5rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        a {
+            color: var(--soft-blue);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+        
+        a:hover {
+            color: var(--earth-medium);
+        }
+        
+        strong {
+            color: var(--earth-dark);
+            font-weight: 600;
+        }
+        
+        em {
+            color: var(--earth-medium);
+        }
+        
+        /* ============================================
+           LAYOUT
+           ============================================ */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .wide-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        section {
+            padding: 3rem 0;
+        }
+        
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        .top-nav {
+            background: var(--earth-dark);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .nav-home {
+            color: var(--warm-sand);
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+        
+        .nav-home:hover {
+            color: var(--healing-green);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links a {
+            color: var(--warm-sand);
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        
+        .nav-links a:hover {
+            opacity: 1;
+            color: var(--healing-green);
+        }
+        
+        /* ============================================
+           HEADER
+           ============================================ */
+        header {
+            background: linear-gradient(135deg, var(--earth-dark) 0%, var(--earth-medium) 100%);
+            color: var(--warm-sand);
+            padding: 3rem 0 2rem;
+            position: relative;
+        }
+        
+        .audience-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+        }
+        
+        /* ============================================
+           CONTENT SECTIONS
+           ============================================ */
+        .content-section {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .problem-statement {
+            background: linear-gradient(135deg, rgba(90, 124, 94, 0.1) 0%, rgba(168, 197, 160, 0.1) 100%);
+            border-left: 4px solid var(--earth-medium);
+        }
+        
+        .language-section {
+            border-left: 4px solid var(--soft-blue);
+        }
+        
+        .quote-box {
+            background: var(--background-light);
+            border-left: 4px solid var(--healing-green);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            font-style: italic;
+        }
+        
+        .quote-box strong {
+            font-style: normal;
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--earth-medium);
+        }
+        
+        /* ============================================
+           SENTENCE FRAMES (CRITICAL CONTENT)
+           ============================================ */
+        .sentence-frames {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .sentence-frame {
+            background: var(--card-background);
+            border: 2px solid var(--healing-green);
+            border-radius: var(--border-radius);
+            padding: 1.25rem;
+            position: relative;
+            transition: var(--transition-smooth);
+        }
+        
+        .sentence-frame:hover {
+            box-shadow: var(--shadow-medium);
+            transform: translateX(4px);
+        }
+        
+        .sentence-frame::before {
+            content: '💬';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            opacity: 0.3;
+        }
+        
+        .sentence-text {
+            font-size: 1.05rem;
+            color: var(--earth-dark);
+            line-height: 1.6;
+        }
+        
+        /* ============================================
+           EXIT RAMPS (PRIMARY FEATURE)
+           ============================================ */
+        .exit-ramps-container {
+            margin: 2rem 0;
+        }
+        
+        .exit-ramp {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-subtle);
+            border-left: 6px solid var(--soft-blue);
+            transition: var(--transition-smooth);
+        }
+        
+        .exit-ramp:hover {
+            box-shadow: var(--shadow-medium);
+            border-left-width: 10px;
+        }
+        
+        .exit-ramp-label {
+            display: inline-block;
+            background: var(--soft-blue);
+            color: white;
+            padding: 0.375rem 0.875rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .exit-ramp-title {
+            font-size: 1.5rem;
+            color: var(--earth-dark);
+            margin: 0.5rem 0 1rem;
+        }
+        
+        .exit-ramp-quote {
+            background: var(--background-light);
+            padding: 1rem 1.25rem;
+            border-radius: 6px;
+            font-size: 1.125rem;
+            font-style: italic;
+            color: var(--earth-medium);
+            margin: 1rem 0;
+            border-left: 3px solid var(--healing-green);
+        }
+        
+        .exit-ramp-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        
+        .exit-ramp-benefits {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .exit-ramp-benefits ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .exit-ramp-benefits li {
+            padding: 0.5rem 0 0.5rem 1.75rem;
+            position: relative;
+            color: var(--text-secondary);
+        }
+        
+        .exit-ramp-benefits li::before {
+            content: '→';
+            position: absolute;
+            left: 0.5rem;
+            color: var(--healing-green);
+            font-weight: bold;
+        }
+        
+        /* ============================================
+           STRATEGY CARDS
+           ============================================ */
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .strategy-card {
+            background: var(--background-light);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            border-top: 4px solid var(--earth-medium);
+        }
+        
+        .strategy-card h4 {
+            margin-top: 0;
+        }
+        
+        /* ============================================
+           CALLOUT BOXES
+           ============================================ */
+        .callout {
+            background: var(--warm-sand);
+            border-radius: var(--border-radius);
+            padding: 1.75rem;
+            margin: 2rem 0;
+            border-left: 5px solid var(--earth-medium);
+        }
+        
+        .callout-title {
+            font-size: 1.25rem;
+            color: var(--earth-dark);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .callout-content {
+            color: var(--text-secondary);
+        }
+        
+        .warning-box {
+            background: rgba(255, 200, 100, 0.1);
+            border-left-color: #f59e0b;
+        }
+        
+        .success-box {
+            background: rgba(168, 197, 160, 0.2);
+            border-left-color: var(--healing-green);
+        }
+        
+        /* ============================================
+           MORAL PIVOT SECTION (SPECIAL TREATMENT)
+           ============================================ */
+        .moral-pivot {
+            background: linear-gradient(135deg, var(--earth-medium) 0%, var(--earth-light) 100%);
+            color: var(--warm-sand);
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-medium);
+            text-align: center;
+            margin: 3rem 0;
+        }
+        
+        .moral-pivot h2 {
+            color: var(--warm-sand);
+            margin-top: 0;
+        }
+        
+        .moral-pivot p {
+            color: var(--warm-sand);
+            font-size: 1.125rem;
+            max-width: 700px;
+            margin: 1.5rem auto;
+        }
+        
+        .moral-pivot-quote {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            font-size: 1.25rem;
+            font-style: italic;
+            margin: 2rem 0;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        /* ============================================
+           LISTS
+           ============================================ */
+        ul {
+            margin: 1rem 0 1rem 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .no-bullets {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        /* ============================================
+           ZERO HARM BADGE (PERSISTENT)
+           ============================================ */
+        .zero-harm-badge {
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--earth-dark);
+            color: var(--warm-sand);
+            padding: 0.75rem 1.25rem;
+            border-radius: 50px;
+            box-shadow: var(--shadow-medium);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: var(--transition-smooth);
+        }
+        
+        .zero-harm-badge:hover {
+            background: var(--earth-medium);
+            transform: scale(1.05);
+        }
+        
+        .zero-harm-badge::before {
+            content: '🛡️';
+            margin-right: 0.5rem;
+        }
+        
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: var(--earth-dark);
+            color: var(--warm-sand);
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .footer-nav a {
+            color: var(--warm-sand);
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        
+        .footer-nav a:hover {
+            opacity: 1;
+            color: var(--healing-green);
+        }
+        
+        .zero-harm-statement {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-left: 4px solid var(--healing-green);
+        }
+        
+        .zero-harm-statement h3 {
+            color: var(--healing-green);
+            margin-top: 0;
+        }
+        
+        .zero-harm-statement p {
+            color: var(--warm-sand);
+            font-size: 0.95rem;
+            margin: 0.5rem 0;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            margin-top: 2rem;
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+        
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 1.5rem;
+            }
+            
+            .exit-ramp {
+                padding: 1.5rem;
+            }
+            
+            .moral-pivot {
+                padding: 2rem 1.5rem;
+            }
+            
+            .nav-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .nav-links {
+                width: 100%;
+            }
+            
+            .zero-harm-badge {
+                top: auto;
+                bottom: 20px;
+                font-size: 0.75rem;
+                padding: 0.5rem 1rem;
+            }
+            
+            .strategy-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* ============================================
+           PRINT STYLES
+           ============================================ */
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .top-nav,
+            .zero-harm-badge {
+                display: none;
+            }
+            
+            .content-section,
+            .exit-ramp {
+                page-break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+            
+            a[href^="http"]::after {
+                content: " (" attr(href) ")";
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- TOP NAVIGATION -->
+    <nav class="top-nav">
+        <div class="wide-container">
+            <div class="nav-content">
+                <a href="../index.html" class="nav-home">← Feed Children ASAP Atlas</a>
+                <ul class="nav-links">
+                    <li><a href="implementers.html">For Implementers</a></li>
+                    <li><a href="funders.html">For Funders</a></li>
+                    <li><a href="researchers.html">For Researchers</a></li>
+                    <li><a href="communities.html">For Communities</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ZERO HARM BADGE -->
+    <aside class="zero-harm-badge">
+        <a href="../governance.html">Zero Harm Policy</a>
+    </aside>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <span class="audience-badge">🏛️ For Policymakers & Leaders</span>
+            <h1>Re-Uniting Children and Food Without Losing Face, Power, or Stability</h1>
+            <p class="subtitle">
+                A linguistic and structural on-ramp for ministers, cabinet members, foundation directors, 
+                UN staff, and institutional decision-makers who need to act without professional or reputational risk
+            </p>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <div class="container">
+            
+            <!-- CORE PROBLEM -->
+            <section class="content-section problem-statement">
+                <h2>The Core Problem (Stated Neutrally)</h2>
+                <p>
+                    Modern governance systems separated nutrition, children, and moral responsibility into different 
+                    administrative silos. This was efficient. It was also corrosive.
+                </p>
+                <p><strong>The result:</strong></p>
+                <ul>
+                    <li>Children became statistics</li>
+                    <li>Food became commodities</li>
+                    <li>Responsibility became diffuse</li>
+                </ul>
+                <p>
+                    <strong>No single actor "caused" this.</strong> But every actor now inherits it.
+                </p>
+                <p>
+                    This guide exists to help leaders reverse course without self-incrimination, institutional collapse, 
+                    or narrative loss.
+                </p>
+            </section>
+
+            <!-- WHY LANGUAGE COMES FIRST -->
+            <section class="content-section language-section">
+                <h2>Why Language Comes First 🗣️</h2>
+                <p>
+                    Before budgets, laws, or logistics, there is <strong>permission to speak</strong>.
+                </p>
+                <p>
+                    Many leaders avoid pairing children and food publicly because:
+                </p>
+                <ul>
+                    <li>It implies moral urgency</li>
+                    <li>It invites accountability</li>
+                    <li>It risks exposing systemic failure</li>
+                </ul>
+                <p>
+                    So the first task is not policy—it's <strong>sentence construction</strong>.
+                </p>
+            </section>
+
+            <!-- PHASE I: SAFE LANGUAGE RE-ENTRY -->
+            <section class="content-section">
+                <h2>Phase I: Safe Language Re-Entry (No Blame Zone)</h2>
+                <p>
+                    These are approved sentence frames that allow leaders to speak about children and food together 
+                    <strong>without admitting fault</strong>.
+                </p>
+                <p>Use them verbatim if needed.</p>
+                
+                <div class="sentence-frames">
+                    <div class="sentence-frame">
+                        <p class="sentence-text">
+                            "Children's nutrition is a cross-sector resilience issue, not a single-ministry responsibility."
+                        </p>
+                    </div>
+                    
+                    <div class="sentence-frame">
+                        <p class="sentence-text">
+                            "Food security outcomes for children reflect system complexity, not individual intent."
+                        </p>
+                    </div>
+                    
+                    <div class="sentence-frame">
+                        <p class="sentence-text">
+                            "Our focus is ensuring forward-looking nutritional stability for the next generation."
+                        </p>
+                    </div>
+                    
+                    <div class="sentence-frame">
+                        <p class="sentence-text">
+                            "We are aligning food systems with child development indicators."
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="callout success-box">
+                    <div class="callout-title">
+                        <span>✓</span>
+                        <span>What These Phrases Accomplish</span>
+                    </div>
+                    <div class="callout-content">
+                        <ul class="no-bullets">
+                            <li><strong>Signal concern</strong> without confession</li>
+                            <li><strong>Acknowledge complexity</strong> without accepting blame</li>
+                            <li><strong>Open the door</strong> to further action</li>
+                        </ul>
+                        <p style="margin-top: 1rem; font-style: italic;">
+                            This is the linguistic on-ramp.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PHASE II: STRUCTURAL DISTANCE -->
+            <section class="content-section">
+                <h2>Phase II: Structural Distance Without Moral Evasion</h2>
+                <p>
+                    Once the language barrier is broken, leaders need structural buffers—ways to act without being 
+                    seen as personally responsible for past harm.
+                </p>
+                
+                <h3>Strategy: Proxy Ownership</h3>
+                <p>Instead of governments or elites acting directly, they:</p>
+                
+                <div class="strategy-grid">
+                    <div class="strategy-card">
+                        <h4>Empower Independent Trusts</h4>
+                        <p>
+                            Create independent nutrition trusts with legal separation from direct government control
+                        </p>
+                    </div>
+                    
+                    <div class="strategy-card">
+                        <h4>Fund Arm's-Length Boards</h4>
+                        <p>
+                            Establish child food resilience boards with operational autonomy but public accountability
+                        </p>
+                    </div>
+                    
+                    <div class="strategy-card">
+                        <h4>Delegate to Coalitions</h4>
+                        <p>
+                            Transfer authority to multi-stakeholder coalitions representing diverse interests
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="quote-box">
+                    <strong>This allows action while preserving:</strong>
+                    Political continuity • Institutional legitimacy • Personal reputations
+                </div>
+                
+                <p style="text-align: center; font-size: 1.125rem; color: var(--earth-medium); margin-top: 2rem;">
+                    <strong>Responsibility moves forward, not backward ⏩</strong>
+                </p>
+            </section>
+
+            <!-- PHASE III: EXIT RAMP MENU -->
+            <section class="content-section">
+                <h2>Phase III: Exit Ramp Menu (Choose Your Path)</h2>
+                <p>
+                    Leaders fear being trapped once they "admit" children need food. So here are clean exits—ways 
+                    to help without permanent exposure.
+                </p>
+                
+                <div class="exit-ramps-container">
+                    
+                    <!-- EXIT RAMP A -->
+                    <div class="exit-ramp">
+                        <span class="exit-ramp-label">Exit Ramp A</span>
+                        <h3 class="exit-ramp-title">Data-First Commitment 📊</h3>
+                        
+                        <div class="exit-ramp-quote">
+                            "We are beginning with measurement."
+                        </div>
+                        
+                        <div class="exit-ramp-description">
+                            <p>
+                                This approach allows leaders to demonstrate seriousness while deferring operational 
+                                commitments. By focusing on data collection and analysis first, you create space 
+                                for institutional learning without immediate resource allocation.
+                            </p>
+                        </div>
+                        
+                        <div class="exit-ramp-benefits">
+                            <strong>Implementation Steps:</strong>
+                            <ul>
+                                <li>Fund child nutrition metrics and baseline assessments</li>
+                                <li>Publish public dashboards showing current state (not historical blame)</li>
+                                <li>Delay operational decisions pending data review</li>
+                            </ul>
+                            <p style="margin-top: 1rem;">
+                                <strong>Why This Works:</strong> Signals seriousness while buying time for consensus-building 
+                                and resource mobilization.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- EXIT RAMP B -->
+                    <div class="exit-ramp">
+                        <span class="exit-ramp-label">Exit Ramp B</span>
+                        <h3 class="exit-ramp-title">Pilot Zones 🌱</h3>
+                        
+                        <div class="exit-ramp-quote">
+                            "We will test approaches locally."
+                        </div>
+                        
+                        <div class="exit-ramp-description">
+                            <p>
+                                Limited-scope pilot programs provide proof-of-concept without system-wide commitment. 
+                                This reduces political risk and allows for learning-by-doing in controlled environments.
+                            </p>
+                        </div>
+                        
+                        <div class="exit-ramp-benefits">
+                            <strong>Parameters:</strong>
+                            <ul>
+                                <li>Limited geography (one district, one province)</li>
+                                <li>Temporary funding (12-24 month pilot phase)</li>
+                                <li>Reversible programs (sunset clauses built in)</li>
+                            </ul>
+                            <p style="margin-top: 1rem;">
+                                <strong>Decision Logic:</strong> If it works, scale. If it fails, sunset—no scandal. 
+                                Pilots frame risk as learning, not failure.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- EXIT RAMP C -->
+                    <div class="exit-ramp">
+                        <span class="exit-ramp-label">Exit Ramp C</span>
+                        <h3 class="exit-ramp-title">Philanthropic Translation 💼</h3>
+                        
+                        <div class="exit-ramp-quote">
+                            "Private capital will move first."
+                        </div>
+                        
+                        <div class="exit-ramp-description">
+                            <p>
+                                By positioning foundations and private donors as first movers, government leaders can 
+                                appear supportive rather than directly responsible. This translates moral pressure into 
+                                catalytic philanthropy.
+                            </p>
+                        </div>
+                        
+                        <div class="exit-ramp-benefits">
+                            <strong>Structure:</strong>
+                            <ul>
+                                <li>Foundations lead program design and initial funding</li>
+                                <li>Governments "support" through policy alignment, not budget allocation</li>
+                                <li>Elites appear catalytic, not culpable</li>
+                            </ul>
+                            <p style="margin-top: 1rem;">
+                                <strong>Narrative Advantage:</strong> Morality flows through philanthropy instead of policy. 
+                                Reduces direct government exposure while enabling action.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- EXIT RAMP D -->
+                    <div class="exit-ramp">
+                        <span class="exit-ramp-label">Exit Ramp D</span>
+                        <h3 class="exit-ramp-title">Reframing as Security 🛡️</h3>
+                        
+                        <div class="exit-ramp-quote">
+                            "Child nutrition is a stability issue."
+                        </div>
+                        
+                        <div class="exit-ramp-description">
+                            <p>
+                                When framed as national security, economic competitiveness, or social stability, child 
+                                nutrition becomes strategic necessity rather than moral obligation. This converts 
+                                compassion into hard-power calculus.
+                            </p>
+                        </div>
+                        
+                        <div class="exit-ramp-benefits">
+                            <strong>Translation Framework:</strong>
+                            <ul>
+                                <li>Tie food access to crime reduction and urban stability</li>
+                                <li>Link nutrition to workforce readiness and GDP growth</li>
+                                <li>Connect child development to future state capacity</li>
+                            </ul>
+                            <p style="margin-top: 1rem;">
+                                <strong>Why Power Responds:</strong> Security language activates institutional reflexes that 
+                                moral appeals often cannot. This is strategic reframing, not cynicism.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- EXIT RAMP E -->
+                    <div class="exit-ramp">
+                        <span class="exit-ramp-label">Exit Ramp E</span>
+                        <h3 class="exit-ramp-title">International Alignment 🌍</h3>
+                        
+                        <div class="exit-ramp-quote">
+                            "We are harmonizing with global standards."
+                        </div>
+                        
+                        <div class="exit-ramp-description">
+                            <p>
+                                By aligning with international frameworks and multilateral commitments, national leaders 
+                                can distribute responsibility across borders. This diffuses risk while multiplying legitimacy.
+                            </p>
+                        </div>
+                        
+                        <div class="exit-ramp-benefits">
+                            <strong>Coordination Mechanisms:</strong>
+                            <ul>
+                                <li>Reference SDGs, WHO guidelines, or regional agreements</li>
+                                <li>Share responsibility across UN agencies and treaty partners</li>
+                                <li>Avoid singular national blame through collective action framing</li>
+                            </ul>
+                            <p style="margin-top: 1rem;">
+                                <strong>Institutional Advantage:</strong> International alignment provides political cover 
+                                while creating peer pressure for action across jurisdictions.
+                            </p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </section>
+
+            <!-- PHASE IV: MORAL PIVOT -->
+            <div class="moral-pivot">
+                <h2>Phase IV: The Moral Pivot (Optional, Advanced)</h2>
+                <p>
+                    Only some leaders will take this path. This is where a policymaker says—not apologetically, but calmly:
+                </p>
+                
+                <div class="moral-pivot-quote">
+                    "A system that feeds markets before children requires adjustment."
+                </div>
+                
+                <p>
+                    <strong>No blame.</strong><br>
+                    <strong>No drama.</strong><br>
+                    <strong>Just correction.</strong>
+                </p>
+                
+                <p style="font-size: 1.125rem; margin-top: 2rem;">
+                    History tends to be kind to those who arrive here voluntarily.
+                </p>
+            </div>
+
+            <!-- WHAT THIS GUIDE IS NOT -->
+            <section class="content-section">
+                <h2>What This Guide Is Not</h2>
+                <ul class="no-bullets" style="font-size: 1.05rem; line-height: 2;">
+                    <li>❌ Not a call for punishment</li>
+                    <li>❌ Not an accusation</li>
+                    <li>❌ Not a revolution</li>
+                    <li>❌ Not a demand for martyrdom</li>
+                </ul>
+                
+                <div class="callout" style="margin-top: 2rem;">
+                    <div class="callout-title">
+                        <span>✓</span>
+                        <span>What This Guide Is</span>
+                    </div>
+                    <div class="callout-content">
+                        <p style="font-size: 1.125rem; margin: 0;">
+                            <strong>A face-saving bridge back to coherence.</strong>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FINAL NOTE -->
+            <section class="content-section" style="border-left: 5px solid var(--healing-green); background: linear-gradient(135deg, rgba(168, 197, 160, 0.1) 0%, rgba(255, 255, 255, 1) 100%);">
+                <h2>Final Note to Decision-Makers 🧩</h2>
+                <p>
+                    Every era is judged by the things it normalized without naming.
+                </p>
+                <p>
+                    Future generations will not ask:
+                </p>
+                <div class="quote-box" style="text-align: center;">
+                    "Who was guilty?"
+                </div>
+                <p>
+                    They will ask:
+                </p>
+                <div class="quote-box" style="text-align: center; border-left-color: var(--earth-medium);">
+                    "Who noticed early enough to change direction?"
+                </div>
+                <p style="margin-top: 2rem;">
+                    This guide exists so that answer can still include you.
+                </p>
+                <p style="font-size: 1.125rem; color: var(--earth-medium); margin-top: 2rem; text-align: center;">
+                    <em>The strange thing about power is that it rarely disappears—it just waits for permission 
+                    to be used wisely 🌾✨</em>
+                </p>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <nav class="footer-nav">
+                <a href="../index.html">Home</a>
+                <a href="implementers.html">For Implementers</a>
+                <a href="funders.html">For Funders</a>
+                <a href="researchers.html">For Researchers</a>
+                <a href="communities.html">For Communities</a>
+                <a href="../governance.html">Governance</a>
+                <a href="../about.html">About</a>
+            </nav>
+            
+            <div class="zero-harm-statement">
+                <h3>Zero Harm & Anti-Coercion Commitment</h3>
+                <p>
+                    This guide operates under absolute non-harm principles. No surveillance. No coercion. No shaming. 
+                    No targeting of individuals or institutions. No advocacy for illegal activity.
+                </p>
+                <p>
+                    This framework exists to enable coordinated action to feed children without coercion, manipulation, 
+                    or institutional destabilization. All pathways are voluntary. All strategies respect legal boundaries.
+                </p>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>Feed Children ASAP Atlas | For Policymakers & Leaders</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem;">
+                    Offline-First | No Tracking | Zero Surveillance | Licensed for Regenerative Use
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT (MINIMAL PROGRESSIVE ENHANCEMENT) -->
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Track that user visited policymakers section (for returning user detection on index)
+        try {
+            localStorage.setItem('feedChildrenAtlas_lastRole', 'policymakers');
+        } catch (e) {
+            // Silent fail if localStorage unavailable
+        }
+        
+        // Accessibility: Reduced motion support
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('*').forEach(el => {
+                el.style.animation = 'none';
+                el.style.transition = 'none';
+            });
+        }
+        
+        // Print optimization: Expand all collapsed sections before print
+        window.addEventListener('beforeprint', function() {
+            document.querySelectorAll('details').forEach(detail => {
+                detail.setAttribute('open', '');
+            });
+        });
+    </script>
+    
+    <!--
+    ZERO HARM COMPLIANCE NOTICE:
+    
+    This page contains:
+    - No tracking or analytics
+    - No external API calls
+    - No data collection beyond localStorage for navigation preferences
+    - No surveillance mechanisms
+    - No calls to violence, coercion, or illegal action
+    
+    All content is designed to provide decision-safe pathways for institutional actors
+    to address child nutrition without professional risk, blame, or destabilization.
+    
+    This guide respects legal boundaries, institutional constraints, and personal safety.
+    -->
+</body>
+</html>
