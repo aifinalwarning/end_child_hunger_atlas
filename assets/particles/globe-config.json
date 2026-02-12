@@ -1,0 +1,282 @@
+{
+  "version": "1.0",
+  "description": "Configuration for animated particle globe visualization on Atlas homepage",
+  "globe": {
+    "radius": 200,
+    "centerX": "50%",
+    "centerY": "50%",
+    "rotationSpeed": 0.001,
+    "tiltAngle": 23.5,
+    "autoRotate": true,
+    "responsive": {
+      "mobile": {
+        "radius": 120,
+        "particleCount": 300
+      },
+      "tablet": {
+        "radius": 160,
+        "particleCount": 500
+      },
+      "desktop": {
+        "radius": 200,
+        "particleCount": 800
+      }
+    }
+  },
+  "particles": {
+    "count": 800,
+    "size": {
+      "min": 1,
+      "max": 3,
+      "default": 2
+    },
+    "color": {
+      "primary": "#5a7c5e",
+      "secondary": "#8ba888",
+      "accent": "#a8c5a0",
+      "opacity": {
+        "min": 0.3,
+        "max": 0.9,
+        "default": 0.6
+      }
+    },
+    "distribution": "sphere",
+    "depth": {
+      "near": 0.5,
+      "far": 1.5
+    },
+    "glow": {
+      "enabled": true,
+      "radius": 4,
+      "intensity": 0.3
+    }
+  },
+  "connections": {
+    "enabled": true,
+    "maxDistance": 80,
+    "lineWidth": 0.5,
+    "color": "#7a9eb8",
+    "opacity": {
+      "min": 0.1,
+      "max": 0.4,
+      "fadeStart": 60,
+      "fadeEnd": 80
+    },
+    "maxConnections": 3
+  },
+  "animation": {
+    "fps": 60,
+    "rotationSpeed": {
+      "x": 0.001,
+      "y": 0.0015,
+      "z": 0
+    },
+    "particleMovement": {
+      "enabled": true,
+      "amplitude": 0.02,
+      "frequency": 0.5
+    },
+    "pulseEffect": {
+      "enabled": true,
+      "speed": 0.002,
+      "intensity": 0.2
+    },
+    "reducedMotion": {
+      "respectPreference": true,
+      "fallbackRotation": 0.0002,
+      "disableConnections": true
+    }
+  },
+  "interaction": {
+    "mouseEffect": {
+      "enabled": true,
+      "radius": 150,
+      "strength": 0.3,
+      "type": "repel"
+    },
+    "touchEffect": {
+      "enabled": true,
+      "radius": 100,
+      "strength": 0.2
+    },
+    "dragToRotate": {
+      "enabled": false,
+      "sensitivity": 0.005
+    }
+  },
+  "lighting": {
+    "ambient": {
+      "enabled": true,
+      "intensity": 0.6,
+      "color": "#ffffff"
+    },
+    "directional": {
+      "enabled": true,
+      "intensity": 0.8,
+      "position": {
+        "x": -1,
+        "y": 1,
+        "z": 1
+      },
+      "color": "#ffffff"
+    },
+    "depthShading": {
+      "enabled": true,
+      "nearBrightness": 1,
+      "farBrightness": 0.4
+    }
+  },
+  "highlights": {
+    "continents": {
+      "enabled": true,
+      "regions": [
+        {
+          "name": "Africa",
+          "latitude": 0,
+          "longitude": 20,
+          "radius": 30,
+          "color": "#e8a87c",
+          "particleDensity": 1.5
+        },
+        {
+          "name": "Asia",
+          "latitude": 30,
+          "longitude": 100,
+          "radius": 40,
+          "color": "#7a9eb8",
+          "particleDensity": 1.5
+        },
+        {
+          "name": "South America",
+          "latitude": -15,
+          "longitude": -60,
+          "radius": 25,
+          "color": "#6b9e6b",
+          "particleDensity": 1.5
+        }
+      ]
+    },
+    "hotspots": {
+      "enabled": false,
+      "markers": []
+    }
+  },
+  "background": {
+    "color": "transparent",
+    "gradient": {
+      "enabled": false,
+      "colors": ["#1a1a1a", "#2d2d2d"],
+      "direction": "radial"
+    },
+    "stars": {
+      "enabled": false,
+      "count": 100,
+      "color": "#ffffff",
+      "opacity": 0.3,
+      "size": 1
+    }
+  },
+  "performance": {
+    "adaptiveQuality": {
+      "enabled": true,
+      "targetFps": 30,
+      "reduceLowPerformance": true,
+      "thresholds": {
+        "high": 55,
+        "medium": 40,
+        "low": 25
+      }
+    },
+    "particleReduction": {
+      "highPerformance": 1.0,
+      "mediumPerformance": 0.7,
+      "lowPerformance": 0.4
+    },
+    "connectionReduction": {
+      "highPerformance": true,
+      "mediumPerformance": true,
+      "lowPerformance": false
+    },
+    "pauseWhenHidden": true
+  },
+  "accessibility": {
+    "reducedMotion": {
+      "detectPreference": true,
+      "slowAnimation": true,
+      "disableParticleMovement": true,
+      "simplifyConnections": true
+    },
+    "highContrast": {
+      "detectPreference": true,
+      "alternatePalette": {
+        "primary": "#2d3e2f",
+        "secondary": "#5a7c5e",
+        "accent": "#a8c5a0"
+      }
+    },
+    "skipAnimation": {
+      "enabled": true,
+      "buttonText": "Skip animation",
+      "keyboardShortcut": "Escape"
+    }
+  },
+  "themes": {
+    "default": {
+      "particles": "#5a7c5e",
+      "connections": "#7a9eb8",
+      "glow": "#a8c5a0"
+    },
+    "earth": {
+      "particles": "#2d5a3d",
+      "connections": "#4a7c5e",
+      "glow": "#6b9e6b"
+    },
+    "nutrition": {
+      "particles": "#7a6b9e",
+      "connections": "#5a9e9e",
+      "glow": "#a8c5a0"
+    },
+    "peaceful": {
+      "particles": "#7a9eb8",
+      "connections": "#8ba888",
+      "glow": "#e8dcc4"
+    }
+  },
+  "presets": {
+    "standard": {
+      "particleCount": 800,
+      "connectionDistance": 80,
+      "rotationSpeed": 0.001,
+      "animationIntensity": "normal"
+    },
+    "minimal": {
+      "particleCount": 400,
+      "connectionDistance": 60,
+      "rotationSpeed": 0.0005,
+      "animationIntensity": "low"
+    },
+    "performance": {
+      "particleCount": 300,
+      "connectionDistance": 50,
+      "rotationSpeed": 0.0003,
+      "animationIntensity": "minimal",
+      "disableGlow": true
+    },
+    "showcase": {
+      "particleCount": 1200,
+      "connectionDistance": 100,
+      "rotationSpeed": 0.002,
+      "animationIntensity": "high",
+      "enhancedGlow": true
+    }
+  },
+  "documentation": {
+    "usage": "This configuration file controls the animated particle globe on the Atlas homepage. Adjust values to customize appearance and performance.",
+    "particleCount": "Higher counts = more detailed globe but lower performance. Recommended: 300-800 particles.",
+    "connectionDistance": "Maximum distance between particles to draw connection lines. Lower = fewer lines, better performance.",
+    "rotationSpeed": "Speed of globe rotation. Very small values (0.001-0.002) recommended for subtle movement.",
+    "colorScheme": "Uses Atlas color palette. Particle colors should complement overall design.",
+    "performance": "Enable adaptiveQuality to automatically reduce particles on low-performance devices.",
+    "accessibility": "Always respect prefers-reduced-motion. Provide skip button for users who want static display."
+  }
+}
